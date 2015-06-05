@@ -48,7 +48,7 @@
 $host = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "http");
 $host .=  "://".$_SERVER['HTTP_HOST'];
 $host .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-$hostname = '103.247.8.138'; // Production Site
+$hostname = '103.247.8.138'; // Production or Staging Site
 $username = 'kepe3788_user';
 $password = '1234_asdf';
 $database = 'kepe3788_db';
