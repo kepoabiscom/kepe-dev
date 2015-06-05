@@ -136,13 +136,12 @@
                     </a>
                 </div>
 
-                <!-- =========================
-                   Header item 1
-                ============================== -->
-                <div class="item active">
+                <?php $i=0; foreach($slider->result_array() as $data) { ?>
+                <?php $path = $data['path']; ?>
+                <?php if($i == 0) { ?><div class="item active"><?php } else {?><div class="item"><?php } ?>
 
                     <!-- Set the first background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('<?php echo base_url(); ?>assets/img/slider/slider-4.jpg');">
+                    <div class="fill" style="background-image:url('<?php echo base_url() . $path; ?>');">
                     </div>
                     <div class="carousel-caption">
                         <h1 class="light mab-none">This is <strong class="bold-text">KepoAbiscom</strong></h1>
@@ -162,110 +161,7 @@
                     </div>
                     <div class="overlay"></div>
                 </div>
-
-                <!-- =========================
-                   Header item 2
-                ============================== -->
-                <div class="item">
-
-                    <!-- Set the second background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('<?php echo base_url(); ?>assets/img/slider/slider-1.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h1 class="light mab-none">This is <strong class="bold-text">KepoAbiscom</strong></h1>
-                        <h1 class="light margin-bottom-medium mat-none">And We Are <strong class="bold-text">Awesome</strong></h1>
-                        <p class="light margin-bottom-medium">- Always make you curious -</p>
-                        <div class="call-button">
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                                    <a href="#portfolio" class="button pull-right internal-link bold-text light hvr-grow" data-rel="#portfolio">Our Work</a>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <a href="#about-us" class="button pull-left internal-link bold-text main-bg hvr-grow" data-rel="#about-us">About Us</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="overlay"></div>
-                </div>
-
-                <!-- =========================
-                   Header item 3
-                ============================== -->
-                <div class="item">
-
-                    <!-- Set the third background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('<?php echo base_url(); ?>assets/img/slider/slider-2.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h1 class="light mab-none">This is <strong class="bold-text">KepoAbiscom</strong></h1>
-                        <h1 class="light margin-bottom-medium mat-none">And We Are <strong class="bold-text">Awesome</strong></h1>
-                        <p class="light margin-bottom-medium">- Always make you curious -</p>
-                        <div class="call-button">
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                                    <a href="#portfolio" class="button pull-right internal-link bold-text light hvr-grow" data-rel="#portfolio">Our Work</a>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <a href="#about-us" class="button pull-left internal-link bold-text main-bg hvr-grow" data-rel="#about-us">About Us</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="overlay"></div>
-                </div>
-
-                <!-- =========================
-                   Header item 4
-                ============================== -->
-                <div class="item">
-
-                    <!-- Set the third background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('<?php echo base_url(); ?>assets/img/slider/slider-3.jpg');"></div>
-                    <div class="carousel-caption">
-						<h1 class="light mab-none">This is <strong class="bold-text">KepoAbiscom</strong></h1>
-                        <h1 class="light margin-bottom-medium mat-none">And We Are <strong class="bold-text">Awesome</strong></h1>
-                        <p class="light margin-bottom-medium">- Always make you curious -</p>
-                        <div class="call-button">
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                                    <a href="#portfolio" class="button pull-right internal-link bold-text light hvr-grow" data-rel="#portfolio">Our Work</a>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <a href="#about-us" class="button pull-left internal-link bold-text main-bg hvr-grow" data-rel="#about-us">About Us</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="overlay"></div>
-                </div>
-
-                <!-- =========================
-                   Header item 5
-                ============================== -->
-                <div class="item">
-
-                    <!-- Set the third background image using inline CSS below. -->
-                    <div class="fill" style="background-image:url('<?php echo base_url(); ?>assets/img/slider/slider-4.jpg');"></div>
-                    <div class="carousel-caption">
-                        <h1 class="light mab-none">This is <strong class="bold-text">KepoAbiscom</strong></h1>
-                        <h1 class="light margin-bottom-medium mat-none">And We Are <strong class="bold-text">Awesome</strong></h1>
-                        <p class="light margin-bottom-medium">- Always make you curious -</p>
-                        <div class="call-button">
-                            <div class="row">
-                                <div class="col-md-4 col-md-offset-2 col-sm-4 col-sm-offset-2 col-xs-12">
-                                    <a href="#portfolio" class="button pull-right internal-link bold-text light hvr-grow" data-rel="#portfolio">Our Work</a>
-                                </div>
-                                <div class="col-md-4 col-sm-4 col-xs-12">
-                                    <a href="#about-us" class="button pull-left internal-link bold-text main-bg hvr-grow" data-rel="#about-us">About Us</a>
-                                </div>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="overlay"></div>
-                </div>
+                <?php $i++; } ?>
             </div> <!-- *** end wrapper *** -->
 
             <!-- Carousel Controls -->
