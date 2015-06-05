@@ -45,13 +45,27 @@
 | the active record class
 */
 
+$host = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "http");
+$host .=  "://".$_SERVER['HTTP_HOST'];
+$host .=  str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+$hostname = '103.247.8.138'; // Production Site
+$username = 'kepe3788_user';
+$password = '1234_asdf';
+$database = 'kepe3788_db';
+if(strpos($host, 'localhost') == true) {
+	$hostname = 'localhost'; // Local Site
+	$username = 'root';
+	$password = '';
+	$database = 'kepe3788_db';
+}
+
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = '103.247.8.138';
-$db['default']['username'] = 'kepe3788_user';
-$db['default']['password'] = '1234_asdf';
-$db['default']['database'] = 'kepe3788_db';
+$db['default']['hostname'] = $hostname;
+$db['default']['username'] = $username;
+$db['default']['password'] = $password;
+$db['default']['database'] = $database;
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
