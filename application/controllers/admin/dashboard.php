@@ -7,15 +7,27 @@ class Dashboard extends CI_Controller {
 	 */
 	function __construct() {
 		parent:: __construct();
-		//$this->load->helper(array("url", "form"));
-		//$this->load->library("pagination");
+		$this->load->helper(array("url", "form"));
+		$this->load->library("pagination");
 	}
 
 	/**
 	 * Index Page for this controller.
 	 */
-	public function index() {
-		$this->load->view('admin/login');
-	}
+	function index() {
+		if($this->session->userdata('logged_in')) {
+		     $session_data = $this->session->userdata('logged_in');
+		     $data['username'] = $session_data['username'];
+		     $this->load->view('admin/dashboard', $data);
+	   	} else {
+		     redirect('admin/login', 'refresh');
+	   	}
+	 }
+ 
+	 function logout() {
+	   	$this->session->unset_userdata('logged_in');
+	   	session_destroy();
+	   	redirect('admin/dashboard', 'refresh');
+	 }
 
 }
