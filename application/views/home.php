@@ -18,7 +18,7 @@
     <!-- =========================
        favicon and app touch icon
     ============================== -->
-    <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="shortcut icon" href="<?php echo base_url(); ?>assets/img/favicon.ico"/>
     <link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/img/apple-touch-icon.png">
 
 
