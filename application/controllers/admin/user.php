@@ -47,7 +47,7 @@ class User extends CI_Controller {
 	 }
  
 	 function add() {
-	 	return "";
+	 	$this->load->view("admin/user_form");
 	 }
 
 	 function edit($id='') {
