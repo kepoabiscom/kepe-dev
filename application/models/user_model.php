@@ -22,4 +22,16 @@ class User_model extends CI_Model {
             return false;
         }
     }
+
+    function get_user_list() {
+        $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, created_date, modified_date');
+        $this->db->from('user');
+        $this->db->limit(10);
+
+        $query = $this->db->get();
+
+        if($query->num_rows() > 0) {
+            return $query->result();
+        } return;
+    }
 }

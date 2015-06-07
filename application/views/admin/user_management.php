@@ -62,10 +62,10 @@
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="nav navbar-nav side-nav">
-                    <li class="active">
+                    <li>
                         <a href="dashboard"><i class="fa fa-fw fa-dashboard"></i>Home</a>
                     </li>
-                    <li>
+                    <li class="active">
                         <a href="user"><i class="fa fa-fw fa-table"></i>User Management</a>
                     </li>
                     <li>
@@ -98,27 +98,42 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Home Dashboard
-                            <small>KepoAbis.com</small>
+                            User Management
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>Home
+                                <i class="fa fa-file"></i>User Management
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
 
-                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="alert alert-info alert-dismissable">
-                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                            <i class="fa fa-info-circle"></i>  <strong>Welcome</strong> on <strong>Dashboard KepoAbis.com</strong>
+                 <div class="col-lg-12">
+                        <h2>User List <strong>KepoAbis.com</strong></h2>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Username</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Role</th>
+                                        <th>Position</th>
+                                        <th>Created Time</th>
+                                        <th>Updated Time </th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {data_user}
+                                </tbody>
+                            </table>
                         </div>
+                        <a href='user/add' class="btn btn-lg btn-success">Add User</a>
                     </div>
                 </div>
 
