@@ -119,8 +119,8 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Username</th>
                                         <th>Nama Lengkap</th>
+                                        <th>Username</th>
                                         <th>Role</th>
                                         <th>Position</th>
                                         <th>Created Time</th>
