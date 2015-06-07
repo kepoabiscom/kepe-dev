@@ -16,7 +16,7 @@
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="<?php echo base_url(); ?>assets/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -47,7 +47,7 @@
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user">Hi, </i>{username}<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"> </i>&nbsp;{username}<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li>
                             <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
@@ -66,13 +66,13 @@
                         <a href="dashboard"><i class="fa fa-fw fa-dashboard"></i>Home</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i>User Management</a>
+                        <a href="#"><i class="fa fa-fw fa-table"></i>User Management</a>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Video Management</a>
+                        <a href="#"><i class="fa fa-fw fa-desktop"></i>Video Management</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i>Content Manegement<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-edit"></i>Content Manegement<i class="fa fa-fw fa-caret-down"></i></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">News</a>
@@ -83,7 +83,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#"><i class="fa fa-fw fa-table"></i>Category Management</a>
+                        <a href="#"><i class="fa fa-fw fa-file"></i>Category Management</a>
                     </li>
                 </ul>
             </div>
