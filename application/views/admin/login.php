@@ -28,7 +28,7 @@
                     <div class="panel-body">
                         <?php echo validation_errors(); ?>
                         <?php echo form_open('admin/login'); ?>
-                        <form role="form">
+                       <!-- <form role="form">-->
                             <fieldset>
                                 <div class="form-group">
                                     <input class="form-control" required="true" placeholder="Username" name="username" type="text" autofocus>

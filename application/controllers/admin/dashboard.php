@@ -8,7 +8,8 @@ class Dashboard extends CI_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
-		$this->load->library("pagination");
+		$this->load->library("parser");
+		//$this->load->library("pagination");
 	}
 
 	/**
@@ -17,8 +18,10 @@ class Dashboard extends CI_Controller {
 	function index() {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
-		     $data['username'] = $session_data['username'];
-		     $this->load->view('admin/dashboard', $data);
+		     $data = array(
+		     			'username' => $session_data['username']
+		     		);
+		     $this->parser->parse('admin/dashboard', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
