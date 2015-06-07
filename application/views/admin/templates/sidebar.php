@@ -13,10 +13,10 @@
             }
         ?>
         <li class="<?php echo $active[0]; ?>">
-            <a href="dashboard"><i class="fa fa-fw fa-dashboard"></i>Home</a>
+            <a href="<?php echo base_url(); ?>admin/dashboard"><i class="fa fa-fw fa-dashboard"></i>Home</a>
         </li>
         <li class="<?php echo $active[1]; ?>">
-            <a href="user"><i class="fa fa-fw fa-table"></i>User Management</a>
+            <a href="<?php echo base_url(); ?>admin/user"><i class="fa fa-fw fa-table"></i>User Management</a>
         </li>
         <li class="<?php echo $active[2]; ?>">
             <a href="#"><i class="fa fa-fw fa-desktop"></i>Video Management</a>

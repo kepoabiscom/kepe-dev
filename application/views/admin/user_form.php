@@ -120,7 +120,7 @@
                                 </div>
                             </form>
                             <button type="submit" class="btn btn-primary">Create</button>
-                            <a href='user'>Cancel</a>
+                            <a href='<?php echo base_url(); ?>admin/user'>Cancel</a>
                         </div>
                         
                     </div>
