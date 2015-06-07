@@ -17,7 +17,7 @@
             </li>
             <li class="divider"></li>
             <li>
-                <a href="dashboard/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                <a href="<?php echo base_url(); ?>admin/dashboard/logout"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
             </li>
         </ul>
     </li>
