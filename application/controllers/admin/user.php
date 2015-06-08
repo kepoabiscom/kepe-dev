@@ -23,7 +23,7 @@ class User extends CI_Controller {
 		     			'username' => $session_data['username'],
 		     			'data_user' => $this->get_user_list()
 		     		);
-		     $this->parser->parse('admin/user_management', $data);
+		     $this->parser->parse('admin/user/user_management', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
@@ -47,7 +47,7 @@ class User extends CI_Controller {
 	 }
  
 	 function add() {
-	 	$this->load->view("admin/user_form");
+	 	$this->load->view("admin/user/user_form");
 	 }
 
 	 function edit($id='') {

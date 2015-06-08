@@ -54,7 +54,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-file"></i>Home
