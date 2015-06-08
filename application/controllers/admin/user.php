@@ -10,6 +10,7 @@ class User extends CI_Controller {
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->model('user_model','', true);
+		$this->load->library('form_validation');
 		//$this->load->library("pagination");
 	}
 
@@ -46,8 +47,24 @@ class User extends CI_Controller {
         return $data_array . "</tr>";
 	 }
  
-	 function add() {
-	 	$this->load->view("admin/user/user_form");
+	 function create() {
+	 	if($this->session->userdata('logged_in')) {
+	 		$data['success'] = false;
+	        $this->validation();
+
+	        if($this->form_validation->run() == true) {
+			 	if(isset($_POST['submit'])) {
+			 		$data = $this->input->post(null, true);
+			 		$this->user_model->create_user($data);
+			 		$data['success'] = true;
+			 		$this->load->view("admin/user/create_user", $data);
+			 	}
+		 	} else {
+		 		$this->load->view("admin/user/create_user", $data);	
+		 	}
+		} else {
+			redirect('admin/login', 'refresh');
+		}
 	 }
 
 	 function edit($id='') {
@@ -56,6 +73,15 @@ class User extends CI_Controller {
 
 	 function delete($id='') {
 	 	return "";
+	 }
+
+	 function validation() {
+	 	$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
+	 	$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+	 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
+	 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');
+	    $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
+	    
 	 }
 
 

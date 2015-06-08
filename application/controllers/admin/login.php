@@ -6,12 +6,12 @@ class Login extends CI_Controller {
    		parent::__construct();
    		$this->load->helper(array('form'));
    		$this->load->model('user_model','', true);
-        $this->load->library('form_validation');
+      $this->load->library('form_validation');
  	}
 
  	function index() {
  		if(!$this->session->userdata('logged_in')) {
-	   		$this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+	   		  $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
 	        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_db');
 
 	        if($this->form_validation->run() == false) {

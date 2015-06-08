@@ -1,6 +1,21 @@
 <?php
 
 class User_model extends CI_Model {
+    
+    // Instance
+    var $user_id = "";
+    var $nama_lengkap = "";
+    var $user_name = "";
+    var $password = "";
+    var $user_role = "";
+    var $email = "";
+    var $position = "";
+    var $body = "";
+    var $image = "";
+    var $created_date = "";
+    var $modified_date = "";
+    var $deleted_date = "";
+    var $data = array();
 
     function __construct() {
         parent:: __construct();
@@ -33,5 +48,20 @@ class User_model extends CI_Model {
         if($query->num_rows() > 0) {
             return $query->result();
         } return;
+    }
+
+    function create_user($data) {
+        $data = array("user_name" => $data['username'],
+                    "password" => md5($data['password']),
+                    "email" => $data['email'],
+                    "nama_lengkap" => $data['nama_lengkap'],
+                    "user_role" => $data['role'],
+                    "position" => $data['position'],
+                    "body" => $data['body'],
+                    "created_date" => date("Y-m-d H:i:s"),
+                    "modified_date" => date("Y-m-d H:i:s")
+                    //"image" => $data['image']
+                );
+        $this->db->insert('user', $data);
     }
 }
