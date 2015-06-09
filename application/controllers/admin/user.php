@@ -54,7 +54,7 @@ class User extends CI_Controller {
         	$data_array .= "<td>" . $row->position . "</td>";
         	$data_array .= "<td>" . $row->created_date . "</td>";
         	$data_array .= "<td>" . $row->modified_date . "</td>";
-        	$data_array .= "<td><a href='user/update/".$id."'>Edit</a>&nbsp;<a href='user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
+        	$data_array .= "<td><a href='". base_url()."admin/user/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
         	$i++;
         }
 

@@ -92,7 +92,7 @@
                             </table>
                             {link}<br><br>
                         </div>
-                        <a href='user/create' class="btn btn-lg btn-success">Add User</a>
+                        <a href='<?php echo base_url(); ?>admin/user/create' class="btn btn-lg btn-success">Add User</a>
                     </div>
                 </div>
 
