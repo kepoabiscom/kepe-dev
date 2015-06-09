@@ -145,7 +145,7 @@ class User extends CI_Controller {
 	 	if($this->session->userdata("t")) {
 			$t = $this->session->userdata("t");
 			if($t['success'] && $t['f'] == "delete") {
-				$notif = $t['username'] . "has been deleted successfully.";
+				$notif = $t['username'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['username'] . " has been updated successfully.";
 			} 
