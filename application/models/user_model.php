@@ -38,24 +38,25 @@ class User_model extends CI_Model {
         }
     }
 
-    function get_user_list() {
-        $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, created_date, modified_date');
-        $this->db->from('user');
-        $this->db->limit(10);
-
-        $query = $this->db->get();
-
-        if($query->num_rows() > 0) {
-            return $query->result();
-        } return;
+    function get_user_list($start, $limit) {
+        $this->db->limit($limit, $start);
+        $query = $this->db->get("user");
+ 
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+        return false;
     }
 
     function create_user($data) {
-        $data = array("user_name" => $data['username'],
+        $data = array("user_name" => $data['user_name'],
                     "password" => md5($data['password']),
                     "email" => $data['email'],
                     "nama_lengkap" => $data['nama_lengkap'],
-                    "user_role" => $data['role'],
+                    "user_role" => $data['user_role'],
                     "position" => $data['position'],
                     "body" => $data['body'],
                     "created_date" => date("Y-m-d H:i:s"),
@@ -66,7 +67,13 @@ class User_model extends CI_Model {
     }
 
     function update_user($id, $data){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $this->db->where('user_id', $id);
+        $this->db->update('user', $data); 
+    }
 
+    function count_user() {
+        return $this->db->count_all("user");
     }
 
     function get_by_id($id) {

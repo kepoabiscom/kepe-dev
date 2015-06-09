@@ -11,7 +11,7 @@ class User extends CI_Controller {
 		$this->load->library("parser");
 		$this->load->model('user_model','', true);
 		$this->load->library('form_validation');
-		//$this->load->library("pagination");
+		$this->load->library("pagination");
 	}
 
 	/**
@@ -19,32 +19,42 @@ class User extends CI_Controller {
 	 */
 	function index() {
 		if($this->session->userdata('logged_in')) {
-		     $session_data = $this->session->userdata('logged_in');
-		 	 $success = $this->notification('1');
-		     $data = array(
+		    $session_data = $this->session->userdata('logged_in');
+		 	$success = $this->notification();
+
+		 	$config['base_url'] = base_url() . "admin/user/index";
+			$config['per_page'] = 5;
+		 	$config['total_rows'] = $this->user_model->count_user();
+			$config['uri_segment'] = 4;
+				
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+		    $data = array(
 		     			'username' => $session_data['username'],
-		     			'data_user' => $this->get_user_list(),
-		     			'success' => $success
+		     			'data_user' => $this->get_user_list($page, $config['per_page']),
+		     			'success' => $success,
+		     			'link' => $this->pagination->create_links()
 		     		);
-		     $this->parser->parse('admin/user/user_management', $data);
+		    $this->parser->parse('admin/user/user_management', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
 	 }
 
-	 function get_user_list() {
-	 	$result = $this->user_model->get_user_list();
+	 function get_user_list($start, $limit) {
+	 	$result = $this->user_model->get_user_list($start, $limit);
 	 	$data_array = ""; $i = 1;
 	 	foreach($result as $row) {
 	 		$id = $row->user_id;
-        	$data_array .= "<tr><td>" . $i . "</td>";
+        	$data_array .= "<tr><td>" . $id . "</td>";
         	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
         	$data_array .= "<td>" . $row->user_name . "</td>";
         	$data_array .= "<td>" . $row->user_role . "</td>";
         	$data_array .= "<td>" . $row->position . "</td>";
         	$data_array .= "<td>" . $row->created_date . "</td>";
         	$data_array .= "<td>" . $row->modified_date . "</td>";
-        	$data_array .= "<td><a href='user/edit/".$id."'>Edit</a>&nbsp;<a href='user/delete/".$id."'>Delete</a></td></tr>";
+        	$data_array .= "<td><a href='user/update/".$id."'>Edit</a>&nbsp;<a href='user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
         	$i++;
         }
 
@@ -53,13 +63,14 @@ class User extends CI_Controller {
  
 	 function create() {
 	 	if($this->session->userdata('logged_in')) {
-	 		$data['success'] = false;
+	 		$data = array("success" => false, "flag" => "create");
 	        $this->validation();
+	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {
 			 	if(isset($_POST['submit'])) {
-			 		$data = $this->input->post(null, true);
-			 		$this->user_model->create_user($data);
+			 		$d = $this->input->post(null, true);
+			 		$this->user_model->create_user($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/user/create_user", $data);
 			 	}
@@ -71,24 +82,35 @@ class User extends CI_Controller {
 		}
 	 }
 
-	 function edit($id='') {
+	 function update($id='') {
 	 	if($this->session->userdata('logged_in')) {
-	 		$data['success'] = false;
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
 			 	if(isset($_POST['submit'])) {
-			 		$data = $this->input->post(null, true);
-			 		$this->user_model->update_user($id, $data);
-			 		$data['success'] = true;
-			 		$this->load->view("admin/user/create_user", $data);
+			 		$d = $this->input->post(null, true);
+			 		unset($d['submit']);
+			 		$this->user_model->update_user($d['user_id'], $d);
+			 		$t = array("success" => true,
+			 				"username" => $d['user_name'],
+			 				"f" => "update"
+			 			);
+			 		$this->session->set_userdata("t", $t);
+			 		redirect('admin/user');
 			 	}
 		 	} else {
 		 		$r = $this->user_model->get_by_id($id);
-			 		$data = array(
-			 				
-			 			);
-		 		$this->load->view("admin/user/edit_user", $data);	
+		 		$data = array("user_id" => $r->user_id,
+		 				"username" => $r->user_name,
+		 				"nama_lengkap" => $r->nama_lengkap,
+		 				"email" => $r->email,
+		 				"position" => $r->position,
+		 				"role" => $r->user_role,
+		 				"description" => $r->body,
+		 				"flag" => "update"
+						//"image" => $r->image
+		 			);
+		 		$this->load->view('admin/user/update_user', $data);
 		 	}
 		} else {
 			redirect('admin/login', 'refresh');
@@ -100,7 +122,8 @@ class User extends CI_Controller {
 	 		$r = $this->user_model->get_by_id($id);
 	 		$this->user_model->delete_user($id);
 	 		$t = array("success" => true,
-	 				"username" => $r->user_name
+	 				"username" => $r->user_name,
+	 				"f" => "delete"
 	 			);
 	 		$this->session->set_userdata("t", $t);
 	 		redirect('admin/user');
@@ -111,25 +134,24 @@ class User extends CI_Controller {
 
 	 function validation() {
 	 	$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
-	 	$this->form_validation->set_rules('username', 'Username', 'required|xss_clean');
+	 	$this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean');
 	 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
 	 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');
-	    $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 	    
 	 }
 
-	 function notification($flag='1') {
+	 function notification() {
 	 	$notif = ""; $s = "";
 	 	if($this->session->userdata("t")) {
 			$t = $this->session->userdata("t");
-			if($t['success'] && $flag == '1') {
+			if($t['success'] && $t['f'] == "delete") {
 				$notif = $t['username'] . "has been deleted successfully.";
-			} else if($t['success'] && $flag == '2') {
+			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['username'] . " has been updated successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>
-                    <strong>Success!</strong> ". $notif ."
+                    <strong></strong> ". $notif ."
               </div>";
 		}
 		$this->session->unset_userdata("t");

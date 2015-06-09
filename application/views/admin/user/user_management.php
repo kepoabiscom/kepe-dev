@@ -24,7 +24,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    
+    <script>
+        function ConfirmDelete() {
+            var x = confirm("Are you sure you want to delete this user?");
+            if (x) return true;
+            return false;
+        }
+    </script>
 
 </head>
 
@@ -70,7 +76,7 @@
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>User ID</th>
                                         <th>Nama Lengkap</th>
                                         <th>Username</th>
                                         <th>Role</th>
@@ -84,6 +90,7 @@
                                     {data_user}
                                 </tbody>
                             </table>
+                            {link}<br><br>
                         </div>
                         <a href='user/create' class="btn btn-lg btn-success">Add User</a>
                     </div>
