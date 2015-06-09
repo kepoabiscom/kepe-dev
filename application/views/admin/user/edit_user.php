@@ -53,7 +53,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
                                 <i class="fa fa-file"></i>User Management
@@ -62,33 +62,15 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
-                 <div class="col-lg-12">
-                        <h2>User List <strong>KepoAbis.com</strong></h2>
-                        {success}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Username</th>
-                                        <th>Role</th>
-                                        <th>Position</th>
-                                        <th>Created Time</th>
-                                        <th>Updated Time </th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {data_user}
-                                </tbody>
-                            </table>
-                        </div>
-                        <a href='user/create' class="btn btn-lg btn-success">Add User</a>
-                    </div>
-                </div>
-
+                <h2>Edit User</h2><br>
+                <div class="col-lg-8">
+                    <?php echo validation_errors(); ?><br>
+                    <form action="<?php echo base_url(); ?>admin/user/edit" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        <?php $this->load->view("admin/user/_form"); ?>
+                        <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+                        <a href='<?php echo base_url(); ?>admin/user'>Cancel</a>
+                    </form>
+                </div>  
             </div>
             <!-- /.container-fluid -->
 
