@@ -40,6 +40,7 @@ class User_model extends CI_Model {
 
     function get_user_list($start, $limit) {
         $this->db->limit($limit, $start);
+        $this->db->order_by("user_id", "desc");
         $query = $this->db->get("user");
  
         if ($query->num_rows() > 0) {

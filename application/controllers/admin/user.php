@@ -22,17 +22,11 @@ class User extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 		 	$success = $this->notification();
 
-		 	$config['base_url'] = base_url() . "admin/user/index";
-			$config['per_page'] = 5;
-		 	$config['total_rows'] = $this->user_model->count_user();
-			$config['uri_segment'] = 4;
-				
-			$this->pagination->initialize($config);
-			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		 	$config = $this->page_config();
 
 		    $data = array(
 		     			'username' => $session_data['username'],
-		     			'data_user' => $this->get_user_list($page, $config['per_page']),
+		     			'data_user' => $this->get_user_list($config['uri'], $config['per_page']),
 		     			'success' => $success,
 		     			'link' => $this->pagination->create_links()
 		     		);
@@ -156,6 +150,23 @@ class User extends CI_Controller {
 		}
 		$this->session->unset_userdata("t");
         return $s;
+	 }
+
+	 function page_config() {
+	 	$config['base_url'] = base_url() . "admin/user/page";
+		$config['per_page'] = 5;
+	 	$config['total_rows'] = $this->user_model->count_user();
+		$config['uri_segment'] = 4;
+		$config['use_page_numbers'] = true;
+			
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+
+		return array("uri" => $page, "per_page" => $config['per_page']);
+	 }
+
+	 function page() {
+	 	$this->index();
 	 }
 
 
