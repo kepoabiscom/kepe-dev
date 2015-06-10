@@ -52,7 +52,7 @@ $hostname = '103.247.8.138'; // Production or Staging Site
 $username = 'kepe3788_user';
 $password = '1234_asdf';
 $database = 'kepe3788_db';
-if(strpos($host, 'localhost') == true) {
+if(strpos($host, 'localhost') || strpos($host, '127.0.0.1')) {
 	$hostname = 'localhost'; // Local Site
 	$username = 'root';
 	$password = '';
