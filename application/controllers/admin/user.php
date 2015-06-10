@@ -166,7 +166,12 @@ class User extends CI_Controller {
 	 }
 
 	 function page() {
-	 	$this->index();
+	 	if(!$this->uri->segment(4)) {
+	 		redirect("admin/user");
+	 	} else {
+	 		$this->index();	
+	 	}
+	 	
 	 }
 
 
