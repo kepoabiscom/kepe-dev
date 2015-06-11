@@ -72,7 +72,7 @@ class User extends CI_Controller {
 		 			$this->load->view("admin/user/create_user", $data);	
 		 			return;
 		 		}
-		 		
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		$d['image'] = $img_name;
@@ -90,12 +90,31 @@ class User extends CI_Controller {
 
 	 function update($id='') {
 	 	if($this->session->userdata('logged_in')) {
+	        $img_name = "";
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
+	 			$t = $this->upload();
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		unset($d['submit']);
+			 		$q = $this->user_model->get_by_id($d['user_id']);
+			 		if($t['is_uploaded']) {
+			 			$d['image'] = $t['data']['file_name'];
+			 			if($q->image != null) {
+			 				unlink(base_url() . "assets/img/team/" . $q->image);
+			 			} 
+			 		} else if(!$t['is_uploaded']) {
+			 			if(empty($t['data']['file_name'])) {
+			 				$d['image'] = $q->image == null ? "default.jpg" : $q->image;
+			 			} else {
+			 				$data = array("error_message" => "<span style='color:red'>" . $t['error_message'] . "</span>");
+		 					$this->session->set_userdata("error_message", $data['error_message']);
+		 					redirect("admin/user/update/" . $d['user_id']);	
+			 			}	
+			 		}
+
 			 		$this->user_model->update_user($d['user_id'], $d);
 			 		$t = array("success" => true,
 			 				"username" => $d['user_name'],
@@ -105,7 +124,9 @@ class User extends CI_Controller {
 			 		redirect('admin/user');
 			 	}
 		 	} else {
+		 		//$this->session->unset_userdata("error_message");
 		 		$r = $this->user_model->get_by_id($id);
+		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
 		 		$data = array("user_id" => $r->user_id,
 		 				"username" => $r->user_name,
 		 				"nama_lengkap" => $r->nama_lengkap,
@@ -113,9 +134,11 @@ class User extends CI_Controller {
 		 				"position" => $r->position,
 		 				"role" => $r->user_role,
 		 				"description" => $r->body,
-		 				"flag" => "update"
+		 				"flag" => "update",
+		 				"error_message" => $e
 						//"image" => $r->image
 		 			);
+		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/user/update_user', $data);
 		 	}
 		} else {
@@ -141,9 +164,9 @@ class User extends CI_Controller {
 	 function upload() {
 	 	$config['upload_path'] = './assets/img/team/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
-		$config['max_size']	= '2000';
-		$config['max_width']  = '2024';
-		$config['max_height']  = '1768';
+		$config['max_size']	= '1000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
 		$config['encrypt_name'] = true;
 
 		$this->load->library('upload', $config);

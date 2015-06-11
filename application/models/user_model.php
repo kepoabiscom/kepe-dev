@@ -78,7 +78,7 @@ class User_model extends CI_Model {
     }
 
     function get_by_id($id) {
-        $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, created_date, modified_date');
+        $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, image, created_date, modified_date');
         $this->db->from('user');
         $this->db->where("user_id", $id);
         $this->db->limit(1);
