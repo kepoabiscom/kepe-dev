@@ -70,7 +70,7 @@
                 <?php } ?>
                 <h2>Create new User</h2><br>
                 <div class="col-lg-8">
-                    <?php echo validation_errors(); ?><br>
+                    <?php echo $error_message; echo validation_errors(); ?><br>
                     <form action="<?php echo base_url(); ?>admin/user/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/user/_form"); ?>
                         <button type="submit" name="submit" class="btn btn-primary">Create</button>

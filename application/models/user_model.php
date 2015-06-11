@@ -61,8 +61,8 @@ class User_model extends CI_Model {
                     "position" => $data['position'],
                     "body" => $data['body'],
                     "created_date" => date("Y-m-d H:i:s"),
-                    "modified_date" => date("Y-m-d H:i:s")
-                    //"image" => $data['image']
+                    "modified_date" => date("Y-m-d H:i:s"),
+                    "image" => $data['image']
                 );
         $this->db->insert('user', $data);
     }

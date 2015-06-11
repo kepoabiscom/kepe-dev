@@ -58,7 +58,7 @@
 <div class="form-group">
     <label class="col-sm-2">File input</label>
     <div class="col-sm-6">
-        <input type="file" name="image">
+        <input type="file" name="userfile">
     </div>
 </div>
 

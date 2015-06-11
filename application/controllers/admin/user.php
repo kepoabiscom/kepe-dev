@@ -57,13 +57,25 @@ class User extends CI_Controller {
  
 	 function create() {
 	 	if($this->session->userdata('logged_in')) {
-	 		$data = array("success" => false, "flag" => "create");
+	 		$data = array("success" => false, "error_message" => "", "flag" => "create");
+
 	        $this->validation();
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {
+	        	$img_name = "default.jpg";
+	 			$t = $this->upload();
+		 		if($t['is_uploaded']) {
+		 			$img_name = $t['data']['file_name'];
+		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+		 			$this->load->view("admin/user/create_user", $data);	
+		 			return;
+		 		}
+		 		
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
+			 		$d['image'] = $img_name;
 			 		$this->user_model->create_user($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/user/create_user", $data);
@@ -124,6 +136,23 @@ class User extends CI_Controller {
 	 	} else {
 	 		redirect('admin/login', 'refresh');
 	 	}
+	 }
+
+	 function upload() {
+	 	$config['upload_path'] = './assets/img/team/';
+		$config['allowed_types'] = 'jpg|gif|jpeg|png';
+		$config['max_size']	= '2000';
+		$config['max_width']  = '2024';
+		$config['max_height']  = '1768';
+		$config['encrypt_name'] = true;
+
+		$this->load->library('upload', $config);
+
+		$uploaded = $this->upload->do_upload();
+		$data = $this->upload->data();
+		if($uploaded) {
+			return array("is_uploaded" => true, "data" => $data);
+		} return array("is_uploaded" => false, "data"=> $data, "error_message" => $this->upload->display_errors());
 	 }
 
 	 function validation() {
