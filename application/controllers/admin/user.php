@@ -48,11 +48,30 @@ class User extends CI_Controller {
         	$data_array .= "<td>" . $row->position . "</td>";
         	$data_array .= "<td>" . $row->created_date . "</td>";
         	$data_array .= "<td>" . $row->modified_date . "</td>";
-        	$data_array .= "<td><a href='". base_url()."admin/user/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
+        	$data_array .= "<td><a href='". base_url()."admin/user/detail/".$id."'>Detail</a>&nbsp;<a href='". base_url()."admin/user/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
         	$i++;
         }
 
         return $data_array . "</tr>";
+	 }
+
+	 function detail($id='') {
+	 	if($this->session->userdata('logged_in')) {
+	 		$q = $this->user_model->get_by_id($id);
+	 		$img = "<img src='" . base_url() . "assets/img/team/" . $q->image . "' height='100' width='100' />";
+	 		$data = array(
+		     			"username" => $q->user_name,
+		 				"nama_lengkap" => $q->nama_lengkap,
+		 				"email" => $q->email,
+		 				"position" => $q->position,
+		 				"role" => $q->user_role,
+		 				"description" => $q->body,
+		 				"image" => $img
+		     		);
+	 		$this->parser->parse('admin/user/view_user', $data);
+	 	} else {
+	 		direct('admin/login', 'refresh');
+	 	}
 	 }
  
 	 function create() {
@@ -124,7 +143,6 @@ class User extends CI_Controller {
 			 		redirect('admin/user');
 			 	}
 		 	} else {
-		 		//$this->session->unset_userdata("error_message");
 		 		$r = $this->user_model->get_by_id($id);
 		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
 		 		$data = array("user_id" => $r->user_id,
@@ -136,7 +154,6 @@ class User extends CI_Controller {
 		 				"description" => $r->body,
 		 				"flag" => "update",
 		 				"error_message" => $e
-						//"image" => $r->image
 		 			);
 		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/user/update_user', $data);

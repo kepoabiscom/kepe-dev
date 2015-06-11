@@ -35,9 +35,20 @@
     <label class="col-sm-2">Role</label>
     <div class="col-sm-6">
         <select class="form-control" id="role" name="user_role">
+            <?php if($flag != "update" or $role == "superadmin") { ?>
             <option value="superadmin">Superadmin</option>
             <option value="admin">Admin</option>
             <option value="crew">Crew</option>
+            <?php } else { ?>
+            <?php if ($role == "admin") { ?>
+            <option value="admin">Admin</option>
+            <option value="crew">Crew</option>
+            <option value="superadmin">Superadmin</option>
+            <?php } else { ?>
+            <option value="crew">Crew</option>
+            <option value="superadmin">Superadmin</option>
+            <option value="admin">Admin</option>
+            <?php } } ?>
         </select>
     </div>
 </div>
@@ -52,7 +63,7 @@
     <label class="col-sm-2">Description</label>
     <div class="col-sm-6">
         <?php $desc = ($flag == "update") ? $description : ""; ?>
-        <textarea class="form-control" rows="3" value="<?php echo $desc; ?>" name="body"></textarea>
+        <textarea class="form-control" rows="3" value="<?php echo $desc; ?>" name="body"><?php echo $desc; ?></textarea>
     </div>
 </div>
 <div class="form-group">
