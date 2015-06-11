@@ -122,7 +122,7 @@ class User extends CI_Controller {
 			 		if($t['is_uploaded']) {
 			 			$d['image'] = $t['data']['file_name'];
 			 			if($q->image != null) {
-			 				unlink(base_url() . "assets/img/team/" . $q->image);
+			 				//unlink(base_url() . "assets/img/team/" . $q->image);
 			 			} 
 			 		} else if(!$t['is_uploaded']) {
 			 			if(empty($t['data']['file_name'])) {
