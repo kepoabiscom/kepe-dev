@@ -1,8 +1,8 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <?php 
-            $data = array('home', 'user', 'video', 'news', 'article', 'category', 'about');
-            $active = array_fill(0, 7, '');
+            $data = array('home', 'profile', 'user', 'news', 'article', 'video', 'category', 'about');
+            $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
                 if($i == $menu) {
@@ -15,11 +15,11 @@
         <li class="<?php echo $active[0]; ?>">
             <a href="<?php echo base_url(); ?>admin/dashboard"><i class="fa fa-fw fa-dashboard"></i>Home</a>
         </li>
-        <li class="<?php echo $active[1]; ?>">
-            <a href="<?php echo base_url(); ?>admin/user"><i class="fa fa-fw fa-table"></i>User Management</a>
+       <li class="<?php echo $active[1]; ?>">
+            <a href="<?php echo base_url(); ?>admin/profile"><i class="fa fa-user"></i>My Profile</a>
         </li>
         <li class="<?php echo $active[2]; ?>">
-            <a href="#"><i class="fa fa-fw fa-desktop"></i>Video Management</a>
+            <a href="<?php echo base_url(); ?>admin/user"><i class="fa fa-fw fa-table"></i>User Management</a>
         </li>
         <li>
             <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-edit"></i>Content Management<i class="fa fa-fw fa-caret-down"></i></a>
@@ -33,9 +33,13 @@
             </ul>
         </li>
         <li class="<?php echo $active[5]; ?>">
+            <a href="#"><i class="fa fa-fw fa-desktop"></i>Video Management</a>
+        </li>
+        
+        <li class="<?php echo $active[6]; ?>">
             <a href="#"><i class="fa fa-fw fa-wrench"></i>Category Management</a>
         </li>
-        <li class="<?php echo $active[6]; ?>">
+        <li class="<?php echo $active[7]; ?>">
             <a href="#"><i class="fa fa-fw fa-file"></i>About</a>
         </li>
     </ul>
