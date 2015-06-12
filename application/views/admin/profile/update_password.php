@@ -37,7 +37,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "user"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "profile"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -86,7 +86,7 @@
                                 </div>
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                        <a href='<?php echo base_url(); ?>admin/profile/update_profile'>Back</a>
+                        <a href='<?php echo base_url(); ?>admin/profile/update'>Back</a>
                     </form>
                 </div>  
             </div>
