@@ -86,7 +86,7 @@
                                 </div>
                         </div>
                         <button type="submit" name="submit" class="btn btn-primary">Submit</button>
-                        <a href='<?php echo base_url(); ?>admin/profile/update'>Back</a>
+                        <a href='<?php echo base_url(); ?>admin/profile/'>Back</a>
                     </form>
                 </div>  
             </div>
