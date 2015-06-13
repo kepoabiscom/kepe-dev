@@ -200,7 +200,6 @@ class User extends CI_Controller {
 	 	$this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean');
 	 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
 	 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');
-	    
 	 }
 
 	 function notification() {

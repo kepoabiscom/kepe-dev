@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Content Management - KepoAbis.com</title>
+    <title>User Management - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -18,19 +18,16 @@
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
 
+    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
+    <script>tinymce.init({selector:'textarea'});</script>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this article?");
-            if (x) return true;
-            return false;
-        }
-    </script>
+    
 
 </head>
 
@@ -59,42 +56,30 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>&nbsp;Article
+                                <i class="fa fa-file"></i>Article
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-
-                 <div class="col-lg-12">
-                        <h2>Article List - <strong>KepoAbis.com</strong></h2>
-                        {success}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Category</th>
-                                        <th>Title</th>
-                                        <th>Status</th>
-                                        <th>Created Time</th>
-                                        <th>Updated Time </th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {list_article}
-                                </tbody>
-                            </table>
-                            {link}<br><br>
-                        </div>
-                        <a href='<?php echo base_url(); ?>admin/article/create' class="btn btn-lg btn-success">Add Article</a>
-                    </div>
+                <?php if($success) { ?>
+                <div class="alert alert-success fade in">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Success!</strong> New article has been created successfully.
                 </div>
-
+                <?php } ?>
+                <h2>Create new Article</h2><br>
+                <div class="col-lg-18">
+                    <?php echo $error_message; echo validation_errors(); ?><br>
+                    <form action="<?php echo base_url(); ?>admin/article/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        <?php $this->load->view("admin/content/article/_form"); ?>
+                        <button type="submit" name="submit" class="btn btn-primary">Create</button>
+                        <a href='<?php echo base_url(); ?>admin/article'>Back</a>
+                    </form>
+                </div>  
             </div>
             <!-- /.container-fluid -->
 
