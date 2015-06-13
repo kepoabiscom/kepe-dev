@@ -77,6 +77,26 @@ class User_model extends CI_Model {
         return $this->db->count_all("user");
     }
 
+    function check_password($id, $password) {
+        $this->db->select("user_id");
+        $this->db->from("user");
+        $this->db->where("user_id", $id);
+        $this->db->where("password", md5($password));
+
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return true;
+        } return false;        
+           
+    }
+
+    function change_password($id, $password) {
+        $data['password'] = md5($password);
+        $this->db->where('user_id', $id);
+        $this->db->update('user', $data); 
+    }
+
     function get_by_id($id) {
         $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, image, created_date, modified_date');
         $this->db->from('user');

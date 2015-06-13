@@ -39,7 +39,7 @@ class Profile extends CI_Controller {
 		    $session_data = $this->session->userdata('logged_in');
 
 		    $img_name = "";
-	        $this->validation();
+	        $this->validation("update_profile");
 
 	        if($this->form_validation->run() == true) {
 	 			$t = $this->upload();
@@ -97,21 +97,48 @@ class Profile extends CI_Controller {
 	function password() {
 		if($this->session->userdata('logged_in')) {
 			$session_data = $this->session->userdata('logged_in');
-			$data = array("success" => false, "error_message" => "");
+			$data = array("success" => "", "error_message" => "");
 
-			$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
-			$this->form_validation->set_rules('new_password', 'New Password', 'required|xss_clean');
-			$this->form_validation->set_rules('old_password', 'Old Password', 'required|xss_clean');
-			$this->form_validation->set_rules('confirm_password', 'Confirmation Password', 'required|xss_clean');
+			$this->validation("change_password");		
 
 	        if($this->form_validation->run() == true) {
-
+	        	$post = $this->input->post(null, true);
+	        	if($post['new_password'] == $post['confirm_password']) {
+	        		$this->user_model->change_password($session_data['id'], $post['new_password']);
+	        		$t = array(
+	        				"success" => true,
+	        				"f" => "change_password"
+	        			);
+	        		$this->session->set_userdata("t", $t);
+	        		redirect('admin/profile/password');
+	        	} else {
+	        		$data = array("error_message" => "<span style='color:red'>New password isn't same with confirm password.</span>");
+		 			$this->session->set_userdata("error_message", $data['error_message']);
+		 			redirect("admin/profile/password");	
+	        	}
 	        } else {
+	        	$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
+	        	$data = array(
+	        			"success" => $this->notification(),
+	        			"error_message" => $e
+	        		);
+	        	$this->session->unset_userdata("error_message");
 	        	$this->load->view('admin/profile/update_password', $data);
 	        }
 		} else {
 			direct('admin/login', 'refresh');
 		}
+	}
+
+	function check_password_db($password) {
+		$sess = $this->session->userdata("logged_in");
+		$result = $this->user_model->check_password($sess['id'], $password);
+		if($result) return true;
+		else {
+			$this->form_validation->set_message('check_password_db', "<span style='color:red'>Invalid old password.</span>");
+			return false;
+		}
+
 	}
 
 	function notification() {
@@ -122,6 +149,9 @@ class Profile extends CI_Controller {
 				$link = "<strong><a href='" . base_url() . "admin/profile' >" . $t['username'] . "</a></strong>"; 
 				$notif = $link . " has been updated successfully.";
 			} 
+			if($t['success'] && $t['f'] == 'change_password') {
+				$notif = "Your password has been updated successfully.";
+			}
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>
                     <strong></strong> ". $notif ."
@@ -131,12 +161,19 @@ class Profile extends CI_Controller {
         return $s;
 	 }
 
-	function validation() {
-	 	$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
-	 	$this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean');
-	 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
-	 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');
-	    
+	function validation($param) {
+		if($param == "update_profile") {
+			$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
+		 	$this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean');
+		 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
+		 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');   	
+		} else if ($param = "change_password") {
+			$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
+			$this->form_validation->set_rules('new_password', 'New Password', 'required|xss_clean');
+			$this->form_validation->set_rules('old_password', 'Old Password', 'required|xss_clean|callback_check_password_db');
+			$this->form_validation->set_rules('confirm_password', 'Confirmation Password', 'required|xss_clean');
+		}
+	 	
 	 }
 
 	 function upload() {
