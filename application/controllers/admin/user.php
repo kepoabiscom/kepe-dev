@@ -39,20 +39,21 @@ class User extends CI_Controller {
 	 function get_user_list($start, $limit) {
 	 	$result = $this->user_model->get_user_list($start, $limit);
 	 	$data_array = ""; $i = 1;
-	 	foreach($result as $row) {
-	 		$id = $row->user_id;
-        	$data_array .= "<tr><td>" . $id . "</td>";
-        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
-        	$data_array .= "<td>" . $row->user_name . "</td>";
-        	$data_array .= "<td>" . $row->user_role . "</td>";
-        	$data_array .= "<td>" . $row->position . "</td>";
-        	$data_array .= "<td>" . $row->created_date . "</td>";
-        	$data_array .= "<td>" . $row->modified_date . "</td>";
-        	$data_array .= "<td><a href='". base_url()."admin/user/detail/".$id."'>Detail</a>&nbsp;<a href='". base_url()."admin/user/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
-        	$i++;
-        }
-
-        return $data_array . "</tr>";
+	 	if($result) {
+	 		foreach($result as $row) {
+		 		$id = $row->user_id;
+	        	$data_array .= "<tr><td>" . $id . "</td>";
+	        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
+	        	$data_array .= "<td>" . $row->user_name . "</td>";
+	        	$data_array .= "<td>" . $row->user_role . "</td>";
+	        	$data_array .= "<td>" . $row->position . "</td>";
+	        	$data_array .= "<td>" . $row->created_date . "</td>";
+	        	$data_array .= "<td>" . $row->modified_date . "</td>";
+	        	$data_array .= "<td><a href='". base_url()."admin/user/detail/".$id."'>Detail</a>&nbsp;<a href='". base_url()."admin/user/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/user/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
+	        	$i++;
+	        }
+	        return $data_array . "</tr>";
+	 	} else return "";
 	 }
 
 	 function detail($id='') {
