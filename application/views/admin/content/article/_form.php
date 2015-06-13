@@ -1,4 +1,7 @@
 <input type="hidden" class="form-control" value="<?php echo $user_id; ?>" name="user_id">
+<?php if($flag == "update") { ?>
+<input type="hidden" class="form-control" value="<?php echo $article_id; ?>" name="article_id">
+<?php } ?>
 <div class="form-group">
     <label class="col-sm-2">Title</label>
     <div class="col-sm-6">
@@ -56,5 +59,4 @@
         <input type="file" name="userfile">
     </div>
 </div>
--->>
-
+-->

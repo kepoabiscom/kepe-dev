@@ -18,9 +18,6 @@
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
 
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    <script>tinymce.init({selector:'textarea'});</script>
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -65,20 +62,46 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <?php if($success) { ?>
-                <div class="alert alert-success fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New article has been created successfully.
-                </div>
-                <?php } ?>
-                <h2>Create new Article</h2><br>
-                <div class="col-lg-18">
-                    <?php echo $error_message; echo validation_errors(); ?><br>
-                    <form action="<?php echo base_url(); ?>admin/article/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
-                        <?php $this->load->view("admin/content/article/_form"); ?>
-                        <button type="submit" name="submit" class="btn btn-primary">Create</button>
-                        <a href='<?php echo base_url(); ?>admin/article'>Back</a>
-                    </form>
+                <h2>Detail Article</h2><br>
+                <div class="col-lg-8">
+                    <div class="row clearfix">
+                        <div class="col-md-18 column"> <br>
+                            <table class="table">
+                                <tbody>
+                                <td>
+                                    <tr>
+                                        <td align="left"><strong>Created by:</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{nama_lengkap}   
+                                    </td>
+                                        
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Title<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{title_article} </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Category</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{category} </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Tag</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{tag}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Status</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{status}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="justify" ><strong>Summary</strong></td>
+                                        <td align="justify">&nbsp;&nbsp;&nbsp;{summary}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Created Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Modified Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{modified_date}</td>
+                                    </tr>
+                                </td>
+                                </tbody>
+                            </table>
+                            <a href='<?php echo base_url(); ?>admin/article'>Back</a>
+                        </div>
+                    </div>
                 </div>  
             </div>
             <!-- /.container-fluid -->

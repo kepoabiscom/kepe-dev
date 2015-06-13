@@ -53,18 +53,42 @@ class Article extends CI_Controller {
         return $data_array . "</tr>";
 	}
 
-	function get_category_article() {
+	function get_category_article($flag=1, $id='') {
 		$result = $this->category_article_model->get_category();
-	 	$category = ""; $i = 1;
-	 	foreach($result as $row) {
-	 		$category .= "<option value='". $row->article_category_id ."'>" . $row->title . "</option>";
+	 	$category = "";
+	 	if($flag == 1) {
+	 		foreach($result as $row) {
+	 			$category .= "<option value='". $row->article_category_id ."'>" . $row->title . "</option>";
+	 		}	
+	 	} else {
+	 		foreach($result as $row) {
+	 			if($id == $row->article_category_id) {
+	 				$category .= "<option value='". $row->article_category_id ."'>" . $row->title . "</option>";	
+	 			}
+	 		}
+	 		foreach($result as $row) {
+	 			if($id != $row->article_category_id) {
+	 				$category .= "<option value='". $row->article_category_id ."'>" . $row->title . "</option>";
+	 			}
+	 		}	
 	 	}
 
 	 	return $category;
 	}
 
-	function get_by_id() {
-		return 0;
+	function delete($id='') {
+		if($this->session->userdata('logged_in')) {
+	 		$r = $this->article_model->get_by_id($id);
+	 		$this->article_model->delete_article($id);
+	 		$t = array("success" => true,
+	 				"article_title" => $r->title_article,
+	 				"f" => "delete"
+	 			);
+	 		$this->session->set_userdata("t", $t);
+	 		redirect('admin/article');
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
 	}
 
 	function create() {
@@ -103,11 +127,62 @@ class Article extends CI_Controller {
 	 }
 
 	function detail($id='') {
-		return "";
+		if($this->session->userdata('logged_in')) {
+	 		$q = $this->article_model->get_by_id($id);
+	 		$data = array("nama_lengkap" => $q->nama_lengkap,
+		 				"title_article" => $q->title_article,
+		 				"tag" => $q->tag,
+		 				"category" => $q->title_category,
+		 				"status" => $q->status,
+		 				"summary" => $q->summary, 
+		 				"created_date" => $q->created_date,
+		 				"modified_date" => $q->modified_date
+		     		);
+	 		$this->parser->parse('admin/content/article/detail_article', $data);
+	 	} else {
+	 		direct('admin/login', 'refresh');
+	 	}
 	}
 
 	function filter() {
 		return "";
+	}
+
+	function update($id='') {
+		if($this->session->userdata('logged_in')) {
+	        $this->validation();
+
+	        if($this->form_validation->run() == true) {
+			 	if(isset($_POST['submit'])) {
+			 		$d = $this->input->post(null, true);
+			 		unset($d['submit']);
+			 		$this->article_model->update_article($d['article_id'], $d);
+			 		$t = array("success" => true,
+			 				"title_article" => $d['title'],
+			 				"f" => "update"
+			 			);
+			 		$this->session->set_userdata("t", $t);
+			 		redirect('admin/article');
+			 	}
+		 	} else {
+		 		$r = $this->article_model->get_by_id($id);
+		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
+		 		$data = array("article_id" => $r->article_id,
+		 				"title" => $r->title_article,
+		 				"category" => $this->get_category_article(2, $r->article_category_id),
+		 				"status" => $r->status,
+		 				"tag" => $r->tag,
+		 				"summary" => $r->summary,
+		 				"flag" => "update",
+		 				"error_message" => $e,
+		 				"user_id" => $r->user_id
+		 			);
+		 		$this->session->unset_userdata("error_message");
+		 		$this->load->view('admin/content/article/update_article', $data);
+		 	}
+		} else {
+			redirect('admin/login', 'refresh');
+		}
 	}
 
 	function page_config() {
@@ -138,7 +213,7 @@ class Article extends CI_Controller {
 			if($t['success'] && $t['f'] == "delete") {
 				$notif = $t['article_title'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
-				$notif = $t['article_title'] . " has been updated successfully.";
+				$notif = $t['title_article'] . " has been updated successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

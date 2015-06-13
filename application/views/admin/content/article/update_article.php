@@ -65,18 +65,12 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <?php if($success) { ?>
-                <div class="alert alert-success fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New article has been created successfully.
-                </div>
-                <?php } ?>
-                <h2>Create new Article</h2><br>
-                <div class="col-lg-18">
+                <h2>Edit Article</h2><br>
+                <div class="col-lg-20">
                     <?php echo $error_message; echo validation_errors(); ?><br>
-                    <form action="<?php echo base_url(); ?>admin/article/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                    <form action="<?php echo base_url(); ?>admin/article/update" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/content/article/_form"); ?>
-                        <button type="submit" name="submit" class="btn btn-primary">Create</button>
+                        <button type="submit" name="submit" class="btn btn-primary">Edit</button>
                         <a href='<?php echo base_url(); ?>admin/article'>Back</a>
                     </form>
                 </div>  
