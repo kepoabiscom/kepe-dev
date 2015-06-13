@@ -2,10 +2,10 @@
 -- version 4.1.12
 -- http://www.phpmyadmin.net
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 07, 2015 at 03:19 PM
--- Server version: 5.6.16
--- PHP Version: 5.5.11
+-- Host: localhost
+-- Generation Time: Jun 13, 2015 at 08:12 AM
+-- Server version: 5.5.36
+-- PHP Version: 5.4.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -39,7 +39,18 @@ CREATE TABLE IF NOT EXISTS `article` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
+
+--
+-- Dumping data for table `article`
+--
+
+INSERT INTO `article` (`article_id`, `article_category_id`, `user_id`, `image_id`, `title`, `tag`, `summary`, `status`, `created_date`, `modified_date`, `deleted_date`) VALUES
+(1, 1, 3, 1, 'Kepoabis', 'Kepoabis', 'Kepoabis', 'pending', '2015-06-12 00:00:00', '2015-06-12 00:00:00', '2015-06-12 00:00:00'),
+(2, 1, 3, 0, 'Apa itu KepoABis.com', 'aaa', '<p>sdadsasdas</p>', 'unpublished', '2015-06-13 06:03:30', '2015-06-13 06:03:30', NULL),
+(6, 2, 3, 0, 'JIJIU', 'asdasdas', '<p>adasdasdas</p>', 'pending', '2015-06-13 06:18:25', '2015-06-13 08:08:56', NULL),
+(9, 1, 3, 0, 'SDSDFSDFSDF', 'DFSDFSD', '<p>SDFSFDSFSDFSDF</p>', 'unpublished', '2015-06-13 08:09:18', '2015-06-13 08:09:18', NULL),
+(10, 1, 3, 0, 'ASDASDAS', 'DFSDFSD', '<p>DFSDFDSF</p>', 'unpublished', '2015-06-13 08:09:26', '2015-06-13 08:09:26', NULL);
 
 -- --------------------------------------------------------
 
@@ -72,7 +83,16 @@ CREATE TABLE IF NOT EXISTS `article_category` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_category_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data for table `article_category`
+--
+
+INSERT INTO `article_category` (`article_category_id`, `image_id`, `title`, `body`, `created_date`, `modified_date`, `deleted_date`) VALUES
+(1, 0, 'Category 1', 'CAtegory 1', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL),
+(2, 0, 'Category 2', 'Category 2', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL),
+(3, 0, 'Category 3', 'Category 3', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -153,16 +173,22 @@ CREATE TABLE IF NOT EXISTS `user` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=34 ;
 
 --
 -- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`user_id`, `nama_lengkap`, `user_name`, `password`, `user_role`, `email`, `image`, `position`, `body`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(1, 'Mr. Kepo Abis', 'kepoabiscom', '3d4dd8af06196347d9df28537', 'superadmin', 'hi@kepoabis.com', NULL, NULL, NULL, NULL, NULL, NULL),
-(2, 'Syahrul Ramadhan', 'sramadhan13', '3d4dd8af06196347d9df28537', 'admin', 'syahrul.ramadhan@kepoabis.com', NULL, NULL, NULL, NULL, NULL, NULL),
-(3, 'Administrator', 'administrator', 'b067a55e2a74eb6cfb2db054cc0264cb', 'admin', 'admin@kepoabis.com', 'kepoabis', 'kepoabis', 'kepoabis', '2015-06-06 00:00:00', '2015-06-06 00:00:00', '2015-06-06 00:00:00');
+(3, 'Administrator', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'superadmin', 'administrator@gmail.com', 'd697cf246a144e1c5e56a1ed2d91d7fa.jpg', 'kepoabis', 'Hai Oyoy', '2015-06-06 00:00:00', '2015-06-13 02:02:36', '2015-06-26 00:00:00'),
+(11, 'jaka', 'jaka', '827ccb0eea8a706c4c34a16891f84e7b', 'superadmin', 'hermanwahyudi@rocketmail.com', '02033c72364772984452b3e6b0d28195.jpg', 'asdas', '', '2015-06-08 18:37:22', '2015-06-11 18:28:17', NULL),
+(20, 'asdasd', 'sdasdas', 'b8c5943d6849d0f9e7615faa57093d49', 'crew', 'hermanwahyudi@rocketmail.com', '410193eb50061dd9c0c2b35ac578912d.jpg', '', '', '2015-06-09 16:42:42', '2015-06-11 18:42:37', NULL),
+(21, 'asdas', 'sdas', 'a8f5f167f44f4964e6c998dee827110c', 'superadmin', 'hermanwahyudi@rocketmail.com', NULL, '', '', '2015-06-09 18:15:25', '2015-06-09 18:15:25', NULL),
+(26, 'JKKKKKK', 'dsdasd', 'b0c44dc7bd2ecec1ccfd77f4bfbd35cc', 'superadmin', 'hermanwahyudi@rocketmail.com', '0d04c5ad49c0df24404fafd56735f824.jpg', '', '', '2015-06-09 19:48:56', '2015-06-11 18:32:50', NULL),
+(28, 'asdasda', 'dsdasdsadas', '6c0cbf5029aed0af395ac4b864c6b095', 'admin', 'hermanwahyudi@rocketmail.com', '5844121f9df8a1f9183c0b7a96af89a1.jpg', 'asdas', '', '2015-06-09 20:02:46', '2015-06-11 19:09:49', NULL),
+(30, 'ffff', 'ffff', 'ece926d8c0356205276a45266d361161', 'crew', 'hermanwahyudi@rocketmail.com', '1c68e47b06400e93d3f72ed44d632b6a.jpg', '', '', '2015-06-11 16:47:26', '2015-06-11 19:07:49', NULL),
+(32, 'Herman', 'Herman', 'aecd5784f6cc5eadb56c6fbb21f68577', 'crew', 'hermanwahyudi@rocketmail.com', '4a91a49b776afda15919ce19e8a8e606.jpg', 'asdasdas', 'sdasd', '2015-06-11 19:10:24', '2015-06-11 19:12:16', NULL),
+(33, 'test', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 'crew', 'hermanwahyudi@rocketmail.com', 'default.jpg', '', '', '2015-06-13 05:16:25', '2015-06-13 05:16:25', NULL);
 
 -- --------------------------------------------------------
 
