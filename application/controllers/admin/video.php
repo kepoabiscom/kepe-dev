@@ -113,9 +113,33 @@ class Video extends CI_Controller {
 	 				"f" => "delete"
 	 			);
 	 		$this->session->set_userdata("t", $t);
-	 		redirect('admin/article');
+	 		redirect('admin/video');
 	 	} else {
 	 		redirect('admin/login', 'refresh');
+	 	}
+	}
+
+	function detail($id='') {
+		if($this->session->userdata('logged_in')) {
+	 		$q = $this->video_model->get_by_id($id);
+	 		$data = array("title_category" => $q->title_category,
+	                    "title" => $q->title_video,
+	                    "tag" => $q->tag,
+	                    "status" => $q->status,
+	                    "description" => $q->description,
+	                    "story_ide" => $q->story_ide,
+	                    "screenwriter" => $q->screenwriter,
+	                    "film_director" => $q->film_director,
+	                    "cameramen" => $q->cameramen,
+	                    "artist" => $q->artist,
+	                    "url" => "<iframe width='420' height='345'src='".$q->url."'></iframe> ",
+	                    "duration" => $q->duration,
+	                    "created_date" => $q->created_date,
+	                    "modified_date" => $q->modified_date
+	                );
+	 		$this->parser->parse('admin/video/detail_video', $data);
+	 	} else {
+	 		direct('admin/login', 'refresh');
 	 	}
 	}
 
