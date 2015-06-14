@@ -66,4 +66,10 @@ class Video_model extends CI_Model {
             return $query->row();
         } return;
     }
+
+    function update_video($id, $data){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $this->db->where('video_id', $id);
+        $this->db->update('video', $data); 
+    }
 }
