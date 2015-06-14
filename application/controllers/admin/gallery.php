@@ -41,4 +41,29 @@ class Gallery extends CI_Controller {
 	        return $data_array;	
 	 	} else return "<strong>No Picture.</strong>";
 	 }
+
+	function conf_upload(){
+		$config['upload_path'] = "./assets/img/";
+		$config['allowed_types'] = "jpg|gif|png|jpeg";
+		$config['max_size']	= '2000';
+		$config['max_width'] = '1024';
+		$config['max_height'] = '1768';
+		$config['encrypt_name'] = true;
+		$this->load->library('upload');
+		$this->upload->initialize($config);
+	}
+	function upload(){
+		$this->conf_upload();
+		if(!$this->upload->do_upload()){ 
+			$status = array('success' => false, 
+							'msg' => "Error when uploaded."
+					);
+		} else{
+		 	$file = $this->upload->data();
+		  	$status = array('success' => true, 
+		  					'msg' => 'Image uploaded.'
+		  			);
+		} 
+		echo(json_encode($status));
+	}
 }

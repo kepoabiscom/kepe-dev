@@ -31,6 +31,10 @@
             return false;
         }
     </script>
+    <script type ="text/javascript" src ="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.js"></script>
+    <script type ="text/javascript" src ="//cdnjs.cloudflare.com/ajax/libs/jquery.form/3.51/jquery.form.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="<?php echo base_url(); ?>ajax/upload.js"></script>
 
 </head>
 
@@ -72,6 +76,15 @@
                     <div class="col-lg-12">
                         <h1 class="page-header">Gallery</h1>
                         {images_list}
+
+                    </div>
+                    <div class ="col-md-6">
+                    <div class ="msg"></div>
+                    
+                    <form action="<?php echo base_url(); ?>admin/gallery/upload" method="post" enctype="multipart/form-data" class="upload-image-form" role="form">
+                        <input type="file" class = "form-control" name="userfile" size="20" /><br />
+                        <input type="submit" name = "submit" value="Upload" class ="btn btn-primary" />
+                    </form>
                     </div>
                 </div>
 
