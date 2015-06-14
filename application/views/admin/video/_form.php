@@ -12,7 +12,7 @@
     <label class="col-sm-2">Category</label>
     <div class="col-sm-6">
         <select class="form-control" id="video_category_id" name="video_category_id">
-        <?php echo $category; ?>
+        <?php echo $title_category; ?>
         </select>
     </div>
 </div>

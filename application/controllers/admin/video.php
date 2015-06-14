@@ -41,8 +41,7 @@ class Video extends CI_Controller {
 	 		$data = array("success" => false, 
 	 					"error_message" => "", 
 	 					"flag" => "create",
-	 					"user_id" => $sess_data['id'],
-	 					"category" => $this->get_category_video()
+	 					"title_category" => $this->get_category_video()
 	 				);
 
 	        $this->validation();
@@ -92,11 +91,12 @@ class Video extends CI_Controller {
 	 		foreach($result as $row) {
 	 			if($id == $row->video_category_id) {
 	 				$category .= "<option value='". $row->video_category_id ."'>" . $row->title . "</option>";	
+	 				break;
 	 			}
 	 		}
 	 		foreach($result as $row) {
-	 			if($id != $row->article_category_id) {
-	 				$category .= "<option value='". $row->article_category_id ."'>" . $row->title . "</option>";
+	 			if($id != $row->video_category_id) {
+	 				$category .= "<option value='". $row->video_category_id ."'>" . $row->title . "</option>";
 	 			}
 	 		}	
 	 	}
@@ -119,6 +119,49 @@ class Video extends CI_Controller {
 	 	}
 	}
 
+	function update($id='') {
+		if($this->session->userdata('logged_in')) {
+	        $this->validation();
+
+	        if($this->form_validation->run() == true) {
+			 	if(isset($_POST['submit'])) {
+			 		$d = $this->input->post(null, true);
+			 		unset($d['submit']);
+			 		$this->video_model->update_video($d['video_id'], $d);
+			 		$t = array("success" => true,
+			 				"video_title" => $d['title'],
+			 				"f" => "update"
+			 			);
+			 		$this->session->set_userdata("t", $t);
+			 		redirect('admin/video');
+			 	}
+		 	} else {
+		 		$q = $this->video_model->get_by_id($id);
+		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
+		 		$data = array("video_id" => $q->video_id,
+		 				"title_category" => $this->get_category_video(2, $q->video_category_id),
+	                    "title" => $q->title_video,
+	                    "tag" => $q->tag,
+	                    "status" => $q->status,
+	                    "description" => $q->description,
+	                    "story_ide" => $q->story_ide,
+	                    "screenwriter" => $q->screenwriter,
+	                    "film_director" => $q->film_director,
+	                    "cameramen" => $q->cameramen,
+	                    "artist" => $q->artist,
+	                    "url" => $q->url,
+	                    "duration" => $q->duration,
+		 				"flag" => "update",
+		 				"error_message" => $e
+		 			);
+		 		$this->session->unset_userdata("error_message");
+		 		$this->load->view('admin/video/video_update', $data);
+		 	}
+		} else {
+			redirect('admin/login', 'refresh');
+		}
+	}
+
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
 	 		$q = $this->video_model->get_by_id($id);
@@ -132,7 +175,7 @@ class Video extends CI_Controller {
 	                    "film_director" => $q->film_director,
 	                    "cameramen" => $q->cameramen,
 	                    "artist" => $q->artist,
-	                    "url" => "<iframe width='420' height='345'src='".$q->url."'></iframe> ",
+	                    "url" => "<iframe width='420' height='345'src='http://www.youtube.com/embed/". explode("v=", $q->url)[1] ."'></iframe> ",
 	                    "duration" => $q->duration,
 	                    "created_date" => $q->created_date,
 	                    "modified_date" => $q->modified_date

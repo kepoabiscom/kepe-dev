@@ -119,7 +119,7 @@
                                 </td>
                                 </tbody>
                             </table>
-                            <a href='<?php echo base_url(); ?>admin/article'>Back</a>
+                            <a href='<?php echo base_url(); ?>admin/video'>Back</a>
                         </div>
                     </div>
                 </div>  
