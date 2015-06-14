@@ -1,7 +1,7 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <?php 
-            $data = array('home', 'profile', 'user', 'content', 'article', 'news', 'video', 'category', 'about');
+            $data = array('home', 'profile', 'user', 'content', 'article', 'news', 'video', 'category', 'about', 'gallery');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -37,7 +37,9 @@
         <li class="<?php echo $active[6]; ?>">
             <a href="<?php echo base_url(); ?>admin/video"><i class="fa fa-fw fa-desktop"></i>&nbsp;Video Management</a>
         </li>
-        
+        <li class="<?php echo $active[9]; ?>">
+            <a href="<?php echo base_url(); ?>admin/gallery"><i class="fa fa-fw fa-desktop"></i>&nbsp;Gallery Management</a>
+        </li>
         <li class="<?php echo $active[7]; ?>">
             <a href="#"><i class="fa fa-fw fa-wrench"></i>&nbsp;Category Management</a>
         </li>
