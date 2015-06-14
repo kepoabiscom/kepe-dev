@@ -35,7 +35,7 @@
             </ul>
         </li>
         <li class="<?php echo $active[6]; ?>">
-            <a href="#"><i class="fa fa-fw fa-desktop"></i>&nbsp;Video Management</a>
+            <a href="<?php echo base_url(); ?>admin/video"><i class="fa fa-fw fa-desktop"></i>&nbsp;Video Management</a>
         </li>
         
         <li class="<?php echo $active[7]; ?>">
