@@ -33,7 +33,7 @@
             <option value="pending">Pending</option>
             <option value="published">Published</option>
             <?php } else { ?>
-            <?php if ($role == "published") { ?>
+            <?php if ($status == "published") { ?>
             <option value="published">Published</option>
             <option value="unpublished">Unpublished</option>
             <option value="pending">Pending</option>
