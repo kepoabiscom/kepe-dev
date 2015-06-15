@@ -165,7 +165,11 @@ class Video extends CI_Controller {
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
 	 		$q = $this->video_model->get_by_id($id);
-	 		$v = explode("v=", $q->url);
+	 		$youtube_id = ""; $link = $q->url;
+	 		if(strpos($link, "v=")) {
+	 			$arr = explode("v=", $link);
+	 			$youtube_id = $arr[1];
+	 		}
 	 		$data = array("title_category" => $q->title_category,
 	                    "title" => $q->title_video,
 	                    "tag" => $q->tag,
@@ -176,7 +180,7 @@ class Video extends CI_Controller {
 	                    "film_director" => $q->film_director,
 	                    "cameramen" => $q->cameramen,
 	                    "artist" => $q->artist,
-	                    "url" => "<iframe width='420' height='345'src='http://www.youtube.com/embed/". $v[1] ."'></iframe> ",
+	                    "url" => "<iframe width='420' height='345'src='http://www.youtube.com/embed/". $youtube_id ."'></iframe> ",
 	                    "duration" => $q->duration,
 	                    "created_date" => $q->created_date,
 	                    "modified_date" => $q->modified_date

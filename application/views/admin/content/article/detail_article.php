@@ -70,7 +70,7 @@
                                 <tbody>
                                 <td>
                                     <tr>
-                                        <td align="left"><strong>Author:</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{nama_lengkap}   
+                                        <td align="left"><strong>Author</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{nama_lengkap}   
                                     </td>
                                         
                                     </tr>

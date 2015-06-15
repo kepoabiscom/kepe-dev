@@ -68,7 +68,7 @@
                 <h2>Update Video</h2><br>
                 <div class="col-lg-20">
                     <?php echo $error_message; echo validation_errors(); ?><br>
-                    <form action="<?php echo base_url(); ?>admin/video/update" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                    <form action="<?php echo base_url() . 'admin/video/update/' . $video_id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/video/_form"); ?>
                         <button type="submit" name="submit" class="btn btn-primary">Edit</button>
                         <a href='<?php echo base_url(); ?>admin/video'>Back</a>
