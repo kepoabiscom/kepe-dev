@@ -55,12 +55,12 @@ class Gallery extends CI_Controller {
 	function upload(){
 		$this->conf_upload();
 		if(!$this->upload->do_upload()){ 
-			$status = array('success' => false, 
+			$status = array('status' => false, 
 							'msg' => "Error when uploaded."
 					);
 		} else{
 		 	$file = $this->upload->data();
-		  	$status = array('success' => true, 
+		  	$status = array('status' => true, 
 		  					'msg' => 'Image uploaded.'
 		  			);
 		} 
