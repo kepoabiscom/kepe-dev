@@ -1,12 +1,14 @@
+var formObj = $(this);
+var formURL = $("#upload-image-form").attr("action");
 $(document).ready(function() { 
-    $(".upload-image-form").submit(function(){
+    $("#upload-image-form").submit(function(e){
         $.ajax({
-            url: base_url + "admin/gallery/upload",
+            url: formURL,
             type: 'POST',
             dataType: 'JSON',
             resetForm: true,
-            beforeSubmit: function() {
-                $('.msg').html('Loading ...');
+            beforeSend: function() {
+                $('.msg').html("Loading...");
             },
             success: function(data) {
                 if(data.status){
