@@ -80,6 +80,7 @@ class User extends CI_Controller {
 	 		$data = array("success" => false, "error_message" => "", "flag" => "create");
 
 	        $this->validation();
+	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|callback_db_check_username');
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {
@@ -106,6 +107,30 @@ class User extends CI_Controller {
 		} else {
 			redirect('admin/login', 'refresh');
 		}
+	 }
+
+	function db_check_username($username) {
+       	$result = $this->user_model->username_check($username);
+
+       	if($result) return true;
+       	else {
+            $this->form_validation->set_message('db_check_username', "<span style='color:red'>The Username is not Available.</span>");
+            return false;
+        }
+	}
+
+	function ajax_check_username($username='') {
+	 	$result = $this->user_model->username_check($username);
+	 	if($result) {
+	 		$status = array("success" => 1,
+	 					"msg" => "<span style='color:green'>Available!</span>"
+	 			);
+	 	} else {
+	 		$status = array("success" => 0,
+	 					"msg" => "<span style='color:red'>Not Available!</span>"
+	 			);
+	 	}	
+	 	echo json_encode($status);
 	 }
 
 	 function update($id='') {

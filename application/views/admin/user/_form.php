@@ -6,7 +6,8 @@
     <div class="col-sm-6">
         <?php $readonly = ($flag == "update") ? "readonly" : ""; ?>
         <?php $username = ($flag == "update") ? $username : ""; ?>
-        <input type="text" class="form-control" value="<?php echo $username; ?>" name="user_name" <?php echo $readonly; ?>>
+        <input type="text" class="form-control" onkeyup="username_check(this.value)" value="<?php echo $username; ?>" name="user_name" <?php echo $readonly; ?>>
+        <span id="v_username"></span>
     </div>
 </div>
 <div class="form-group">
