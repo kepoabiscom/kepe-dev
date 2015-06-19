@@ -72,6 +72,14 @@
                  <div class="col-lg-12">
                         <h2>Article List - <strong>KepoAbis.com</strong></h2>
                         {success}
+                        <div class="row">
+                            <form action="" method="get">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="" name="title" placeholder="Title">
+                            </div><button type="submit" name="submit" id="filter" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div><br>
+                        <div class="row">
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
@@ -90,6 +98,7 @@
                                 </tbody>
                             </table>
                             {link}<br><br>
+                        </div>
                         </div>
                         <a href='<?php echo base_url(); ?>admin/article/create' class="btn btn-lg btn-success">Add Article</a>
                     </div>

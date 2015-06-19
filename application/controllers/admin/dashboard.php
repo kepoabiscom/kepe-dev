@@ -25,9 +25,18 @@ class Dashboard extends CI_Controller {
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
-	 }
- 
-	 function logout() {
+	}
+ 	
+	function get_api_weather() {
+		$api_weather = "http://api.openweathermap.org/data/2.5/find?q=Jakarta";
+		$json_string = file_get_contents($api_weather);
+		$parsed_json = json_decode($json_string);
+
+		echo $parsed_json->{'list'}[0]->{'name'};
+
+	}
+
+	function logout() {
 	   	$this->session->unset_userdata('logged_in');
 	   	//session_destroy();
 	   	redirect('admin/dashboard', 'refresh');

@@ -30,12 +30,9 @@ class User_model extends CI_Model {
 
         $query = $this->db->get();
 
-        if($query->num_rows() == 1) {
+        if($query->num_rows() == 1)
             return $query->result();
-        }
-        else {
-            return false;
-        }
+        return false;
     }
 
     function get_user_list($start, $limit) {
@@ -50,6 +47,18 @@ class User_model extends CI_Model {
             return $data;
         }
         return false;
+    }
+
+    function username_check($username) {
+        $query = $this->db->select("user_name")
+            ->from("user")
+            ->where("user_name", $username)
+            ->group_by("user_name")
+            ->get();
+
+        if($query->num_rows() == 1)
+            return false;
+        return true;
     }
 
     function create_user($data) {
