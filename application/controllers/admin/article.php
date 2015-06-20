@@ -35,8 +35,8 @@ class Article extends CI_Controller {
 	   	}
 	}
 
-	function get_list_article($start, $limit) {
-		$result = $this->article_model->get_article_list($start, $limit);
+	function get_list_article($start, $limit, $keyword='') {
+		$result = $this->article_model->get_article_list($start, $limit, $keyword);
 	 	$data_array = ""; $i = 1;
 	 	if($result) {
 	 		foreach($result as $row) {
@@ -146,7 +146,19 @@ class Article extends CI_Controller {
 	}
 
 	function filter() {
-		return "";
+		if($this->session->userdata('logged_in')) {
+		    $keyword = $this->input->get('title', true);
+			$config = $this->page_config(array('filter', $keyword));
+
+		    $data = array(
+		   			'list_article' => $this->get_list_article($config['uri'], $config['per_page'], $keyword),
+		   			'link' => $this->pagination->create_links(),
+		   			'success' => $this->notification()
+		   		);
+		    $this->parser->parse('admin/content/article/article_management', $data);
+		} else {
+			redirect('admin/login', 'refresh');
+		}
 	}
 
 	function update($id='') {
@@ -186,16 +198,26 @@ class Article extends CI_Controller {
 		}
 	}
 
-	function page_config() {
-	 	$config['base_url'] = base_url() . "admin/article/page";
-		$config['per_page'] = 5;
-	 	$config['total_rows'] = $this->article_model->count_article();
-		$config['uri_segment'] = 4;
-		$config['use_page_numbers'] = true;
-			
-		$this->pagination->initialize($config);
-		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
+	function page_config($flag=null) {
+		if($flag[0] == 'filter') {
+			$config['base_url'] = base_url() . "admin/article/filter";
+			$config['per_page'] = 5;
+		 	$config['total_rows'] = $this->article_model->count_article($flag[1]);
+			$config['uri_segment'] = 4;
+			$config['use_page_numbers'] = true;
+				
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;	
+		} else {
+			$config['base_url'] = base_url() . "admin/article/page";
+			$config['per_page'] = 5;
+		 	$config['total_rows'] = $this->article_model->count_article();
+			$config['uri_segment'] = 4;
+			$config['use_page_numbers'] = true;
+				
+			$this->pagination->initialize($config);
+			$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;	
+		}
 		return array("uri" => $page, "per_page" => $config['per_page']);
 	 }
 
