@@ -130,7 +130,7 @@
                                     <i class="fa fa-tasks fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">{celcius}&deg;</div>
+                                    <div class="huge">{celcius}&deg;c</div>
                                     <div><strong>{weather}</strong><br>{city}</div>
                                 </div>
                             </div>
