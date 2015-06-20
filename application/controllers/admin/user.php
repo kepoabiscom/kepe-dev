@@ -59,7 +59,11 @@ class User extends CI_Controller {
 	 function detail($id='') {
 	 	if($this->session->userdata('logged_in')) {
 	 		$q = $this->user_model->get_by_id($id);
-	 		$img = "<img src='" . base_url() . "assets/img/team/" . $q->image . "' height='100' width='100' />";
+	 		
+	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/team/" . $q->image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/team/" . $q->image ."'>";
+			$img .= "</a></div>";
 	 		$data = array(
 		     			"username" => $q->user_name,
 		 				"nama_lengkap" => $q->nama_lengkap,
