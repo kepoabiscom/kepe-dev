@@ -1,32 +1,15 @@
--- phpMyAdmin SQL Dump
--- version 4.1.12
--- http://www.phpmyadmin.net
---
--- Host: localhost
--- Generation Time: Jun 14, 2015 at 05:15 AM
--- Server version: 5.5.36
--- PHP Version: 5.4.27
+# Host: localhost  (Version: 5.6.21)
+# Date: 2015-06-20 16:04:21
+# Generator: MySQL-Front 5.3  (Build 4.191)
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+/*!40101 SET NAMES latin1 */;
 
+#
+# Structure for table "article"
+#
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-
---
--- Database: `kepe3788_db`
---
-
--- --------------------------------------------------------
-
---
--- Table structure for table `article`
---
-
-CREATE TABLE IF NOT EXISTS `article` (
+DROP TABLE IF EXISTS `article`;
+CREATE TABLE `article` (
   `article_id` int(11) NOT NULL AUTO_INCREMENT,
   `article_category_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
@@ -39,22 +22,20 @@ CREATE TABLE IF NOT EXISTS `article` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 
---
--- Dumping data for table `article`
---
+#
+# Data for table "article"
+#
 
-INSERT INTO `article` (`article_id`, `article_category_id`, `user_id`, `image_id`, `title`, `tag`, `summary`, `status`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(12, 2, 3, 0, 'sdfds', 'sdfsdfs', '<p>sdfsdfsd</p>', 'unpublished', '2015-06-13 16:17:54', '2015-06-14 04:44:37', NULL);
+INSERT INTO `article` VALUES (12,2,3,0,'sdfds','sdfsdfs','<p>sdfsdfsd</p>','unpublished','2015-06-13 16:17:54','2015-06-14 04:44:37',NULL);
 
--- --------------------------------------------------------
+#
+# Structure for table "article_blog"
+#
 
---
--- Table structure for table `article_blog`
---
-
-CREATE TABLE IF NOT EXISTS `article_blog` (
+DROP TABLE IF EXISTS `article_blog`;
+CREATE TABLE `article_blog` (
   `artcle_blog_id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL DEFAULT '0',
   `body` text,
@@ -62,15 +43,21 @@ CREATE TABLE IF NOT EXISTS `article_blog` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`artcle_blog_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
+#
+# Data for table "article_blog"
+#
 
---
--- Table structure for table `article_category`
---
+/*!40000 ALTER TABLE `article_blog` DISABLE KEYS */;
+/*!40000 ALTER TABLE `article_blog` ENABLE KEYS */;
 
-CREATE TABLE IF NOT EXISTS `article_category` (
+#
+# Structure for table "article_category"
+#
+
+DROP TABLE IF EXISTS `article_category`;
+CREATE TABLE `article_category` (
   `article_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `image_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -79,24 +66,22 @@ CREATE TABLE IF NOT EXISTS `article_category` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `article_category`
---
+#
+# Data for table "article_category"
+#
 
-INSERT INTO `article_category` (`article_category_id`, `image_id`, `title`, `body`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(1, 0, 'Category 1', 'CAtegory 1', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL),
-(2, 0, 'Category 2', 'Category 2', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL),
-(3, 0, 'Category 3', 'Category 3', '2015-06-12 00:00:00', '2015-06-12 00:00:00', NULL);
+/*!40000 ALTER TABLE `article_category` DISABLE KEYS */;
+INSERT INTO `article_category` VALUES (1,0,'Category 1','CAtegory 1','2015-06-12 00:00:00','2015-06-12 00:00:00',NULL),(2,0,'Category 2','Category 2','2015-06-12 00:00:00','2015-06-12 00:00:00',NULL),(3,0,'Category 3','Category 3','2015-06-12 00:00:00','2015-06-12 00:00:00',NULL);
+/*!40000 ALTER TABLE `article_category` ENABLE KEYS */;
 
--- --------------------------------------------------------
+#
+# Structure for table "article_comment"
+#
 
---
--- Table structure for table `article_comment`
---
-
-CREATE TABLE IF NOT EXISTS `article_comment` (
+DROP TABLE IF EXISTS `article_comment`;
+CREATE TABLE `article_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL DEFAULT '0',
   `nick_name` varchar(255) NOT NULL DEFAULT '',
@@ -106,15 +91,21 @@ CREATE TABLE IF NOT EXISTS `article_comment` (
   `created_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
--- --------------------------------------------------------
+#
+# Data for table "article_comment"
+#
 
---
--- Table structure for table `image`
---
+/*!40000 ALTER TABLE `article_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `article_comment` ENABLE KEYS */;
 
-CREATE TABLE IF NOT EXISTS `image` (
+#
+# Structure for table "image"
+#
+
+DROP TABLE IF EXISTS `image`;
+CREATE TABLE `image` (
   `image_id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL DEFAULT '',
   `tag` varchar(255) DEFAULT NULL,
@@ -126,41 +117,55 @@ CREATE TABLE IF NOT EXISTS `image` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`image_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `image`
---
+#
+# Data for table "image"
+#
 
-INSERT INTO `image` (`image_id`, `title`, `tag`, `body`, `type`, `size`, `path`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(1, 'Slide 1', 'Kepoabis', 'Kepoabis', 'kepoabis', '300', 'assets/img/slider/slider-1.jpg', '2015-06-06 07:23:23', '2015-06-06 07:23:23', NULL),
-(2, 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', '300', 'assets/img/slider/slider-3.jpg', '2015-06-06 08:21:22', '2015-06-06 08:21:22', NULL),
-(3, 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', '300', 'assets/img/slider/slider-2.jpg', '2015-06-06 08:21:22', '2015-06-06 08:21:22', NULL),
-(4, 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', 'kepoabiscom', '300', 'assets/img/slider/slider-4.jpg', '2015-06-06 08:21:22', '2015-06-06 08:21:22', NULL);
+/*!40000 ALTER TABLE `image` DISABLE KEYS */;
+INSERT INTO `image` VALUES (1,'Slide 1','Kepoabis','Kepoabis','kepoabis','300','assets/img/slider/slider-1.jpg','2015-06-06 07:23:23','2015-06-06 07:23:23',NULL),(2,'kepoabiscom','kepoabiscom','kepoabiscom','kepoabiscom','300','assets/img/slider/slider-3.jpg','2015-06-06 08:21:22','2015-06-06 08:21:22',NULL),(3,'kepoabiscom','kepoabiscom','kepoabiscom','kepoabiscom','300','assets/img/slider/slider-2.jpg','2015-06-06 08:21:22','2015-06-06 08:21:22',NULL),(4,'kepoabiscom','kepoabiscom','kepoabiscom','kepoabiscom','300','assets/img/slider/slider-4.jpg','2015-06-06 08:21:22','2015-06-06 08:21:22',NULL);
+/*!40000 ALTER TABLE `image` ENABLE KEYS */;
 
--- --------------------------------------------------------
+#
+# Structure for table "setting"
+#
 
---
--- Table structure for table `skill`
---
+DROP TABLE IF EXISTS `setting`;
+CREATE TABLE `setting` (
+  `setting_id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `logo` varchar(255) DEFAULT NULL,
+  `background_color` varchar(255) DEFAULT NULL,
+  `contact_address` text,
+  `contact_telphone_1` varchar(255) DEFAULT NULL,
+  `contact_telphone_2` varchar(255) DEFAULT NULL,
+  `contact_fax` varchar(255) DEFAULT NULL,
+  `contact_email_1` varchar(255) DEFAULT NULL,
+  `contact_email_2` varchar(255) DEFAULT NULL,
+  `contact_lat` varchar(255) DEFAULT NULL,
+  `contact_long` varchar(255) DEFAULT NULL,
+  `footer` text,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`setting_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
-CREATE TABLE IF NOT EXISTS `skill` (
-  `skill_id` int(11) NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`skill_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+#
+# Data for table "setting"
+#
 
--- --------------------------------------------------------
 
---
--- Table structure for table `user`
---
+#
+# Structure for table "user"
+#
 
-CREATE TABLE IF NOT EXISTS `user` (
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
   `user_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_role_basic_id` int(11) NOT NULL DEFAULT '3',
   `nama_lengkap` varchar(25) NOT NULL DEFAULT '',
   `user_name` varchar(25) NOT NULL DEFAULT '',
   `password` varchar(64) NOT NULL DEFAULT '',
-  `user_role` enum('superadmin','admin','crew') DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
   `image` varchar(255) DEFAULT NULL,
   `position` varchar(255) DEFAULT NULL,
@@ -169,30 +174,98 @@ CREATE TABLE IF NOT EXISTS `user` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=34 ;
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `user`
---
+#
+# Data for table "user"
+#
 
-INSERT INTO `user` (`user_id`, `nama_lengkap`, `user_name`, `password`, `user_role`, `email`, `image`, `position`, `body`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(3, 'Administrator', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 'superadmin', 'administrator@gmail.com', 'd697cf246a144e1c5e56a1ed2d91d7fa.jpg', 'kepoabis', 'Hai Oyoy', '2015-06-06 00:00:00', '2015-06-13 02:02:36', '2015-06-26 00:00:00'),
-(11, 'jaka', 'jaka', '827ccb0eea8a706c4c34a16891f84e7b', 'superadmin', 'hermanwahyudi@rocketmail.com', '02033c72364772984452b3e6b0d28195.jpg', 'asdas', '', '2015-06-08 18:37:22', '2015-06-11 18:28:17', NULL),
-(20, 'asdasd', 'sdasdas', 'b8c5943d6849d0f9e7615faa57093d49', 'crew', 'hermanwahyudi@rocketmail.com', '410193eb50061dd9c0c2b35ac578912d.jpg', '', '', '2015-06-09 16:42:42', '2015-06-11 18:42:37', NULL),
-(21, 'asdas', 'sdas', 'a8f5f167f44f4964e6c998dee827110c', 'superadmin', 'hermanwahyudi@rocketmail.com', NULL, '', '', '2015-06-09 18:15:25', '2015-06-09 18:15:25', NULL),
-(26, 'JKKKKKK', 'dsdasd', 'b0c44dc7bd2ecec1ccfd77f4bfbd35cc', 'superadmin', 'hermanwahyudi@rocketmail.com', '0d04c5ad49c0df24404fafd56735f824.jpg', '', '', '2015-06-09 19:48:56', '2015-06-11 18:32:50', NULL),
-(28, 'asdasda', 'dsdasdsadas', '6c0cbf5029aed0af395ac4b864c6b095', 'admin', 'hermanwahyudi@rocketmail.com', '5844121f9df8a1f9183c0b7a96af89a1.jpg', 'asdas', '', '2015-06-09 20:02:46', '2015-06-11 19:09:49', NULL),
-(30, 'ffff', 'ffff', 'ece926d8c0356205276a45266d361161', 'crew', 'hermanwahyudi@rocketmail.com', '1c68e47b06400e93d3f72ed44d632b6a.jpg', '', '', '2015-06-11 16:47:26', '2015-06-11 19:07:49', NULL),
-(32, 'Herman', 'Herman', 'aecd5784f6cc5eadb56c6fbb21f68577', 'crew', 'hermanwahyudi@rocketmail.com', '4a91a49b776afda15919ce19e8a8e606.jpg', 'asdasdas', 'sdasd', '2015-06-11 19:10:24', '2015-06-11 19:12:16', NULL),
-(33, 'testuuu', 'test', '827ccb0eea8a706c4c34a16891f84e7b', 'crew', 'hermanwahyudi@rocketmail.com', 'default.jpg', '', '', '2015-06-13 05:16:25', '2015-06-14 04:44:59', NULL);
+INSERT INTO `user` VALUES (3,1,'Administrator','admin','25d55ad283aa400af464c76d713c07ad','administrator@gmail.com','d697cf246a144e1c5e56a1ed2d91d7fa.jpg','kepoabis','Hai Oyoy','2015-06-06 00:00:00','2015-06-18 21:42:24','2015-06-26 00:00:00'),(32,3,'Herman','Herman','aecd5784f6cc5eadb56c6fbb21f68577','hermanwahyudi@rocketmail.com','4a91a49b776afda15919ce19e8a8e606.jpg','qwerty','qwerty','2015-06-11 19:10:24','2015-06-20 11:02:44',NULL),(34,2,'Syahrul Ramadhan','syahrulramadhan','7e3c888bc51d81e9f092529b0c721135','sramadhan95@gmail.com','78c6d5f7d9b7e79a17b4261867b9baac.jpg','qwerty','qwerty','2015-06-20 11:02:25','2015-06-20 11:02:25',NULL);
 
--- --------------------------------------------------------
+#
+# Structure for table "user_role_basic"
+#
 
---
--- Table structure for table `video`
---
+DROP TABLE IF EXISTS `user_role_basic`;
+CREATE TABLE `user_role_basic` (
+  `user_role_basic_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `role_name_alias` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `active` int(2) NOT NULL DEFAULT '1',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_role_basic_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
-CREATE TABLE IF NOT EXISTS `video` (
+#
+# Data for table "user_role_basic"
+#
+
+INSERT INTO `user_role_basic` VALUES (1,'superadmin','Super Administrator',1,'2015-06-20 14:35:20'),(2,'admin','Administrator',1,'2015-06-20 14:35:25'),(3,'crew','Crew',1,'2015-06-20 14:35:31');
+
+#
+# Structure for table "user_role_basic_grup"
+#
+
+DROP TABLE IF EXISTS `user_role_basic_grup`;
+CREATE TABLE `user_role_basic_grup` (
+  `user_role_basic_grup_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_role_basic_id` int(11) DEFAULT '0',
+  `active` int(2) NOT NULL DEFAULT '1',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_role_basic_grup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+#
+# Data for table "user_role_basic_grup"
+#
+
+
+#
+# Structure for table "user_role_grup"
+#
+
+DROP TABLE IF EXISTS `user_role_grup`;
+CREATE TABLE `user_role_grup` (
+  `user_role_grup_id` int(11) NOT NULL AUTO_INCREMENT,
+  `grup_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `category` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(2) NOT NULL DEFAULT '1',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_role_grup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+#
+# Data for table "user_role_grup"
+#
+
+
+#
+# Structure for table "user_role_item"
+#
+
+DROP TABLE IF EXISTS `user_role_item`;
+CREATE TABLE `user_role_item` (
+  `user_role_item_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_role_grup_id` int(11) NOT NULL,
+  `role_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(500) COLLATE utf8_unicode_ci NOT NULL,
+  `active` int(2) NOT NULL DEFAULT '1',
+  `created_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`user_role_item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
+
+#
+# Data for table "user_role_item"
+#
+
+
+#
+# Structure for table "video"
+#
+
+DROP TABLE IF EXISTS `video`;
+CREATE TABLE `video` (
   `video_id` int(11) NOT NULL AUTO_INCREMENT,
   `video_category_id` varchar(50) NOT NULL DEFAULT '',
   `tag` text NOT NULL,
@@ -210,24 +283,20 @@ CREATE TABLE IF NOT EXISTS `video` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`video_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
---
--- Dumping data for table `video`
---
+#
+# Data for table "video"
+#
 
-INSERT INTO `video` (`video_id`, `video_category_id`, `tag`, `title`, `description`, `story_ide`, `screenwriter`, `film_director`, `cameramen`, `artist`, `url`, `duration`, `status`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(5, '2', 'asdasda', 'dasdas', '<p>https://www.youtube.com/watch?v=5BedFiOT9b8</p>', 'sadas', 'asdas', 'asdasda', 'asdasd', '<p>https://www.youtube.com/watch?v=5BedFiOT9b8</p>', 'https://www.youtube.com/watch?v=71tSzPkUgv0', 'asdas', 'unpublished', '2015-06-14 04:20:38', '2015-06-14 04:44:15', NULL),
-(6, '1', 'asdasd', 'asdasda', '<p>wewerwerw</p>', 'asdasd', 'wasdasdas', 'asdasda', 'asdas', '<p>adsasdas</p>', 'https://www.youtube.com/watch?v=71tSzPkUgv0', 'aweaeq', 'unpublished', '2015-06-14 04:50:46', '2015-06-14 04:51:10', NULL),
-(7, '3', 'asdasdas', 'dasdasda', '<p>adasdas</p>', 'sdasdas', 'adsasd', 'asdasd', 'asdasd', '<p>asdasda</p>', 'https://www.youtube.com/watch?v=71tSzPkUgv0', 'asdasd', 'unpublished', '2015-06-14 04:51:35', '2015-06-14 04:51:35', NULL);
+INSERT INTO `video` VALUES (5,'2','qwerty','Like Father Like Daughter','<p>https://www.youtube.com/watch?v=5BedFiOT9b8</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=lbYbFmG7eu0','01.39','published','2015-06-14 04:20:38','2015-06-20 07:57:01',NULL),(6,'1','qwerty','KEPOABIS.COM','<p>wewerwerw</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=TjBvuQ_Qj-0','02.12','published','2015-06-14 04:50:46','2015-06-20 07:56:38',NULL),(7,'3','qwerty','Ace Hardware untuk Indonesia - ACE Hardware Video Competition','<p>adasdas</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=VjN4Xl3DN_I','01.22','published','2015-06-14 04:51:35','2015-06-20 07:55:50',NULL),(8,'1','enjoy, jakarta, kepo, abis','Enjoy Jakarta Enjoy Your Day, Nikmati Caramu','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=dg_IomGAkmU','01.09','published','2015-06-20 07:52:17','2015-06-20 07:52:17',NULL),(9,'1','duit, kepo, abis','Masih Mau Duit Kotor','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=LF0j-DMAxPw','01.09','published','2015-06-20 07:53:14','2015-06-20 07:53:14',NULL),(10,'1','qwerty','Harta, Tahta, & Wanita','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=Y6wUbCjed00','01.09','published','2015-06-20 07:54:22','2015-06-20 07:54:22',NULL),(11,'1','qwery','The Youthpreneur Your future is your choice #VirusWirausaha','<p>qwery</p>','qwery','qwery','qwery','qwery','<p>qwery</p>','https://www.youtube.com/watch?v=icV2JZoqQtY','01.01','published','2015-06-20 14:02:30','2015-06-20 14:02:30',NULL),(12,'1','qwerty','An Impacting Life','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=lkh8mi5phsU','09.57','published','2015-06-20 14:03:04','2015-06-20 14:03:04',NULL),(13,'1','qwerty','This Is My Active Life - Yamaha','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','This Is My Active Life - Yamaha','00.57','published','2015-06-20 14:03:42','2015-06-20 14:03:42',NULL),(14,'1','qwerty','Jeruji Besi','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=T0O-zde6U9I','11.35','published','2015-06-20 14:04:41','2015-06-20 14:04:41',NULL),(15,'1','qwerty','Kepoin Kuliner - Takeya The Japanese Restaurant, Bintaro','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','Kepoin Kuliner - Takeya The Japanese Restaurant, Bintaro','05.10','published','2015-06-20 14:05:18','2015-06-20 14:05:18',NULL),(16,'1','qwerty','Kepoin Event - Seminar & Talk Show Pra Nikah KTMU','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=w3Oth_jpEiA','05.06','published','2015-06-20 14:06:59','2015-06-20 14:06:59',NULL),(17,'1','qwerty','Tips Bertamu Saat Lebaran','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=6uxLckdtomI','06.45','published','2015-06-20 14:07:41','2015-06-20 14:07:41',NULL),(18,'1','qwerty','Tips Berpergian Jauh','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=WEKsZNOV0D4','01.57','published','2015-06-20 14:08:29','2015-06-20 14:08:29',NULL),(19,'1','qwerty','FORMASI 2015','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=1rhDrHn-O_k','01.26','published','2015-06-20 14:09:08','2015-06-20 14:09:08',NULL),(20,'1','qwerty','Video Promosi Formasi 2015 (ver.2)','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=82I_3faUhpc','01.20','published','2015-06-20 14:09:43','2015-06-20 14:09:43',NULL),(21,'1','qwerty','Susu 18 Pasang (Intro KepoAbis.com) - KepoinVlog #1','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=uz91JYDC6GE','03.51','published','2015-06-20 14:10:34','2015-06-20 14:10:34',NULL),(22,'1','qwerty','Kepoin Event - FORMASI 2015 MAN 4 Jakarta','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=ADP679lVYsk','05.46','published','2015-06-20 14:11:05','2015-06-20 14:11:05',NULL),(23,'1','qwerty','Video Promosi KOMPAS','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=bUGZ1LG5T4s','00.47','published','2015-06-20 14:11:44','2015-06-20 14:11:44',NULL),(24,'1','qwerty','Kepoin Event - Ragunan Zoo Application','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=0gxSy7P0a5k','02.49','published','2015-06-20 14:12:26','2015-06-20 14:12:26',NULL),(25,'1','qwerty','Kepoin Event - N3TS School Exhibition','<p>qwerty</p>','qwerty','qwerty','qwerty','qwerty','<p>qwerty</p>','https://www.youtube.com/watch?v=eyTEU65RHf4','06.35','published','2015-06-20 14:13:08','2015-06-20 14:13:08',NULL);
 
--- --------------------------------------------------------
+#
+# Structure for table "video_category"
+#
 
---
--- Table structure for table `video_category`
---
-
-CREATE TABLE IF NOT EXISTS `video_category` (
+DROP TABLE IF EXISTS `video_category`;
+CREATE TABLE `video_category` (
   `video_category_id` int(11) NOT NULL AUTO_INCREMENT,
   `image_id` int(11) NOT NULL DEFAULT '0',
   `title` varchar(255) NOT NULL DEFAULT '',
@@ -236,24 +305,22 @@ CREATE TABLE IF NOT EXISTS `video_category` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`video_category_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
---
--- Dumping data for table `video_category`
---
+#
+# Data for table "video_category"
+#
 
-INSERT INTO `video_category` (`video_category_id`, `image_id`, `title`, `body`, `created_date`, `modified_date`, `deleted_date`) VALUES
-(1, 0, 'Documenter', 'Documenter', '2015-06-13 00:00:00', '2015-06-13 00:00:00', NULL),
-(2, 0, 'Serba-serbi', 'Serba-serbi', '2015-06-13 00:00:00', '2015-06-13 00:00:00', NULL),
-(3, 0, 'Vlog', 'Vlog', '2015-06-13 00:00:00', '2015-06-13 00:00:00', NULL);
+/*!40000 ALTER TABLE `video_category` DISABLE KEYS */;
+INSERT INTO `video_category` VALUES (1,0,'Documenter','Documenter','2015-06-13 00:00:00','2015-06-13 00:00:00',NULL),(2,0,'Serba-serbi','Serba-serbi','2015-06-13 00:00:00','2015-06-13 00:00:00',NULL),(3,0,'Vlog','Vlog','2015-06-13 00:00:00','2015-06-13 00:00:00',NULL);
+/*!40000 ALTER TABLE `video_category` ENABLE KEYS */;
 
--- --------------------------------------------------------
+#
+# Structure for table "video_comment"
+#
 
---
--- Table structure for table `video_comment`
---
-
-CREATE TABLE IF NOT EXISTS `video_comment` (
+DROP TABLE IF EXISTS `video_comment`;
+CREATE TABLE `video_comment` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `article_id` int(11) NOT NULL DEFAULT '0',
   `nick_name` varchar(255) NOT NULL DEFAULT '',
@@ -263,8 +330,11 @@ CREATE TABLE IF NOT EXISTS `video_comment` (
   `created_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+#
+# Data for table "video_comment"
+#
+
+/*!40000 ALTER TABLE `video_comment` DISABLE KEYS */;
+/*!40000 ALTER TABLE `video_comment` ENABLE KEYS */;

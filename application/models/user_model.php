@@ -37,9 +37,12 @@ class User_model extends CI_Model {
 
     function get_user_list($start, $limit) {
         $this->db->limit($limit, $start);
+		$this->db->select('u.*, urb.role_name AS user_role');
         $this->db->order_by("user_id", "desc");
-        $query = $this->db->get("user");
- 
+        $this->db->from("user u");
+        $this->db->join("user_role_basic urb","urb.user_role_basic_id = u.user_role_basic_id");
+        $query = $this->db->get();
+		
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
@@ -66,13 +69,14 @@ class User_model extends CI_Model {
                     "password" => md5($data['password']),
                     "email" => $data['email'],
                     "nama_lengkap" => $data['nama_lengkap'],
-                    "user_role" => $data['user_role'],
+                    "user_role_basic_id" => $data['user_role_basic_id'],
                     "position" => $data['position'],
                     "body" => $data['body'],
                     "created_date" => date("Y-m-d H:i:s"),
                     "modified_date" => date("Y-m-d H:i:s"),
                     "image" => $data['image']
                 );
+		
         $this->db->insert('user', $data);
     }
 
@@ -107,13 +111,14 @@ class User_model extends CI_Model {
     }
 
     function get_by_id($id) {
-        $this->db->select('user_id, user_role, user_name, nama_lengkap, email, position, body, image, created_date, modified_date');
-        $this->db->from('user');
+        $this->db->select('u.user_id, u.user_role_basic_id, urb.role_name AS user_role, u.user_name, u.nama_lengkap, u.email, u.position, u.body, u.image, u.created_date, u.modified_date');
+        $this->db->from('user u');
+        $this->db->join("user_role_basic urb","urb.user_role_basic_id = u.user_role_basic_id");
         $this->db->where("user_id", $id);
         $this->db->limit(1);
 
         $query = $this->db->get();
-
+		
         if($query->num_rows() == 1) {
             return $query->row();
         } return;

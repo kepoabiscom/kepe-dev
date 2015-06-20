@@ -32,6 +32,7 @@
     </div>
 </div>
 <?php } ?>
+<!--
 <div class="form-group">
     <label class="col-sm-2">Role</label>
     <div class="col-sm-6">
@@ -50,6 +51,15 @@
             <option value="superadmin">Superadmin</option>
             <option value="admin">Admin</option>
             <?php } } ?>
+        </select>
+    </div>
+</div>
+-->
+<div class="form-group">
+    <label class="col-sm-2">Role</label>
+    <div class="col-sm-6">
+        <select class="form-control" id="user_role_basic_id" name="user_role_basic_id">
+        <?php echo $role_name; ?>
         </select>
     </div>
 </div>
