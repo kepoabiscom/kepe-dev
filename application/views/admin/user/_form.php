@@ -70,7 +70,14 @@
 <div class="form-group">
     <label class="col-sm-2">File input</label>
     <div class="col-sm-6">
-        <input type="file" name="userfile">
+        <input type="file" name="userfile" onchange="readURL(this);">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Preview</label>
+    <div class="col-sm-6">
+        <?php $image = ($flag == "update") ? $image : ""; ?>
+        <img id="img_prev" style="border-radius:25px; box-shadow: 10px 10px 5px #888888; max-width:95%;border:6px groove #545565;" src="<?php echo base_url() . 'assets/img/team/' . $image;?>"  width="150" height="200"/>
     </div>
 </div>
 

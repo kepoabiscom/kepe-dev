@@ -84,6 +84,7 @@ class Profile extends CI_Controller {
 		 				"email" => $r->email,
 		 				"position" => $r->position,
 		 				"description" => $r->body,
+		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e,
 		 				"success" => $success

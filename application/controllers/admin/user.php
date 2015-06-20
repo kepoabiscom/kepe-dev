@@ -182,6 +182,7 @@ class User extends CI_Controller {
 		 				"position" => $r->position,
 		 				"role" => $r->user_role,
 		 				"description" => $r->body,
+		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e
 		 			);
