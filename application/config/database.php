@@ -55,7 +55,7 @@ $database = 'kepe3788_db';
 if(strpos($host, 'localhost') || strpos($host, '127.0.0.1')) {
 	$hostname = 'localhost'; // Local Site
 	$username = 'root';
-	$password = '';
+	$password = '123456';
 	$database = 'kepe3788_db';
 }
 

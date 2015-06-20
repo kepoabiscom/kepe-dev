@@ -10,6 +10,7 @@ class User extends CI_Controller {
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->model('user_model','', true);
+		$this->load->model('user_role_basic_model','', true);
 		$this->load->library('form_validation');
 		$this->load->library("pagination");
 	}
@@ -81,7 +82,12 @@ class User extends CI_Controller {
  
 	 function create() {
 	 	if($this->session->userdata('logged_in')) {
-	 		$data = array("success" => false, "error_message" => "", "flag" => "create");
+	 		$data = array(
+				"success" => false, 
+				"error_message" => "", 
+				"flag" => "create",
+				"role_name" => $this->get_user_role_basic()
+			);
 
 	        $this->validation();
 	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|callback_db_check_username');
@@ -112,7 +118,39 @@ class User extends CI_Controller {
 			redirect('admin/login', 'refresh');
 		}
 	 }
-
+	
+	function get_user_role_basic($flag=1, $id=''){
+		$result = $this->user_role_basic_model->get_user_role_basic();
+	 	$user_role_basic = '';
+		
+		/*
+		echo $flag;
+		echo "<br>";
+		echo $id;
+		exit;
+		*/
+		
+		if($flag == 1) {
+	 		foreach($result as $row) {
+	 			$user_role_basic .= "<option value='". $row->user_role_basic_id ."'>" . $row->role_name . "</option>";
+	 		}	
+	 	} else {
+	 		foreach($result as $row) {
+	 			if($id == $row->user_role_basic_id) {
+	 				$user_role_basic .= "<option value='". $row->user_role_basic_id ."'>" . $row->role_name . "</option>";	
+	 				break;
+	 			}
+	 		}
+	 		foreach($result as $row) {
+	 			if($id != $row->user_role_basic_id) {
+	 				$user_role_basic .= "<option value='". $row->user_role_basic_id ."'>" . $row->role_name . "</option>";
+	 			}
+	 		}	
+	 	}
+		
+		return $user_role_basic;
+	}
+	
 	function db_check_username($username) {
        	$result = $this->user_model->username_check($username);
 
@@ -180,12 +218,20 @@ class User extends CI_Controller {
 		 				"nama_lengkap" => $r->nama_lengkap,
 		 				"email" => $r->email,
 		 				"position" => $r->position,
-		 				"role" => $r->user_role,
+		 				#"role" => $r->user_role,
+		 				"role_name" => $this->get_user_role_basic(2, $r->user_role_basic_id),
 		 				"description" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e
 		 			);
+					
+					/*
+					echo "<pre>";
+					print_r($data);
+					echo "</pre>";
+					exit;
+					*/
 		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/user/update_user', $data);
 		 	}
