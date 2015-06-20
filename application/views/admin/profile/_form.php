@@ -4,8 +4,9 @@
 <div class="form-group">
     <label class="col-sm-2">Username</label>
     <div class="col-sm-6">
+        <?php $readonly = ($flag == "update") ? "readonly" : ""; ?>
         <?php $username = ($flag == "update") ? $username : ""; ?>
-        <input type="text" class="form-control" value="<?php echo $username; ?>" name="user_name">
+        <input type="text" class="form-control" value="<?php echo $username; ?>" name="user_name" <?php echo $readonly; ?>>
     </div>
 </div>
 <div class="form-group">
