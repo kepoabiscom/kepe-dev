@@ -73,10 +73,10 @@
                         <h2>Article List - <strong>KepoAbis.com</strong></h2>
                         {success}
                         <div class="row">
-                            <form action="" method="get">
+                            <form action="<?php echo base_url(); ?>admin/article/filter" method="get">
                             <div class="col-sm-3">
                                 <input type="text" class="form-control" value="" name="title" placeholder="Title">
-                            </div><button type="submit" name="submit" id="filter" class="btn btn-primary">Filter</button>
+                            </div><button type="submit" name="submit" value="s" id="filter" class="btn btn-primary">Filter</button>
                             </form>
                         </div><br>
                         <div class="row">

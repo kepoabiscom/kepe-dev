@@ -6,9 +6,11 @@ class Article_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_article_list($start, $limit) {
+    function get_article_list($start, $limit, $keyword='') {
     	$this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
     	$this->db->from("article as a");
+        if($keyword != '') 
+            $this->db->like("a.title", $keyword);
     	$this->db->limit($limit, $start);
         $this->db->order_by("article_id", "desc");
         $this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id');
@@ -23,7 +25,12 @@ class Article_model extends CI_Model {
         return false;
     }
 
-    function count_article() {
+    function count_article($keyword='') {
+        if($keyword != '') {
+            $this->db->like('title', $keyword);
+            $this->db->from('article');
+            return $this->db->count_all_results();
+        }
         return $this->db->count_all("article");
     }
 
