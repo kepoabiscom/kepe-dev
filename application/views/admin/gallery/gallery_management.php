@@ -33,7 +33,7 @@
     </script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 
 </head>
 
@@ -80,8 +80,14 @@
                     <div class ="col-md-6">
                    
                     <div class ="msg"></div>
+                    <div class="form-group">
+                        <label class="col-sm-2">Preview</label>
+                        <div class="col-sm-6">
+                            <img id="img_prev" style="border-radius:25px; box-shadow: 10px 10px 5px #888888; max-width:95%;border:6px groove #545565;" src="<?php $image = 'default-image.png'; echo base_url() . 'assets/img/' . $image;?>"  width="150" height="200"/>
+                        </div>
+                    </div>
                     <form id="upload-image-form" action="<?php echo base_url(); ?>admin/gallery/upload" method="post" enctype="multipart/form-data" role="form">
-                        <input type="file" class = "form-control" name="userfile" size="20" /><br />
+                        <input type="file" class = "form-control" name="userfile" size="20" onchange="read_image(this);" /><br />
                         <input type="submit" name = "submit" value="Upload" class ="btn btn-primary" />
                     </form>
                     </div>

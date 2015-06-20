@@ -24,21 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script type="text/javascript">
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                $('#img_prev')
-                   .attr('src', e.target.result)
-                    .width(150)
-                    .height(200);
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
+    <script>tinymce.init({selector:'textarea'});</script>
 
 </head>
 
