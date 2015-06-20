@@ -127,11 +127,11 @@ class User extends CI_Controller {
 	 	$result = $this->user_model->username_check($username);
 	 	if($result) {
 	 		$status = array("success" => true,
-	 					"msg" => "Available!</span>"
+	 					"msg" => "Available!"
 	 			);
 	 	} else {
 	 		$status = array("success" => false,
-	 					"msg" => "<span style='color:red'>Not Available!</span>"
+	 					"msg" => "Not Available!"
 	 			);
 	 	}	
 	 	echo json_encode($status);
