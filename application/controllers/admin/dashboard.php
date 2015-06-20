@@ -38,7 +38,7 @@ class Dashboard extends CI_Controller {
 		
 		return array("city" => $city,
 					"weather" => $weather,
-					"celcius" => floor($celcius),
+					"celcius" => ceil($celcius),
 					"now" => $this->get_now()
 			);
 	}

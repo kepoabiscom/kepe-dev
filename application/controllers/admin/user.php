@@ -59,7 +59,11 @@ class User extends CI_Controller {
 	 function detail($id='') {
 	 	if($this->session->userdata('logged_in')) {
 	 		$q = $this->user_model->get_by_id($id);
-	 		$img = "<img src='" . base_url() . "assets/img/team/" . $q->image . "' height='100' width='100' />";
+	 		
+	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/team/" . $q->image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/team/" . $q->image ."'>";
+			$img .= "</a></div>";
 	 		$data = array(
 		     			"username" => $q->user_name,
 		 				"nama_lengkap" => $q->nama_lengkap,
@@ -123,11 +127,11 @@ class User extends CI_Controller {
 	 	$result = $this->user_model->username_check($username);
 	 	if($result) {
 	 		$status = array("success" => true,
-	 					"msg" => "Available!</span>"
+	 					"msg" => "Available!"
 	 			);
 	 	} else {
 	 		$status = array("success" => false,
-	 					"msg" => "<span style='color:red'>Not Available!</span>"
+	 					"msg" => "Not Available!"
 	 			);
 	 	}	
 	 	echo json_encode($status);
@@ -178,6 +182,7 @@ class User extends CI_Controller {
 		 				"position" => $r->position,
 		 				"role" => $r->user_role,
 		 				"description" => $r->body,
+		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e
 		 			);
