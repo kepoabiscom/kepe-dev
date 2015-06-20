@@ -18,9 +18,8 @@ class Dashboard extends CI_Controller {
 	function index() {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
-		     $data = array(
-		     			'username' => $session_data['username']
-		     		);
+		     $data = $this->get_api_weather(); 
+
 		     $this->parser->parse('admin/dashboard', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
@@ -28,12 +27,23 @@ class Dashboard extends CI_Controller {
 	}
  	
 	function get_api_weather() {
-		$api_weather = "http://api.openweathermap.org/data/2.5/find?q=Jakarta";
-		$json_string = file_get_contents($api_weather);
-		$parsed_json = json_decode($json_string);
+		$city = "Jakarta";
+		$jsonurl = "http://api.openweathermap.org/data/2.5/weather?q=" . $city;
+		$json = file_get_contents($jsonurl);
 
-		echo $parsed_json->{'list'}[0]->{'name'};
-
+		$parsed_json = json_decode($json);
+		$kelvin = $parsed_json->main->temp;
+		$celcius = $kelvin - 273.15;
+		$weather = $parsed_json->weather[0]->main;
+		$month = array("January", "February", "March", "April", "May", "June",
+					"July", "August", "September", "October", "November", "December"
+			);
+		$now = date("l") . ", " . date("d") . " " . $month[(int) date("m")-1] . " " . date("Y");
+		return array("city" => $city,
+					"weather" => $weather,
+					"celcius" => floor($celcius),
+					"now" => $now
+			);
 	}
 
 	function logout() {
