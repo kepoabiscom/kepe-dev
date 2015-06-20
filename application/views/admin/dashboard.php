@@ -113,7 +113,6 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
                  <div class="row">
                     <div class="col-lg-12">
                         <div class="alert alert-info alert-dismissable">
@@ -121,6 +120,29 @@
                             <i class="fa fa-info-circle"></i>  <strong>Welcome</strong> on <strong>Dashboard KepoAbis.com</strong>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-tasks fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{celcius}&deg;</div>
+                                    <div><strong>{weather}</strong><br>{city}</div>
+                                </div>
+                            </div>
+                        </div>
+                        <a>
+                            <div class="panel-footer">
+                                <span class="pull-left">{now}</span>
+                                <div class="clearfix"></div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
                 </div>
                 <div id="chartContainer" style="height: 300px; width: 100%;">
             </div>
