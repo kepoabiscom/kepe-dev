@@ -22,11 +22,12 @@ class User_model extends CI_Model {
     }
 
     function login($username, $password) {
-        $this->db->select('user_id, user_role, user_name, password');
-        $this->db->from('user');
-        $this->db->where('user_name', $username);
-        $this->db->where('password', md5($password));
-        $this->db->limit(1);
+        $this->db->select('user_id, urb.role_name as user_role, user_name, password')
+                    ->from('user u')
+                    ->join("user_role_basic urb", "urb.user_role_basic_id = u.user_role_basic_id")
+                    ->where('user_name', $username)
+                    ->where('password', md5($password))
+                    ->limit(1);
 
         $query = $this->db->get();
 
