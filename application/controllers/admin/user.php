@@ -123,13 +123,6 @@ class User extends CI_Controller {
 		$result = $this->user_role_basic_model->get_user_role_basic();
 	 	$user_role_basic = '';
 		
-		/*
-		echo $flag;
-		echo "<br>";
-		echo $id;
-		exit;
-		*/
-		
 		if($flag == 1) {
 	 		foreach($result as $row) {
 	 			$user_role_basic .= "<option value='". $row->user_role_basic_id ."'>" . $row->role_name . "</option>";
@@ -218,7 +211,6 @@ class User extends CI_Controller {
 		 				"nama_lengkap" => $r->nama_lengkap,
 		 				"email" => $r->email,
 		 				"position" => $r->position,
-		 				#"role" => $r->user_role,
 		 				"role_name" => $this->get_user_role_basic(2, $r->user_role_basic_id),
 		 				"description" => $r->body,
 		 				"image" => $r->image,
@@ -226,12 +218,6 @@ class User extends CI_Controller {
 		 				"error_message" => $e
 		 			);
 					
-					/*
-					echo "<pre>";
-					print_r($data);
-					echo "</pre>";
-					exit;
-					*/
 		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/user/update_user', $data);
 		 	}

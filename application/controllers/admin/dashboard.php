@@ -53,7 +53,7 @@ class Dashboard extends CI_Controller {
 
 	function get_region() {
 		try {
-			$ip = $_SERVER['REMOTE_ADDR']; echo $ip;
+			$ip = $_SERVER['REMOTE_ADDR'];
 			$details = json_decode(file_get_contents("http://ipinfo.io/{$ip}"));
 			return !isset($details->city) ? "Jakarta" : $details->city;
 		} catch(Exception $e) {

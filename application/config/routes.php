@@ -40,6 +40,8 @@
 
 $route['default_controller'] = "home";
 $route['admin'] = "admin/dashboard/index";
+$route['category-article'] = "admin/category_article";
+$route['category-video'] = "admin/category_video";
 $route['404_override'] = '';
 
 
