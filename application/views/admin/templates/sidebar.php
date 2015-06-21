@@ -53,7 +53,7 @@
             </ul>
         </li>
         <li class="<?php echo $active[8]; ?>">
-            <a href="#"><i class="fa fa-fw fa-file"></i>&nbsp;About</a>
+            <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
         </li>
     </ul>
 </div>

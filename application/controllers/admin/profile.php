@@ -22,8 +22,7 @@ class Profile extends CI_Controller {
 			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/team/" . $q->image ."'>";
 			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/team/" . $q->image ."'>";
 			$img .= "</a></div>";
-	 		$data = array(
-		     			"username" => $q->user_name,
+	 		$data = array("username" => $q->user_name,
 		 				"nama_lengkap" => $q->nama_lengkap,
 		 				"email" => $q->email,
 		 				"position" => $q->position,
@@ -33,7 +32,7 @@ class Profile extends CI_Controller {
 		     		);
 	 		$this->parser->parse('admin/profile/view_profile', $data);
 	 	} else {
-	 		direct('admin/login', 'refresh');
+	 		redirect('admin/login', 'refresh');
 	 	}
 	}
 
@@ -94,7 +93,7 @@ class Profile extends CI_Controller {
 		 	}
 
 		} else {
-			direct('admin/login', 'refresh');
+			redirect('admin/login', 'refresh');
 		}
 	}
 
@@ -130,7 +129,7 @@ class Profile extends CI_Controller {
 	        	$this->load->view('admin/profile/update_password', $data);
 	        }
 		} else {
-			direct('admin/login', 'refresh');
+			redirect('admin/login', 'refresh');
 		}
 	}
 
@@ -171,7 +170,7 @@ class Profile extends CI_Controller {
 		 	$this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean');
 		 	$this->form_validation->set_rules('nama_lengkap', 'Nama', 'required|xss_clean');
 		 	$this->form_validation->set_rules('email', 'Email', 'required|xss_clean');   	
-		} else if ($param = "change_password") {
+		} else if ($param == "change_password") {
 			$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
 			$this->form_validation->set_rules('new_password', 'New Password', 'required|xss_clean');
 			$this->form_validation->set_rules('old_password', 'Old Password', 'required|xss_clean|callback_check_password_db');
@@ -193,8 +192,11 @@ class Profile extends CI_Controller {
 		$uploaded = $this->upload->do_upload();
 		$data = $this->upload->data();
 		if($uploaded) {
-			return array("is_uploaded" => true, "data" => $data);
-		} return array("is_uploaded" => false, "data"=> $data, "error_message" => $this->upload->display_errors());
+			return array("is_uploaded" => true, 
+						"data" => $data);
+		} return array("is_uploaded" => false, 
+						"data"=> $data, 
+						"error_message" => $this->upload->display_errors());
 	 }
 
 }
