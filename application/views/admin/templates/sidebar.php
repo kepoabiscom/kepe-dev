@@ -1,7 +1,8 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <?php 
-            $data = array('home', 'profile', 'user', 'content', 'article', 'news', 'video', 'category', 'about', 'gallery');
+            $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
+                        'video', 'category', 'about', 'gallery', 'category_article', 'category_video');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -24,8 +25,8 @@
         </li>
         <?php } ?>
         <li class="<?php echo $active[3]; ?>">
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-edit"></i>&nbsp;Content Management<i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="demo" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#content"><i class="fa fa-fw fa-edit"></i>&nbsp;Content Management<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="content" class="collapse">
                 <li class="<?php echo $active[4]; ?>">
                     <a href="<?php echo base_url(); ?>admin/article">Article</a>
                 </li>
@@ -41,7 +42,15 @@
             <a href="<?php echo base_url(); ?>admin/gallery"><i class="fa fa-fw fa-desktop"></i>&nbsp;Gallery Management</a>
         </li>
         <li class="<?php echo $active[7]; ?>">
-            <a href="#"><i class="fa fa-fw fa-wrench"></i>&nbsp;Category Management</a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#category"><i class="fa fa-fw fa-edit"></i>&nbsp;Category Management<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="category" class="collapse">
+                <li class="<?php echo $active[10]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/category-article">&nbsp;Category Article</a>
+                </li>
+                 <li class="<?php echo $active[11]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/category-video">&nbsp;Category Video</a>
+                </li>
+            </ul>
         </li>
         <li class="<?php echo $active[8]; ?>">
             <a href="#"><i class="fa fa-fw fa-file"></i>&nbsp;About</a>

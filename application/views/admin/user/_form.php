@@ -33,29 +33,6 @@
     </div>
 </div>
 <?php } ?>
-<!--
-<div class="form-group">
-    <label class="col-sm-2">Role</label>
-    <div class="col-sm-6">
-        <select class="form-control" id="role" name="user_role">
-            <?php if($flag != "update" or $role == "superadmin") { ?>
-            <option value="superadmin">Superadmin</option>
-            <option value="admin">Admin</option>
-            <option value="crew">Crew</option>
-            <?php } else { ?>
-            <?php if ($role == "admin") { ?>
-            <option value="admin">Admin</option>
-            <option value="crew">Crew</option>
-            <option value="superadmin">Superadmin</option>
-            <?php } else { ?>
-            <option value="crew">Crew</option>
-            <option value="superadmin">Superadmin</option>
-            <option value="admin">Admin</option>
-            <?php } } ?>
-        </select>
-    </div>
-</div>
--->
 <div class="form-group">
     <label class="col-sm-2">Role</label>
     <div class="col-sm-6">

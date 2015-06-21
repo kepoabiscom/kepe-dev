@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>User Management - KepoAbis.com</title>
+    <title>Category Management - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -24,13 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this user?");
-            if (x) return true;
-            return false;
-        }
-    </script>
+    
 
 </head>
 
@@ -43,7 +37,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "user"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "category"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -55,47 +49,45 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            User Management
+                            Category Management
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>User Management
+                                <i class="fa fa-file"></i>&nbsp;Category Video
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-
-                 <div class="col-lg-12">
-                        <h2>User List <strong>KepoAbis.com</strong></h2>
-                        {success}
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-hover table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>ID</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>Username</th>
-                                        <th>Role</th>
-                                        <th>Position</th>
-                                        <th>Created Time</th>
-                                        <th>Updated Time </th>
-                                        <th>More</th>
-                                    </tr>
-                                </thead>
+                <h2>Detail Category Video</h2><br>
+                <div class="col-lg-8">
+                    <div class="row clearfix">
+                        <div class="col-md-18 column"> <br>
+                            <table class="table">
                                 <tbody>
-                                    {data_user}
+                                <td>
+                                    <tr>
+                                        <td align="left"><strong>Title</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{title}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Summary</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{body}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Created Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Modified Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{modified_date}</td>
+                                    </tr>
+                                </td>
                                 </tbody>
                             </table>
-                            {link}<br><br>
+                            <a href='<?php echo base_url(); ?>admin/category-video'>Back</a>
                         </div>
-                        <a href='<?php echo base_url(); ?>admin/user/create' class="btn btn-lg btn-success">Add User</a>
                     </div>
-                </div>
-
+                </div>  
             </div>
             <!-- /.container-fluid -->
 
