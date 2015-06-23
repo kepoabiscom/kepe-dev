@@ -63,6 +63,12 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2">Background Color</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" value="<?php echo $background_color; ?>" name="background_color">
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2">Address</label>
     <div class="col-sm-6">
         <textarea class="form-control" rows="3" value="<?php echo $contact_address; ?>" name="contact_address"><?php echo $contact_address; ?></textarea>    
