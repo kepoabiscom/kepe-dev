@@ -50,6 +50,24 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2">Contact Facebook</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" value="<?php echo $contact_facebook; ?>" name="contact_facebook">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Contact Twitter</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" value="<?php echo $contact_twitter; ?>" name="contact_twitter">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Contact Google Plus</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" value="<?php echo $contact_googleplus; ?>" name="contact_googleplus">
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2">Logo</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);">

@@ -101,6 +101,15 @@
                                     <tr>
                                         <td align="left"><strong>Address<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_address} </td>
                                     </tr>
+									<tr>
+                                        <td align="left"><strong>Facebook<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_facebook}">{contact_facebook}</a></td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Twitter<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_twitter}">{contact_twitter}</a></td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Google Plus<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_googleplus}">{contact_googleplus}</a></td>
+                                    </tr>
                                     <tr>
                                         <td align="left"><strong>Footer</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{footer}</td>
                                     </tr>

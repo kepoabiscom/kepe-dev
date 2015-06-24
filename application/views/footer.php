@@ -31,19 +31,19 @@
 									<div class="afiliasi-link">
 										<a target="_blank" title="Microsoft Corporation" href="#">
 											<ul class="afiliasi-logo">
-												<li class="social-icon-holder"><img alt="uia" src="img/aei_microsoft.png"></li>
+												<li class="social-icon-holder"><img alt="uia" src="<?php echo base_url('assets/img//microsoft.png'); ?>"></li>
 												<li><span class="afiliasi-name">Microsoft Corporation</span></li>
 											</ul>
 										</a>
 										<a target="_blank" title="Google Inc." href="#">
 											<ul class="afiliasi-logo">
-												<li class="social-icon-holder"><img alt="arcasia" src="img/aei_google.png"></li>
+												<li class="social-icon-holder"><img alt="arcasia" src="<?php echo base_url('assets/img//google.png'); ?>"></li>
 												<li><span class="afiliasi-name">Google Inc.</span></li>
 											</ul>
 										</a>
 										<a target="_blank" title="Oracle Corporation" href="#">
 											<ul class="afiliasi-logo">
-												<li class="social-icon-holder"><img alt="lpjk" src="img/aei_oracle.png"></li>
+												<li class="social-icon-holder"><img alt="lpjk" src="<?php echo base_url('assets/img//oracle.png'); ?>"></li>
 												<li><span class="afiliasi-name">Oracle Corporation</span></li>
 											</ul>
 										</a>
@@ -53,16 +53,23 @@
 							<div class="col-md-3 pull-right">
 								<ul id="footer-socials" class="ul-no-padding">
 									<li class="social-icons">
-										<a target="_blank" title="Follow aei" href="#">
+										<a target="_blank" title="Follow Twitter" href="#">
 											<span class="social-icon-holder">
-												<img class="img-responsive" src="img/twitter.png">
+												<img class="img-responsive" src="<?php echo base_url('assets/img//twitter.png'); ?>">
 											</span>
 										</a>
 									</li>
 									<li class="social-icons">
-										<a target="_blank" title="aei's Facebook group" href="#">
+										<a target="_blank" title="Facebook group" href="#">
 											<span class="social-icon-holder">
-												<img class="img-responsive" src="img/facebook.png">
+												<img class="img-responsive" src="<?php echo base_url('assets/img//facebook.png'); ?>">
+											</span>
+										</a>
+									</li>
+									<li class="social-icons">
+										<a target="_blank" title="Google Plus group" href="#">
+											<span class="social-icon-holder">
+												<img class="img-responsive" src="<?php echo base_url('assets/img//googleplus.png'); ?>">
 											</span>
 										</a>
 									</li>
