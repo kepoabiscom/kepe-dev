@@ -21,6 +21,6 @@ class Home extends CI_Controller {
 
 	public function get_header_slide() {
 		$data['slider'] = $this->home_model->get_slider();
-		$this->load->view("home", $data);
+		$this->load->view("index", $data);
 	}
 }
