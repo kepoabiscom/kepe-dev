@@ -90,29 +90,28 @@
 		<div class="col-md-12">
 			<h2><strong class="bold-text">BERITA</strong></h2>
 		</div>
-		<?php for($i=0; $i<3; $i++){ ?>
+		{get_news}
 		<div class="col-md-4">
 			<div class="recent_post">
 				<div>
 					<h5>
-						<a href="news-section-11033-of-de-finibus-bonorum-et-malorum-written-by-cicero-in-45-bc.php">Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</a>
+						{title}
 					</h5>
-					<p><em>08 Nov 2012 13:43:03 </em></p>		
-					<img class="img-responsive" alt="Responsive image" src="<?php echo base_url('assets/img/portfolio/img (1).jpg'); ?>"/>
+					<p><em>{created_date}</em></p>		
+					{image}
 					<br>
 					<p style="text-align: justify;">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat aliquet lobortis. Vestibulum non lectus vel metus sagittis vestibulum non in augue. In tincidunt pretium risus sit amet fringilla. 
+					{summary}
 					</p>
 					<p>
-						<em>By <a href="#">Syahrul Ramadhan</a></em><br>
+						<em>By <a href="#">{full_name}</a></em><br>
+						<em>Kategori : {category}</em>
 					</p>
-					<div style="text-align: right; margin: 20px 10px 10px 10px;">
-						<a href="berita.php">Selengkapnya</a>
-					</div>
 				</div>
 			</div>                	 
 		</div>
-		<?php } ?>
+		{/get_news}
+		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
 			<a class="btn btn-default" href="berita.php">Berita Selengkapnya</a>
 		</div>
@@ -123,32 +122,29 @@
 		<div class="col-md-12">
 			<h2><strong class="bold-text">ARTIKEL</strong></h2>
 		</div>
-		<?php for($i=0; $i<4; $i++){ ?>
+		{get_article}
 		<div class="col-md-3">
 			<div class="recent_post">
 				<div>
 					<h5>
-						<a href="news-section-11033-of-de-finibus-bonorum-et-malorum-written-by-cicero-in-45-bc.php">Section 1.10.33 of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC</a>
+						{title}
 					</h5>
-					<p><em>08 Nov 2012 13:43:03 </em></p>		
-					<img class="img-responsive" alt="Responsive image" src="<?php echo base_url('assets/img/portfolio/img (1).jpg'); ?>"/>
-					<br>
+					<p><em>{created_date}</em></p>		
+					{image}
 					<p style="text-align: justify;">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer volutpat aliquet lobortis. Vestibulum non lectus vel metus sagittis vestibulum non in augue. In tincidunt pretium risus sit amet fringilla. 
+					{summary}
 					</p>
 					<p>
-						<em>By <a href="#">Syahrul Ramadhan</a></em><br>
-						<em>Kategori : <a href="#">Sinematografi</a></em>
+						<em>By <a href="#">{full_name}</a></em><br>
+						<em>Kategori : {category}</em>
 					</p>
-					<div style="text-align: right; margin: 20px 10px 10px 10px;">
-						<a href="berita.php">Selengkapnya</a>
-					</div>
 				</div>
 			</div>                	 
 		</div>
-		<?php } ?>
+		{/get_article}
+		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="berita.php">Artikel Selengkapnya</a>
+			<a class="btn btn-default" href="#">Artikel Selengkapnya</a>
 		</div>
     </div>
 </div>
