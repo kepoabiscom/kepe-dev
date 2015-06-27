@@ -286,7 +286,7 @@ h5 {
 
 body {
     min-height: none;
-    padding-top: 110px;
+    padding-top: 100px;
 }
 
 .list-news{
@@ -377,4 +377,14 @@ sidebar-module {
 	text-align: left;
 	left: 15%;
 	right: 15%;
+}
+
+.pull-center{
+	text-align: center;
+}
+
+.jumbo-text {
+    color: #272727;
+    font-size: 40px;
+    text-transform: uppercase;
 }

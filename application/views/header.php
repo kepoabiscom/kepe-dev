@@ -70,7 +70,7 @@
 						</button>
 					</span>
 				</div>
-        </form>
+			</form>
         </div><!--/.nav-collapse -->
       </div>
     </nav>

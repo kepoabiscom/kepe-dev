@@ -1,17 +1,16 @@
-/*!
- * Start Bootstrap - Thumbnail Gallery HTML Template (http://startbootstrap.com)
- * Code licensed under the Apache License v2.0.
- * For details, see http://www.apache.org/licenses/LICENSE-2.0.
- */
+/*
+* Author: MafiaShare.net
+* Template: Incredible
+* URL: http://themeforest.net/user/Vasterad/
+*/
 
-body {
-    padding-top: 70px; /* Required padding for .navbar-fixed-top. Change if height of navigation changes. */
-}
+/* =============================================================== */
+/* Import Section
+================================================================ */
 
-.thumb {
-    margin-bottom: 30px;
-}
-
-footer {
-    margin: 50px 0;
-}
+@import url("skeleton.css");			/* 960 Grid + Media Query Layouts */ 
+@import url("flexslider.css");			/* Flex Slider Styles */ 
+@import url("pricing_tables.css");		/* Pricing Table Styles */ 
+@import url("imagebox.css");			/* Responsive Lightbox */ 
+@import url("shortcodes.css");			/* Shortcode Styles */ 
+@import url("base.css");				/* etc. */ 

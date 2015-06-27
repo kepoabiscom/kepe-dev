@@ -24,6 +24,7 @@ class Home extends CI_Controller {
 	public function generate($view, $content = array())
 	{
 		$data['header']  = $this->parser->parse('header', array(), TRUE);
+		$data['slider']  = $this->parser->parse('slider', array(), TRUE);
 		$data['content']  = $this->parser->parse($view, $content, TRUE);
 		$data['footer']  = $this->parser->parse('footer', array(), TRUE);
 		

@@ -12,16 +12,18 @@
     <title>KepoAbis.com by Haamill Productions Team</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>" rel="stylesheet">
-
-	<link rel="stylesheet" href="<?php echo base_url('assets/css/base.css'); ?>">
+    <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 	
+	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
   </head>
 
   <body>
     <!-- Fixed navbar -->
     <div>{header}</div>
+    <div>{slider}</div>
 
     <div class="container" style="margin-bottom: 20px;">
 
@@ -39,9 +41,13 @@
 		function initialize()
 		{
 		var mapProp = {
-		  center:myCenter,
-		  zoom:15,
-		  mapTypeId:google.maps.MapTypeId.ROADMAP
+			center:myCenter,
+			zoom:15,
+			scrollwheel: false,
+			panControl: true,
+			zoomControl: true,
+			scaleControl: true,
+			mapTypeId:google.maps.MapTypeId.ROADMAP
 		  };
 
 		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
@@ -67,7 +73,5 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
-    <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
   </body>
 </html>
