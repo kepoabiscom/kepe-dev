@@ -106,9 +106,21 @@ class Article extends CI_Controller {
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
+	        	$t = $this->upload_config();
+				$img_data = array("name" => "default-image.png", 
+								"size" => 0);
+				if($t['is_uploaded']) {
+		 			$img_data['name'] = $t['data']['file_name'];
+		 			$img_data['size'] = $t['data']['file_size'];
+		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+		 			$this->load->view("admin/content/article/create_article", $data);	
+		 			return;
+		 		}
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
-			 		$d['image_id'] = $this->post_image($d);
+			 		$d['image_id'] = $this->post_image($d, $img_data);
 			 		$this->article_model->create_article($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/content/article/create_article", $data);
@@ -121,23 +133,13 @@ class Article extends CI_Controller {
 		}
 	}
 
-	function post_image($d) {
-		$t = $this->upload_config();
-		$image_name = "default-image.png";
-		if($t['is_uploaded']) {
- 			$image_name = $t['data']['file_name'];
- 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
- 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
- 			$this->load->view("admin/article/create_article", $data);	
- 			return;
- 		}
-
+	function post_image($d, $img_data) {
 		$data = array("title" => $d['title'],
 					"type" => "article",
 					"tag" => $d['tag'],
-					"size" => 0,
+					"size" => $img_data['size'],
 					"body" => $d['summary'],
-					"path" => $image_name
+					"path" => $img_data['name']
 			);
 		$this->image_model->insert_image($data);
 		$result = $this->image_model->get_last_image();
@@ -174,11 +176,10 @@ class Article extends CI_Controller {
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
 	 		$q = $this->article_model->get_by_id($id);
-	 		$r = $this->article_model->get_image($id);
-	 		$s = isset($r->path) ? $r->path : "";
+	 		$image = $this->get_article_image($id);
 	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $s ."'>";
-			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $s ."'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $image ."'>";
 			$img .= "</a></div>";
 	 		$data = array("nama_lengkap" => $q->nama_lengkap,
 		 				"title_article" => $q->title_article,
@@ -217,21 +218,49 @@ class Article extends CI_Controller {
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
+	        	$is_success = true; $e = "";
+	        	$t = $this->upload_config();
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		unset($d['submit']);
-			 		$d['image_id'] = $this->post_image($d);
-			 		$this->article_model->update_article($d['article_id'], $d);
-			 		$t = array("success" => true,
-			 				"title_article" => $d['title'],
-			 				"f" => "update"
-			 			);
-			 		$this->session->set_userdata("t", $t);
-			 		redirect('admin/article');
+			 		$q = $this->image_model->get_by_id($d['image_id']) ? $this->image_model->get_by_id($d['image_id']) : "";
+			 		$img_data = array("name" => $q->path, 
+								"size" => $q->size);
+					if($t['is_uploaded']) {
+			 			$img_data['name'] = $t['data']['file_name'];
+			 			$img_data['size'] = $t['data']['file_size'];
+			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 			$e['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 			$is_success = false;
+			 		}
+			 		if($is_success) {
+						$this->image_model->update_image((int) $d['image_id'], 
+								array("title" => $d['title'],
+										"type" => "article",
+										"tag" => $d['tag'],
+										"size" => $img_data['size'],
+										"body" => $d['summary'],
+										"path" => $img_data['name']
+								)
+							);
+
+			 			$d['image_id'] = $d['image_id'];
+				 		$this->article_model->update_article($d['article_id'], $d);
+				 		$t = array("success" => true,
+				 				"title_article" => $d['title'],
+				 				"f" => "update"
+				 			);
+				 		$this->session->set_userdata("t", $t);
+				 		redirect('admin/article');
+			 		} else {
+			 			$this->session->set_userdata("error_message", $e);
+			 			redirect('admin/article/update/' . $d['article_id']);
+			 		}
 			 	}
 		 	} else {
 		 		$r = $this->article_model->get_by_id($id);
-		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
+		 		$e = $this->session->userdata("error_message") ? $this->session->userdata("error_message") : array("error_message" => "");
 		 		$data = array("article_id" => $r->article_id,
 		 				"title" => $r->title_article,
 		 				"category" => $this->get_category_article(2, $r->article_category_id),
@@ -240,8 +269,9 @@ class Article extends CI_Controller {
 		 				"image" => $this->get_article_image($r->article_id), 
 		 				"summary" => $r->summary,
 		 				"flag" => "update",
-		 				"error_message" => $e,
-		 				"user_id" => $r->user_id
+		 				"error_message" => $e['error_message'],
+		 				"user_id" => $r->user_id,
+		 				"image_id" => $r->image_id
 		 			);
 		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/content/article/update_article', $data);

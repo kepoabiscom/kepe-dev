@@ -31,7 +31,7 @@ class Image_model extends CI_Model {
 
     function update_image($id, $data) {
         $data["modified_date"] = date("Y-m-d H:i:s");
-        $$this->db->where('image_id', $id);
+        $this->db->where('image_id', $id);
         $this->db->update('image', $data); 
     }
 
@@ -47,4 +47,14 @@ class Image_model extends CI_Model {
         } return false;
     }
 
+    function get_by_id($id='') {
+        $this->db->select("image_id, path, size")
+                ->from("image")
+                ->where("image_id", $id);
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+    }
 }

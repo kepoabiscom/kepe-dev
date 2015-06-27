@@ -2,6 +2,7 @@
 <input type="hidden" class="form-control" value="<?php echo $user_id; ?>" name="user_id">
 <?php if($flag == "update") { ?>
 <input type="hidden" class="form-control" value="<?php echo $article_id; ?>" name="article_id">
+<input type="hidden" class="form-control" value="<?php echo $image_id; ?>" name="image_id">
 <?php } ?>
 <div class="form-group">
     <label class="col-sm-2">Title</label>

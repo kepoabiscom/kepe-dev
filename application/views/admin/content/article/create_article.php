@@ -17,7 +17,7 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-
+    
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script>tinymce.init({selector:'textarea'});</script>
 
