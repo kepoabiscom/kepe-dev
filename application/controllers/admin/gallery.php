@@ -9,7 +9,7 @@ class Gallery extends CI_Controller {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
-		$this->load->model('gallery_model','', true);
+		$this->load->model('image_model','', true);
 		//$this->load->library('form_validation');
 		//$this->load->library("pagination");
 	}
@@ -27,7 +27,7 @@ class Gallery extends CI_Controller {
 	 }
 
 	 function get_list_image() {
-	 	$result = $this->gallery_model->get_image_list();
+	 	$result = $this->image_model->get_image_list("kepoabiscom");
 	 	$data_array = ""; $i = 1;
 	 	if($result) {
 	 		foreach($result as $row) {

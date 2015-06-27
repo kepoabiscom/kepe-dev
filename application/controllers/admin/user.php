@@ -76,7 +76,7 @@ class User extends CI_Controller {
 		     		);
 	 		$this->parser->parse('admin/user/view_user', $data);
 	 	} else {
-	 		direct('admin/login', 'refresh');
+	 		redirect('admin/login', 'refresh');
 	 	}
 	 }
  
@@ -241,7 +241,7 @@ class User extends CI_Controller {
 	 	}
 	 }
 
-	 function upload() {
+	function upload() {
 	 	$config['upload_path'] = './assets/img/team/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
 		$config['max_size']	= '1000';
