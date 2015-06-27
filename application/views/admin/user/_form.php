@@ -56,7 +56,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2">File input</label>
+    <label class="col-sm-2">User Image</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);">
     </div>

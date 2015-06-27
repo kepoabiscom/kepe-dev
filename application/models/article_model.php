@@ -25,6 +25,13 @@ class Article_model extends CI_Model {
         return false;
     }
 
+    function get_enum_status() {
+        $enum = $this->db->query("SHOW COLUMNS FROM article WHERE Field = 'status' ");
+        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
+        $result = explode("','", $matches[1]);
+        return $result;
+    }
+
     function count_article($keyword='') {
         if($keyword != '') {
             $this->db->like('title', $keyword);
@@ -52,9 +59,23 @@ class Article_model extends CI_Model {
     	return $this->db->delete("article", array("article_id" => $id));
     }
 
+    function get_image($id='') {
+        $this->db->select("i.path")
+                ->from("article a")
+                ->join("image i", "a.image_id = i.image_id")
+                ->where("article_id", $id);
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+
+    }
+
     function get_by_id($id) {
     	//$sql = "select * from user as u JOIN article as a on a.user_id = u.user_id JOIN article_category as ac on ac.article_category_id = a.article_category_id ";
-    	$this->db->select("a.article_id, a.article_category_id, u.user_id, u.nama_lengkap, a.title as title_article, ac.title as title_category, a.status, a.summary, a.tag, a.created_date, a.modified_date", false);
+    	$this->db->select("a.article_id, a.image_id, a.article_category_id, u.user_id, u.nama_lengkap, a.title as title_article, 
+                            ac.title as title_category, a.status, a.summary, a.tag, a.created_date, a.modified_date", false);
     	$this->db->from("article as a");
     	$this->db->join('user as u', 'u.user_id = a.user_id');
         $this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id');

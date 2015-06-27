@@ -43,6 +43,7 @@ class About extends CI_Controller {
 	 				"background_color" => !isset($q->background_color) ? "" : $q->background_color,
 	 				"footer" => !isset($q->footer) ? "" : $q->footer, 
 	 				"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+	 				"background_color" => !isset($q->background_color) ? "" : $q->background_color, 
 	 				"image" => $img,
 	 				"logo_name" => $logo, 
 	 				"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id

@@ -68,6 +68,7 @@
                         <div class="col-md-18 column"> <br>
                             <table class="table">
                                 <tbody>
+
                                 <td>
                                     <tr>
                                         <td align="left"><strong>Author</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{nama_lengkap}   
@@ -90,13 +91,18 @@
                                         <td align="justify" ><strong>Summary</strong></td>
                                         <td align="justify">&nbsp;&nbsp;&nbsp;{summary}</td>
                                     </tr>
+                                     <tr>
+                                        <td align="left"><strong>Image Article</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{image}</td>
+                                    </tr>
                                     <tr>
                                         <td align="left"><strong>Created Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>
                                     </tr>
                                     <tr>
                                         <td align="left"><strong>Modified Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{modified_date}</td>
                                     </tr>
+                                   
                                 </td>
+                                
                                 </tbody>
                             </table>
                             <a href='<?php echo base_url(); ?>admin/article'>Back</a>
