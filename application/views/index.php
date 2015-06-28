@@ -9,7 +9,7 @@
     <meta name="author" content="Haamill Productions">
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
 
-    <title>KepoAbis.com by Haamill Productions Team</title>
+    <title>{site_name} by Haamill Productions Team</title>
 
     <!-- Bootstrap core CSS -->
     <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">

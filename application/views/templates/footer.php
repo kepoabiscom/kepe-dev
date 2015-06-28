@@ -7,10 +7,7 @@
 					<div class="container">
 						<div class="row">
 							<div class="col-md-3">
-								<a href="#">KepoAbis.com</a> &copy; 2013-2015<br>
-								Haamill Productions<br>
-								Jalan Pelita RT 02/09 No. 69, Kelurahan Tengah, Kecamatan Kramat Jati, Jakarta Timur 13540<br>Indonesia<br>
-								<p>Phone: +62 856 973 09 204<br>Email: <a href="mailto:#">hi@kepoabis.com</a></p> 
+								{contact_footer}
 							</div>
 							<div class="col-md-3">
 								<div>
@@ -53,21 +50,21 @@
 							<div class="col-md-3 pull-right">
 								<ul id="footer-socials" class="ul-no-padding">
 									<li class="social-icons">
-										<a target="_blank" title="Follow Twitter" href="#">
+										<a target="_blank" title="Follow Twitter" href="{contact_twitter}">
 											<span class="social-icon-holder">
 												<img class="img-responsive" src="<?php echo base_url('assets/img//twitter.png'); ?>">
 											</span>
 										</a>
 									</li>
 									<li class="social-icons">
-										<a target="_blank" title="Facebook group" href="#">
+										<a target="_blank" title="Facebook group" href="{contact_facebook}">
 											<span class="social-icon-holder">
 												<img class="img-responsive" src="<?php echo base_url('assets/img//facebook.png'); ?>">
 											</span>
 										</a>
 									</li>
 									<li class="social-icons">
-										<a target="_blank" title="Google Plus group" href="#">
+										<a target="_blank" title="Google Plus group" href="{contact_googleplus}">
 											<span class="social-icon-holder">
 												<img class="img-responsive" src="<?php echo base_url('assets/img//googleplus.png'); ?>">
 											</span>
@@ -88,8 +85,7 @@
 				<div class="row">
 					<div class="col-md-12 text-right">
 						<div id="signature">
-							Copyright &copy;2013-2015 <a target="_blank" href="#">HAAMILL PRODUCTIONS TEAM</a> &nbsp;
-							 All Rights Reserved. 
+							{footer}
 						</div>
 					</div>
 				</div>

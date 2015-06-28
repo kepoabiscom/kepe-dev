@@ -15,10 +15,7 @@
 								<div id="googleMap" style="width:100%;height:310px; border: 1px solid #fff;"></div>
 							</div>
 							<br>
-							<a href="#">KepoAbis.com</a> &copy; 2013-2015<br>
-							Haamill Productions<br>
-							Jalan Pelita RT 02/09 No. 69, Kelurahan Tengah, Kecamatan Kramat Jati, Jakarta Timur 13540<br>Indonesia<br>
-							<p>Phone: +62 856 973 09 204<br>Email: <a href="mailto:#">hi@kepoabis.com</a></p>                         
+							{contact_footer}                     
                         </div>
                     	<div class="col-md-8">
                         	<h2 class="title">Get In Touch</h2>

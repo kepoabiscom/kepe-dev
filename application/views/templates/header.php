@@ -4,7 +4,7 @@
                  <div class="row">
                     <div class="col-md-6">
                             <!--<img class="img-responsive" alt="" src="assets/templates/thirteen/img/weblogohor-sm-2.png">-->
-						<div class="title">KepoAbis.com | Always make you curious</div>
+						<div class="title">{site_name} | {tagline}</div>
                     </div>
                     <div class="col-md-6">
                     </div>
