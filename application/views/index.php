@@ -22,10 +22,10 @@
 
   <body>
     <!-- Fixed navbar -->
-    <div>{header}</div>
-    <div>{slider}</div>
+    {header}
+    {slider}
 
-    <div class="container" style="margin-bottom: 20px;">
+    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
 
       <div class="row">
 		{content}
@@ -33,7 +33,7 @@
 
     </div> <!-- /container -->
 	
-	<div>{footer}</div>
+	{footer}
 	
 	<script>
 		var myCenter=new google.maps.LatLng( -6.290491, 106.860785);

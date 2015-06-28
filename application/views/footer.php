@@ -20,10 +20,10 @@
 								</div>
 								<div class="spacer"></div>
 								<ul class="ul-no-padding">
-									<li><a href="sub_single_page_static.php">Aturan Penggunaan</a></li>
-									<li><a href="contact.php">Peta Situs</a></li>
-									<li><a href="sub_single_page_static.php">Tentang Situs</a></li>
-									<li><a href="contact.php">Kontak</a></li>
+									<li><a href="#">Aturan Penggunaan</a></li>
+									<li><a href="#">Peta Situs</a></li>
+									<li><a href="#">Tentang Situs</a></li>
+									<li><a href="#">Kontak</a></li>
 								</ul>
 							</div>
 							<div class="col-md-3">

@@ -18,6 +18,7 @@ class Home extends CI_Controller {
 	
 	public function index()
 	{
+		$data['get_menu'] = $this->get_menu();
 		$data['get_video'] = $this->get_video();
 		$data['get_article'] = $this->get_article();
 		$data['get_news'] = $this->get_news();
@@ -33,6 +34,22 @@ class Home extends CI_Controller {
 		$data['footer']  = $this->parser->parse('footer', $content, TRUE);
 		
 		$this->parser->parse('index', $data);
+	}
+	
+	public function get_menu(){
+		$data['menu'] = array(
+			"home" => base_url('home'),
+			"news" => base_url('news'),
+			"article" => base_url('article'),
+			"videografi" => base_url('videografi'),
+			"contact" => base_url('contact'),
+			"membershipform" => '#',
+			"membership" => '#',
+			"organization" => '#',
+			"history" => '#'
+		);
+		
+		return $data;
 	}
 	
 	public function get_news(){
