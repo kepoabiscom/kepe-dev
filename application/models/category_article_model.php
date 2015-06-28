@@ -6,18 +6,44 @@ class category_article_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_category() {
-    	$this->db->select('article_category_id, title')
-                    ->from('article_category');
+    function get_category($flag=0) {
+        if($flag == 0) {
+        	$this->db->select('article_category_id, title')
+                        ->from('article_category');
 
-        $query = $this->db->get();
+            $query = $this->db->get();
 
-        if($query->num_rows() > 0) {
-        	foreach ($query->result() as $row) {
-                $data[] = $row;
-            }
-            return $data;
-        } return false;
+            if($query->num_rows() > 0) {
+            	foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
+            } 
+        } else {
+            $q = "
+                SELECT 
+                    art_cat.article_category_id
+                        ,art_cat.title
+                        ,CASE art.article_id 
+                            WHEN '' THEN 0
+                            ELSE COUNT(art.article_id)
+                            END AS total 
+                    FROM 
+                        article_category art_cat
+                    LEFT JOIN
+                        article art
+                    ON
+                        art_cat.article_category_id = art.article_category_id
+                    GROUP BY art_cat.article_category_id
+                ";
+                
+            $query = $this->db->query($q);
+            
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
+        }
+        return false;
     }
 
     function get_list_category($start, $limit) {

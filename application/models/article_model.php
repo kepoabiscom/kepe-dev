@@ -6,21 +6,61 @@ class Article_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_article_list($start, $limit, $keyword='') {
-    	$this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
-    	$this->db->from("article as a");
-        if($keyword != '') 
-            $this->db->like("a.title", $keyword);
-    	$this->db->limit($limit, $start);
-        $this->db->order_by("article_id", "desc");
-        $this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id');
-        $query = $this->db->get();
- 
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+    function get_article_list($flag=0, $start, $limit, $keyword='') {
+    	if($flag == 0) {
+            $this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
+        	$this->db->from("article as a");
+            if($keyword != '') 
+                $this->db->like("a.title", $keyword);
+        	$this->db->limit($limit, $start);
+            $this->db->order_by("article_id", "desc");
+            $this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id');
+            $query = $this->db->get();
+     
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
             }
-            return $data;
+        } else {
+            $q = "
+                SELECT 
+                    art.article_id
+                    ,art.article_category_id
+                    ,art.image_id
+                    ,art.title
+                    ,art.summary
+                    ,usr.nama_lengkap
+                    ,DATE_FORMAT(art.created_date, '%d %b %Y') as created_date
+                    ,img.path AS path_image
+                    ,art_cat.title AS category
+                FROM
+                    article art
+                    LEFT JOIN
+                        user usr
+                    ON
+                        art.user_id = usr.user_id
+                    LEFT JOIN
+                        image img
+                    ON
+                        art.image_id = img.image_id
+                    LEFT JOIN
+                        article_category art_cat
+                    ON
+                        art.article_category_id = art_cat.article_category_id
+                WHERE 
+                    art.status = 'published'
+                    AND art.image_id > 0
+                ORDER BY art.created_date DESC
+                LIMIT ".$start.", ".$limit."
+            ";
+
+            $query = $this->db->query($q);
+            
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
         }
         return false;
     }

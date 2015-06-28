@@ -9,6 +9,7 @@ class Contact extends CI_Controller {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
+		$this->load->library("menu");
 	}
 	
 	/**
@@ -17,7 +18,7 @@ class Contact extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->get_menu();
+		$data['get_menu'] = $this->menu->get_menu("contact");
 		
 		$this->generate('contact', $data);
 	}
@@ -32,19 +33,4 @@ class Contact extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-		public function get_menu(){
-		$data['menu'] = array(
-			"home" => base_url('home'),
-			"news" => base_url('news'),
-			"article" => base_url('article'),
-			"videografi" => base_url('videografi'),
-			"contact" => base_url('contact'),
-			"membershipform" => '#',
-			"membership" => '#',
-			"organization" => '#',
-			"history" => '#'
-		);
-		
-		return $data;
-	}
 }

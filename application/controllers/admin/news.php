@@ -23,7 +23,7 @@ class News extends CI_Controller {
 		     $config = $this->page_config();
 
 		     $data = array(
-		     			'list_news' => $this->get_list_news($config['uri'], $config['per_page']),
+		     			'list_news' => $this->get_list_news(0, $config['uri'], $config['per_page']),
 		     			'link' => $this->pagination->create_links(),
 		     			'success' => $this->notification()
 		     		);

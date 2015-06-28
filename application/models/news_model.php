@@ -6,21 +6,62 @@ class News_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_news_list($start, $limit, $keyword='') {
-    	$this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
-    	$this->db->from("news as a");
-        if($keyword != '') 
-            $this->db->like("a.title", $keyword);
-    	$this->db->limit($limit, $start);
-        $this->db->order_by("news_id", "desc");
-        $this->db->join('news_category as ac', 'ac.news_category_id = a.news_category_id');
-        $query = $this->db->get();
- 
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+    function get_news_list($flag=0, $start, $limit, $keyword='') {
+        if($flag == 0) {
+            $this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
+        	$this->db->from("news as a");
+            if($keyword != '') 
+                $this->db->like("a.title", $keyword);
+        	$this->db->limit($limit, $start);
+            $this->db->order_by("news_id", "desc");
+            $this->db->join('news_category as ac', 'ac.news_category_id = a.news_category_id');
+            $query = $this->db->get();
+     
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
             }
-            return $data;
+        } else {
+            $q = "
+                SELECT 
+                    n.news_id
+                    ,n.news_category_id
+                    ,n.image_id
+                    ,n.title
+                    ,n.summary
+                    ,n.body
+                    ,usr.nama_lengkap
+                    ,DATE_FORMAT(n.created_date, '%M %d, %Y') as created_date
+                    ,img.path AS path_image
+                    ,n_cat.title AS category
+                FROM
+                    news n
+                    LEFT JOIN
+                        user usr
+                    ON
+                        n.user_id = usr.user_id
+                    LEFT JOIN
+                        image img
+                    ON
+                        n.image_id = img.image_id
+                    LEFT JOIN
+                        news_category n_cat
+                    ON
+                        n.news_category_id = n_cat.news_category_id
+                WHERE 
+                    n.status = 'published'
+                    AND n.image_id > 0
+                ORDER BY n.created_date DESC
+                LIMIT ".$start.", ".$limit."
+            ";
+
+            $query = $this->db->query($q);
+            
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
         }
         return false;
     }

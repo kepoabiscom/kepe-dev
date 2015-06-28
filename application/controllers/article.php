@@ -8,8 +8,11 @@ class Article extends CI_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
-		$this->load->model('db_model','', true);
+		$this->load->model('archives_model','', true);
+		$this->load->model('article_model','', true);
+		$this->load->model('category_article_model','', true);
 		$this->load->library("parser");
+		$this->load->library("menu");
 	}
 	
 	/**
@@ -18,7 +21,7 @@ class Article extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->get_menu();
+		$data['get_menu'] = $this->menu->get_menu("article");
 		$data['get_article'] = $this->get_article_list();
 		$data['get_article_category'] = $this->get_article_category_list();
 		$data['get_archives_list'] = $this->get_archives_list();
@@ -36,24 +39,8 @@ class Article extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-		public function get_menu(){
-		$data['menu'] = array(
-			"home" => base_url('home'),
-			"news" => base_url('news'),
-			"article" => base_url('article'),
-			"videografi" => base_url('videografi'),
-			"contact" => base_url('contact'),
-			"membershipform" => '#',
-			"membership" => '#',
-			"organization" => '#',
-			"history" => '#'
-		);
-		
-		return $data;
-	}
-	
 	public function get_article_list($start=0, $limit=10){
-		$query = $this->db_model->get_article_list($start, $limit);
+		$query = $this->article_model->get_article_list(1, $start, $limit);
 		
 		$i = 0;
 		foreach ($query->result() as $q)
@@ -84,7 +71,7 @@ class Article extends CI_Controller {
 	}
 	
 	public function get_article_category_list() {
-		$query = $this->db_model->get_article_category_list();
+		$query = $this->category_article_model->get_category(1);
 
 		$i = 0;
 		foreach ($query->result() as $q)
@@ -108,7 +95,7 @@ class Article extends CI_Controller {
 	public function get_archives_list() {
 		$table = "article";
 		
-		$query = $this->db_model->get_archives_list($table);
+		$query = $this->archives_model->get_archives_list($table);
 
 		$i = 0;
 		foreach ($query->result() as $q)

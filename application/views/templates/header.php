@@ -22,33 +22,14 @@
           <!--<a class="navbar-brand" href="#">Project name</a>-->
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-			{get_menu}
 			<ul id="-aei-navbar-nav" class="nav navbar-nav">
-                <li class="active">
-					<a title="HOME" href="{home}">
-						HOME
+				{get_menu}
+                <li class="{active}">
+					<a title="{name}" href="{url}">
+						{name}
 					</a> 
 				</li>
-				<li class="">
-					<a title="NEWS" href="{news}">
-						NEWS
-					</a>  
-				</li>
-				<li class="">
-					<a title="ARTICLE" href="{article}">
-						ARTICLE
-					</a>
-				</li>
-				<li class=" ultimateparent">
-					<a title="VIDEOGRAFI" href="{videografi}">
-						VIDEOGRAFI 
-					</a>
-				</li>
-				<li class=" ultimateparent">
-					<a title="CONTACT US" href="{contact}">
-						CONTACT US
-					</a>
-				</li>
+				{/get_menu}
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 						ABOUT US &nbsp;<span class="caret"></span>
@@ -61,7 +42,6 @@
 					</ul>
 				</li>
 			</ul>
-			{/get_menu}
 			<form role="search" class="navbar-form navbar-right" method="get" action="home/search">
 				<div style="width: 200px;" class="input-group">
 					<input type="text" placeholder="Search" class="form-control input-sm" value="" name="search">

@@ -9,6 +9,7 @@ class Home extends CI_Controller {
 		parent:: __construct();
 		$this->load->model("home_model");
 		$this->load->helper(array("url", "form"));
+		$this->load->library("menu");
 		$this->load->library("parser");
 	}
 
@@ -18,7 +19,7 @@ class Home extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->get_menu();
+		$data['get_menu'] = $this->menu->get_menu("home");
 		$data['get_video'] = $this->get_video();
 		$data['get_article'] = $this->get_article();
 		$data['get_news'] = $this->get_news();
@@ -36,21 +37,6 @@ class Home extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_menu(){
-		$data['menu'] = array(
-			"home" => base_url('home'),
-			"news" => base_url('news'),
-			"article" => base_url('article'),
-			"videografi" => base_url('videografi'),
-			"contact" => base_url('contact'),
-			"membershipform" => '#',
-			"membership" => '#',
-			"organization" => '#',
-			"history" => '#'
-		);
-		
-		return $data;
-	}
 	
 	public function get_news(){
 		$query = $this->home_model->get_recent_news();

@@ -1,23 +1,51 @@
 <?php 
 
-class category_video_model extends CI_Model {
+class Category_video_model extends CI_Model {
 
     function __construct() {
         parent:: __construct();
     }
 
-    function get_category() {
-    	$this->db->select('video_category_id, title');
-        $this->db->from('video_category');
+    function get_category($flag=0) {
+        if($flag == 0) {
+            $this->db->select('video_category_id, title');
+            $this->db->from('video_category');
 
-        $query = $this->db->get();
+            $query = $this->db->get();
 
-        if($query->num_rows() > 0) {
-        	foreach ($query->result() as $row) {
-                $data[] = $row;
-            }
-            return $data;
-        } return false;
+            if($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
+            }    	
+        } else {
+            $q = "
+                SELECT 
+                    vid_cat.video_category_id
+                    ,vid_cat.title
+                    ,CASE vid.video_id 
+                        WHEN '' THEN 0
+                        ELSE COUNT(vid.video_id)
+                        END AS total 
+                FROM 
+                    video_category vid_cat
+                LEFT JOIN
+                    video vid
+                ON
+                    vid_cat.video_category_id = vid.video_category_id
+                GROUP BY vid_cat.video_category_id
+                ORDER BY vid_cat.title ASC
+            ";
+                
+            $query = $this->db->query($q);
+            
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
+        } 
+
+        return false;
     }
 
     function count_category_video() {

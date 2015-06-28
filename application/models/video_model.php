@@ -10,20 +10,58 @@ class Video_model extends CI_Model {
         return $this->db->count_all("video");
     }
 
-    function get_video_list($start, $limit) {
-    	$this->db->select("v.video_id, v.title as title_video, vc.title as title_category, v.status, v.created_date, v.modified_date", false);
-    	$this->db->from("video as v");
-    	$this->db->limit($limit, $start);
-        $this->db->order_by("video_id", "desc");
-        $this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id');
-        $query = $this->db->get();
- 
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                $data[] = $row;
+    function get_video_list($flag=0, $start, $limit) {
+        if($flag == 0) {
+            $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, v.status, v.created_date, v.modified_date", false);
+            $this->db->from("video as v");
+            $this->db->limit($limit, $start);
+            $this->db->order_by("video_id", "desc");
+            $this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id');
+            $query = $this->db->get();
+     
+            if ($query->num_rows() > 0) {
+                foreach ($query->result() as $row) {
+                    $data[] = $row;
+                }
+                return $data;
             }
-            return $data;
+        } else {
+            $q = "
+                SELECT 
+                  vid.video_id
+                  ,vid.video_category_id
+                  ,vid.image_id
+                  ,vid.title
+                  ,vid.description
+                  ,vid.url AS path_video
+                  ,vid.duration
+                  ,vid.created_date
+                  ,img.path AS path_image
+                  ,vid_cat.title AS category
+                FROM
+                    video vid
+                    LEFT JOIN
+                      image img
+                    ON
+                      vid.image_id = img.image_id
+                    LEFT JOIN
+                      video_category vid_cat
+                    ON
+                      vid.video_category_id = vid_cat.video_category_id
+                WHERE 
+                    vid.status = 'published'
+                    AND vid.image_id > 0
+                ORDER BY created_date DESC
+                LIMIT ".$start.", ".$limit."
+            ";
+
+            $query = $this->db->query($q);
+            
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
         }
+    	
         return false;
     }
 
