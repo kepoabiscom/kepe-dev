@@ -105,8 +105,7 @@ class Home extends CI_Controller {
 					"category" => "",
 					"image" => ""
 
-			));
-		
+			));	
 	}
 	
 	public function get_video(){
