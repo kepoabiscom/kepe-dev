@@ -70,31 +70,34 @@ class Home extends CI_Controller {
 		$query = $this->home_model->get_recent_article();
 		
 		$i = 0;
-		foreach ($query->result() as $q)
-		{
-			$path = !isset($q->path_image) ? "" : $q->path_image;
-			$title = !isset($q->title) ? "" : $q->title;
-			
-			$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
-			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
-			$img .= "</a>";
-			
-			$data[$i] = array(
-				"article_id" => !isset($q->article_id) ? "" : $q->article_id,
-				"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
-				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='#'>".$title."</a>",
-				"summary" => !isset($q->summary) ? "" : $q->summary,
-				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
-				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
-				"image" => $img,
-				"category" => !isset($q->category) ? "" : $q->category,
-			 );
-			 
-			 $i++;
-		}
+		if ($query != false) {
+			foreach ($query->result() as $q)
+			{
+				$path = !isset($q->path_image) ? "" : $q->path_image;
+				$title = !isset($q->title) ? "" : $q->title;
+				
+				$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
+				$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "</a>";
+				
+				$data[$i] = array(
+					"article_id" => !isset($q->article_id) ? "" : $q->article_id,
+					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
+					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+					"title" => "<a href='#'>".$title."</a>",
+					"summary" => !isset($q->summary) ? "" : $q->summary,
+					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
+					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+					"image" => $img,
+					"category" => !isset($q->category) ? "" : $q->category,
+				 );
+				 
+				 $i++;
+			}
 
- 		return $data;
+	 		return $data;
+		} return "";
+		
 	}
 	
 	public function get_video(){

@@ -107,10 +107,10 @@ class Article extends CI_Controller {
 
 	        if($this->form_validation->run() == true) {
 	        	$t = $this->upload_config();
-				$img_data = array("name" => "default-image.png", 
+				$img_data = array("name" => "assets/img/article/default-image.png", 
 								"size" => 0);
 				if($t['is_uploaded']) {
-		 			$img_data['name'] = $t['data']['file_name'];
+		 			$img_data['name'] = "assets/img/article/" . $t['data']['file_name'];
 		 			$img_data['size'] = $t['data']['file_size'];
 		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
 		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
@@ -147,7 +147,7 @@ class Article extends CI_Controller {
 	}
 
 	function upload_config() {
-		$config['upload_path'] = './assets/img/';
+		$config['upload_path'] = './assets/img/article/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
 		$config['max_size']	= '1000';
 		$config['max_width']  = '1024';
@@ -178,8 +178,8 @@ class Article extends CI_Controller {
 	 		$q = $this->article_model->get_by_id($id);
 	 		$image = $this->get_article_image($id);
 	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $image ."'>";
-			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $image ."'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
 			$img .= "</a></div>";
 	 		$data = array("nama_lengkap" => $q->nama_lengkap,
 		 				"title_article" => $q->title_article,
@@ -228,7 +228,7 @@ class Article extends CI_Controller {
 			 		$img_data = array("name" => $q->path, 
 								"size" => $q->size);
 					if($t['is_uploaded']) {
-			 			$img_data['name'] = $t['data']['file_name'];
+			 			$img_data['name'] = "assets/img/article/" . $t['data']['file_name'];
 			 			$img_data['size'] = $t['data']['file_size'];
 			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
 			 			$e['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
