@@ -68,50 +68,66 @@
                         <div class="col-md-12 column"> <br>
                             <table class="table">
                                 <tbody>
-                                <td>
                                     <tr>{image}</tr>
-                                </td>
-                                <td>
                                     <tr>
-                                        <td align="left"><strong>Title</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{title}   
+                                        <td align="left"><strong>Title</strong></td><td>:</td><td align="left">{title}   
+                                    </td>
+                                        
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Tagline</strong></td><td>:</td><td align="left">{tagline}   
+                                    </td>
+                                        
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Description</strong></td><td>:</td><td align="left">{description}   
                                     </td>
                                         
                                     </tr>
                                     <tr>
-                                        <td align="left"><strong>Telephone 1</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_telphone_1} </td>
+                                        <td align="left"><strong>Phone</strong></td><td>:</td><td align="left">{contact_phone} </td>
                                     </tr>
                                     <tr>
-                                        <td align="left"><strong>Telephone 2</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_telphone_2}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Fax</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_fax}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Email 1</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_email_1}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Email 2</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_email_2}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Contact Lat</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_lat}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Contact Long</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_long}</td>
-                                    </tr>
-                                    <tr>
-                                        <td align="left"><strong>Address<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{contact_address} </td>
+                                        <td align="left"><strong>Phone Mobile First</strong></td><td>:</td><td align="left">{contact_phone_mobile_first}</td>
                                     </tr>
 									<tr>
-                                        <td align="left"><strong>Facebook<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_facebook}">{contact_facebook}</a></td>
-                                    </tr>
-									<tr>
-                                        <td align="left"><strong>Twitter<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_twitter}">{contact_twitter}</a></td>
-                                    </tr>
-									<tr>
-                                        <td align="left"><strong>Google Plus<strong></td><td align="left">:&nbsp;&nbsp;&nbsp;<a href="{contact_googleplus}">{contact_googleplus}</a></td>
+                                        <td align="left"><strong>Phone Mobile Second</strong></td><td>:</td><td align="left">{contact_phone_mobile_second}</td>
                                     </tr>
                                     <tr>
-                                        <td align="left"><strong>Footer</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{footer}</td>
+                                        <td align="left"><strong>Fax</strong></td><td>:</td><td align="left">{contact_fax}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Email Addres First</strong></td><td>:</td><td align="left">{contact_email_address_first}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Email Address Second</strong></td><td>:</td><td align="left">{contact_email_address_second}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Contact Lat</strong></td><td>:</td><td align="left">{contact_lat}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Contact Long</strong></td><td>:</td><td align="left">{contact_long}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Address<strong></td><td>:</td><td align="left">{contact_address} </td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Facebook<strong></td><td>:</td><td align="left"><a href="{contact_facebook}">{contact_facebook}</a></td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Twitter<strong></td><td>:</td><td align="left"><a href="{contact_twitter}">{contact_twitter}</a></td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Google Plus<strong></td><td>:</td><td align="left"><a href="{contact_googleplus}">{contact_googleplus}</a></td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Created Year<strong></td><td>:</td><td align="left">{created_year}</td>
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Version<strong></td><td>:</td><td align="left">{version}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Footer</strong></td><td>:</td><td align="left">{footer}</td>
                                     </tr>
                                 </td>
                                 </tbody>

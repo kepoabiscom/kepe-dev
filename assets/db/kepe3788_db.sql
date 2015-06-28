@@ -1,5 +1,5 @@
 # Host: localhost  (Version: 5.6.21)
-# Date: 2015-06-28 17:25:07
+# Date: 2015-06-29 00:16:06
 # Generator: MySQL-Front 5.3  (Build 4.191)
 
 /*!40101 SET NAMES latin1 */;
@@ -22,7 +22,7 @@ CREATE TABLE `article` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "article"
@@ -118,7 +118,7 @@ CREATE TABLE `image` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`image_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=24 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 #
 # Data for table "image"
@@ -173,7 +173,7 @@ CREATE TABLE `news` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`news_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 #
 # Data for table "news"
@@ -239,18 +239,27 @@ CREATE TABLE `setting` (
   `user_id` int(11) DEFAULT NULL,
   `title` varchar(255) DEFAULT NULL,
   `logo` varchar(255) DEFAULT NULL,
+  `tagline` varchar(255) DEFAULT NULL,
+  `description` text,
   `background_color` varchar(255) DEFAULT NULL,
   `contact_address` text,
-  `contact_telphone_1` varchar(255) DEFAULT NULL,
-  `contact_telphone_2` varchar(255) DEFAULT NULL,
+  `contact_phone` varchar(255) DEFAULT NULL,
+  `contact_phone_mobile_first` varchar(255) DEFAULT NULL,
+  `contact_phone_mobile_second` varchar(255) DEFAULT NULL,
   `contact_fax` varchar(255) DEFAULT NULL,
-  `contact_email_1` varchar(255) DEFAULT NULL,
-  `contact_email_2` varchar(255) DEFAULT NULL,
+  `contact_email_address_first` varchar(255) DEFAULT NULL,
+  `contact_email_address_second` varchar(255) DEFAULT NULL,
   `contact_lat` varchar(255) DEFAULT NULL,
   `contact_long` varchar(255) DEFAULT NULL,
+  `contact_city` varchar(255) DEFAULT NULL,
+  `contact_state` varchar(255) DEFAULT NULL,
+  `contact_zip` varchar(255) DEFAULT NULL,
+  `contact_country` varchar(255) DEFAULT NULL,
   `contact_facebook` varchar(255) DEFAULT NULL,
   `contact_twitter` varchar(255) DEFAULT NULL,
   `contact_googleplus` varchar(255) DEFAULT NULL,
+  `created_year` varchar(255) DEFAULT NULL,
+  `version` varchar(255) DEFAULT NULL,
   `footer` text,
   PRIMARY KEY (`setting_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
@@ -259,7 +268,7 @@ CREATE TABLE `setting` (
 # Data for table "setting"
 #
 
-INSERT INTO `setting` VALUES (1,0,'KEPOABIS.COM','b7d6537d27b26a5878d476104cf70186.png','#000000','<p>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati<br />Jakarta Timur - 13540, Indonesia</p>','085697309204','','','hi@kepoabis.com','contact@kepoabis.com','-6.290491','106.860785','https://www.facebook.com/kepoabiscom','https://twitter.com/KepoAbisCom','https://plus.google.com/108330573883645796122','<p>© Copyright 2015 Haamill Productions - All Rights reserved</p>');
+INSERT INTO `setting` VALUES (1,0,'KepoAbis.com','b7d6537d27b26a5878d476104cf70186.png','Always make you curious','<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s. <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.</p>','#000000','<p>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati</p>','085697309204','','','23456','hi@kepoabis.com','contact@kepoabis.com','-6.290491','106.860785','Jakarta Timur','DKI Jakarta','13540','Indonesia','https://www.facebook.com/kepoabiscom','https://twitter.com/KepoAbisCom','https://plus.google.com/108330573883645796122','2014','1.0.0','<p>© Copyright 2015 Haamill Productions - All Rights reserved</p>');
 
 #
 # Structure for table "static_content"
@@ -439,7 +448,7 @@ CREATE TABLE `video_category` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`video_category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 #
 # Data for table "video_category"

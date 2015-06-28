@@ -7,13 +7,39 @@ class About_model extends CI_Model {
     }
 
     function get_detail() {
-        $this->db->select('setting_id, title, logo, contact_address, contact_telphone_1, contact_telphone_2,
-						contact_fax, contact_email_1, contact_email_2, contact_lat, contact_long, background_color, contact_facebook, contact_twitter, contact_googleplus, footer');
+        $this->db->select('
+			setting_id
+			,title
+			,logo
+			,tagline
+			,description
+			,contact_address
+			,contact_phone
+			,contact_phone_mobile_first
+			,contact_phone_mobile_second
+			,contact_fax
+			,contact_email_address_first
+			,contact_email_address_second
+			,contact_lat
+			,contact_long
+			,contact_city
+			,contact_state
+			,contact_zip
+			,contact_country
+			,background_color
+			,contact_facebook
+			,contact_twitter
+			,contact_googleplus
+			,created_year
+			,version
+			,footer'
+		);
+		
         $this->db->from('setting');
         $this->db->limit(1);
 
         $query = $this->db->get();
-		
+
         if($query->num_rows() == 1) {
             return $query->row();
         } return false;

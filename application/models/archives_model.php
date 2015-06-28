@@ -27,5 +27,4 @@ class Archives_model extends CI_Model {
 			return false;
 		}
 	}
-	
 }

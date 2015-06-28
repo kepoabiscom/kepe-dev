@@ -22,32 +22,42 @@ class About extends CI_Controller {
 
 	function get_about_detail() {
 		$q = $this->about_model->get_detail();
-
+		
 	    $logo = !isset($q->logo) ? "" : $q->logo;
 	    $img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
 		$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $logo ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $logo ."'>";
 		$img .= "</a></div>";
- 		$data = array("title" => !isset($q->title) ? "" : $q->title,
-	 				"contact_address" => !isset($q->contact_address) ? "" : $q->contact_address,
-	 				"contact_telphone_1" => !isset($q->contact_telphone_1) ? "" : $q->contact_telphone_1,
-	 				"contact_telphone_2" => !isset($q->contact_telphone_2) ? "" : $q->contact_telphone_2,
-	 				"contact_email_1" => !isset($q->contact_email_1) ? "" : $q->contact_email_1,
-	 				"contact_email_2" => !isset($q->contact_email_2) ? "" : $q->contact_email_2,
-	 				"contact_fax" => !isset($q->contact_fax) ? "" : $q->contact_fax,
-	 				"contact_lat" => !isset($q->contact_lat) ? "" : $q->contact_lat,
-	 				"contact_long" => !isset($q->contact_long) ? "" : $q->contact_long,
-	 				"contact_facebook" => !isset($q->contact_facebook) ? "" : $q->contact_facebook,
-	 				"contact_twitter" => !isset($q->contact_twitter) ? "" : $q->contact_twitter,
-	 				"contact_googleplus" => !isset($q->contact_googleplus) ? "" : $q->contact_googleplus,
-	 				"background_color" => !isset($q->background_color) ? "" : $q->background_color,
-	 				"footer" => !isset($q->footer) ? "" : $q->footer, 
-	 				"user_id" => !isset($q->user_id) ? "" : $q->user_id,
-	 				"background_color" => !isset($q->background_color) ? "" : $q->background_color, 
-	 				"image" => $img,
-	 				"logo_name" => $logo, 
-	 				"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id
-	     		);
+ 		$data = array(
+			"title" => !isset($q->title) ? "" : $q->title,
+			"tagline" => !isset($q->tagline) ? "" : $q->tagline,
+			"description" => !isset($q->description) ? "" : htmlentities($q->description),
+	 		"contact_address" => !isset($q->contact_address) ? "" : htmlentities($q->contact_address),
+	 		"contact_phone" => !isset($q->contact_phone) ? "" : $q->contact_phone,
+	 		"contact_phone_mobile_first" => !isset($q->contact_phone_mobile_first) ? "" : $q->contact_phone_mobile_first,
+	 		"contact_phone_mobile_second" => !isset($q->contact_phone_mobile_second) ? "" : $q->contact_phone_mobile_second,
+	 		"contact_email_address_first" => !isset($q->contact_email_address_first) ? "" : $q->contact_email_address_first,
+	 		"contact_email_address_second" => !isset($q->contact_email_address_second) ? "" : $q->contact_email_address_second,
+	 		"contact_fax" => !isset($q->contact_fax) ? "" : $q->contact_fax,
+	 		"contact_lat" => !isset($q->contact_lat) ? "" : $q->contact_lat,
+	 		"contact_long" => !isset($q->contact_long) ? "" : $q->contact_long,
+	 		"contact_city" => !isset($q->contact_city) ? "" : $q->contact_city,
+	 		"contact_state" => !isset($q->contact_state) ? "" : $q->contact_state,
+	 		"contact_zip" => !isset($q->contact_zip) ? "" : $q->contact_zip,
+	 		"contact_country" => !isset($q->contact_country) ? "" : $q->contact_country,
+	 		"contact_facebook" => !isset($q->contact_facebook) ? "" : $q->contact_facebook,
+	 		"contact_twitter" => !isset($q->contact_twitter) ? "" : $q->contact_twitter,
+	 		"contact_googleplus" => !isset($q->contact_googleplus) ? "" : $q->contact_googleplus,
+	 		"background_color" => !isset($q->background_color) ? "" : $q->background_color,
+	 		"created_year" => !isset($q->created_year) ? "" : $q->created_year,
+	 		"version" => !isset($q->version) ? "" : $q->version,
+	 		"footer" => !isset($q->footer) ? "" : htmlentities($q->footer), 
+	 		"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+	 		"image" => $img,
+	 		"logo_name" => $logo, 
+	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id
+	     );
+		 
  		return $data;
 	}
 
@@ -125,7 +135,7 @@ class About extends CI_Controller {
 		$this->form_validation->set_error_delimiters("<div style='color:red'>", "</div>");
 	 	$this->form_validation->set_rules('title', 'Title', 'required|xss_clean');
 	 	$this->form_validation->set_rules('contact_address', 'Address', 'required|xss_clean');
-	 	$this->form_validation->set_rules('contact_telphone_1', 'Telephone 1', 'required|xss_clean');   	
+	 	$this->form_validation->set_rules('contact_phone', 'Phone', 'required|xss_clean');   	
 	}
 
 	function upload() {
