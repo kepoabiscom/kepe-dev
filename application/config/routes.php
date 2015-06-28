@@ -42,6 +42,7 @@ $is_maintenance = false;
 $route['default_controller'] = (!$is_maintenance) ? "home" : "maintenance";
 $route['admin'] = "admin/dashboard/index";
 $route['category-article'] = "admin/category_article";
+$route['category-news'] = "admin/category_news";
 $route['category-video'] = "admin/category_video";
 $route['404_override'] = '';
 

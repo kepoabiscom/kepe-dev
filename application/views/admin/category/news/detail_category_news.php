@@ -24,16 +24,7 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this video?");
-            if (x) return true;
-            return false;
-        }
-    </script>
     
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
-    <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 
 </head>
 
@@ -62,40 +53,41 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li>
-                                <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
+                                <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>&nbsp;Category Video
+                                <i class="fa fa-file"></i>&nbsp;Category News
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-                <div class="col-lg-12">
-                    <h2>Category Video List - <strong>KepoAbis.com</strong></h2>
-                    {success}
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Summary</th>
-                                    <th>Created Time</th>
-                                    <th>Updated Time </th>
-                                    <th>More</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {list_category_video}
-                            </tbody>
-                        </table>
-                        {link}<br><br>
+                <h2>Detail Category News</h2><br>
+                <div class="col-lg-8">
+                    <div class="row clearfix">
+                        <div class="col-md-18 column"> <br>
+                            <table class="table">
+                                <tbody>
+                                <td>
+                                    <tr>
+                                        <td align="left"><strong>Title</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{title}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Summary</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{body}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Created Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>
+                                    </tr>
+                                    <tr>
+                                        <td align="left"><strong>Modified Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{modified_date}</td>
+                                    </tr>
+                                </td>
+                                </tbody>
+                            </table>
+                            <a href='<?php echo base_url(); ?>admin/category-news'>Back</a>
+                        </div>
                     </div>
-                    <a href='<?php echo base_url(); ?>admin/category-video/create' class="btn btn-lg btn-success">Add Category Video</a>
-                </div>
-
-
+                </div>  
             </div>
             <!-- /.container-fluid -->
 

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Category Article Management - KepoAbis.com</title>
+    <title>Category Management - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -58,7 +58,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Category Article Management
+                            Category Management
                         </h1>
                         <ol class="breadcrumb">
                             <li>
