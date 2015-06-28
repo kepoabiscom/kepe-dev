@@ -29,9 +29,9 @@ class Article extends CI_Controller {
 	public function generate($view, $content = array())
 	{
 		$data['slider'] = "";
-		$data['header']  = $this->parser->parse('header', $content, TRUE);
+		$data['header']  = $this->parser->parse('templates/header', $content, TRUE);
 		$data['content']  = $this->parser->parse($view, $content, TRUE);
-		$data['footer']  = $this->parser->parse('footer', $content, TRUE);
+		$data['footer']  = $this->parser->parse('templates/footer', $content, TRUE);
 		
 		$this->parser->parse('index', $data);
 	}
