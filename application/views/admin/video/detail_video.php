@@ -110,6 +110,9 @@
                                         <td align="justify" ><strong>Description</strong></td>
                                         <td align="justify">&nbsp;&nbsp;&nbsp;{description}</td>
                                     </tr>
+                                     <tr>
+                                        <td align="left"><strong>Image Video</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{image}</td>
+                                    </tr>
                                     <tr>
                                         <td align="left"><strong>Created Date</strong></td><td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>
                                     </tr>

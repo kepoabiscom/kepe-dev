@@ -11,6 +11,7 @@ class Video extends CI_Controller {
 		$this->load->library("parser");
 		$this->load->model('video_model','', true);
 		$this->load->model('category_video_model','', true);
+		$this->load->model('image_model','', true);
 		$this->load->library('form_validation');
 		$this->load->library("pagination");
 	}
@@ -35,7 +36,7 @@ class Video extends CI_Controller {
 	   	}
 	 }
 
-	 function create() {
+	function create() {
 		if($this->session->userdata('logged_in')) {
 			$sess_data = $this->session->userdata('logged_in');
 	 		$data = array("success" => false, 
@@ -47,8 +48,27 @@ class Video extends CI_Controller {
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
+	        	$t = $this->upload_config();
+				$img_data = array("name" => "assets/img/video/default-image.png", 
+								"size" => 0);
+				if($t['is_uploaded']) {
+		 			$img_data['name'] = "assets/img/video/" . $t['data']['file_name'];
+		 			$img_data['size'] = $t['data']['file_size'];
+		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+		 			$this->load->view("admin/video/create_video", $data);	
+		 			return;
+		 		}
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
+			 		$d['image_id'] = $this->post_image(array("title" => $d['title'],
+							"type" => "video",
+							"tag" => $d['tag'],
+							"size" => $img_data['size'],
+							"body" => $d['description'],
+							"path" => $img_data['name']
+					));
 			 		$this->video_model->create_video($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/video/create_video", $data);
@@ -61,7 +81,13 @@ class Video extends CI_Controller {
 		}
 	}
 
-	 function get_list_video($start, $limit) {
+	function post_image($data) {
+		$this->image_model->insert_image($data);
+		$result = $this->image_model->get_last_image();
+		return ($result != false) ? $result->image_id : 0;
+	}
+
+	function get_list_video($start, $limit) {
 	 	$result = $this->video_model->get_video_list($start, $limit);
 	 	$data_array = ""; $i = 1;
 	 	if($result) {
@@ -124,20 +150,49 @@ class Video extends CI_Controller {
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
+	        	$is_success = true; $e = "";
+	        	$t = $this->upload_config();
+
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		unset($d['submit']);
-			 		$this->video_model->update_video($d['video_id'], $d);
-			 		$t = array("success" => true,
-			 				"video_title" => $d['title'],
-			 				"f" => "update"
-			 			);
-			 		$this->session->set_userdata("t", $t);
-			 		redirect('admin/video');
+			 		$q = $this->image_model->get_by_id($d['image_id']) ? $this->image_model->get_by_id($d['image_id']) : "";
+			 		$img_data = array("name" => $q->path, 
+								"size" => $q->size);
+					if($t['is_uploaded']) {
+			 			$img_data['name'] = "assets/img/video/" . $t['data']['file_name'];
+			 			$img_data['size'] = $t['data']['file_size'];
+			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 			$e['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 			$is_success = false;
+			 		}
+
+			 		if($is_success) {
+						$this->image_model->update_image((int) $d['image_id'], 
+								array("title" => $d['title'],
+										"type" => "video",
+										"tag" => $d['tag'],
+										"size" => $img_data['size'],
+										"body" => $d['summary'],
+										"path" => $img_data['name']
+								)
+							);
+				 		$this->video_model->update_video($d['video_id'], $d);
+				 		$t = array("success" => true,
+				 				"video_title" => $d['title'],
+				 				"f" => "update"
+				 			);
+				 		$this->session->set_userdata("t", $t);
+				 		redirect('admin/video');
+				 	} else {
+				 		$this->session->set_userdata("error_message", $e);
+			 			redirect('admin/video/update/' . $d['video_id']);
+				 	}
 			 	}
 		 	} else {
 		 		$q = $this->video_model->get_by_id($id);
-		 		$e = $this->session->userdata("error_message") ?  $this->session->userdata("error_message") : "";
+		 		$e = $this->session->userdata("error_message") ? $this->session->userdata("error_message") : array("error_message" => "");;
+		 		$img = $this->get_video_image($q->video_id);
 		 		$data = array("video_id" => $q->video_id,
 		 				"title_category" => $this->get_category_video(2, $q->video_category_id),
 	                    "title" => $q->title_video,
@@ -151,8 +206,10 @@ class Video extends CI_Controller {
 	                    "artist" => $q->artist,
 	                    "url" => $q->url,
 	                    "duration" => $q->duration,
+	                    "image" => $img['path'],
+	                    "image_id" => $img['image_id'], 
 		 				"flag" => "update",
-		 				"error_message" => $e
+		 				"error_message" => $e['error_message']
 		 			);
 		 		$this->session->unset_userdata("error_message");
 		 		$this->load->view('admin/video/video_update', $data);
@@ -162,6 +219,11 @@ class Video extends CI_Controller {
 		}
 	}
 
+	function get_video_image($id) {
+		$r = $this->video_model->get_image($id);
+		return ($r != false) ? array("image_id" => $r->image_id, "path" => $r->path) : array("image_id" => 0, "path" => "");
+	}
+	
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
 	 		$q = $this->video_model->get_by_id($id);
@@ -170,6 +232,11 @@ class Video extends CI_Controller {
 	 			$arr = explode("v=", $link);
 	 			$youtube_id = $arr[1];
 	 		}
+	 		$image = $this->get_video_image($id);
+	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image['path'] ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . $image['path'] ."'>";
+			$img .= "</a></div>";
 	 		$data = array("title_category" => $q->title_category,
 	                    "title" => $q->title_video,
 	                    "tag" => $q->tag,
@@ -182,6 +249,7 @@ class Video extends CI_Controller {
 	                    "artist" => $q->artist,
 	                    "url" => "<iframe width='420' height='345'src='http://www.youtube.com/embed/". $youtube_id ."'></iframe> ",
 	                    "duration" => $q->duration,
+	                    "image" => $img,
 	                    "created_date" => $q->created_date,
 	                    "modified_date" => $q->modified_date
 	                );
@@ -237,5 +305,25 @@ class Video extends CI_Controller {
 	 	$this->form_validation->set_rules('description', 'Description', 'required|xss_clean');  
 	 	$this->form_validation->set_rules('url', 'URL Youtube', 'required|xss_clean');
 	 	$this->form_validation->set_rules('duration', 'Duration', 'required|xss_clean');
-	 }
+	}
+	
+	function upload_config() {
+		$config['upload_path'] = './assets/img/video/';
+		$config['allowed_types'] = 'jpg|gif|jpeg|png';
+		$config['max_size']	= '1000';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['encrypt_name'] = true;
+
+		$this->load->library('upload', $config);
+
+		$uploaded = $this->upload->do_upload();
+		$data = $this->upload->data();
+		if($uploaded) {
+			return array("is_uploaded" => true, 
+					"data" => $data);
+		} return array("is_uploaded" => false, 
+					"data"=> $data, 
+					"error_message" => $this->upload->display_errors());
+	}
 }
