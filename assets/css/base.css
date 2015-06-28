@@ -385,3 +385,8 @@ sidebar-module {
     font-size: 40px;
     text-transform: uppercase;
 }
+
+.slider_description > p{
+    color: #ffff;
+    font-size: 14px;
+}

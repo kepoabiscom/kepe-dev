@@ -111,7 +111,7 @@
 		{/get_news}
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="berita.php">View News</a>
+			<a class="btn btn-default" href="#">View News</a>
 		</div>
     </div>
 </div>

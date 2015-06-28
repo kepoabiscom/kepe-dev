@@ -36,7 +36,7 @@
 	{footer}
 	
 	<script>
-		var myCenter=new google.maps.LatLng( -6.290491, 106.860785);
+		var myCenter=new google.maps.LatLng("{contact_lat}", "{contact_long}");
 
 		function initialize()
 		{
@@ -59,7 +59,7 @@
 		marker.setMap(map);
 
 		var infowindow = new google.maps.InfoWindow({
-		  content:"<p><a href='#' style='font-size: 24px;'>KepoAbis.com</a> by Haamill Productions<br>Jalan Pelita RT 02/09 No. 69, Kelurahan Tengah, Kecamatan Kramat Jati, Jakarta Timur 13540<br>Indonesia<br>Phone: +62 856 973 09 204<br>Email: <a href='mailto:#'>hi@kepoabis.com</a></p>"
+		  content:"{contact_footer}"
 		  });
 
 		google.maps.event.addListener(marker, 'click', function() {
