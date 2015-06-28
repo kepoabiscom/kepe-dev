@@ -88,7 +88,7 @@ class Video extends CI_Controller {
 	}
 
 	function get_list_video($start, $limit) {
-	 	$result = $this->video_model->get_video_list($start, $limit);
+	 	$result = $this->video_model->get_video_list(0, $start, $limit);
 	 	$data_array = ""; $i = 1;
 	 	if($result) {
 	 		foreach($result as $row) {

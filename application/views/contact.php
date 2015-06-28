@@ -5,7 +5,7 @@
 					  {get_breadcrumb}
 					  <li><a href="{home}">Beranda</a></li>
 					  <li class="active">Kontak</li>
-					  {/get_breadcrum}
+					  {/get_breadcrumb}
 					</ol>
 				</div>
 			</div>

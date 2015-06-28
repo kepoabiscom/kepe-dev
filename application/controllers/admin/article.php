@@ -26,7 +26,7 @@ class Article extends CI_Controller {
 		     $config = $this->page_config();
 
 		     $data = array(
-		     			'list_article' => $this->get_list_article(0, $config['uri'], $config['per_page']),
+		     			'list_article' => $this->get_list_article($config['uri'], $config['per_page']),
 		     			'link' => $this->pagination->create_links(),
 		     			'success' => $this->notification()
 		     		);
@@ -37,7 +37,7 @@ class Article extends CI_Controller {
 	}
 
 	function get_list_article($start, $limit, $keyword='') {
-		$result = $this->article_model->get_article_list($start, $limit, $keyword);
+		$result = $this->article_model->get_article_list(0, $start, $limit, $keyword);
 	 	$data_array = ""; $i = 1;
 	 	if($result) {
 	 		foreach($result as $row) {
