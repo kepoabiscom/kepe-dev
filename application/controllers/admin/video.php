@@ -26,7 +26,7 @@ class Video extends CI_Controller {
 		     $config = $this->page_config();
 
 		     $data = array(
-		     			'list_video' => $this->get_list_video(0, $config['uri'], $config['per_page']),
+		     			'list_video' => $this->get_list_video($config['uri'], $config['per_page']),
 		     			'link' => $this->pagination->create_links(),
 		     			'success' => $this->notification()
 		     		);
