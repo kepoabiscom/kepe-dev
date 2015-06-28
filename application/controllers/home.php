@@ -86,17 +86,26 @@ class Home extends CI_Controller {
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='#'>".$title."</a>",
 					"summary" => !isset($q->summary) ? "" : $q->summary,
-					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
+					"full_name" => !isset($q->nama_lengkap) ? "" : "By <a href='#''>" . $q->nama_lengkap . "</a>",
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"category" => !isset($q->category) ? "" : $q->category,
+					"category" => !isset($q->category) ? "" : "Category : " . $q->category,
+					"no_recent_art" => ""
 				 );
 				 
 				 $i++;
 			}
 
 	 		return $data;
-		} return "";
+		} return array(array("no_recent_art"=> "No recent Articles.",
+					"title" => "",
+					"created_date" => "",
+					"summary" => "",
+					"full_name" => "",
+					"category" => "",
+					"image" => ""
+
+			));
 		
 	}
 	
