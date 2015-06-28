@@ -21,7 +21,8 @@ class Article extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->menu->get_menu("article");
+		$data['get_menu'] = $this->menu->get_menu("header", "article");
+		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "article");
 		$data['get_article'] = $this->get_article_list();
 		$data['get_article_category'] = $this->get_article_category_list();
 		$data['get_archives_list'] = $this->get_archives_list();

@@ -1,10 +1,10 @@
 <div class="col-md-12">
 	<div>
 		<ol class="breadcrumb">
-			{get_menu}
+			{get_breadcrumb}
 			<li><a href="{home}">Beranda</a></li>
 			<li class="active">Berita</li>
-			{/get_menu}
+			{/get_breadcrumb}
 		</ol>
 	</div>
 </div>

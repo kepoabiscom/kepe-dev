@@ -19,7 +19,8 @@ class Home extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->menu->get_menu("home");
+		$data['get_menu'] = $this->menu->get_menu("header", "home");
+		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "home");
 		$data['get_video'] = $this->get_video();
 		$data['get_article'] = $this->get_article();
 		$data['get_news'] = $this->get_news();

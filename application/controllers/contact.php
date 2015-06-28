@@ -18,7 +18,8 @@ class Contact extends CI_Controller {
 	
 	public function index()
 	{
-		$data['get_menu'] = $this->menu->get_menu("contact");
+		$data['get_menu'] = $this->menu->get_menu("header", "contact");
+		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "contact");
 		
 		$this->generate('contact', $data);
 	}
