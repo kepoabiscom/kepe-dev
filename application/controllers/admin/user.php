@@ -90,7 +90,7 @@ class User extends CI_Controller {
 			);
 
 	        $this->validation();
-	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|callback_db_check_username');
+	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|regex_match[/^[a-zA-Z0-9]+$/]|callback_db_check_username');
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {

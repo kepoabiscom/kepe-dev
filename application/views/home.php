@@ -122,6 +122,7 @@
 			<h2><strong class="bold-text">ARTICLE</strong></h2>
 		</div>
 		{get_article}
+        {no_recent_art}
 		<div class="col-md-3">
 			<div class="recent_post">
 				<div>
@@ -134,8 +135,8 @@
 					{summary}
 					</p>
 					<p>
-						<em>By <a href="#">{full_name}</a></em><br>
-						<em>Kategori : {category}</em>
+						<em>{full_name}</a></em><br>
+						<em>{category}</em>
 					</p>
 				</div>
 			</div>                	 

@@ -44,6 +44,7 @@ class Video_model extends CI_Model {
                     "artist" => $data['artist'],
                     "url" => $data['url'],
                     "duration" => $data['duration'],
+                    "image_id" => $data['image_id'],
                     "created_date" => date("Y-m-d H:i:s"),
                     "modified_date" => date("Y-m-d H:i:s")
                 );
@@ -71,5 +72,18 @@ class Video_model extends CI_Model {
         $data["modified_date"] = date("Y-m-d H:i:s");
         $this->db->where('video_id', $id);
         $this->db->update('video', $data); 
+    }
+
+    function get_image($id='') {
+        $this->db->select("i.path, i.image_id")
+                ->from("video v")
+                ->join("image i", "v.image_id = i.image_id")
+                ->where("video_id", $id);
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+
     }
 }

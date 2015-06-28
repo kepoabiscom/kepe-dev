@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Category Management - KepoAbis.com</title>
+    <title>Category News Management - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
     <![endif]-->
     <script>
         function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this video?");
+            var x = confirm("Are you sure you want to delete this news?");
             if (x) return true;
             return false;
         }
@@ -65,14 +65,14 @@
                                 <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>&nbsp;Category Video
+                                <i class="fa fa-file"></i>&nbsp;Category News
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
                 <div class="col-lg-12">
-                    <h2>Category Video List - <strong>KepoAbis.com</strong></h2>
+                    <h2>Category News List - <strong>KepoAbis.com</strong></h2>
                     {success}
                     <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
@@ -87,14 +87,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {list_category_video}
+                                {list_category_news}
                             </tbody>
                         </table>
                         {link}<br><br>
                     </div>
-                    <a href='<?php echo base_url(); ?>admin/category-video/create' class="btn btn-lg btn-success">Add Category Video</a>
+                    <a href='<?php echo base_url(); ?>admin/category-news/create' class="btn btn-lg btn-success">Add Category News</a>
                 </div>
-
 
             </div>
             <!-- /.container-fluid -->

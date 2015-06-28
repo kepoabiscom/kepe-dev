@@ -1,5 +1,7 @@
+<script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 <?php if($flag == "update") { ?>
 <input type="hidden" class="form-control" value="<?php echo $video_id; ?>" name="video_id">
+<input type="hidden" class="form-control" value="<?php echo $image_id; ?>" name="image_id">
 <?php } ?>
 <div class="form-group">
     <label class="col-sm-2">Title</label>
@@ -91,6 +93,19 @@
             <option value="unpublished">Unpublished</option>
             <?php } } ?>
         </select>
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Video Image</label>
+    <div class="col-sm-6">
+        <input type="file" name="userfile" onchange="read_image(this);">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Preview</label>
+    <div class="col-sm-6">
+        <?php $image = ($flag == "update") ? $image : "assets/img/default-image.png"; ?>
+        <img id="img_prev" style="border-radius:25px; box-shadow: 10px 10px 5px #888888; max-width:95%;border:6px groove #545565;" src="<?php echo base_url() . $image;?>"  width="150" height="200"/>
     </div>
 </div>
 <div class="form-group">

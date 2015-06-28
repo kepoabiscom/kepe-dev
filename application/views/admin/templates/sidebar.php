@@ -2,7 +2,7 @@
     <ul class="nav navbar-nav side-nav">
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
-                        'video', 'category', 'about', 'gallery', 'category_article', 'category_video');
+                        'video', 'category', 'about', 'gallery', 'category_article', 'category_video', 'category_news');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -31,7 +31,7 @@
                     <a href="<?php echo base_url(); ?>admin/article">Article</a>
                 </li>
                 <li class="<?php echo $active[5]; ?>">
-                    <a href="#">News</a>
+                    <a href="<?php echo base_url(); ?>admin/news">News</a>
                 </li>
             </ul>
         </li>
@@ -47,7 +47,10 @@
                 <li class="<?php echo $active[10]; ?>">
                     <a href="<?php echo base_url(); ?>admin/category-article">&nbsp;Category Article</a>
                 </li>
-                 <li class="<?php echo $active[11]; ?>">
+                <li class="<?php echo $active[12]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/category-news">&nbsp;Category News</a>
+                </li>
+                <li class="<?php echo $active[11]; ?>">
                     <a href="<?php echo base_url(); ?>admin/category-video">&nbsp;Category Video</a>
                 </li>
             </ul>
