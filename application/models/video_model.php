@@ -36,6 +36,9 @@ class Video_model extends CI_Model {
                   ,vid.url AS path_video
                   ,vid.duration
                   ,vid.created_date
+				  ,DATE_FORMAT(vid.created_date, '%Y') as year
+				  ,DATE_FORMAT(vid.created_date, '%m') as month
+				  ,DATE_FORMAT(vid.created_date, '%d') as day
                   ,img.path AS path_image
                   ,vid_cat.title AS category
                 FROM
@@ -89,18 +92,69 @@ class Video_model extends CI_Model {
         $this->db->insert('video', $data);
     }
 
-    function get_by_id($id) {
-    	$this->db->select("v.video_id, v.video_category_id, v.tag, v.title as title_video, 
-    						vc.title as title_category, v.status, v.artist, v.story_ide, 
-    						v.cameramen, v.url, v.duration, v.screenwriter, v.film_director,
-    						v.description, v.created_date, v.modified_date", false);
-    	$this->db->from("video as v");
-        $this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id');
-       	$this->db->where("video_id", $id);
-       	$this->db->limit(1);
+    function get_by_id($flag=0, $id) {
+		if($flag == 0){
+			$this->db->select("
+				v.video_id
+				,v.video_category_id
+				,v.tag
+				,v.title as title_video
+				,vc.title as title_category
+				,v.status
+				,v.artist
+				,v.story_ide
+				,v.cameramen
+				,v.url
+				,v.duration
+				,v.screenwriter
+				,v.film_director
+				,v.description
+				,v.created_date
+				,v.modified_date"
+				,false
+			);
+			$this->db->from("video as v");
+			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id');
+			$this->db->where("video_id", $id);
+			$this->db->limit(1);
+		}
+		else{
+			$this->db->select("
+				v.video_id
+				,v.video_category_id
+				,u.nama_lengkap as full_name
+				,v.tag
+				,v.title as title_video
+				,vc.title as title_category
+				,v.status
+				,v.artist
+				,v.story_ide
+				,v.cameramen
+				,v.url
+				,v.duration
+				,v.screenwriter
+				,v.film_director
+				,v.description
+				,DATE_FORMAT(v.created_date, '%M %d, %Y') as created_date
+				,DATE_FORMAT(v.modified_date, '%M %d, %Y') as modified_date"
+				,false
+			);
+			$this->db->from("video as v");
+			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
+			$this->db->join('user as u', 'u.user_id = v.user_id','left');
+			$this->db->where("video_id", $id);
+			$this->db->limit(1);
+		}
 
         $query = $this->db->get();
-
+		
+		/*
+		echo "<pre>";
+		print_r($this->db);
+		echo "</pre>";
+		exit;
+		*/
+		
         if($query->num_rows() == 1) {
             return $query->row();
         } return;

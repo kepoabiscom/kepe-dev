@@ -132,7 +132,7 @@ class Video extends CI_Controller {
 
 	function delete($id='') {
 		if($this->session->userdata('logged_in')) {
-	 		$r = $this->video_model->get_by_id($id);
+	 		$r = $this->video_model->get_by_id(0, $id);
 	 		$this->video_model->delete_video($id);
 	 		$t = array("success" => true,
 	 				"video_title" => $r->title_video,
@@ -190,7 +190,7 @@ class Video extends CI_Controller {
 				 	}
 			 	}
 		 	} else {
-		 		$q = $this->video_model->get_by_id($id);
+		 		$q = $this->video_model->get_by_id(0, $id);
 		 		$e = $this->session->userdata("error_message") ? $this->session->userdata("error_message") : array("error_message" => "");;
 		 		$img = $this->get_video_image($q->video_id);
 		 		$data = array("video_id" => $q->video_id,
@@ -226,7 +226,7 @@ class Video extends CI_Controller {
 	
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
-	 		$q = $this->video_model->get_by_id($id);
+	 		$q = $this->video_model->get_by_id(0, $id);
 	 		$youtube_id = ""; $link = $q->url;
 	 		if(strpos($link, "v=")) {
 	 			$arr = explode("v=", $link);

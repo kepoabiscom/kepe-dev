@@ -8,7 +8,6 @@ class Article extends CI_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
-		$this->load->model("about_model");
 		$this->load->model('archives_model','', true);
 		$this->load->model('article_model','', true);
 		$this->load->model('category_article_model','', true);

@@ -120,15 +120,19 @@ class Home extends CI_Controller {
 		$i = 0;
 		foreach ($query->result() as $q)
 		{
+			$video_id= !isset($q->video_id) ? "" : $q->video_id;
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' width='536px' src='". base_url($path) ."' alt='".$title."' style='float: right; margin-top: 20px;'/>";
 			$img .= "</a>";
 			
 			$data[$i] = array(
-				"video_id" => !isset($q->video_id) ? "" : $q->video_id,
+				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => $title,
@@ -138,6 +142,7 @@ class Home extends CI_Controller {
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
 				"category" => !isset($q->category) ? "" : $q->category,
+				"view" => "<a href='".base_url('videografi/detail/'.$year.'/'.$month.'/'.$day.'/'.$video_id)."' class='button medium yellow'>View</a>"
 			 );
 			 
 			 $i++;

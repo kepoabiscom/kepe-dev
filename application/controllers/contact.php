@@ -7,7 +7,6 @@ class Contact extends CI_Controller {
 	 */
 	function __construct() {
 		parent:: __construct();
-		$this->load->model("about_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->library("menu");

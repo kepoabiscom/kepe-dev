@@ -7,7 +7,6 @@ class News extends CI_Controller {
 	 */
 	function __construct() {
 		parent:: __construct();
-		$this->load->model("about_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->model('archives_model','', true);
 		$this->load->model('news_model','', true);
