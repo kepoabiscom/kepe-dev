@@ -116,8 +116,10 @@ class News_model extends CI_Model {
 
     function get_by_id($id) {
     	//$sql = "select * from user as u JOIN news as a on a.user_id = u.user_id JOIN news_category as ac on ac.news_category_id = a.news_category_id ";
-    	$this->db->select("a.news_id, a.image_id, a.news_category_id, u.user_id, u.nama_lengkap, a.title as title_news, 
-                            ac.title as title_category, a.status, a.summary, a.body, a.tag, a.created_date, a.modified_date", false);
+    	$this->db->select("a.news_id, a.image_id, a.news_category_id, u.user_id, 
+                            u.nama_lengkap, a.title as title_news, 
+                            ac.title as title_category, a.status, a.summary, 
+                            a.body, a.tag, DATE_FORMAT(a.created_date, '%M %d, %Y') as created_date, a.modified_date", false);
     	$this->db->from("news as a");
     	$this->db->join('user as u', 'u.user_id = a.user_id');
         $this->db->join('news_category as ac', 'ac.news_category_id = a.news_category_id');

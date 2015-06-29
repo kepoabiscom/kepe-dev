@@ -111,7 +111,7 @@
 		{/get_news}
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="#">View News</a>
+			<a class="btn btn-default" href="<?php echo base_url('news'); ?>">View News</a>
 		</div>
     </div>
 </div>
@@ -144,7 +144,7 @@
 		{/get_article}
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="#">View Article</a>
+			<a class="btn btn-default" href="<?php echo base_url('article'); ?>">View Article</a>
 		</div>
     </div>
 </div>

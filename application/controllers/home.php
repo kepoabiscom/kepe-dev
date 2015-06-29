@@ -49,7 +49,8 @@ class Home extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
-			
+			$news_id = !isset($q->news_id) ? "" : $q->news_id;
+			$read_more = base_url("news/read/" .  $news_id . "/" . $this->slug($title) . "");
 			$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a>";
@@ -58,7 +59,7 @@ class Home extends CI_Controller {
 				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
 				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='#'>".$title."</a>",
+				"title" => "<a href='" . $read_more . "'>".$title."</a>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -77,20 +78,21 @@ class Home extends CI_Controller {
 		
 		$i = 0;
 		if ($query != false) {
-			foreach ($query->result() as $q)
-			{
+			foreach ($query->result() as $q) {
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				$article_id = !isset($q->article_id) ? "" : $q->article_id;
+				$read_more = base_url("article/read/" .  $article_id . "/" . $this->slug($title) . "");
 				
 				$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
 				$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a>";
 				
 				$data[$i] = array(
-					"article_id" => !isset($q->article_id) ? "" : $q->article_id,
+					"article_id" => $article_id,
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-					"title" => "<a href='#'>".$title."</a>",
+					"title" => "<a href='". $read_more ."'>".$title."</a>",
 					"summary" => !isset($q->summary) ? "" : $q->summary,
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By <a href='#''>" . $q->nama_lengkap . "</a>",
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -118,17 +120,18 @@ class Home extends CI_Controller {
 		$query = $this->home_model->get_recent_video();
 		
 		$i = 0;
-		foreach ($query->result() as $q)
-		{
+		foreach ($query->result() as $q) {
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+			$video_id = !isset($q->video_id) ? "" : $q->video_id;
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' width='536px' src='". base_url($path) ."' alt='".$title."' style='float: right; margin-top: 20px;'/>";
 			$img .= "</a>";
+			$view_more = base_url("videografi/view/" .  $video_id );
 			
 			$data[$i] = array(
-				"video_id" => !isset($q->video_id) ? "" : $q->video_id,
+				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => $title,
@@ -137,6 +140,7 @@ class Home extends CI_Controller {
 				"duration" => !isset($q->duration) ? "" : $q->duration,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
+				"url" => $view_more,
 				"category" => !isset($q->category) ? "" : $q->category,
 			 );
 			 
@@ -146,9 +150,13 @@ class Home extends CI_Controller {
  		return $data;
 	}
 	
-	public function profile(){
+	public function profile() {
 		include ('about.php');
 		
 		return $obj = new about();
+	}
+
+	function slug($str='') {
+		return strtolower(preg_replace('/\s/', '-', $str));
 	}
 }
