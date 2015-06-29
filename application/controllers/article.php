@@ -28,7 +28,7 @@ class Article extends CI_Controller {
 		$data['get_article_category'] = $this->get_article_category_list();
 		$data['get_archives_list'] = $this->get_archives_list();
 		
-		$this->generate('article', $data);
+		$this->generate('article/article', $data);
 	}
 	
 	public function generate($view, $content = array())
@@ -118,10 +118,41 @@ class Article extends CI_Controller {
 
  		return $data;
 	}
-	
+
+	function read($id, $slug) {
+		$q = $this->article_model->get_by_id($id);
+		$r = $this->article_model->get_image($id);
+		$title = $q->title_article;
+		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
+			$image = ($r != false) ? $r->path : "";
+	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
+			$img .= "</a></div>";
+	 		$data = array_merge($this->profile()->get_about_detail(), 
+	 					array("get_menu" => $this->menu->get_menu("header", "article"),
+		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
+		 					"get_article_category" => $this->get_article_category_list(),
+		 					"get_archives_list" => $this->get_archives_list(),
+		 					"nama_lengkap" => $q->nama_lengkap,
+			 				"title" => $title,
+			 				"tag" => $q->tag,
+			 				"category" => $q->title_category,
+			 				"status" => $q->status,
+			 				"summary" => $q->summary,
+			 				"image" => $img, 
+			 				"created_date" => $q->created_date
+		     		));
+
+	 		$this->generate('article/read_article', $data);
+		} 
+	}
+
 	public function profile(){
 		include ('about.php');
 		
 		return $obj = new about();
 	}
+
+
 }

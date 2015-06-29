@@ -173,7 +173,7 @@ class Video extends CI_Controller {
 										"type" => "video",
 										"tag" => $d['tag'],
 										"size" => $img_data['size'],
-										"body" => $d['summary'],
+										"body" => $d['description'],
 										"path" => $img_data['name']
 								)
 							);

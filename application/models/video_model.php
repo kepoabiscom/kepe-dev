@@ -12,7 +12,8 @@ class Video_model extends CI_Model {
 
     function get_video_list($flag=0, $start, $limit) {
         if($flag == 0) {
-            $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, v.status, v.created_date, v.modified_date", false);
+            $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, 
+                            v.status, v.created_date, v.modified_date", false);
             $this->db->from("video as v");
             $this->db->limit($limit, $start);
             $this->db->order_by("video_id", "desc");
