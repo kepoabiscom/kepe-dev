@@ -43,6 +43,10 @@ class Article extends CI_Controller {
 	}
 	
 	public function get_article_list($start=0, $limit=10){
+		include("home.php");
+		
+		$obj = new Home();
+
 		$query = $this->article_model->get_article_list(1, $start, $limit);
 		
 		$i = 0;
@@ -50,6 +54,8 @@ class Article extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+			$article_id = !isset($q->article_id) ? "" : $q->article_id;
+			$read_more = base_url("article/read/" .  $article_id . "/" . $obj->slug($title) . "");
 			
 			$year = !isset($q->year) ? 0 : $q->year;
 			$month = !isset($q->month) ? 0 : $q->month;

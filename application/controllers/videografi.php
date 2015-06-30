@@ -49,14 +49,7 @@ class Videografi extends CI_Controller {
 	
 	public function get_video_list($start=0, $limit=10) {
 		$query = $this->video_model->get_video_list(1, $start, $limit);
-		
-		/*
-		echo "<pre>";
-		print_r($query->result());
-		echo "<pre>";
-		exit;
-		*/
-		
+
 		$i = 0;
 		foreach ($query->result() as $q)
 		{
@@ -74,6 +67,7 @@ class Videografi extends CI_Controller {
 			$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 			$title = "<h5 style='min-height: 41px;'><a href='".$view."'>".$title."</a></h5>";
 			
+
 			$data[$i] = array(
 				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,

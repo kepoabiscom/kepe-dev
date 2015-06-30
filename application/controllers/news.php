@@ -43,6 +43,10 @@ class News extends CI_Controller {
 	}
 	
 	public function get_news_list($start=0, $limit=10){
+		include("home.php");
+		$obj = new Home();
+
+
 		$query = $this->news_model->get_news_list(1, $start, $limit);
 
 		$i = 0;
@@ -50,14 +54,14 @@ class News extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
-			
+
 			$year = !isset($q->year) ? 0 : $q->year;
 			$month = !isset($q->month) ? 0 : $q->month;
 			$day = !isset($q->day) ? 0 : $q->day;
 			
 			$news_id = !isset($q->news_id) ? "" : $q->news_id;
 			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
-			
+
 			$img = "<p><a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a></p>";
