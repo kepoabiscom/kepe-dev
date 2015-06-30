@@ -65,7 +65,7 @@ class Home extends CI_Controller {
 				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => "<a href='" . $read_more . "'>".$title."</a>",
-				"summary" => !isset($q->summary) ? "" : $q->summary,
+				"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more),
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
@@ -103,7 +103,7 @@ class Home extends CI_Controller {
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='". $read_more ."'>".$title."</a>",
-					"summary" => !isset($q->summary) ? "" : $q->summary,
+					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more),
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By <a href='#''>" . $q->nama_lengkap . "</a>",
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
@@ -173,5 +173,19 @@ class Home extends CI_Controller {
 
 	function slug($str='') {
 		return strtolower(preg_replace('/\s/', '-', $str));
+	}
+
+	function get_preview_summary($text, $see_more) {
+		$words = explode(" ", $text);
+		$N = 20;
+		if(count($words) > $N) {
+			$text = "";
+			for($i=0; $i < $N; $i++) {
+				$text .= $words[$i] . " ";
+			}
+			$text .= "... <a href='".$see_more."'>See more</a>";
+		}
+
+		return $text;
 	}
 }
