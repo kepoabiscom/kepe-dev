@@ -120,10 +120,15 @@ class Home extends CI_Controller {
 		$query = $this->home_model->get_recent_video();
 		
 		$i = 0;
-		foreach ($query->result() as $q) {
+
+		foreach ($query->result() as $q)
+		{
+			$video_id= !isset($q->video_id) ? "" : $q->video_id;
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
-			$video_id = !isset($q->video_id) ? "" : $q->video_id;
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' width='536px' src='". base_url($path) ."' alt='".$title."' style='float: right; margin-top: 20px;'/>";
@@ -142,6 +147,7 @@ class Home extends CI_Controller {
 				"image" => $img,
 				"url" => $view_more,
 				"category" => !isset($q->category) ? "" : $q->category,
+				"view" => "<a href='".base_url('videografi/detail/'.$year.'/'.$month.'/'.$day.'/'.$video_id)."' class='button medium yellow'>View</a>"
 			 );
 			 
 			 $i++;

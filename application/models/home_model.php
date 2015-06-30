@@ -19,6 +19,9 @@ class home_model extends CI_Model {
 			  ,vid.created_date
 			  ,img.path AS path_image
 			  ,vid_cat.title AS category
+			  ,DATE_FORMAT(vid.created_date, '%Y') as year
+		      ,DATE_FORMAT(vid.created_date, '%m') as month
+			  ,DATE_FORMAT(vid.created_date, '%d') as day
 			FROM
 				video vid
 				LEFT JOIN
