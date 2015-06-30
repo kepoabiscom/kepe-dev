@@ -2,8 +2,8 @@
 	<div>
 		<ol class="breadcrumb">
 			{get_breadcrumb}
-			<li><a href="{home}">Beranda</a></li>
-			<li class="active">Berita</li>
+			<li><a href="{home}">Home</a></li>
+			<li class="active">News</li>
 			{/get_breadcrumb}
 		</ol>
 	</div>

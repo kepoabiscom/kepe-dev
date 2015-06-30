@@ -51,15 +51,22 @@ class News extends CI_Controller {
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
 			
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
+			
+			$news_id = !isset($q->news_id) ? "" : $q->news_id;
+			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
+			
 			$img = "<p><a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a></p>";
 			
 			$data[$i] = array(
-				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
-				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
+				"news_id" => !isset($q->news_id) ? "" : $q->news_id,
+				"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='#'>".$title."</a>",
+				"title" => "<a href='" . $read_more . "'>".$title."</a>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"body" => !isset($q->body) ? "" : $q->body,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
@@ -126,25 +133,25 @@ class News extends CI_Controller {
 		return $obj = new about();
 	}
 
-	function read($id, $slug) {
+	function read($year, $month, $day, $id, $slug) {
 		$q = $this->news_model->get_by_id($id);
 		$r = $this->news_model->get_image($id);
 		$title = $q->title_news;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
-	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			
+			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-			$img .= "</a></div>";
+			$img .= "</a>";
 	 		$data = array_merge($this->profile()->get_about_detail(), 
 	 					array("get_menu" => $this->menu->get_menu("header", "news"),
 		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
 		 					"get_news_category" => $this->get_news_category_list(),
 		 					"get_archives_list" => $this->get_archives_list(),
-		 					"nama_lengkap" => $q->nama_lengkap,
+		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 			 				"title" => $title,
 			 				"tag" => $q->tag,
-			 				"category" => $q->title_category,
+			 				"title_category" => "<a href='#'>".$q->title_category."</a>",
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
 			 				"image" => $img, 
@@ -153,5 +160,9 @@ class News extends CI_Controller {
 
 	 		$this->generate('news/read_news', $data);
 		} 
+	}
+	
+	function slug($str='') {
+		return strtolower(preg_replace('/\s/', '-', $str));
 	}
 }

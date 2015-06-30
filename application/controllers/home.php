@@ -49,8 +49,13 @@ class Home extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+			
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
+				
 			$news_id = !isset($q->news_id) ? "" : $q->news_id;
-			$read_more = base_url("news/read/" .  $news_id . "/" . $this->slug($title) . "");
+			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
 			$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a>";
@@ -81,8 +86,13 @@ class Home extends CI_Controller {
 			foreach ($query->result() as $q) {
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				
+				$year = !isset($q->year) ? 0 : $q->year;
+				$month = !isset($q->month) ? 0 : $q->month;
+				$day = !isset($q->day) ? 0 : $q->day;
+			
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
-				$read_more = base_url("article/read/" .  $article_id . "/" . $this->slug($title) . "");
+				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 				
 				$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
 				$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
@@ -133,7 +143,7 @@ class Home extends CI_Controller {
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive' width='536px' src='". base_url($path) ."' alt='".$title."' style='float: right; margin-top: 20px;'/>";
 			$img .= "</a>";
-			$view_more = base_url("videografi/view/" .  $video_id );
+			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id)."' class='button medium yellow'>View</a>";
 			
 			$data[$i] = array(
 				"video_id" => $video_id,
@@ -147,7 +157,6 @@ class Home extends CI_Controller {
 				"image" => $img,
 				"url" => $view_more,
 				"category" => !isset($q->category) ? "" : $q->category,
-				"view" => "<a href='".base_url('videografi/detail/'.$year.'/'.$month.'/'.$day.'/'.$video_id)."' class='button medium yellow'>View</a>"
 			 );
 			 
 			 $i++;

@@ -36,6 +36,9 @@ class News_model extends CI_Model {
                     ,DATE_FORMAT(n.created_date, '%M %d, %Y') as created_date
                     ,img.path AS path_image
                     ,n_cat.title AS category
+					,DATE_FORMAT(n.created_date, '%Y') as year
+					,DATE_FORMAT(n.created_date, '%m') as month
+					,DATE_FORMAT(n.created_date, '%d') as day
                 FROM
                     news n
                     LEFT JOIN

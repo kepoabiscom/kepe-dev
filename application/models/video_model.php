@@ -136,8 +136,8 @@ class Video_model extends CI_Model {
 				,v.screenwriter
 				,v.film_director
 				,v.description
-				,DATE_FORMAT(v.created_date, '%M %d, %Y') as created_date
-				,DATE_FORMAT(v.modified_date, '%M %d, %Y') as modified_date"
+				,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,DATE_FORMAT(v.modified_date, '%M %d, %Y %h:%i %p') as modified_date"
 				,false
 			);
 			$this->db->from("video as v");
@@ -148,13 +148,6 @@ class Video_model extends CI_Model {
 		}
 
         $query = $this->db->get();
-		
-		/*
-		echo "<pre>";
-		print_r($this->db);
-		echo "</pre>";
-		exit;
-		*/
 		
         if($query->num_rows() == 1) {
             return $query->row();

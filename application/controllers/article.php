@@ -51,15 +51,22 @@ class Article extends CI_Controller {
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
 			
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
+			
+			$article_id = !isset($q->article_id) ? "" : $q->article_id;
+			$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
+				
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a>";
 			
 			$data[$i] = array(
-				"article_id" => !isset($q->article_id) ? "" : $q->article_id,
+				"article_id" => $article_id,
 				"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<h5><a href='#'>".$title."</a></h5>",
+				"title" => "<h5><a href='" . $read_more . "'>".$title."</a></h5>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -119,25 +126,25 @@ class Article extends CI_Controller {
  		return $data;
 	}
 
-	function read($id, $slug) {
+	function read($year, $month, $day, $id, $slug) {
 		$q = $this->article_model->get_by_id($id);
 		$r = $this->article_model->get_image($id);
 		$title = $q->title_article;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
-	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+
+			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-			$img .= "</a></div>";
+			$img .= "</a>";
 	 		$data = array_merge($this->profile()->get_about_detail(), 
 	 					array("get_menu" => $this->menu->get_menu("header", "article"),
 		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
 		 					"get_article_category" => $this->get_article_category_list(),
 		 					"get_archives_list" => $this->get_archives_list(),
-		 					"nama_lengkap" => $q->nama_lengkap,
+		 					"full_name" => $q->nama_lengkap,
 			 				"title" => $title,
 			 				"tag" => $q->tag,
-			 				"category" => $q->title_category,
+			 				"title_category" => "<a href='#'>".$q->title_category."</a>",
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
 			 				"image" => $img, 
@@ -154,5 +161,7 @@ class Article extends CI_Controller {
 		return $obj = new about();
 	}
 
-
+	function slug($str='') {
+		return strtolower(preg_replace('/\s/', '-', $str));
+	}
 }

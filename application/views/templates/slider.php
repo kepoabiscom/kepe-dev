@@ -11,7 +11,7 @@
 						<div class="slider_description">
 							<h2 style="color: #fff;">{title}</h2>
 							<p style="color: #fff;">{description}</p>
-								{view}
+								{url}
 						</div>
 					</div>
 					{image}

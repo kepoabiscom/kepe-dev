@@ -2,28 +2,34 @@
 	<div>
 		<ol class="breadcrumb">
 			{get_breadcrumb}
-			<li><a href="{home}">Beranda</a></li>
-			<li class="active">Berita</li>
+			<li><a href="{home}">Home</a></li>
+			<li><a href="{news}">News</a></li>
+			<li class="active">{title}</li>
 			{/get_breadcrumb}
 		</ol>
 	</div>
 </div>
-<div class="col-md-8 blog-main">
-	<div class="row">
-		<div class="col-md-6">
-			<div class="recent_post">
-				<div>
-					<h3>{title}</h3>
-					{image}
-					<p>Created Date {created_date}</p>
-					<p>By: {nama_lengkap}</p>
-					<p>
-						{summary}
-					</p>
-				</div>
-			</div>                	 
-		</div>
-		
+<div class="col-md-8">
+	<div class="blog-post">
+		<h2 class="blog-post-title">{title}</h2>
+		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
+		{image}
+		<p>{summary}</p>
+		<p>Category : {title_category}</p>
+		<nav class="text-center">
+		  <ul class="pagination">
+			<li>
+			  <a href="#" aria-label="Previous">
+				<span aria-hidden="true">&laquo; Previous</span>
+			  </a>
+			</li>
+			<li>
+			  <a href="#" aria-label="Next">
+				<span aria-hidden="true">Next &raquo;</span>
+			  </a>
+			</li>
+		  </ul>
+		</nav>
 	</div>
 </div>
 <div class="col-md-4">

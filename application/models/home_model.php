@@ -61,6 +61,9 @@ class home_model extends CI_Model {
 				,DATE_FORMAT(n.created_date, '%d %b %Y') as created_date
 				,img.path AS path_image
 				,n_cat.title AS category
+				,DATE_FORMAT(n.created_date, '%Y') as year
+				,DATE_FORMAT(n.created_date, '%m') as month
+				,DATE_FORMAT(n.created_date, '%d') as day
 			FROM
 				news n
 				LEFT JOIN
@@ -104,6 +107,9 @@ class home_model extends CI_Model {
 				,DATE_FORMAT(art.created_date, '%d %b %Y') as created_date
 				,img.path AS path_image
 				,art_cat.title AS category
+				,DATE_FORMAT(art.created_date, '%Y') as year
+				,DATE_FORMAT(art.created_date, '%m') as month
+				,DATE_FORMAT(art.created_date, '%d') as day
 			FROM
 				article art
 				LEFT JOIN

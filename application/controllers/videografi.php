@@ -36,44 +36,6 @@ class Videografi extends CI_Controller {
 		return ($r != false) ? array("image_id" => $r->image_id, "path" => $r->path) : array("image_id" => 0, "path" => "");
 	}
 	
-	public function detail($year, $month, $day, $id=3)
-	{
-		$profile = $this->profile()->get_about_detail();
-		
-		$q = $this->video_model->get_by_id(1, $id);
-	 	$youtube_id = ""; $link = $q->url;
-	 	if(strpos($link, "v=")) {
-	 		$arr = explode("v=", $link);
-	 		$youtube_id = $arr[1];
-	 	}
-
-	 	$videografi = array(
-			"title_category" => "<a href='#'>".$q->title_category."</a>",
-	        "title" => $q->title_video,
-			"tag" => $q->tag,
-			"status" => $q->status,
-			"description" => $q->description,
-			"story_ide" => $q->story_ide,
-			"screenwriter" => $q->screenwriter,
-			"film_director" => $q->film_director,
-			"cameramen" => $q->cameramen,
-			"artist" => $q->artist,
-			"video" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
-			"duration" => $q->duration,
-			"full_name" => $q->full_name,
-			"created_date" => $q->created_date,
-			"modified_date" => $q->modified_date
-		);
-		
-		$data = array_merge($profile, $videografi);
-		
-		$data['get_menu'] = $this->menu->get_menu("header", "videografi");
-		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "videografi");
-		$data['get_video'] = $this->get_video_list(0, 5);
-
-		$this->generate('videografi/videografi_detail', $data);
-	}
-	
 	public function generate($view, $content = array())
 	{
 		$data = $content;
@@ -87,7 +49,14 @@ class Videografi extends CI_Controller {
 	
 	public function get_video_list($start=0, $limit=10) {
 		$query = $this->video_model->get_video_list(1, $start, $limit);
-
+		
+		/*
+		echo "<pre>";
+		print_r($query->result());
+		echo "<pre>";
+		exit;
+		*/
+		
 		$i = 0;
 		foreach ($query->result() as $q)
 		{
@@ -102,7 +71,7 @@ class Videografi extends CI_Controller {
 			$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "</a>";
 			
-			$view = base_url('videografi/detail/'.$year.'/'.$month.'/'.$day.'/'.$video_id);
+			$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 			$title = "<h5 style='min-height: 41px;'><a href='".$view."'>".$title."</a></h5>";
 			
 			$data[$i] = array(
@@ -170,42 +139,51 @@ class Videografi extends CI_Controller {
  		return $data;
 	}
 
-	function view($id) {
-		$q = $this->video_model->get_by_id($id);
-		$title = $q->title_video;
-		$q = $this->video_model->get_by_id($id);
+	function view($year, $month, $day, $id, $slug = "") {
+		$q = $this->video_model->get_by_id(1, $id);
+		
  		$youtube_id = ""; $link = $q->url;
  		if(strpos($link, "v=")) {
  			$arr = explode("v=", $link);
  			$youtube_id = $arr[1];
  		}
- 		$data = array_merge($this->profile()->get_about_detail(),
- 					array("get_menu" => $this->menu->get_menu("header", "videografi"),
-	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "videografi"),
-	 					"get_video_category" => $this->get_video_category_list(),
-	 					"get_archives_list" => $this->get_archives_list(),
- 						"title_category" => $q->title_category,
-	                    "title" => $q->title_video,
-	                    "tag" => $q->tag,
-	                    "status" => $q->status,
-	                    "description" => $q->description,
-	                    "story_ide" => $q->story_ide,
-	                    "screenwriter" => $q->screenwriter,
-	                    "film_director" => $q->film_director,
-	                    "cameramen" => $q->cameramen,
-	                    "artist" => $q->artist,
-	                    "url" => "<iframe width='420' height='345'src='http://www.youtube.com/embed/". $youtube_id ."'></iframe> ",
-	                    "duration" => $q->duration,
-	                    "created_date" => $q->created_date,
-	                    "modified_date" => $q->modified_date
-	                ));
+		
+ 		$data = array_merge(
+			$this->profile()->get_about_detail(),
+ 			array(
+				"get_menu" => $this->menu->get_menu("header", "videografi"),
+	 			"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "videografi"),
+	 			"get_video_category" => $this->get_video_category_list(),
+	 			"get_archives_list" => $this->get_archives_list(),
+	 			"get_video" => $this->get_video_list(0, 5),
+ 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+	            "title" => $q->title_video,
+	            "tag" => $q->tag,
+	            "status" => $q->status,
+	            "description" => $q->description,
+	            "story_ide" => $q->story_ide,
+	            "screenwriter" => $q->screenwriter,
+	            "film_director" => $q->film_director,
+	            "cameramen" => $q->cameramen,
+	            "artist" => $q->artist,
+	            "url" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
+	            "duration" => $q->duration,
+				"full_name" => $q->full_name,
+	            "created_date" => $q->created_date,
+	            "modified_date" => $q->modified_date
+	        )
+		);
 
- 		$this->generate('videografi/view_video', $data);
+ 		$this->generate('videografi/view', $data);
 	}
 	
 	public function profile(){
 		include ('about.php');
 		
 		return $obj = new about();
+	}
+	
+	function slug($str='') {
+		return strtolower(preg_replace('/\s/', '-', $str));
 	}
 }
