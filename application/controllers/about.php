@@ -38,7 +38,7 @@ class About extends CI_Controller {
  		$data = array(
 			"site_name" => $site_name,
 			"tagline" => $tagline,
-			"description" => !isset($q->description) ? "" : $q->description,
+			"site_description" => !isset($q->description) ? "" : $q->description,
 	 		"contact_address" => $contact_address,
 	 		"contact_phone" => $contact_phone,
 	 		"contact_phone_mobile_first" => !isset($q->contact_phone_mobile_first) ? "" : $q->contact_phone_mobile_first,

@@ -27,7 +27,8 @@ class Videografi extends CI_Controller {
 		$data['get_video'] = $this->get_video_list();
 		$data['get_video_category'] = $this->get_video_category_list();
 		$data['get_archives_list'] = $this->get_archives_list();
-
+		
+		
 		$this->generate('videografi/videografi', $data);
 	}
 	
@@ -49,7 +50,7 @@ class Videografi extends CI_Controller {
 	
 	public function get_video_list($start=0, $limit=10) {
 		$query = $this->video_model->get_video_list(1, $start, $limit);
-
+		
 		$i = 0;
 		foreach ($query->result() as $q)
 		{
