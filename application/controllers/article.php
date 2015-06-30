@@ -44,6 +44,10 @@ class Article extends CI_Controller {
 	}
 	
 	public function get_article_list($start=0, $limit=10){
+		include("home.php");
+		
+		$obj = new Home();
+
 		$query = $this->article_model->get_article_list(1, $start, $limit);
 		
 		$i = 0;
@@ -51,6 +55,8 @@ class Article extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+			$article_id = !isset($q->article_id) ? "" : $q->article_id;
+			$read_more = base_url("article/read/" .  $article_id . "/" . $obj->slug($title) . "");
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."'/>";
@@ -60,7 +66,7 @@ class Article extends CI_Controller {
 				"article_id" => !isset($q->article_id) ? "" : $q->article_id,
 				"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<h5><a href='#'>".$title."</a></h5>",
+				"title" => "<h5><a href='". $read_more ."'>".$title."</a></h5>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,

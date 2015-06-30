@@ -9,26 +9,17 @@
 	</div>
 </div>
 <div class="col-md-8 blog-main">
-	<div class="row">
-		<div class="col-md-6">
-			<div class="recent_post">
-				<div>
-					<h3>{title}</h3>
-					{image}
-					<p>Created Date {created_date}</p>
-					<p>By: {nama_lengkap}</p>
-					<p>
-						{summary}
-					</p>
-				</div>
-			</div>                	 
-		</div>
-		
-	</div>
+	<div class="blog-post">
+		<h2 class="blog-post-title">{title}</h2>
+		<p class="blog-post-meta">{created_date} by : {nama_lengkap}</p>
+			{image}
+		{summary}
+	</div><!-- /.blog-post -->
+	
 </div>
 <div class="col-md-4">
 	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Category</h5>
+		<h2>Category</h2>
 		<ol class="list-unstyled">
 			{get_article_category}
 				{list}
@@ -36,12 +27,13 @@
 		</ol>                 	 
 	</div>
 	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Archives</h5>
+		<h2>Archives</h2>
             <ol class="list-unstyled">
 				{get_archives_list}
 					{list}
 				{/get_archives_list}
             </ol>
     </div>
+</div>
 </div>
 

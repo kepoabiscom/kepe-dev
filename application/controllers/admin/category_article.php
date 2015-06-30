@@ -56,6 +56,9 @@ class Category_article extends CI_Controller {
 			
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
+		if($page != 0) {
+			$page = $page + (3*($page-1)+($page-2));
+		}
 
 		return array("uri" => $page, 
 					"per_page" => $config['per_page']);

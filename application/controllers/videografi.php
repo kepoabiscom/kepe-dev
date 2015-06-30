@@ -56,10 +56,12 @@ class Videografi extends CI_Controller {
 			$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "</a></p>";
 			
-			$title = "<h5 style='min-height: 41px;'><a href=''>".$title."</a></h5>";
-			
+			$video_id = !isset($q->video_id) ? "" : $q->video_id;
+			$view_more = base_url("videografi/view/" .  $video_id);
+			$title = "<h5 style='min-height: 41px;'><a href='".$view_more."'>".$title."</a></h5>";
+
 			$data[$i] = array(
-				"video_id" => !isset($q->video_id) ? "" : $q->video_id,
+				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => $title,

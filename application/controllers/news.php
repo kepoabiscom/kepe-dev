@@ -44,6 +44,10 @@ class News extends CI_Controller {
 	}
 	
 	public function get_news_list($start=0, $limit=10){
+		include("home.php");
+		$obj = new Home();
+
+
 		$query = $this->news_model->get_news_list(1, $start, $limit);
 
 		$i = 0;
@@ -51,7 +55,9 @@ class News extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
-			
+			$news_id = !isset($q->news_id) ? "" : $q->news_id;
+			$read_more = base_url("news/read/" .  $news_id . "/" . $obj->slug($title) . "");
+
 			$img = "<p><a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a></p>";
@@ -60,7 +66,7 @@ class News extends CI_Controller {
 				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
 				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='#'>".$title."</a>",
+				"title" => "<a href='" . $read_more . "'>".$title."</a>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"body" => !isset($q->body) ? "" : $q->body,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
