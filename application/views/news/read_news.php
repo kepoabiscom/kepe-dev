@@ -1,3 +1,13 @@
+<!-- appId=876274572459160 appId for KepoAbis.com -->
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=876274572459160";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+</script>
 <div class="col-md-12">
 	<div>
 		<ol class="breadcrumb">
@@ -11,6 +21,7 @@
 </div>
 <div class="col-md-8">
 	<div class="blog-post">
+		<div class="fb-share-button" data-href="{url}" data-layout="button_count"></div>
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		{image}
