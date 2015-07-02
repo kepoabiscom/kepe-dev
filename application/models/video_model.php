@@ -6,8 +6,35 @@ class Video_model extends CI_Model {
         parent:: __construct();
     }
 
-    function count_video() {
-        return $this->db->count_all("video");
+    function count_video($flag=0) {
+		if($flag=0){
+			return $this->db->count_all("video");
+		}
+		else{
+			$this->db->select(" 
+                  v.video_id
+                  ,v.video_category_id
+                  ,v.image_id
+                  ,v.title
+                  ,v.description
+                  ,v.url AS path_video
+                  ,v.duration
+				  ,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
+				  ,DATE_FORMAT(v.created_date, '%Y') as year
+				  ,DATE_FORMAT(v.created_date, '%m') as month
+				  ,DATE_FORMAT(v.created_date, '%d') as day
+                  ,img.path AS path_image
+                  ,vc.title AS category"
+				  , false);
+			$this->db->from("video as v");
+			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
+			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
+			$this->db->where("v.status = 'published' AND v.image_id > 0");
+			$this->db->order_by("v.created_date", "DESC");	
+			 $query = $this->db->get();
+			 
+			 return $query->num_rows();
+		}
     }
 
     function get_video_list($flag=0, $start, $limit) {
@@ -27,40 +54,30 @@ class Video_model extends CI_Model {
                 return $data;
             }
         } else {
-            $q = "
-                SELECT 
-                  vid.video_id
-                  ,vid.video_category_id
-                  ,vid.image_id
-                  ,vid.title
-                  ,vid.description
-                  ,vid.url AS path_video
-                  ,vid.duration
-                  ,vid.created_date
-				  ,DATE_FORMAT(vid.created_date, '%Y') as year
-				  ,DATE_FORMAT(vid.created_date, '%m') as month
-				  ,DATE_FORMAT(vid.created_date, '%d') as day
+			$this->db->select(" 
+                  v.video_id
+                  ,v.video_category_id
+                  ,v.image_id
+                  ,v.title
+                  ,v.description
+                  ,v.url AS path_video
+                  ,v.duration
+				  ,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
+				  ,DATE_FORMAT(v.created_date, '%Y') as year
+				  ,DATE_FORMAT(v.created_date, '%m') as month
+				  ,DATE_FORMAT(v.created_date, '%d') as day
                   ,img.path AS path_image
-                  ,vid_cat.title AS category
-                FROM
-                    video vid
-                    LEFT JOIN
-                      image img
-                    ON
-                      vid.image_id = img.image_id
-                    LEFT JOIN
-                      video_category vid_cat
-                    ON
-                      vid.video_category_id = vid_cat.video_category_id
-                WHERE 
-                    vid.status = 'published'
-                    AND vid.image_id > 0
-                ORDER BY created_date DESC
-                LIMIT ".$start.", ".$limit."
-            ";
-
-            $query = $this->db->query($q);
-            
+                  ,vc.title AS category"
+				  , false);
+			$this->db->from("video as v");
+			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
+			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
+			$this->db->where("v.status = 'published' AND v.image_id > 0");
+			$this->db->order_by("created_date", "DESC");
+			$this->db->limit($limit, $start);  
+			
+			$query = $this->db->get();
+			
             if($query->num_rows() > 0) {
                 return $query;
             } 
@@ -110,8 +127,8 @@ class Video_model extends CI_Model {
 				,v.screenwriter
 				,v.film_director
 				,v.description
-				,v.created_date
-				,v.modified_date"
+				,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,DATE_FORMAT(v.modified_date, '%M %d, %Y %h:%i %p') as modified_date"
 				,false
 			);
 			$this->db->from("video as v");

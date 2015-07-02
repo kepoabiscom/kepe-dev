@@ -13,6 +13,7 @@ class News extends CI_Controller {
 		$this->load->model('category_news_model','',true);
 		$this->load->library("parser");
 		$this->load->library("menu");
+		$this->load->library("pagination");
 	}
 	
 	/**
@@ -21,12 +22,27 @@ class News extends CI_Controller {
 	
 	public function index()
 	{
+		/*
 		$data = $this->profile()->get_about_detail();
 		$data['get_menu'] = $this->menu->get_menu("header", "news");
 		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "news");
 		$data['get_news'] = $this->get_news_list();
 		$data['get_news_category'] = $this->get_news_category_list();
 		$data['get_archives_list'] = $this->get_archives_list();
+		*/
+		
+		$config = $this->table_pagination();
+		
+		$data = array(
+			'get_menu' => $this->menu->get_menu("header", "videografi"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "videografi"),
+			'get_news' => $this->get_news_list($config['start'], $config['per_page']),
+			'get_news_category' => $this->get_news_category_list(),
+			'get_archives_list' => $this->get_archives_list(),
+			'page' => $config['page']
+		);
+		
+		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
 		$this->generate('news/news', $data);
 	}
@@ -170,5 +186,35 @@ class News extends CI_Controller {
 	
 	function slug($str='') {
 		return strtolower(preg_replace('/\s/', '-', $str));
+	}
+	
+	function page() {
+	 	if(!$this->uri->segment(3)) {
+	 		redirect("news");
+	 	} else {
+	 		$this->index();	
+	 	}
+	 }
+	 
+	function table_pagination(){
+		$config['base_url'] = base_url("news/page/");
+		$config['per_page'] = 5;
+		$config['total_rows'] = $this->news_model->count_news(1);
+		$config['uri_segment'] = 3;
+		$config['next_link'] = '&gt;';
+		$config['prev_link'] = '&lt;';
+		$config['first_link'] = '&lt;&lt;';
+		$config['last_link'] = '&gt;&gt;';
+		$config['cur_tag_open'] = '<span><b>';
+		$config['cur_tag_close'] = '</b></span>';
+		$config['full_tag_open'] = '<div align="center"><ul class="pagination"><li>';
+		$config['full_tag_close'] = '</li></ul></div>';
+		
+		$this->pagination->initialize($config);
+
+		$config['start'] = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		
+		$config['page'] = $this->pagination->create_links();
+		return $config;
 	}
 }
