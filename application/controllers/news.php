@@ -22,15 +22,6 @@ class News extends CI_Controller {
 	
 	public function index()
 	{
-		/*
-		$data = $this->profile()->get_about_detail();
-		$data['get_menu'] = $this->menu->get_menu("header", "news");
-		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "news");
-		$data['get_news'] = $this->get_news_list();
-		$data['get_news_category'] = $this->get_news_category_list();
-		$data['get_archives_list'] = $this->get_archives_list();
-		*/
-		
 		$config = $this->table_pagination();
 		
 		$data = array(
@@ -198,7 +189,7 @@ class News extends CI_Controller {
 	 
 	function table_pagination(){
 		$config['base_url'] = base_url("news/page/");
-		$config['per_page'] = 5;
+		$config['per_page'] = 1;
 		$config['total_rows'] = $this->news_model->count_news(1);
 		$config['uri_segment'] = 3;
 		$config['next_link'] = '&gt;';
