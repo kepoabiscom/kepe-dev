@@ -56,15 +56,42 @@ class Contact extends CI_Controller {
 		$subject = $this->input->post('subject', TRUE);
 		$message = $this->input->post('message', TRUE);
 		
-		$this->email->from('sramadhan95@gmail.com', 'Syahrul Ramadhan');
+		$this->email->from($email, $name);
+		$this->email->to('hi@kepoabis.com');
+
+		$this->email->subject($subject);
+		$this->email->message("<p>".$message."</p>");
+		
+		if($this->email->send())
+		{
+			echo 'Email sent<br>.';
+		}
+		else
+		{
+			show_error($this->email->print_debugger());
+		}
+		
+		$this->email->from('hi@kepoabis.com', 'Hi');
 		$this->email->to($email);
 
 		$this->email->subject($subject);
-		$this->email->message($message);
-
+		$this->email->message("<p>
+				Dear ".$name.",
+				<br>
+				<br>Anda (atau seseorang) baru saja mengirimkan pesan menggunakan alamat email ".$email." ke kontak kami.
+			</p>
+			<p>
+				Terima kasih,
+				<br>
+				<br>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati, Jakarta Timur 13540, Indonesia
+				<br><a href='http://kepoabis.com'>KepoAbis.com</a> by Haamill Productions
+				<br><p>Phone: 085697309204
+				<br>Email: hi@kepoabis.com
+			</p>");
+		
 		if($this->email->send())
 		{
-			echo 'Email sent.';
+			echo 'Email sent<br>.';
 		}
 		else
 		{
