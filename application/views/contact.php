@@ -18,6 +18,7 @@
 </div>
 <div class="col-md-8">
 	<h2 class="title">Get In Touch</h2>
+	{alert}
 	<form action="{sending_message}" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
 		<div class="form-group">
 			<div class="input-group">
