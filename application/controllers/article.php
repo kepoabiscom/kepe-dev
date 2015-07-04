@@ -145,7 +145,7 @@ class Article extends CI_Controller {
 		$title = $q->title_article;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
-
+			$path = !isset($r->path) ? "" : $r->path;
 			$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
