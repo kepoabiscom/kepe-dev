@@ -6,7 +6,7 @@ class Article_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_article_list($flag=0, $start, $limit, $keyword='') {
+    function get_article_list($flag=0, $start, $limit, $keyword=array()) {	
     	if($flag == 0) {
             $this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
         	$this->db->from("article as a");
@@ -43,10 +43,19 @@ class Article_model extends CI_Model {
 			$this->db->join('user as usr', 'a.user_id = usr.user_id', 'left');
 			$this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id', 'left');
 			$this->db->where("a.status = 'published' AND a.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('ac.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("a.created_date", "DESC");	
 			$this->db->limit($limit, $start);  
-			 $query = $this->db->get();
-            
+			$query = $this->db->get();
+			
             if($query->num_rows() > 0) {
                 return $query;
             } 
@@ -61,9 +70,9 @@ class Article_model extends CI_Model {
         return $result;
     }
 
-    function count_article($flag=0, $keyword='') {
+    function count_article($flag=0, $keyword=array()) {
         if($flag == 0){
-			if($keyword != '') {
+			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
 				$this->db->from('article');
 				return $this->db->count_all_results();
@@ -87,11 +96,19 @@ class Article_model extends CI_Model {
 				,DATE_FORMAT(a.created_date, '%m') as month
 				,DATE_FORMAT(a.created_date, '%d') as day"
 				,false);
-			$this->db->from("article as a");
+			$this->db->from("article_category as ac");
+			$this->db->join("article as a", "ac.article_category_id = a.article_category_id AND a.status = 'published' AND a.image_id > 0", "left");
 			$this->db->join('image as img', 'img.image_id = a.image_id', 'left');
 			$this->db->join('user as usr', 'a.user_id = usr.user_id', 'left');
-			$this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id', 'left');
-			$this->db->where("a.status = 'published' AND a.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('ac.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("a.created_date", "DESC");	
 			$query = $this->db->get();
 			 

@@ -6,11 +6,11 @@ class News_model extends CI_Model {
         parent:: __construct();
     }
 
-    function get_news_list($flag=0, $start, $limit, $keyword='') {
+    function get_news_list($flag=0, $start, $limit, $keyword=array()) {
         if($flag == 0) {
             $this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
         	$this->db->from("news as a");
-            if($keyword != '') 
+            if($keyword != NULL) 
                 $this->db->like("a.title", $keyword);
         	$this->db->limit($limit, $start);
             $this->db->order_by("news_id", "desc");
@@ -44,9 +44,18 @@ class News_model extends CI_Model {
 			$this->db->join('user as usr', 'n.user_id = usr.user_id', 'left');
 			$this->db->join('news_category as nc', 'nc.news_category_id = n.news_category_id', 'left');
 			$this->db->where("n.status = 'published' AND n.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('nc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("n.created_date", "DESC");	
 			$this->db->limit($limit, $start);  
-			 $query = $this->db->get();
+			$query = $this->db->get();
 			 
             if($query->num_rows() > 0) {
                 return $query;
@@ -62,9 +71,9 @@ class News_model extends CI_Model {
         return $result;
     }
 
-    function count_news($flag=0, $keyword='') {
+    function count_news($flag=0, $keyword=array()) {
 		if($flag == 0){
-			if($keyword != '') {
+			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
 				$this->db->from('news');
 				return $this->db->count_all_results();
@@ -87,14 +96,22 @@ class News_model extends CI_Model {
 				,DATE_FORMAT(n.created_date, '%m') as month
 				,DATE_FORMAT(n.created_date, '%d') as day"
 				,false);
-			$this->db->from("news as n");
+			$this->db->from("news_category as nc");
+			$this->db->join("news as n", "nc.news_category_id = n.news_category_id AND n.status = 'published' AND n.image_id > 0", "left");
 			$this->db->join('image as img', 'img.image_id = n.image_id', 'left');
 			$this->db->join('user as usr', 'n.user_id = usr.user_id', 'left');
-			$this->db->join('news_category as nc', 'nc.news_category_id = n.news_category_id', 'left');
-			$this->db->where("n.status = 'published' AND n.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('nc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("n.created_date", "DESC");	
-			 $query = $this->db->get();
-		
+			$query = $this->db->get();
+			
 			return $query->num_rows();
 		}
     }

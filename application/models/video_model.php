@@ -6,7 +6,7 @@ class Video_model extends CI_Model {
         parent:: __construct();
     }
 
-    function count_video($flag=0) {
+    function count_video($flag=0, $keyword=array()) {
 		if($flag=0){
 			return $this->db->count_all("video");
 		}
@@ -30,6 +30,15 @@ class Video_model extends CI_Model {
 			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
 			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
 			$this->db->where("v.status = 'published' AND v.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('vc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("v.created_date", "DESC");	
 			 $query = $this->db->get();
 			 
@@ -37,7 +46,7 @@ class Video_model extends CI_Model {
 		}
     }
 
-    function get_video_list($flag=0, $start, $limit) {
+    function get_video_list($flag=0, $start, $limit, $keyword=array()) {
         if($flag == 0) {
             $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, 
                             v.status, v.created_date, v.modified_date", false);
@@ -73,6 +82,15 @@ class Video_model extends CI_Model {
 			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
 			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
 			$this->db->where("v.status = 'published' AND v.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('vc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%m')", $keyword['month']); 
+			}
 			$this->db->order_by("created_date", "DESC");
 			$this->db->limit($limit, $start);  
 			

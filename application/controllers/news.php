@@ -22,12 +22,18 @@ class News extends CI_Controller {
 	
 	public function index()
 	{
-		$config = $this->table_pagination();
+		$keyword = array(
+			'year' => ($this->uri->segment(3)) ? $this->uri->segment(3) : 0,
+			'month' => $this->uri->segment(4) ? $this->uri->segment(4) : 0,
+			'category' => $this->uri->segment(5) ? $this->uri->segment(5) : 0
+		);
+		
+		$config = $this->table_pagination($keyword);
 		
 		$data = array(
 			'get_menu' => $this->menu->get_menu("header", "news"),
 			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "news"),
-			'get_news' => $this->get_news_list($config['start'], $config['per_page']),
+			'get_news' => $this->get_news_list($config['start'], $config['per_page'], $keyword),
 			'get_news_category' => $this->get_news_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page']
@@ -49,44 +55,48 @@ class News extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_news_list($start=0, $limit=10){
+	public function get_news_list($start=0, $limit=10, $keyword=array()){
 		include("home.php");
 		$obj = new Home();
 
 
-		$query = $this->news_model->get_news_list(1, $start, $limit);
+		$query = $this->news_model->get_news_list(1, $start, $limit, $keyword);
+		if($query != NULL){
+			$i = 0;
+			foreach ($query->result() as $q)
+			{
+				$path = !isset($q->path_image) ? "" : $q->path_image;
+				$title = !isset($q->title) ? "" : $q->title;
 
-		$i = 0;
-		foreach ($query->result() as $q)
-		{
-			$path = !isset($q->path_image) ? "" : $q->path_image;
-			$title = !isset($q->title) ? "" : $q->title;
+				$year = !isset($q->year) ? 0 : $q->year;
+				$month = !isset($q->month) ? 0 : $q->month;
+				$day = !isset($q->day) ? 0 : $q->day;
+				
+				$news_id = !isset($q->news_id) ? "" : $q->news_id;
+				$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
 
-			$year = !isset($q->year) ? 0 : $q->year;
-			$month = !isset($q->month) ? 0 : $q->month;
-			$day = !isset($q->day) ? 0 : $q->day;
-			
-			$news_id = !isset($q->news_id) ? "" : $q->news_id;
-			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
-
-			$img = "<p><a target='_blank' href='". base_url($path) ."'>";
-			$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
-			$img .= "</a></p>";
-			
-			$data[$i] = array(
-				"news_id" => !isset($q->news_id) ? "" : $q->news_id,
-				"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
-				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='" . $read_more . "'>".$title."</a>",
-				"summary" => !isset($q->summary) ? "" : $q->summary,
-				"body" => !isset($q->body) ? "" : $q->body,
-				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
-				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
-				"image" => $img,
-				"category" => !isset($q->category) ? "" : $q->category,
-			 );
-			 
-			 $i++;
+				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
+				$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "</a></p>";
+				
+				$data[$i] = array(
+					"news_id" => !isset($q->news_id) ? "" : $q->news_id,
+					"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
+					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+					"title" => "<a href='" . $read_more . "'>".$title."</a>",
+					"summary" => !isset($q->summary) ? "" : $q->summary,
+					"body" => !isset($q->body) ? "" : $q->body,
+					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
+					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+					"image" => $img,
+					"category" => !isset($q->category) ? "" : $q->category,
+				 );
+				 
+				 $i++;
+			}
+		}
+		else{
+			$data = NULL;
 		}
 
  		return $data;
@@ -101,7 +111,7 @@ class News extends CI_Controller {
 			$title = !isset($q->title) ? "" : $q->title;
 			$total = !isset($q->total) ? "" : $q->total;
 			
-			$list = "<li><a href='#'>".$title." (".$total.")</a></li>";
+			$list = "<li><a href='".base_url('news/page/0/0/'.$title)."'>".$title." (".$total.")</a></li>";
 			
 			$data[$i] = array(
 				"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
@@ -123,10 +133,11 @@ class News extends CI_Controller {
 		foreach ($query->result() as $q)
 		{
 			$month = !isset($q->month) ? "" : $q->month;
+			$m = !isset($q->m) ? "" : $q->m;
 			$year = !isset($q->year) ? "" : $q->year;
 			$total = !isset($q->total) ? "" : $q->total;
 			
-			$list = "<li><a href='#'>".$month." ".$year." (".$total.")</a></li>";
+			$list = "<li><a href='".base_url('news/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a></li>";
 			
 			$data[$i] = array(
 				"list" => $list
@@ -180,18 +191,14 @@ class News extends CI_Controller {
 	}
 	
 	function page() {
-	 	if(!$this->uri->segment(3)) {
-	 		redirect("news");
-	 	} else {
-	 		$this->index();	
-	 	}
-	 }
+		$this->index();	
+	}
 	 
-	function table_pagination(){
-		$config['base_url'] = base_url("news/page/");
+	function table_pagination($keyword){
+		$config['base_url'] = base_url("news/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
 		$config['per_page'] = 1;
-		$config['total_rows'] = $this->news_model->count_news(1);
-		$config['uri_segment'] = 3;
+		$config['total_rows'] = $this->news_model->count_news(1, $keyword);
+		$config['uri_segment'] = 6;
 		$config['next_link'] = '&gt;';
 		$config['prev_link'] = '&lt;';
 		$config['first_link'] = '&lt;&lt;';
