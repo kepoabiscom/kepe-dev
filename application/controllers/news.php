@@ -150,7 +150,6 @@ class News extends CI_Controller {
 		$title = $q->title_news;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
-			$path = !isset($r->path) ? "" : $r->path;
 			
 			$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
@@ -169,7 +168,7 @@ class News extends CI_Controller {
 			 				"summary" => $q->summary,
 			 				"image" => $img, 
 			 				"url" => $url_share,
-			 				"og_image" => base_url($path),
+			 				"og_image" => base_url($image),
 			 				"created_date" => $q->created_date
 		     		));
 
