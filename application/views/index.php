@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="KepoAbiscom - Always Make You Curious">
-    <meta name="keywords" content="KepoAbiscom, Kepo, Abis">
-    <meta name="author" content="Haamill Productions">
+   	<meta property="og:title" content="{title}"/>
+	<meta property="og:url" content="{url}"/>
+	<meta property="og:image" content="{og_image}"/>
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
+    
 
-    <title>{site_name} by Haamill Productions Team</title>
+    <title>{site_name}</title>
 
     <!-- Bootstrap core CSS -->
     <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
