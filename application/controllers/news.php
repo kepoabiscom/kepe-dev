@@ -168,6 +168,7 @@ class News extends CI_Controller {
 			 				"summary" => $q->summary,
 			 				"image" => $img, 
 			 				"url" => $url_share,
+			 				"og_image" => base_url($path),
 			 				"created_date" => $q->created_date
 		     		));
 

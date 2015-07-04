@@ -7,7 +7,7 @@
     <meta name="description" content="KepoAbiscom - Always Make You Curious">
    	<meta property="og:title" content="{title}"/>
 	<meta property="og:url" content="{url}"/>
-	<meta property="og:image" content="{image}"/>
+	<meta property="og:image" content="{og_image}"/>
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
     
 
