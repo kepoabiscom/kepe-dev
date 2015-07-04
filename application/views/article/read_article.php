@@ -9,6 +9,14 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 </script>
+<script>!function(d,s,id){
+	var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';
+	if(!d.getElementById(id)){js=d.createElement(s);js.id=id;
+		js.src=p+'://platform.twitter.com/widgets.js';
+		fjs.parentNode.insertBefore(js,fjs);}
+	}(document, 'script', 'twitter-wjs');
+</script>
+
 <div class="col-md-12">
 	<div>
 		<ol class="breadcrumb">
@@ -23,6 +31,7 @@
 <div class="col-md-8">
 	<div class="blog-post">
 		<div class="fb-share-button" data-href="{url}" data-layout="button_count"></div>
+		<a href="https://twitter.com/share" class="twitter-share-button" data-text="{title}" data-via="kepoabiscom" data-hashtags="KepoAbis">Tweet</a>
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		{image}
