@@ -42,10 +42,13 @@
 					</ul>
 				</li>
 			</ul>
-			<form role="search" class="navbar-form navbar-right" method="get" action="home/search">
+			<form role="search" class="navbar-form navbar-right" method="get" action="<?php echo base_url('search'); ?>">
+				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
 				<div style="width: 200px;" class="input-group">
-					<input type="text" placeholder="Search" class="form-control input-sm" value="" name="search">
-					<input type="hidden" value="113" name="id">
+					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
+					<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo $q; ?>" name="q">
+					<?php $t = "article"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
+					<input type="hidden" value="<?php echo $t; ?>" name="type">
 					<span class="input-group-btn">
 						<button class="btn btn-default btn-sm" type="submit">
 							<span class="glyphicon glyphicon-search"></span>
