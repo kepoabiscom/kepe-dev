@@ -90,8 +90,8 @@ class Contact extends CI_Controller {
 			array('sending_message' => base_url('contact/view/1')),
 			array('alert' => $alert),
 			array(
-				'get_menu' => $this->menu->get_menu("header", "videografi"),
-				'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "videografi"),
+				'get_menu' => $this->menu->get_menu("header", "contact"),
+				'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "contact"),
 			),
 			$this->profile()->get_about_detail()
 		);

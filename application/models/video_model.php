@@ -78,12 +78,17 @@ class Video_model extends CI_Model {
 			
 			$query = $this->db->get();
 			
+			/*
+			echo "<pre>";
+			print_r($this->db);
+			echo "</pre>";
+			exit;
+			*/
+			
             if($query->num_rows() > 0) {
                 return $query;
             } 
         }
-    	
-        return false;
     }
 
     function delete_video($id) {

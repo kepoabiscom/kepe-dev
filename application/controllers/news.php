@@ -25,8 +25,8 @@ class News extends CI_Controller {
 		$config = $this->table_pagination();
 		
 		$data = array(
-			'get_menu' => $this->menu->get_menu("header", "videografi"),
-			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "videografi"),
+			'get_menu' => $this->menu->get_menu("header", "news"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "news"),
 			'get_news' => $this->get_news_list($config['start'], $config['per_page']),
 			'get_news_category' => $this->get_news_category_list(),
 			'get_archives_list' => $this->get_archives_list(),

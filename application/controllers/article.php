@@ -25,8 +25,8 @@ class Article extends CI_Controller {
 		$config = $this->table_pagination();
 		
 		$data = array(
-			'get_menu' => $this->menu->get_menu("header", "videografi"),
-			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "videografi"),
+			'get_menu' => $this->menu->get_menu("header", "article"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "article"),
 			'get_article' => $this->get_article_list($config['start'], $config['per_page']),
 			'get_article_category' => $this->get_article_category_list(),
 			'get_archives_list' => $this->get_archives_list(),

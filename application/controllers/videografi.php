@@ -156,7 +156,7 @@ class Videografi extends CI_Controller {
 	 			"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "videografi"),
 	 			"get_video_category" => $this->get_video_category_list(),
 	 			"get_archives_list" => $this->get_archives_list(),
-	 			"get_video" => $this->get_video_list(NULL, 0, 5),
+	 			"get_video" => $this->get_video_list(0, 5),
  				"title_category" => "<a href='#'>".$q->title_category."</a>",
 	            "title" => $q->title_video,
 	            "tag" => $q->tag,
