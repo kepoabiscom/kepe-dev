@@ -34,7 +34,7 @@
       </div>
 
     </div> <!-- /container -->
-	
+	{map}
 	{footer}
 	
 	<script>

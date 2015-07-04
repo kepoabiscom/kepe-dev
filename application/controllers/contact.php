@@ -24,11 +24,15 @@ class Contact extends CI_Controller {
 	
 	public function generate($view, $content = array())
 	{
-		$data = $content;
-		$data['slider'] = "";
-		$data['header']  = $this->parser->parse('templates/header', $content, TRUE);
-		$data['content']  = $this->parser->parse($view, $content, TRUE);
-		$data['footer']  = $this->parser->parse('templates/footer', $content, TRUE);
+		$data = array(
+			'slider' => NULL,
+			'map' => NULL,
+			'header' => $this->parser->parse('templates/header', $content, TRUE),
+			'content' => $this->parser->parse($view, $content, TRUE),
+			'footer' => $this->parser->parse('templates/footer', $content, TRUE)
+		);
+		
+		$data = array_merge($content, $data);
 		
 		$this->parser->parse('index', $data);
 	}

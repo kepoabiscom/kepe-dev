@@ -149,10 +149,3 @@
 		</div>
     </div>
 </div>
-
-<div class="col-md-12">
-	<h2><strong class="bold-text">GOOGLE MAP</strong></h2>
-	<div style="padding: 5px; background-color: #ddd;">
-		<div id="googleMap" style="width:100%;height:305px; border: 1px solid #fff;"></div>
-	</div>
-</div>

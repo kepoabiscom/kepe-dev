@@ -19,27 +19,33 @@ class Home extends CI_Controller {
 	
 	public function index()
 	{	
-		$data = $this->profile()->get_about_detail();
-		$data['get_menu'] = $this->menu->get_menu("header", "home");
-		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "home");
-		$data['get_video'] = $this->get_video();
-		$data['get_article'] = $this->get_article();
-		$data['get_news'] = $this->get_news();
-
+		$data = array(
+			'get_menu' => $this->menu->get_menu("header", "home"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "home"),
+			'get_video' => $this->get_video(),
+			'get_article' => $this->get_article(),
+			'get_news' => $this->get_news()
+		);
+		
+		$data = array_merge($this->profile()->get_about_detail(), $data);
+		
 		$this->generate('home', $data);
 	}
 	
 	public function generate($view, $content = array())
 	{
-		$data = $content;
-		$data['header']  = $this->parser->parse('templates/header', $content, TRUE);
-		$data['slider']  = $this->parser->parse('templates/slider', $content, TRUE);
-		$data['content']  = $this->parser->parse($view, $content, TRUE);
-		$data['footer']  = $this->parser->parse('templates/footer', $content, TRUE);
+		$data = array(
+			'header' => $this->parser->parse('templates/header', $content, TRUE),
+			'slider' => $this->parser->parse('templates/slider', $content, TRUE),
+			'content' => $this->parser->parse($view, $content, TRUE),
+			'map' => $this->parser->parse('map', $content, TRUE),
+			'footer' => $this->parser->parse('templates/footer', $content, TRUE)
+		);
+		
+		$data = array_merge($content, $data);
 		
 		$this->parser->parse('index', $data);
 	}
-	
 	
 	public function get_news(){
 		$query = $this->home_model->get_recent_news();

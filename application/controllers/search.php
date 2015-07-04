@@ -16,6 +16,7 @@ class Search extends CI_Controller {
 		$type = $this->input->get("type");
 		$data = array(
 			'get_menu' => $this->menu->get_menu("header", ""),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", ""),
 			'get_search' => $this->result($type, $q),
 			"q" => $q,
 			'page' => ""
@@ -28,12 +29,15 @@ class Search extends CI_Controller {
 	}
 	
 	public function generate($view, $content = array()) {
-		$data = array($content,
-					"slider" => "",
-					"header" => $this->parser->parse('templates/header', $content, true), 
-					"content" => $this->parser->parse($view, $content, true),
-					"footer" => $this->parser->parse('templates/footer', $content, true) 
-				);
+		$data = array(
+			"slider" => NULL,
+			"map" => NULL,
+			"header" => $this->parser->parse('templates/header', $content, true), 
+			"content" => $this->parser->parse($view, $content, true),
+			"footer" => $this->parser->parse('templates/footer', $content, true) 
+		);
+		
+		$data = array_merge($content, $data);
 		
 		$this->parser->parse('index', $data);
 	}
@@ -46,7 +50,7 @@ class Search extends CI_Controller {
 			return array(array(	"title" => "",
 				"summary" => "",
 				"url" => "",
-				"no_result" => "No result."
+				"no_result" => "<h2>No result</h2>."
 			));
 		} else {
 			foreach($result as $row) {
@@ -58,11 +62,12 @@ class Search extends CI_Controller {
 				if($type == 'article') 
 					$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
 				
-				$data[] = array("title" => $this->get_highlight($row->title, $q),
-						"summary" => $this->get_highlight($row->summary, $q),
-						"url" => $url,
-						"no_result" => ""
-					);
+				$data[] = array(
+					"title" => $this->get_highlight($row->title, $q),
+					"summary" => $this->get_highlight($row->summary, $q),
+					"url" => $url,
+					"no_result" => ""
+				);
 			}
 		}
 		
