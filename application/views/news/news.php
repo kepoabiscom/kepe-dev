@@ -2,8 +2,8 @@
 	<div>
 		<ol class="breadcrumb">
 			{get_breadcrumb}
-			<li><a href="{home}">Beranda</a></li>
-			<li class="active">Berita</li>
+			<li><a href="{home}">Home</a></li>
+			<li class="active">News</li>
 			{/get_breadcrumb}
 		</ol>
 	</div>
@@ -17,16 +17,10 @@
 		{body}
 	</div><!-- /.blog-post -->
 	{/get_news}
-	<div style="text-align: center;">
-		<nav>
-			<ul class="pagination pagination-sm">
-				<li><a href="#"><span aria-hidden="true">&laquo;</span><span class="sr-only">Previous</span></a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#"><span aria-hidden="true">&raquo;</span><span class="sr-only">Next</span></a></li>
-			</ul>
-		</nav>
+	<div class="col-md-12">
+		<div style="text-align: center;">
+			{page}
+		</div>
 	</div>
 </div>
 <div class="col-md-4">

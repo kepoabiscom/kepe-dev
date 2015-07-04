@@ -318,6 +318,10 @@ body {
 	border-color: #870000;
 }
 
+.navbar-default .navbar-nav > li > a {
+    color: #ddd;
+}
+
 @media (max-width: 767px) {
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
 		color: #ddd;

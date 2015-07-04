@@ -24,39 +24,28 @@ class Article_model extends CI_Model {
                 return $data;
             }
         } else {
-            $q = "
-                SELECT 
-                    art.article_id
-                    ,art.article_category_id
-                    ,art.image_id
-                    ,art.title
-                    ,art.summary
-                    ,usr.nama_lengkap
-                    ,DATE_FORMAT(art.created_date, '%d %b %Y') as created_date
-                    ,img.path AS path_image
-                    ,art_cat.title AS category
-                FROM
-                    article art
-                    LEFT JOIN
-                        user usr
-                    ON
-                        art.user_id = usr.user_id
-                    LEFT JOIN
-                        image img
-                    ON
-                        art.image_id = img.image_id
-                    LEFT JOIN
-                        article_category art_cat
-                    ON
-                        art.article_category_id = art_cat.article_category_id
-                WHERE 
-                    art.status = 'published'
-                    AND art.image_id > 0
-                ORDER BY art.created_date DESC
-                LIMIT ".$start.", ".$limit."
-            ";
-
-            $query = $this->db->query($q);
+			$this->db->select(" 
+				a.article_id
+				,a.article_category_id
+				,a.image_id
+				,a.title
+				,a.summary
+				,usr.nama_lengkap
+				,DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,img.path AS path_image
+				,ac.title AS category
+				,DATE_FORMAT(a.created_date, '%Y') as year
+				,DATE_FORMAT(a.created_date, '%m') as month
+				,DATE_FORMAT(a.created_date, '%d') as day"
+				,false);
+			$this->db->from("article as a");
+			$this->db->join('image as img', 'img.image_id = a.image_id', 'left');
+			$this->db->join('user as usr', 'a.user_id = usr.user_id', 'left');
+			$this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id', 'left');
+			$this->db->where("a.status = 'published' AND a.image_id > 0");
+			$this->db->order_by("a.created_date", "DESC");	
+			$this->db->limit($limit, $start);  
+			 $query = $this->db->get();
             
             if($query->num_rows() > 0) {
                 return $query;
@@ -72,13 +61,42 @@ class Article_model extends CI_Model {
         return $result;
     }
 
-    function count_article($keyword='') {
-        if($keyword != '') {
-            $this->db->like('title', $keyword);
-            $this->db->from('article');
-            return $this->db->count_all_results();
+    function count_article($flag=0, $keyword='') {
+        if($flag == 0){
+			if($keyword != '') {
+				$this->db->like('title', $keyword);
+				$this->db->from('article');
+				return $this->db->count_all_results();
+			}
+			else{
+				 return $this->db->count_all("article");
+			}
         }
-        return $this->db->count_all("article");
+		else{
+			$this->db->select(" 
+				a.article_id
+				,a.article_category_id
+				,a.image_id
+				,a.title
+				,a.summary
+				,usr.nama_lengkap
+				,DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,img.path AS path_image
+				,ac.title AS category
+				,DATE_FORMAT(a.created_date, '%Y') as year
+				,DATE_FORMAT(a.created_date, '%m') as month
+				,DATE_FORMAT(a.created_date, '%d') as day"
+				,false);
+			$this->db->from("article as a");
+			$this->db->join('image as img', 'img.image_id = a.image_id', 'left');
+			$this->db->join('user as usr', 'a.user_id = usr.user_id', 'left');
+			$this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id', 'left');
+			$this->db->where("a.status = 'published' AND a.image_id > 0");
+			$this->db->order_by("a.created_date", "DESC");	
+			$query = $this->db->get();
+			 
+			return $query->num_rows();
+		}
     }
 
     function create_article($data) {
@@ -113,11 +131,10 @@ class Article_model extends CI_Model {
     }
 
     function get_by_id($id) {
-    	//$sql = "select * from user as u JOIN article as a on a.user_id = u.user_id JOIN article_category as ac on ac.article_category_id = a.article_category_id ";
     	$this->db->select("a.article_id, a.image_id, a.article_category_id, u.user_id, 
                             u.nama_lengkap, a.title as title_article, 
                             ac.title as title_category, a.status, a.summary, 
-                            a.tag, DATE_FORMAT(a.created_date, '%d %b %Y') as created_date, a.modified_date", false);
+                            a.tag, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
     	$this->db->from("article as a");
     	$this->db->join('user as u', 'u.user_id = a.user_id');
         $this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id');

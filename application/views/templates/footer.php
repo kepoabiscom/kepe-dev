@@ -10,17 +10,12 @@
 								{contact_footer}
 							</div>
 							<div class="col-md-3">
-								<div>
-									<a href="#">
-										<span class="btn btn-default">Sekretariat KepoAbis.com wilayah</span>
-									</a>
-								</div>
-								<div class="spacer"></div>
 								<ul class="ul-no-padding">
-									<li><a href="#">Aturan Penggunaan</a></li>
-									<li><a href="#">Peta Situs</a></li>
-									<li><a href="#">Tentang Situs</a></li>
-									<li><a href="#">Kontak</a></li>
+									<li><a href="#">Membership</a></li>
+									<li><a href="#">Membership Form</a></li>
+									<li><a href="#">Organization</a></li>
+									<li><a href="#">History</a></li>
+									<li><a href="#">Contact</a></li>
 								</ul>
 							</div>
 							<div class="col-md-3">

@@ -7,13 +7,13 @@ class News extends CI_Controller {
 	 */
 	function __construct() {
 		parent:: __construct();
-		$this->load->model("about_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->model('archives_model','', true);
 		$this->load->model('news_model','', true);
 		$this->load->model('category_news_model','',true);
 		$this->load->library("parser");
 		$this->load->library("menu");
+		$this->load->library("pagination");
 	}
 	
 	/**
@@ -22,12 +22,18 @@ class News extends CI_Controller {
 	
 	public function index()
 	{
-		$data = $this->profile()->get_about_detail();
-		$data['get_menu'] = $this->menu->get_menu("header", "news");
-		$data['get_breadcrumb'] = $this->menu->get_menu("breadcrumb", "news");
-		$data['get_news'] = $this->get_news_list();
-		$data['get_news_category'] = $this->get_news_category_list();
-		$data['get_archives_list'] = $this->get_archives_list();
+		$config = $this->table_pagination();
+		
+		$data = array(
+			'get_menu' => $this->menu->get_menu("header", "news"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "news"),
+			'get_news' => $this->get_news_list($config['start'], $config['per_page']),
+			'get_news_category' => $this->get_news_category_list(),
+			'get_archives_list' => $this->get_archives_list(),
+			'page' => $config['page']
+		);
+		
+		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
 		$this->generate('news/news', $data);
 	}
@@ -44,6 +50,10 @@ class News extends CI_Controller {
 	}
 	
 	public function get_news_list($start=0, $limit=10){
+		include("home.php");
+		$obj = new Home();
+
+
 		$query = $this->news_model->get_news_list(1, $start, $limit);
 
 		$i = 0;
@@ -51,16 +61,23 @@ class News extends CI_Controller {
 		{
 			$path = !isset($q->path_image) ? "" : $q->path_image;
 			$title = !isset($q->title) ? "" : $q->title;
+
+			$year = !isset($q->year) ? 0 : $q->year;
+			$month = !isset($q->month) ? 0 : $q->month;
+			$day = !isset($q->day) ? 0 : $q->day;
 			
+			$news_id = !isset($q->news_id) ? "" : $q->news_id;
+			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
+
 			$img = "<p><a target='_blank' href='". base_url($path) ."'>";
 			$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 			$img .= "</a></p>";
 			
 			$data[$i] = array(
-				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
-				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
+				"news_id" => !isset($q->news_id) ? "" : $q->news_id,
+				"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a href='#'>".$title."</a>",
+				"title" => "<a href='" . $read_more . "'>".$title."</a>",
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"body" => !isset($q->body) ? "" : $q->body,
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
@@ -127,32 +144,69 @@ class News extends CI_Controller {
 		return $obj = new about();
 	}
 
-	function read($id, $slug) {
+	function read($year, $month, $day, $id, $slug) {
 		$q = $this->news_model->get_by_id($id);
 		$r = $this->news_model->get_image($id);
 		$title = $q->title_news;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
-	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			
+			$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
+			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-			$img .= "</a></div>";
+			$img .= "</a>";
 	 		$data = array_merge($this->profile()->get_about_detail(), 
 	 					array("get_menu" => $this->menu->get_menu("header", "news"),
 		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
 		 					"get_news_category" => $this->get_news_category_list(),
 		 					"get_archives_list" => $this->get_archives_list(),
-		 					"nama_lengkap" => $q->nama_lengkap,
+		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 			 				"title" => $title,
 			 				"tag" => $q->tag,
-			 				"category" => $q->title_category,
+			 				"title_category" => "<a href='#'>".$q->title_category."</a>",
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
 			 				"image" => $img, 
+			 				"url" => $url_share,
+			 				"og_image" => base_url($image),
 			 				"created_date" => $q->created_date
 		     		));
 
 	 		$this->generate('news/read_news', $data);
 		} 
+	}
+	
+	function slug($str='') {
+		return strtolower(preg_replace('/\s/', '-', $str));
+	}
+	
+	function page() {
+	 	if(!$this->uri->segment(3)) {
+	 		redirect("news");
+	 	} else {
+	 		$this->index();	
+	 	}
+	 }
+	 
+	function table_pagination(){
+		$config['base_url'] = base_url("news/page/");
+		$config['per_page'] = 1;
+		$config['total_rows'] = $this->news_model->count_news(1);
+		$config['uri_segment'] = 3;
+		$config['next_link'] = '&gt;';
+		$config['prev_link'] = '&lt;';
+		$config['first_link'] = '&lt;&lt;';
+		$config['last_link'] = '&gt;&gt;';
+		$config['cur_tag_open'] = '<span><b>';
+		$config['cur_tag_close'] = '</b></span>';
+		$config['full_tag_open'] = '<div align="center"><ul class="pagination"><li>';
+		$config['full_tag_close'] = '</li></ul></div>';
+		
+		$this->pagination->initialize($config);
+
+		$config['start'] = ($this->uri->segment($config['uri_segment'])) ? $this->uri->segment($config['uri_segment']) : 0;
+		
+		$config['page'] = $this->pagination->create_links();
+		return $config;
 	}
 }

@@ -132,7 +132,7 @@ class Video extends CI_Controller {
 
 	function delete($id='') {
 		if($this->session->userdata('logged_in')) {
-	 		$r = $this->video_model->get_by_id($id);
+	 		$r = $this->video_model->get_by_id(0, $id);
 	 		$this->video_model->delete_video($id);
 	 		$t = array("success" => true,
 	 				"video_title" => $r->title_video,
@@ -173,7 +173,7 @@ class Video extends CI_Controller {
 										"type" => "video",
 										"tag" => $d['tag'],
 										"size" => $img_data['size'],
-										"body" => $d['summary'],
+										"body" => $d['description'],
 										"path" => $img_data['name']
 								)
 							);
@@ -190,7 +190,7 @@ class Video extends CI_Controller {
 				 	}
 			 	}
 		 	} else {
-		 		$q = $this->video_model->get_by_id($id);
+		 		$q = $this->video_model->get_by_id(0, $id);
 		 		$e = $this->session->userdata("error_message") ? $this->session->userdata("error_message") : array("error_message" => "");;
 		 		$img = $this->get_video_image($q->video_id);
 		 		$data = array("video_id" => $q->video_id,
@@ -226,7 +226,7 @@ class Video extends CI_Controller {
 	
 	function detail($id='') {
 		if($this->session->userdata('logged_in')) {
-	 		$q = $this->video_model->get_by_id($id);
+	 		$q = $this->video_model->get_by_id(0, $id);
 	 		$youtube_id = ""; $link = $q->url;
 	 		if(strpos($link, "v=")) {
 	 			$arr = explode("v=", $link);
@@ -268,8 +268,11 @@ class Video extends CI_Controller {
 			
 		$this->pagination->initialize($config);
 		$page = ($this->uri->segment(4)) ? $this->uri->segment(4) : 0;
-
-		return array("uri" => $page, "per_page" => $config['per_page']);
+		if($page != 0) {
+			$page = $page + (3*($page-1)+($page-2));
+		}
+		return array("uri" => $page, 
+					"per_page" => $config['per_page']);
 	}
 
 	function page() {
