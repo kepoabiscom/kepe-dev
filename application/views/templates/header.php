@@ -46,7 +46,7 @@
 				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
 				<div style="width: 200px;" class="input-group">
 					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
-					<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo $q; ?>" name="q">
+					<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
 					<?php $t = "article"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
 					<input type="hidden" value="<?php echo $t; ?>" name="type">
 					<span class="input-group-btn">
