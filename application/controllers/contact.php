@@ -61,7 +61,7 @@ class Contact extends CI_Controller {
 			$this->email->from('hi@kepoabis.com', 'Hi');
 			$this->email->to($email);
 
-			$this->email->subject($subject);
+			$this->email->subject("[KONFIRMASI]");
 			$this->email->message("<p>
 					Dear ".$name.",
 					<br>
