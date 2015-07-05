@@ -7,14 +7,13 @@
 			{/get_breadcrumb}
 		</ol>
 	</div>
-	<div>
+	<div class="btn-group" role="group" aria-label="...">
 		{tab_search}
 			{tab}
 		{/tab_search}
 	</div>
 </div>
 <div class="col-md-12">
-	<!-- <div><a href="">Article</a> | <a href="">News</a> | <a href="">Video</a></div> -->
 	<div><h4>Keyword : '{q}' result ({elapsed_time}) s</h4></div>
 </div>
 <div class="col-md-8 blog-main">
