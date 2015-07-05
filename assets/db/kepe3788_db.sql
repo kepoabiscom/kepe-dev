@@ -27,7 +27,7 @@ CREATE TABLE `article` (
   `article_category_id` int(11) DEFAULT NULL,
   `user_id` int(11) NOT NULL DEFAULT '0',
   `image_id` int(11) NOT NULL DEFAULT '0',
-  `title` varchar(255) NOT NULL DEFAULT '',
+  `title` varchar(255) DEFAULT '',
   `tag` varchar(255) DEFAULT NULL,
   `summary` text,
   `status` enum('unpublished','pending','published') DEFAULT 'pending',
@@ -35,7 +35,8 @@ CREATE TABLE `article` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`article_id`),
-  /* FULLTEXT KEY `summary` (`summary`) */
+  FULLTEXT KEY `summary` (`summary`),
+  FULLTEXT KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -221,7 +222,8 @@ CREATE TABLE `news` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`news_id`),
-  /* FULLTEXT KEY `summary` (`summary`) */
+  FULLTEXT KEY `summary` (`summary`),
+  FULLTEXT KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -572,7 +574,8 @@ CREATE TABLE `video` (
   `modified_date` datetime DEFAULT NULL,
   `deleted_date` datetime DEFAULT NULL,
   PRIMARY KEY (`video_id`),
-  FULLTEXT KEY `description` (`description`)
+  FULLTEXT KEY `description` (`description`),
+  FULLTEXT KEY `title` (`title`)
 ) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -653,4 +656,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-07-05 14:32:05
+-- Dump completed on 2015-07-05 15:25:01

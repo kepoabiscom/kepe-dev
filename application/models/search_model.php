@@ -11,9 +11,10 @@ class Search_model extends CI_Model {
 
         $query = $this->db->select($type."_id, title, ". $t .", created_date")
                         ->from($type)
-                        ->where("MATCH(". $t .") AGAINST('". $q ."' IN BOOLEAN MODE)")
+                        ->where("MATCH(title) AGAINST('". $q ."' IN BOOLEAN MODE)")
+                        ->or_where("MATCH(". $t .") AGAINST('". $q ."' IN BOOLEAN MODE)")
                         ->limit($limit, $start)->get();
-     
+		
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 $data[] = $row;
