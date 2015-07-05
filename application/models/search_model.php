@@ -7,11 +7,10 @@ class Search_model extends CI_Model {
     }
 
     function get($type='article', $q='', $start, $limit) {
-    	$query = $this->db->select("a.article_id, a.title, a.summary, a.created_date")
-        		->from("article as a")
-            	->like("a.title", $q)
-        		->limit($limit, $start)
-            	->order_by("a.article_id", "desc")->get();
+        $query = $this->db->query("SELECT article_id, title, summary, created_date
+                            FROM article WHERE MATCH(summary) AGAINST('". $q ."' IN BOOLEAN MODE)
+                            
+            ");
      
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
