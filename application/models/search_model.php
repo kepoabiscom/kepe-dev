@@ -7,11 +7,12 @@ class Search_model extends CI_Model {
     }
 
     function get($type='article', $q='', $start, $limit) {
-        $query = $this->db->query("SELECT article_id, title, summary, created_date
-                            FROM article WHERE MATCH(summary) AGAINST('". $q ."' IN BOOLEAN MODE)
-                            LIMIT ". $start .", ". $limit ." 
-                            
-            ");
+        $t = ($type != 'video') ? 'summary' : 'description'; 
+
+        $query = $this->db->select($type."_id, title, ". $t .", created_date")
+                        ->from($type)
+                        ->where("MATCH(". $t .") AGAINST('". $q ."' IN BOOLEAN MODE)")
+                        ->limit($limit, $start)->get();
      
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {

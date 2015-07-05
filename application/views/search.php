@@ -7,6 +7,11 @@
 			{/get_breadcrumb}
 		</ol>
 	</div>
+	<div>
+		{tab_search}
+			{tab}
+		{/tab_search}
+	</div>
 </div>
 <div class="col-md-12">
 	<!-- <div><a href="">Article</a> | <a href="">News</a> | <a href="">Video</a></div> -->

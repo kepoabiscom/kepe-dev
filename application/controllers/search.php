@@ -19,6 +19,7 @@ class Search extends CI_Controller {
 			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", ""),
 			'get_search' => $this->result($type, $q),
 			"q" => $q,
+			"tab_search" => $this->tab_search($type),
 			'page' => ""
 		);
 		
@@ -44,7 +45,7 @@ class Search extends CI_Controller {
 
 	function result($type='article', $q) {
 		$start = 0; $limit = 10;
-		$result = $this->search_model->get('article', $q, $start, $limit);
+		$result = $this->search_model->get($type, $q, $start, $limit);
 		
 		if($result == false || $q == null) {
 			return array(array(	"title" => "",
@@ -61,10 +62,14 @@ class Search extends CI_Controller {
 
 				if($type == 'article') 
 					$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
+				if($type == 'news') 
+					$url = base_url("news/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->news_id . "/" . $this->slug($row->title) . "");
+				if($type == 'video')
+					$url = base_url('videografi/view/'.$y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id.'/'. $this->slug($row->title));
 				
 				$data[] = array(
 					"title" => $this->get_highlight($row->title, $q),
-					"summary" => $this->get_highlight($row->summary, $q),
+					"summary" => ($type != 'video') ? $this->get_highlight($row->summary, $q) : $this->get_highlight($row->description, $q),
 					"url" => $url,
 					"no_result" => ""
 				);
@@ -99,5 +104,32 @@ class Search extends CI_Controller {
 	    $new_text = str_replace('[@]', '</span>', $new_text);
 	    
 	    return $new_text;
+	}
+
+	function tab_search($type='article') {
+		$arr = array("Article", "News", "Video");
+		$qry_str = $_SERVER['QUERY_STRING'];
+		$q = explode("&", $qry_str);
+		$class = array_fill(0, count($arr), '');
+		$href = array_fill(0, count($arr), '');
+        $j = 0;
+        foreach($arr as $i) {
+            if(strtolower($i) == $type) {
+                $class[$j] = 'btn btn-primary';
+                $href[$j] = '';
+            } else {
+            	$class[$j] = 'btn btn-default';
+            	$href[$j] = base_url()."search?".$q[0] ."&type=". strtolower($i);
+            }
+            $j++;
+        }
+		
+		$data = array(
+					array("tab" => "<a href='".$href[0]."' class='".$class[0]."''>".$arr[0]."</a>"),		
+		 			array("tab" => "<a href='".$href[1]."' class='".$class[1]."''>".$arr[1]."</a>"),
+		 			array("tab" => "<a href='".$href[2]."' class='".$class[2]."''>".$arr[2]."</a>")
+		 		);
+	
+		return $data;
 	}
 }
