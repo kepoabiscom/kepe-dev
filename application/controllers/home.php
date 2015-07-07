@@ -71,7 +71,7 @@ class Home extends CI_Controller {
 				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => "<a href='" . $read_more . "'>".$title."</a>",
-				"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more),
+				"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
 				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
@@ -109,7 +109,7 @@ class Home extends CI_Controller {
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='". $read_more ."'>".$title."</a>",
-					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more),
+					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By <a href='#''>" . $q->nama_lengkap . "</a>",
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
@@ -156,7 +156,7 @@ class Home extends CI_Controller {
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => $title,
-				"description" => !isset($q->description) ? "" : $q->description,
+				"description" => !isset($q->description) ? "" : $this->get_preview_summary($q->description, $view_more),
 				"path_video" => !isset($q->path_video) ? "" : $q->path_video,
 				"duration" => !isset($q->duration) ? "" : $q->duration,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -181,7 +181,7 @@ class Home extends CI_Controller {
 		return strtolower(preg_replace('/\s/', '-', $str));
 	}
 
-	function get_preview_summary($text, $see_more) {
+	function get_preview_summary($text, $see_more, $f='video') {
 		$words = explode(" ", $text);
 		$N = 20;
 		if(count($words) > $N) {
@@ -189,7 +189,8 @@ class Home extends CI_Controller {
 			for($i=0; $i < $N; $i++) {
 				$text .= $words[$i] . " ";
 			}
-			$text .= "... <a href='".$see_more."'>See more</a>";
+			$link = ($f != 'video') ? "<a href='".$see_more."'>Read more</a>" : "";
+			$text .= "... " . $link;
 		}
 
 		return $text;

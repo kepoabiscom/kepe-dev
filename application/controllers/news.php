@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . 'controllers/comment.php'); 
+
 class News extends CI_Controller {
 
 	/**
@@ -163,6 +165,9 @@ class News extends CI_Controller {
 		$q = $this->news_model->get_by_id($id);
 		$r = $this->news_model->get_image($id);
 		$title = $q->title_news;
+
+		$comment = new Comment();
+
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
 			
@@ -184,7 +189,9 @@ class News extends CI_Controller {
 			 				"image" => $img, 
 			 				"url" => $url_share,
 			 				"og_image" => base_url($image),
-			 				"created_date" => $q->created_date
+			 				"created_date" => $q->created_date,
+			 				"get_comment" => $comment->get_comment("news", $id),
+			 				"news_id" => $id
 		     		));
 
 	 		$this->generate('news/read_news', $data);

@@ -1,5 +1,6 @@
 <!-- appId=876274572459160 appId for KepoAbis.com -->
 <div id="fb-root"></div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
@@ -70,5 +71,33 @@
 				{/get_archives_list}
             </ol>
     </div>
+</div>
+<hr>
+<div class="col-md-6">
+	<h2>Comments:</h2>
+	<div class="comment-block">
+		{get_comment}
+	</div>
+	<div class ="msg"></div>
+	
+	<p><h2>You will comment?</h2></p>
+    <form id='form-comment' action="<?php echo base_url(). 'comment/ajax_news'; ?>" method="post">
+        <input type="hidden" class="form-control" value="<?php echo $news_id; ?>" name="news_id">
+        <input type="hidden" class="form-control" value="published" name="status">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="nick_name" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea type="text" class="form-control" name="body" placeholder="Your Comment"></textarea>
+        </div>
+
+        <input type="submit" id='submit' value='Submit' class="btn btn-success">
+
+    </form>
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>
+
+</div>
 </div>
 
