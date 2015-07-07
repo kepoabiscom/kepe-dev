@@ -502,7 +502,7 @@ INSERT INTO `video_category` VALUES (1,0,'Documenter','Documenter','2015-06-13 0
 DROP TABLE IF EXISTS `video_comment`;
 CREATE TABLE `video_comment` (
   `video_comment_id` int(11) NOT NULL AUTO_INCREMENT,
-  `article_id` int(11) NOT NULL DEFAULT '0',
+  `video_id` int(11) NOT NULL DEFAULT '0',
   `nick_name` varchar(255) NOT NULL DEFAULT '',
   `site` varchar(255) DEFAULT NULL,
   `body` text,
