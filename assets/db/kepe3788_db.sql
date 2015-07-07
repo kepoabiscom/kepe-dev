@@ -24,7 +24,7 @@ CREATE TABLE `article` (
   PRIMARY KEY (`article_id`),
   FULLTEXT KEY `summary` (`summary`),
   FULLTEXT KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
 
 #
 # Data for table "article"
@@ -178,7 +178,7 @@ CREATE TABLE `news` (
   PRIMARY KEY (`news_id`),
   FULLTEXT KEY `summary` (`summary`),
   FULLTEXT KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 #
 # Data for table "news"
@@ -462,7 +462,7 @@ CREATE TABLE `video` (
   PRIMARY KEY (`video_id`),
   FULLTEXT KEY `description` (`description`),
   FULLTEXT KEY `title` (`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
+) ENGINE=MyISAM AUTO_INCREMENT=27 DEFAULT CHARSET=latin1 ROW_FORMAT=COMPACT;
 
 #
 # Data for table "video"
