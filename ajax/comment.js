@@ -17,12 +17,13 @@ $(document).ready(function() {
                   if(data.status){
                       $(data.get_comment).hide().fadeIn(800);
                       $('.comment-block').append(data.get_comment);
+                      $('.msg').html('');
                   } else{
-                      $('.msg').html('<span style="color:red">' + data.msg + '</span>')
+                      $('.msg').html('<span style="color:red">' + data.msg + '</span>');
                   }
                   formObj.trigger('reset');
                   submit.val('Submit').removeAttr('disabled');
-                }, 1000);
+                }, 500);
             }
         });
         return false;

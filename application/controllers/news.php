@@ -191,6 +191,9 @@ class News extends CI_Controller {
 			 				"og_image" => base_url($image),
 			 				"created_date" => $q->created_date,
 			 				"get_comment" => $comment->get_comment("news", $id),
+			 				"n1" => $comment->random_set_captcha(0),
+			 				"op" => $comment->random_set_captcha(),
+			 				"n2" => $comment->random_set_captcha(0),
 			 				"news_id" => $id
 		     		));
 

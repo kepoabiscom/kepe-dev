@@ -85,5 +85,41 @@
             </ol>
     </div>
 </div>
+<hr>
+<div class="col-md-6">
+	<h2>Comments:</h2>
+	<div class="comment-block">
+		{get_comment}
+	</div>
+	<p><h2>You will comment?</h2></p>
+	<div class ="msg"></div><br>
+    <form id='form-comment' action="<?php echo base_url(). 'comment/ajax_'; ?>" method="post">
+        <input type="hidden" class="form-control" value="<?php echo $video_id; ?>" name="video_id">
+        <input type="hidden" class="form-control" value="published" name="status">
+        <input type="hidden" class="form-control" value="video" name="type">
+        <div class="form-group">
+            <label for="name">Name* :</label>
+            <input type="text" class="form-control" name="nick_name" placeholder="Your Name">
+        </div>
+        <div class="form-group">
+            <label for="comment">Comment* :</label>
+            <textarea type="text" class="form-control" name="body" placeholder="Your Comment"></textarea>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="n1"><h3>{n1}</h3></label>&nbsp;<label for="op"><h3>{op}</h3></label>&nbsp;<label for="n2"><h3>{n2}</h3></label>
+            <input type="text" class="form-control" name="answer" placeholder="Your Abswer?">
+        	<input type="hidden" class="form-control" value="{n1}" name="n1">
+        	<input type="hidden" class="form-control" value="{op}" name="op">
+        	<input type="hidden" class="form-control" value="{n2}" name="n2">
+        </div>-->
+
+        <input type="submit" id='submit' value='Submit' class="btn btn-success">
+
+    </form>
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>
+
+</div>
+</div>
 
 

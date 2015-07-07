@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . 'controllers/comment.php');
+
 class Videografi extends CI_Controller {
 
 	/**
@@ -158,6 +160,8 @@ class Videografi extends CI_Controller {
 	function view($year, $month, $day, $id, $slug = "") {
 		$q = $this->video_model->get_by_id(1, $id);
 		
+		$comment = new Comment();
+
  		$youtube_id = ""; $link = $q->url;
  		if(strpos($link, "v=")) {
  			$arr = explode("v=", $link);
@@ -186,7 +190,12 @@ class Videografi extends CI_Controller {
 	            "duration" => $q->duration,
 				"full_name" => $q->full_name,
 	            "created_date" => $q->created_date,
-	            "modified_date" => $q->modified_date
+	            "modified_date" => $q->modified_date,
+	            "get_comment" => $comment->get_comment("video", $id),
+ 				"n1" => $comment->random_set_captcha(0),
+ 				"op" => $comment->random_set_captcha(),
+ 				"n2" => $comment->random_set_captcha(0),
+ 				"video_id" => $id
 	        )
 		);
 

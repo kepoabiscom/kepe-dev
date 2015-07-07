@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . 'controllers/comment.php'); 
+
 class Article extends CI_Controller {
 
 	/**
@@ -158,6 +160,9 @@ class Article extends CI_Controller {
 	function read($year, $month, $day, $id, $slug) {
 		$q = $this->article_model->get_by_id($id);
 		$r = $this->article_model->get_image($id);
+		
+		$comment = new Comment();
+
 		$title = $q->title_article;
 		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
 			$image = ($r != false) ? $r->path : "";
@@ -180,7 +185,12 @@ class Article extends CI_Controller {
 			 				"image" => $img, 
 			 				"url" => $url_share,
 			 				"og_image" => base_url($image),
-			 				"created_date" => $q->created_date
+			 				"created_date" => $q->created_date,
+			 				"get_comment" => $comment->get_comment("article", $id),
+			 				"n1" => $comment->random_set_captcha(0),
+			 				"op" => $comment->random_set_captcha(),
+			 				"n2" => $comment->random_set_captcha(0),
+			 				"article_id" => $id
 		     		));
 
 	 		$this->generate('article/read_article', $data);
