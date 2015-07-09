@@ -161,6 +161,7 @@ class Videografi extends CI_Controller {
 		$q = $this->video_model->get_by_id(1, $id);
 		
 		$comment = new Comment();
+		$prev_next = $this->prev_next($id);
 
  		$youtube_id = ""; $link = $q->url;
  		if(strpos($link, "v=")) {
@@ -195,6 +196,7 @@ class Videografi extends CI_Controller {
  				"n1" => $comment->random_set_captcha(0),
  				"op" => $comment->random_set_captcha(),
  				"n2" => $comment->random_set_captcha(0),
+ 				"prev_next" => $prev_next,
  				"video_id" => $id
 	        )
 		);
@@ -202,6 +204,40 @@ class Videografi extends CI_Controller {
  		$this->generate('videografi/view', $data);
 	}
 	
+	function prev_next($current_id) {
+		$result = $this->video_model->get_rank();
+		$count = $this->video_model->count_video();
+		$rank = 0;
+		foreach($result as $k) {
+			if($current_id == $k->video_id) {
+				$rank = $k->i;
+				break;
+			}
+		}
+		
+		if($rank > 0 && $rank < $count-1) {
+			$p = $this->video_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("videografi/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			$p = $this->video_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("videografi/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $prev . $next;
+		}
+		if($count-1 == $rank) {
+			$p = $this->video_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("videografi/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			return $prev;
+		} 
+		if($rank == 0) {
+			$p = $this->video_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("videografi/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $next;
+		}
+	}
+
 	function profile(){
 		include ('about.php');
 		
@@ -209,7 +245,7 @@ class Videografi extends CI_Controller {
 	}
 	
 	function slug($str='') {
-		return strtolower(preg_replace('/\s/', '-', $str));
+		return strtolower(preg_replace('/[\s\/\&%#,.\)\(\$]/', '-', $str));
 	}
 	
 	function page() {

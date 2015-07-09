@@ -133,7 +133,7 @@ class News_model extends CI_Model {
 
     function delete_news($id) {
     	return $this->db->delete("news", array("news_id" => $id));
-    }
+    } 
 
     function get_image($id='') {
         $this->db->select("i.path")
@@ -171,5 +171,34 @@ class News_model extends CI_Model {
         $data["modified_date"] = date("Y-m-d H:i:s");
         $this->db->where('news_id', $id);
         $this->db->update('news', $data); 
+    }
+
+    function get_rank() {
+        $query = $this->db->query("
+                    select @i:=@i+1 as i, news_id
+                    from news, (select @i:=-1) r 
+                    order by news_id desc");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+    
+    function get_one_row($rank) {
+        $query = $this->db->query("
+                    select n.news_id, n.title
+                    ,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date
+                    ,DATE_FORMAT(n.created_date, '%Y') as year
+                    ,DATE_FORMAT(n.created_date, '%m') as month
+                    ,DATE_FORMAT(n.created_date, '%d') as day
+                    from news n order by n.news_id desc
+                    limit ". $rank .", 1 ");
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
     }
 }

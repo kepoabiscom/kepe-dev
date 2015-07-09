@@ -7,7 +7,7 @@ class Video_model extends CI_Model {
     }
 
     function count_video($flag=0, $keyword=array()) {
-		if($flag=0){
+		if($flag==0){
 			return $this->db->count_all("video");
 		}
 		else{
@@ -211,5 +211,34 @@ class Video_model extends CI_Model {
             return $query->row();
         } return false;
 
+    }
+
+    function get_rank() {
+        $query = $this->db->query("
+                    select @i:=@i+1 as i, video_id
+                    from video, (select @i:=-1) r 
+                    order by video_id desc");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+    
+    function get_one_row($rank) {
+        $query = $this->db->query("
+                    select n.video_id, n.title
+                    ,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date
+                    ,DATE_FORMAT(n.created_date, '%Y') as year
+                    ,DATE_FORMAT(n.created_date, '%m') as month
+                    ,DATE_FORMAT(n.created_date, '%d') as day
+                    from video n order by n.video_id desc
+                    limit ". $rank .", 1 ");
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
     }
 }
