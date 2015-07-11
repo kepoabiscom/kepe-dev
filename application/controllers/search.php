@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once(APPPATH . "controllers/home.php");
+
 class Search extends CI_Controller {
 
 	function __construct() {
@@ -12,8 +14,8 @@ class Search extends CI_Controller {
 	}
 
 	function index() {
-		$q = $this->input->get("q");
-		$type = $this->input->get("type");
+		$q = $this->input->get("q", true);
+		$type = $this->input->get("type", true);
 		$data = array(
 			'get_menu' => $this->menu->get_menu("header", ""),
 			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", ""),
@@ -86,7 +88,9 @@ class Search extends CI_Controller {
 	}
 
 	function slug($str='') {
-		return strtolower(preg_replace('/\s/', '-', $str));
+		$home = new Home();
+
+		return $home->slug($str); 
 	}
 
 	function get_highlight($text, $q) {

@@ -156,6 +156,7 @@ class News extends CI_Controller {
 		$uploaded = $this->upload->do_upload();
 		$data = $this->upload->data();
 		if($uploaded) {
+			chmod($data['full_path'], 0777);
 			return array("is_uploaded" => true, 
 					"data" => $data);
 		} return array("is_uploaded" => false, 
