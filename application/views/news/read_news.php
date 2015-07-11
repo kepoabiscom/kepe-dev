@@ -39,9 +39,9 @@
 		<p>{summary}</p>
 		<p>Category : {title_category}</p>
 		<nav class="text-center">
-		  <ul class="pagination">
-			{prev_next}
-		  </ul>
+			<ul class="pagination">
+				{prev_next}
+			</ul>
 		</nav>
 	</div>
 	<hr>
@@ -77,6 +77,19 @@
     </form>
 </div>
 <div class="col-md-4">
+	<div class="widget">
+		<h2 class="title">Recent News</h2>
+			<ul class="recent_post">
+				{get_news}
+				<li>
+					{title}
+					<br>{recent_news_category}
+					<br>{created_date}
+					<div class="clear"></div>
+				</li>		
+				{/get_news}
+		</ul>                	 
+	</div>
 	<div class="sidebar-module">
 		<h5 style="font-weight: 400; font-size: 24px;">Category</h5>
 		<ol class="list-unstyled">
@@ -85,14 +98,6 @@
 			{/get_news_category}
 		</ol>                 	 
 	</div>
-	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Archives</h5>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
-    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

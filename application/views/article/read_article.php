@@ -75,6 +75,19 @@
     </form>
 </div>
 <div class="col-md-4">
+	<div class="widget">
+		<h2 class="title">Recent Article</h2>
+			<ul class="recent_post">
+				{get_article}
+				<li>
+					{title}
+					<br>{recent_article_category}
+					<br>{created_date}
+					<div class="clear"></div>
+				</li>		
+				{/get_article}
+		</ul>                	 
+	</div>
 	<div class="sidebar-module">
 		<h2>Category</h2>
 		<ol class="list-unstyled">
@@ -83,14 +96,6 @@
 			{/get_article_category}
 		</ol>                 	 
 	</div>
-	<div class="sidebar-module">
-		<h2>Archives</h2>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
-    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

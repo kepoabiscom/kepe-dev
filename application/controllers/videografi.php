@@ -86,7 +86,9 @@ class Videografi extends CI_Controller {
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 				$title = "<a href='".$view."'>".$title."</a>";
 				
-
+				$category = !isset($q->category) ? "" : $q->category;
+				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";
+				
 				$data[$i] = array(
 					"video_id" => $video_id,
 					"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
@@ -97,7 +99,7 @@ class Videografi extends CI_Controller {
 					"duration" => !isset($q->duration) ? "" : $q->duration,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"category" => !isset($q->category) ? "" : $q->category
+					"recent_video_category" => $recent_video_category
 				 );
 				 
 				 $i++;
@@ -169,6 +171,9 @@ class Videografi extends CI_Controller {
  			$youtube_id = $arr[1];
  		}
 		
+		$title_category = $q->title_category;
+		$category = "<a href='".base_url('videografi/page/0/0/'.$title_category)."'>".$title_category."</a>";
+		
  		$data = array_merge(
 			$this->profile()->get_about_detail(),
  			array(
@@ -177,7 +182,7 @@ class Videografi extends CI_Controller {
 	 			"get_video_category" => $this->get_video_category_list(),
 	 			"get_archives_list" => $this->get_archives_list(),
 	 			"get_video" => $this->get_video_list(0, 5, NULL),
- 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+ 				"title_category" => $category,
 	            "title" => $q->title_video,
 	            "tag" => $q->tag,
 	            "status" => $q->status,
@@ -254,7 +259,7 @@ class Videografi extends CI_Controller {
 	
 	 function table_pagination($keyword){
 		$config['base_url'] = base_url("videografi/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 4;
+		$config['per_page'] = 10;
 		$config['total_rows'] = $this->video_model->count_video(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = '&gt;';

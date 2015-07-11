@@ -88,16 +88,19 @@ class Article extends CI_Controller {
 				$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a>";
 				
+				$category = !isset($q->category) ? "" : $q->category;
+				$recent_article_category = "<a href='".base_url('article/page/0/0/'.$category)."'>".$category."</a>";
+		
 				$data[$i] = array(
 					"article_id" => $article_id,
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-					"title" => "<h5><a href='" . $read_more . "'>".$title."</a></h5>",
+					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"summary" => !isset($q->summary) ? "" : $q->summary,
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"category" => !isset($q->category) ? "" : $q->category,
+					"recent_article_category" => $recent_article_category
 				 );
 				 
 				 $i++;
@@ -169,6 +172,9 @@ class Article extends CI_Controller {
 		
 		$image = ($r != false) ? $r->path : "";
 		
+		$title_category = $q->title_category;
+		$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
+		
 		$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
@@ -176,12 +182,13 @@ class Article extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "article"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
+						"get_article" => $this->get_article_list(0, 5, NULL),
 	 					"get_article_category" => $this->get_article_category_list(),
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => $q->nama_lengkap,
 		 				"title" => $title,
 		 				"tag" => $q->tag,
-		 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
 		 				"image" => $img, 
@@ -250,7 +257,7 @@ class Article extends CI_Controller {
 	 
 	function table_pagination($keyword){
 		$config['base_url'] = base_url("article/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 2;
+		$config['per_page'] = 10;
 		$config['total_rows'] = $this->article_model->count_article(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = '&gt;';

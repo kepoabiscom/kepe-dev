@@ -83,16 +83,14 @@
 	</nav>
 </div>
 <div class="col-md-4">
-	<div class="sidebar-module">
-		<h2 class="blog-post-title">Recent Videografi</h2>
+	<div class="widget">
+		<h2 class="title">Recent Videografi</h2>
 			<ul class="recent_post">
 				{get_video}
 				<li>
-					{image}
-					<div>
-						{title}
-					</div>
-					{created_date}
+					{title}
+					<br>{recent_video_category}
+					<br>{created_date}
 					<div class="clear"></div>
 				</li>		
 				{/get_video}
@@ -106,14 +104,6 @@
 			{/get_video_category}
 		</ol>                 	 
 	</div>
-	<div class="sidebar-module">
-		<h2 class="blog-post-title">Archives</h2>
-		<ol class="list-unstyled">
-			{get_archives_list}
-				{list}
-			{/get_archives_list}
-		</ol>
-    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

@@ -65,8 +65,8 @@ class News extends CI_Controller {
 		include("home.php");
 		$obj = new Home();
 
-
 		$query = $this->news_model->get_news_list(1, $start, $limit, $keyword);
+		
 		if($query != NULL){
 			$i = 0;
 			foreach ($query->result() as $q)
@@ -85,6 +85,9 @@ class News extends CI_Controller {
 				$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a></p>";
 				
+				$category = !isset($q->category) ? "" : $q->category;
+				$recent_news_category = "<a href='".base_url('news/page/0/0/'.$category)."'>".$category."</a>";
+		
 				$data[$i] = array(
 					"news_id" => !isset($q->news_id) ? "" : $q->news_id,
 					"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
@@ -95,7 +98,7 @@ class News extends CI_Controller {
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"category" => !isset($q->category) ? "" : $q->category,
+					"recent_news_category" => $recent_news_category
 				 );
 				 
 				 $i++;
@@ -173,6 +176,9 @@ class News extends CI_Controller {
 
 		$image = ($r != false) ? $r->path : "";
 		
+		$title_category = $q->title_category;
+		$category = "<a href='".base_url('news/page/0/0/'.$title_category)."'>".$title_category."</a>";
+		
 		$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
@@ -180,12 +186,13 @@ class News extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "news"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
+						"get_news" => $this->get_news_list(0, 5, NULL),
 	 					"get_news_category" => $this->get_news_category_list(),
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 		 				"title" => $title,
 		 				"tag" => $q->tag,
-		 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
 		 				"image" => $img, 
@@ -247,7 +254,7 @@ class News extends CI_Controller {
 	 
 	function table_pagination($keyword){
 		$config['base_url'] = base_url("news/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 1;
+		$config['per_page'] = 5;
 		$config['total_rows'] = $this->news_model->count_news(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = '&gt;';

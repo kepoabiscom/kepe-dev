@@ -14,7 +14,7 @@
 		<div class="col-md-6">
 			<div class="recent_post">
 				<div>
-					{title}
+					<h5>{title}</h5>
 					{image}
 					<p>
 						{summary}
