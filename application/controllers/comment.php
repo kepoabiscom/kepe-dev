@@ -66,9 +66,6 @@ class Comment extends CI_Controller {
 			$data = "";
 			foreach($result as $row) {
 				$date = explode(" ", $row->created_date);
-				$y = explode("-", $date[0]);
-				$m = explode("-", $date[0]);
-				$d = explode("-", $date[0]);
 
 				$data .= "<div class='new-comment'><img src='http://www.gravatar.com/avatar/' width='40' height='40' />&nbsp;<strong>" . $this->get_time_elapsed_string($row->created_date) . " - " .date("d F Y", strtotime($date[0])) . "</strong>";
 				$data .= "<p><strong>Name : </strong>" . $row->nick_name . "</p>";
