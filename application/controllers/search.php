@@ -10,7 +10,7 @@ class Search extends CI_Controller {
 		$this->load->model("search_model");
 		$this->load->library("parser");
 		$this->load->library("menu");
-		//$this->load->library("pagination");
+		$this->load->library("pagination");
 	}
 
 	function index() {
@@ -22,7 +22,7 @@ class Search extends CI_Controller {
 			'get_search' => $this->result($type, $q),
 			"q" => $q,
 			"tab_search" => $this->tab_search($type),
-			'page' => ""
+			'paging' => $this->pagination->create_links()
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
@@ -46,17 +46,17 @@ class Search extends CI_Controller {
 	}
 
 	function result($type='article', $q) {
-		$start = 0; $limit = 10;
-		$result = $this->search_model->get($type, $q, $start, $limit);
-		
-		if($result == false || $q == null) {
+		$config = $this->page_config($type, $q);
+		$result = $this->search_model->get($type, $q, $config['page'], $config['limit']);
+
+		if($result['data'] == false || $q == null) {
 			return array(array(	"title" => "",
 				"summary" => "",
 				"url" => "",
 				"no_result" => "<h2>No result</h2>."
 			));
 		} else {
-			foreach($result as $row) {
+			foreach($result['data'] as $row) {
 				$date = explode(" ", $row->created_date);
 				$y = explode("-", $date[0]);
 				$m = explode("-", $date[0]);
@@ -135,5 +135,38 @@ class Search extends CI_Controller {
 		 		);
 	
 		return $data;
+	}
+
+	function page_config($type='', $q='', $count=0) {
+		$qry_str = $_SERVER['QUERY_STRING'];
+		$ar = explode("&", $qry_str);
+		
+		$this->search_model->get($type, $q);
+
+		$config['base_url'] = base_url() . "search?" . http_build_query($_GET);
+		$config['per_page'] = 5;
+	 	$config['total_rows'] = $this->search_model->count_search();
+		$config['query_string_segment'] = "page";
+		$config['use_page_numbers'] = true;
+		$config['page_query_string'] = true;
+		$config['cur_tag_open'] = '<span><b>';
+		$config['cur_tag_close'] = '</b></span>';
+		$config['full_tag_open'] = '<div align="center"><ul class="pagination"><li>';
+		$config['full_tag_close'] = '</li></ul></div>';
+			
+		$this->pagination->initialize($config);
+		
+		$page = 0;
+		if(isset($ar[count($ar)-1]) && count($ar) > 2) {
+			$p = explode("=", $ar[count($ar)-1]);
+			if($p[count($p)-1] == null) {
+				redirect(base_url() . "search?q=" . $q . "&type=" . $type);
+			} else { 
+				$page = $page + (3*($p[count($p)-1]-1)+($p[count($p)-1]-2));
+			}
+		}
+		return array("page" => $page, 
+					"limit" => $config['per_page']);
+
 	}
 }

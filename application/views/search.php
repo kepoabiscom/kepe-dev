@@ -28,7 +28,7 @@
 	{/get_search}
 	<div class="col-md-12">
 		<div style="text-align: center;">
-			{page}
+			{paging}
 		</div>
 	</div>
 </div>
