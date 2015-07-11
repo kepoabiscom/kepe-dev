@@ -29,6 +29,7 @@ class Article_model extends CI_Model {
 				,a.article_category_id
 				,a.image_id
 				,a.title
+				,a.tag
 				,a.summary
 				,usr.nama_lengkap
 				,DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date

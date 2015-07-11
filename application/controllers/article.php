@@ -14,6 +14,7 @@ class Article extends CI_Controller {
 		$this->load->model('article_model','', true);
 		$this->load->model('category_article_model','', true);
 		$this->load->library("parser");
+		$this->load->library("global_common");
 		$this->load->library("menu");
 		$this->load->library("pagination");
 	}
@@ -74,6 +75,8 @@ class Article extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				$tag = !isset($q->tag) ? "" : $q->tag;
+				
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $article_id . "/" . $obj->slug($title) . "");
 				
@@ -97,6 +100,8 @@ class Article extends CI_Controller {
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
+					"summary" => !isset($q->summary) ? "" : $this->get_short_summary($q->summary),
+					"tag" => $this->global_common->get_list_tag($tag),
 					"summary" => !isset($q->summary) ? "" : $this->get_short_summary($q->summary),
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -177,6 +182,8 @@ class Article extends CI_Controller {
 		$title_category = $q->title_category;
 		$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
 		
+		$tag = !isset($q->tag) ? "" : $q->tag;
+		
 		$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
@@ -189,7 +196,7 @@ class Article extends CI_Controller {
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => $q->nama_lengkap,
 		 				"title" => $title,
-		 				"tag" => $q->tag,
+		 				"tag" => $this->global_common->get_list_tag($tag, 'btn'),
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,

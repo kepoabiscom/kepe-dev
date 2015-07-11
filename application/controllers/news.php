@@ -14,6 +14,7 @@ class News extends CI_Controller {
 		$this->load->model('news_model','', true);
 		$this->load->model('category_news_model','',true);
 		$this->load->library("parser");
+		$this->load->library("global_common");
 		$this->load->library("menu");
 		$this->load->library("pagination");
 	}
@@ -72,6 +73,7 @@ class News extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				$tag = !isset($q->tag) ? "" : $q->tag;
 
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
@@ -87,14 +89,13 @@ class News extends CI_Controller {
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_news_category = "<a href='".base_url('news/page/0/0/'.$category)."'>".$category."</a>";
 				
-				
-				
 				$data[$i] = array(
 					"news_id" => $news_id,
 					"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
+					"tag" => $this->global_common->get_list_tag($tag),
 					"summary" => !isset($q->summary) ? "" : $q->summary,
 					"body" => !isset($q->body) ? "" : $this->get_short_summary($q->body),
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
@@ -110,7 +111,7 @@ class News extends CI_Controller {
 		else{
 			$data = NULL;
 		}
-
+		
  		return $data;
 	}
 	
@@ -182,6 +183,8 @@ class News extends CI_Controller {
 		$title_category = $q->title_category;
 		$category = "<a href='".base_url('news/page/0/0/'.$title_category)."'>".$title_category."</a>";
 		
+		$tag = !isset($q->tag) ? "" : $q->tag;
+		
 		$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
 		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
@@ -194,7 +197,7 @@ class News extends CI_Controller {
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 		 				"title" => $title,
-		 				"tag" => $q->tag,
+		 				"tag" => $this->global_common->get_list_tag($tag, 'btn'),
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,

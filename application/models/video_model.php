@@ -68,6 +68,7 @@ class Video_model extends CI_Model {
                   ,v.video_category_id
                   ,v.image_id
                   ,v.title
+                  ,v.tag
                   ,v.description
                   ,v.url AS path_video
                   ,v.duration

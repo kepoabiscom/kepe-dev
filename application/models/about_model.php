@@ -30,6 +30,7 @@ class About_model extends CI_Model {
 			,contact_facebook
 			,contact_twitter
 			,contact_googleplus
+			,contact_youtube
 			,created_year
 			,version
 			,footer'
@@ -39,7 +40,7 @@ class About_model extends CI_Model {
         $this->db->limit(1);
 
         $query = $this->db->get();
-
+		
         if($query->num_rows() == 1) {
             return $query->row();
         } return false;

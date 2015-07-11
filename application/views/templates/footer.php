@@ -65,6 +65,13 @@
 											</span>
 										</a>
 									</li>
+									<li class="social-icons">
+										<a target="_blank" title="Watch Youtube" href="{contact_youtube}">
+											<span class="social-icon-holder">
+												<img class="img-responsive" src="<?php echo base_url('assets/img//youtube.png'); ?>">
+											</span>
+										</a>
+									</li>
 								</ul>
 							</div>
 						</div>

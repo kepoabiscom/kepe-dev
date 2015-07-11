@@ -14,6 +14,7 @@ class Videografi extends CI_Controller {
 		$this->load->model('video_model','', true);
 		$this->load->model('category_video_model','', true);
 		$this->load->library("parser");
+		$this->load->library("global_common");
 		$this->load->library("pagination");
 		$this->load->library("menu");
 	}
@@ -75,6 +76,8 @@ class Videografi extends CI_Controller {
 				$video_id = !isset($q->video_id) ? "" : $q->video_id;
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				$tag = !isset($q->tag) ? "" : $q->tag;
+				
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
@@ -94,6 +97,7 @@ class Videografi extends CI_Controller {
 					"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => $title,
+					"tag" => $this->global_common->get_list_tag($tag),
 					"description" => !isset($q->description) ? "" : $q->description,
 					"full_name" => !isset($q->full_name) ? "" : $q->full_name,
 					"path_video" => !isset($q->path_video) ? "" : $q->path_video,
@@ -176,6 +180,8 @@ class Videografi extends CI_Controller {
 		$title_category = $q->title_category;
 		$category = "<a href='".base_url('videografi/page/0/0/'.$title_category)."'>".$title_category."</a>";
 		
+		$tag = !isset($q->tag) ? "" : $q->tag;
+		
  		$data = array_merge(
 			$this->profile()->get_about_detail(),
  			array(
@@ -186,7 +192,7 @@ class Videografi extends CI_Controller {
 	 			"get_video" => $this->get_video_list(0, 5, NULL),
  				"title_category" => $category,
 	            "title" => $q->title_video,
-	            "tag" => $q->tag,
+	            "tag" => $this->global_common->get_list_tag($tag, 'btn'),
 	            "status" => $q->status,
 	            "description" => $q->description,
 	            "story_ide" => $q->story_ide,

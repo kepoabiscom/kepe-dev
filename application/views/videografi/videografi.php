@@ -21,7 +21,8 @@
 						{description}
 					</p>
 					
-					 By {full_name}</p>
+					 <p>By {full_name}</p>
+					 <p>Tag {tag}</p>
 				</div>
 			</div>                	 
 		</div>

@@ -91,12 +91,16 @@
 		</ul>                	 
 	</div>
 	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Category</h5>
+		<h2 class="title">Category</h2>
 		<ol class="list-unstyled">
 			{get_news_category}
 				{list}
 			{/get_news_category}
 		</ol>                 	 
+	</div>
+	<div class="sidebar-module">
+		<h2 class="title">Tag</h2>
+		{tag}                	 
 	</div>
 </div>
 
