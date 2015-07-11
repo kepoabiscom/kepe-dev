@@ -89,7 +89,7 @@
 		</div>
 		{get_article}
         {no_recent_art}
-		<div class="col-md-3">
+		<div class="col-md-6">
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>

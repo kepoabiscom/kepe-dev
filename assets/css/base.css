@@ -397,3 +397,28 @@ sidebar-module {
 .opacity:hover {
     opacity: 0.5;
 }
+
+.list-inline > li {
+    display: inline-flex;
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+.list-inline > li.active > a, 
+.list-inline > li.active > a:hover, 
+.list-inline > li.active > a:focus, 
+.list-inline > li > a:hover{
+    background-color: #337ab7;
+    color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+	margin-bottom: 5px;
+}
+
+.list-inline > li > a {
+	background-color: #f5f5f5;
+	padding: 10px 10px;
+	border-radius: 4px;
+	text-decoration: none;
+	margin-bottom: 5px;
+}

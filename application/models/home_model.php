@@ -128,7 +128,7 @@ class home_model extends CI_Model {
 				art.status = 'published'
 				AND art.image_id > 0
 			ORDER BY art.created_date DESC
-			LIMIT 0, 4;
+			LIMIT 0, 2;
 		";
 
         $query = $this->db->query($q);

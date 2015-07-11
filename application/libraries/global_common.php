@@ -29,4 +29,24 @@ class Global_common {
 		
 		return $list;
 	}
+	
+	function get_length_title($N, $text){
+		$array = str_split($text,1);
+
+		$length = strlen($text);
+		
+		$text = "";
+		if($length <= $N){
+			for ($i=0; $i < count($array); $i++) {
+				$text .= $array[$i];
+			}
+		}
+		else{
+			for ($i=0; $i < $N; $i++) {
+				$text .= $array[$i];
+			}
+		}
+
+		return $text;
+	}
 }

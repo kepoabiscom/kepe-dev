@@ -122,13 +122,18 @@ class Videografi extends CI_Controller {
 		$query = $this->category_video_model->get_category(1);
 
 		$i = 0;
+		
 		foreach ($query->result() as $q)
 		{
 			$title = !isset($q->title) ? "" : $q->title;
 			$total = !isset($q->total) ? "" : $q->total;
 			
-			$list = "<li><a href='".base_url('videografi/page/0/0/'.$title)."'>".$title." (".$total.")</a></li>";
+			$active = ($title == $this->uri->segment(5)) ? "class='active'" : "";
 			
+			$r = $this->global_common->get_length_title(5, $title);
+			
+			$list = "<li ".$active."><a href='".base_url('videografi/page/0/0/'.$title)."' data-toggle='tooltip' data-placement='top' title='".$title."'>".$title." (".$total.")</a></li>";
+
 			$data[$i] = array(
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"list" => $list
@@ -288,7 +293,7 @@ class Videografi extends CI_Controller {
 	}
 	
 	function get_title($text) {
-		$N = 50;
+		$N = 45;
 		$array = str_split($text,1);
 		
 		$x = "";
