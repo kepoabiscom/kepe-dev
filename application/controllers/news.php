@@ -39,7 +39,8 @@ class News extends CI_Controller {
 			'get_news' => $this->get_news_list($config['start'], $config['per_page'], $keyword),
 			'get_news_category' => $this->get_news_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
-			'page' => $config['page']
+			'page' => $config['page'],
+			"meta_tag" => "Kepo News, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
@@ -198,6 +199,7 @@ class News extends CI_Controller {
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 		 				"title" => $title,
 		 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
+		 				"meta_tag" => $this->global_common->get_list_tag($tag, 'news', 'metadata'),
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,

@@ -38,7 +38,8 @@ class Videografi extends CI_Controller {
 			'get_video' => $this->get_video_list($config['start'], $config['per_page'], $keyword),
 			'get_video_category' => $this->get_video_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
-			'page' => $config['page']
+			'page' => $config['page'],
+			"meta_tag" => "Kepo Video, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
@@ -193,6 +194,7 @@ class Videografi extends CI_Controller {
  				"title_category" => $category,
 	            "title" => $q->title_video,
 	            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),
+	            "meta_tag" => $this->global_common->get_list_tag($tag, 'video', 'metadata'),
 	            "status" => $q->status,
 	            "description" => $q->description,
 	            "story_ide" => $q->story_ide,
