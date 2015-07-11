@@ -170,4 +170,33 @@ class Article_model extends CI_Model {
         $this->db->where('article_id', $id);
         $this->db->update('article', $data); 
     }
+
+    function get_rank() {
+        $query = $this->db->query("
+                    select @i:=@i+1 as i, article_id
+                    from article, (select @i:=-1) r 
+                    order by article_id desc");
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+    
+    function get_one_row($rank) {
+        $query = $this->db->query("
+                    select n.article_id, n.title
+                    ,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date
+                    ,DATE_FORMAT(n.created_date, '%Y') as year
+                    ,DATE_FORMAT(n.created_date, '%m') as month
+                    ,DATE_FORMAT(n.created_date, '%d') as day
+                    from article n order by n.article_id desc
+                    limit ". $rank .", 1 ");
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+    }
 }

@@ -38,40 +38,11 @@
 		<p>Category : {title_category}</p>
 		<nav class="text-center">
 		  <ul class="pagination">
-			<li>
-			  <a href="#" aria-label="Previous">
-				<span aria-hidden="true">&laquo; Previous</span>
-			  </a>
-			</li>
-			<li>
-			  <a href="#" aria-label="Next">
-				<span aria-hidden="true">Next &raquo;</span>
-			  </a>
-			</li>
+			{prev_next}
 		  </ul>
 		</nav>
 	</div>
-</div>
-<div class="col-md-4">
-	<div class="sidebar-module">
-		<h2>Category</h2>
-		<ol class="list-unstyled">
-			{get_article_category}
-				{list}
-			{/get_article_category}
-		</ol>                 	 
-	</div>
-	<div class="sidebar-module">
-		<h2>Archives</h2>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
-    </div>
-</div>
-</div><hr>
-<div class="col-md-6">
+	<hr>
 	<h2>Comments:</h2>
 	<div class="comment-block">
 		{get_comment}
@@ -102,6 +73,24 @@
         <input type="submit" id='submit' value='Submit' class="btn btn-success">
 
     </form>
-    <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>
-
 </div>
+<div class="col-md-4">
+	<div class="sidebar-module">
+		<h2>Category</h2>
+		<ol class="list-unstyled">
+			{get_article_category}
+				{list}
+			{/get_article_category}
+		</ol>                 	 
+	</div>
+	<div class="sidebar-module">
+		<h2>Archives</h2>
+            <ol class="list-unstyled">
+				{get_archives_list}
+					{list}
+				{/get_archives_list}
+            </ol>
+    </div>
+</div>
+
+<script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

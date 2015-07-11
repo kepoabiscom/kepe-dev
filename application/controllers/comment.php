@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+date_default_timezone_set("Asia/Jakarta");
+
 class Comment extends CI_Controller {
 
 	function __construct() {
@@ -68,9 +70,9 @@ class Comment extends CI_Controller {
 				$m = explode("-", $date[0]);
 				$d = explode("-", $date[0]);
 
-				$data .= "<p><strong>Date : </strong>" . $row->created_date . "</p>";
-				$data .= "<p><strong>Nick Name : </strong>" . $row->nick_name . "</p>";
-				$data .= "<p><strong>Comments : </strong>" . $row->body . "</p><br>";				
+				$data .= "<div class='new-comment'><img src='http://www.gravatar.com/avatar/' width='40' height='40' />&nbsp;<strong>" . $this->get_time_elapsed_string($row->created_date) . " - " .date("d F Y", strtotime($date[0])) . "</strong>";
+				$data .= "<p><strong>Name : </strong>" . $row->nick_name . "</p>";
+				$data .= "<p><strong>Said : </strong>" . $row->body . "</p></div><br>";				
 			}
 		}
 		return $data;
@@ -97,5 +99,33 @@ class Comment extends CI_Controller {
 		}
 	}
 
+	function get_time_elapsed_string($datetime, $full=false) {
+	    $now = new DateTime;
+	    $ago = new DateTime($datetime);
+	    $diff = $now->diff($ago);
+
+	    $diff->w = floor($diff->d/7);
+	    $diff->d -= $diff->w*7;
+
+	    $string = array(
+	        'y' => 'year',
+	        'm' => 'month',
+	        'w' => 'week',
+	        'd' => 'day',
+	        'h' => 'hour',
+	        'i' => 'minute',
+	        's' => 'second',
+	    );
+	    foreach($string as $k => &$v) {
+	        if($diff->$k) {
+	            $v = $diff->$k . ' ' . $v . ($diff->$k > 1 ? 's' : '');
+	        } else {
+	            unset($string[$k]);
+	        }
+	    }
+
+	    if (!$full) $string = array_slice($string, 0, 1);
+	    return $string ? "<em>" . implode(', ', $string) . " ago</em>" : "<em>just now</em>";
+	}
 
 }

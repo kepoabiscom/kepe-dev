@@ -163,46 +163,82 @@ class News extends CI_Controller {
 
 	function read($year, $month, $day, $id, $slug) {
 		$q = $this->news_model->get_by_id($id);
+		
 		$r = $this->news_model->get_image($id);
 		$title = $q->title_news;
 
+		$prev_next = $this->prev_next($id);
+
 		$comment = new Comment();
 
-		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
-			$image = ($r != false) ? $r->path : "";
-			
-			$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
-			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
-			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-			$img .= "</a>";
-	 		$data = array_merge($this->profile()->get_about_detail(), 
-	 					array("get_menu" => $this->menu->get_menu("header", "news"),
-		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
-		 					"get_news_category" => $this->get_news_category_list(),
-		 					"get_archives_list" => $this->get_archives_list(),
-		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
-			 				"title" => $title,
-			 				"tag" => $q->tag,
-			 				"title_category" => "<a href='#'>".$q->title_category."</a>",
-			 				"status" => $q->status,
-			 				"summary" => $q->summary,
-			 				"image" => $img, 
-			 				"url" => $url_share,
-			 				"og_image" => base_url($image),
-			 				"created_date" => $q->created_date,
-			 				"get_comment" => $comment->get_comment("news", $id),
-			 				"n1" => $comment->random_set_captcha(0),
-			 				"op" => $comment->random_set_captcha(),
-			 				"n2" => $comment->random_set_captcha(0),
-			 				"news_id" => $id
-		     		));
+		$image = ($r != false) ? $r->path : "";
+		
+		$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
+		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
+		$img .= "</a>";
+ 		$data = array_merge($this->profile()->get_about_detail(), 
+ 					array("get_menu" => $this->menu->get_menu("header", "news"),
+	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
+	 					"get_news_category" => $this->get_news_category_list(),
+	 					"get_archives_list" => $this->get_archives_list(),
+	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
+		 				"title" => $title,
+		 				"tag" => $q->tag,
+		 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+		 				"status" => $q->status,
+		 				"summary" => $q->summary,
+		 				"image" => $img, 
+		 				"url" => $url_share,
+		 				"og_image" => base_url($image),
+		 				"created_date" => $q->created_date,
+		 				"get_comment" => $comment->get_comment("news", $id),
+		 				"n1" => $comment->random_set_captcha(0),
+		 				"op" => $comment->random_set_captcha(),
+		 				"n2" => $comment->random_set_captcha(0),
+		 				"prev_next" => $prev_next,
+		 				"news_id" => $id
+	     		));
 
-	 		$this->generate('news/read_news', $data);
-		} 
+ 		$this->generate('news/read_news', $data);
 	}
 	
+	function prev_next($current_id) {
+		$result = $this->news_model->get_rank();
+		$count = $this->news_model->count_news();
+		$rank = 0;
+		foreach($result as $k) {
+			if($current_id == $k->news_id) {
+				$rank = $k->i;
+				break;
+			}
+		}
+
+		if($rank > 0 && $rank < $count-1) {
+			$p = $this->news_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			$p = $this->news_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $prev . $next;
+		}
+		if($count-1 == $rank) {
+			$p = $this->news_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			return $prev;
+		} 
+		if($rank == 0) {
+			$p = $this->news_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $next;
+		}
+	}
+
 	function slug($str='') {
-		return strtolower(preg_replace('/\s/', '-', $str));
+		return strtolower(preg_replace('/[\s\/\&%#,.\)\(\$]/', '-', $str));
 	}
 	
 	function page() {

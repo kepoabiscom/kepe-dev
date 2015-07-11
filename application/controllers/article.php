@@ -163,39 +163,76 @@ class Article extends CI_Controller {
 		
 		$comment = new Comment();
 
-		$title = $q->title_article;
-		if(strtolower(preg_replace('/\s/', '_', $title)) === $slug) {
-			$image = ($r != false) ? $r->path : "";
-			
-			$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
-			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
-			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-			$img .= "</a>";
-	 		$data = array_merge($this->profile()->get_about_detail(), 
-	 					array("get_menu" => $this->menu->get_menu("header", "article"),
-		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
-		 					"get_article_category" => $this->get_article_category_list(),
-		 					"get_archives_list" => $this->get_archives_list(),
-		 					"full_name" => $q->nama_lengkap,
-			 				"title" => $title,
-			 				"tag" => $q->tag,
-			 				"title_category" => "<a href='#'>".$q->title_category."</a>",
-			 				"status" => $q->status,
-			 				"summary" => $q->summary,
-			 				"image" => $img, 
-			 				"url" => $url_share,
-			 				"og_image" => base_url($image),
-			 				"created_date" => $q->created_date,
-			 				"get_comment" => $comment->get_comment("article", $id),
-			 				"n1" => $comment->random_set_captcha(0),
-			 				"op" => $comment->random_set_captcha(),
-			 				"n2" => $comment->random_set_captcha(0),
-			 				"article_id" => $id
-		     		));
+		$prev_next = $this->prev_next($id);
 
-	 		$this->generate('article/read_article', $data);
-		} 
+		$title = $q->title_article;
+		
+		$image = ($r != false) ? $r->path : "";
+		
+		$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
+		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
+		$img .= "</a>";
+ 		$data = array_merge($this->profile()->get_about_detail(), 
+ 					array("get_menu" => $this->menu->get_menu("header", "article"),
+	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
+	 					"get_article_category" => $this->get_article_category_list(),
+	 					"get_archives_list" => $this->get_archives_list(),
+	 					"full_name" => $q->nama_lengkap,
+		 				"title" => $title,
+		 				"tag" => $q->tag,
+		 				"title_category" => "<a href='#'>".$q->title_category."</a>",
+		 				"status" => $q->status,
+		 				"summary" => $q->summary,
+		 				"image" => $img, 
+		 				"url" => $url_share,
+		 				"og_image" => base_url($image),
+		 				"created_date" => $q->created_date,
+		 				"get_comment" => $comment->get_comment("article", $id),
+		 				"n1" => $comment->random_set_captcha(0),
+		 				"op" => $comment->random_set_captcha(),
+		 				"n2" => $comment->random_set_captcha(0),
+		 				"prev_next" => $prev_next,
+		 				"article_id" => $id
+	     		));
+
+ 		$this->generate('article/read_article', $data);
 	}
+
+	function prev_next($current_id) {
+		$result = $this->article_model->get_rank();
+		$count = $this->article_model->count_article();
+		$rank = 0;
+		foreach($result as $k) {
+			if($current_id == $k->article_id) {
+				$rank = $k->i;
+				break;
+			}
+		}
+		
+		if($rank > 0 && $rank < $count-1) {
+			$p = $this->article_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("article/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->article_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			$p = $this->article_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("article/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->article_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $prev . $next;
+		}
+		if($count-1 == $rank) {
+			$p = $this->article_model->get_one_row($rank-1);
+			$prev = "<li><a href='". base_url("article/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->article_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+			return $prev;
+		} 
+		if($rank == 0) {
+			$p = $this->article_model->get_one_row($rank+1);
+			$next = "<li><a href='".base_url("article/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->article_id . "/" . $this->slug($p->title) . "")."'"
+					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
+			return $next;
+		}
+	}
+
 
 	public function profile(){
 		include ('about.php');
@@ -204,7 +241,7 @@ class Article extends CI_Controller {
 	}
 
 	function slug($str='') {
-		return strtolower(preg_replace('/\s/', '-', $str));
+		return strtolower(preg_replace('/[\s\/\&%#,.\)\(\$]/', '-', $str));
 	}
 	
 	function page() {
