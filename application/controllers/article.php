@@ -85,7 +85,7 @@ class Article extends CI_Controller {
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 					
 				$img = "<a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
@@ -100,7 +100,8 @@ class Article extends CI_Controller {
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"recent_article_category" => $recent_article_category
+					"recent_article_category" => $recent_article_category,
+					"count_article_comment" => $this->article_model->count_article_comment($article_id)->count_article_comment
 				 );
 				 
 				 $i++;

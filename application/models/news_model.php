@@ -201,4 +201,16 @@ class News_model extends CI_Model {
             return $query->row();
         } return false;
     }
+	
+	function count_news_comment($id){
+		$this->db->select("COUNT(1) AS count_news_comment");
+		$this->db->from("news_comment ncom");
+		$this->db->where("ncom.news_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
 }

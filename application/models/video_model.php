@@ -71,6 +71,7 @@ class Video_model extends CI_Model {
                   ,v.description
                   ,v.url AS path_video
                   ,v.duration
+				  ,usr.nama_lengkap AS full_name
 				  ,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
 				  ,DATE_FORMAT(v.created_date, '%Y') as year
 				  ,DATE_FORMAT(v.created_date, '%m') as month
@@ -80,6 +81,7 @@ class Video_model extends CI_Model {
 				  , false);
 			$this->db->from("video as v");
 			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
+			$this->db->join('user as usr', 'v.user_id = usr.user_id', 'left');
 			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
 			$this->db->where("v.status = 'published' AND v.image_id > 0");
 			if($keyword['category']){
@@ -241,4 +243,16 @@ class Video_model extends CI_Model {
             return $query->row();
         } return false;
     }
+	
+	function count_video_comment($id){
+		$this->db->select("COUNT(1) AS count_video_comment");
+		$this->db->from("video_comment vcom");
+		$this->db->where("vcom.video_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
 }

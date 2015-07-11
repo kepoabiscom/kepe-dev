@@ -14,11 +14,14 @@
 		<div class="col-md-6">
 			<div class="recent_post">
 				<div>
-					<h5 style='min-height: 41px;'>{title}</h5>
+					<h5>{title}</h5>
+					<p class="post-body">On {created_date}, {count_video_comment} Comment</p>
 					{image}
 					<p>
 						{description}
 					</p>
+					
+					 By {full_name}</p>
 				</div>
 			</div>                	 
 		</div>

@@ -199,4 +199,16 @@ class Article_model extends CI_Model {
             return $query->row();
         } return false;
     }
+	
+	function count_article_comment($id){
+		$this->db->select("COUNT(1) AS count_article_comment");
+		$this->db->from("article_comment acom");
+		$this->db->where("acom.article_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
 }

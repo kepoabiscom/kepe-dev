@@ -84,7 +84,7 @@ class Videografi extends CI_Controller {
 				$img .= "</a>";
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
-				$title = "<a href='".$view."'>".$title."</a>";
+				$title = "<a href='".$view."'>".$this->get_title($title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";
@@ -95,11 +95,13 @@ class Videografi extends CI_Controller {
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => $title,
 					"description" => !isset($q->description) ? "" : $q->description,
+					"full_name" => !isset($q->full_name) ? "" : $q->full_name,
 					"path_video" => !isset($q->path_video) ? "" : $q->path_video,
 					"duration" => !isset($q->duration) ? "" : $q->duration,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"recent_video_category" => $recent_video_category
+					"recent_video_category" => $recent_video_category,
+					"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment
 				 );
 				 
 				 $i++;
@@ -277,5 +279,40 @@ class Videografi extends CI_Controller {
 		
 		$config['page'] = $this->pagination->create_links();
 		return $config;
+	}
+	
+	function get_title($text) {
+		$N = 50;
+		$array = str_split($text,1);
+		
+		$x = "";
+		
+		$length = strlen($text);
+		
+		if($length <= $N){
+			for ($i=0; $i < count($array); $i++) {
+				$x .= $array[$i];
+			}
+		}
+		else{
+			for ($i=0; $i < $N; $i++) {
+				$x .= $array[$i];
+			}
+		}
+		
+		$word1 = explode(" ", $text);
+		$word2 = explode(" ", $x);
+		
+		$text = "";
+		for ($i=0; $i < count($word2); $i++) {
+			if($word1[$i] == $word2[$i]){
+				$text .= $word2[$i]." ";
+			}
+		}
+		
+		$length = strlen($x);
+		
+		$text = ($length >= $N) ? $text." ..." : $text;		
+		return $text;
 	}
 }

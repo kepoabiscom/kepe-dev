@@ -60,9 +60,7 @@
 		<div class="col-md-4">
 			<div class="recent_post">
 				<div>
-					<h5>
-						{title}
-					</h5>
+					<div class="title">{title}</div>
 					<p><em>{created_date}</em></p>		
 					{image}
 					<br>
@@ -94,9 +92,7 @@
 		<div class="col-md-3">
 			<div class="recent_post">
 				<div>
-					<h5>
-						{title}
-					</h5>
+					<div class="title">{title}</div>
 					<p><em>{created_date}</em></p>		
 					{image}
 					<p style="text-align: justify;">

@@ -64,7 +64,6 @@ class News extends CI_Controller {
 	public function get_news_list($start=0, $limit=10, $keyword=array()){
 		include("home.php");
 		$obj = new Home();
-
 		$query = $this->news_model->get_news_list(1, $start, $limit, $keyword);
 		
 		if($query != NULL){
@@ -87,18 +86,22 @@ class News extends CI_Controller {
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_news_category = "<a href='".base_url('news/page/0/0/'.$category)."'>".$category."</a>";
-		
+				
+				
+				
 				$data[$i] = array(
-					"news_id" => !isset($q->news_id) ? "" : $q->news_id,
+					"news_id" => $news_id,
 					"news_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
+					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
 					"summary" => !isset($q->summary) ? "" : $q->summary,
 					"body" => !isset($q->body) ? "" : $q->body,
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"recent_news_category" => $recent_news_category
+					"recent_news_category" => $recent_news_category,
+					"count_news_comment" => $this->news_model->count_news_comment($news_id)->count_news_comment
 				 );
 				 
 				 $i++;

@@ -8,18 +8,21 @@
 		</ol>
 	</div>
 </div>
-<div class="col-md-8 blog-main">
-	{get_news}
-	<div class="blog-post">
-		<h2 class="blog-post-title">{title}</h2>
-		<p class="blog-post-meta">{created_date} by {full_name}</p>
-			{image}
-		{body}
-	</div><!-- /.blog-post -->
-	{/get_news}
-	<div class="col-md-12">
-		<div style="text-align: center;">
-			{page}
+<div class="col-md-8">
+	<div class="row">
+		<div class="col-md-12">
+			{get_news}
+			<div class="post">
+				<h2 class="post-title">{title}</h2>
+				<p class="post-body">On {created_date} By {full_name}, {count_news_comment} Comment</p>
+				{image}
+				{body}
+			</div>
+			{read_more}
+			{/get_news}
+			<div style="text-align: center;">
+				{page}
+			</div>
 		</div>
 	</div>
 </div>

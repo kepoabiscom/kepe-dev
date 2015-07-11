@@ -58,7 +58,7 @@ class home_model extends CI_Model {
 				,n.title
 				,n.summary
 				,usr.nama_lengkap
-				,DATE_FORMAT(n.created_date, '%d %b %Y') as created_date
+				,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date
 				,img.path AS path_image
 				,n_cat.title AS category
 				,DATE_FORMAT(n.created_date, '%Y') as year
@@ -104,7 +104,7 @@ class home_model extends CI_Model {
 				,art.title
 				,art.summary
 				,usr.nama_lengkap
-				,DATE_FORMAT(art.created_date, '%d %b %Y') as created_date
+				,DATE_FORMAT(art.created_date, '%M %d, %Y %h:%i %p') as created_date
 				,img.path AS path_image
 				,art_cat.title AS category
 				,DATE_FORMAT(art.created_date, '%Y') as year
