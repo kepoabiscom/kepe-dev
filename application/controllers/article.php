@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(APPPATH . 'controllers/comment.php'); 
-
+		
 class Article extends CI_Controller {
 
 	/**
