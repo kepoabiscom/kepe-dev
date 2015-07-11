@@ -83,7 +83,7 @@ class News extends CI_Controller {
 				$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
 
 				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive thumbnail' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a></p>";
 				
 				$category = !isset($q->category) ? "" : $q->category;

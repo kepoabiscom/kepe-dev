@@ -389,3 +389,11 @@ sidebar-module {
     color: #ffff;
     font-size: 14px;
 }
+
+.opacity {
+    opacity: 1;
+}
+
+.opacity:hover {
+    opacity: 0.5;
+}

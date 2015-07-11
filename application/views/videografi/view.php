@@ -37,6 +37,11 @@
 		<p>{description}</p>
 		<p>Category : {title_category}</p>
 	</div>
+	<nav class="text-center">
+		<ul class="pagination">
+			{prev_next}
+		</ul>
+	</nav>
 	<hr>
 	<h2>Comments:</h2>
 	<div class="comment-block">
@@ -67,11 +72,6 @@
 		-->
         <input type="submit" id='submit' value='Submit' class="btn btn-success">
     </form>
-	<nav class="text-center">
-		<ul class="pagination">
-			{prev_next}
-		</ul>
-	</nav>
 </div>
 <div class="col-md-4">
 	<div class="widget">

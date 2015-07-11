@@ -18,7 +18,7 @@ class Global_common {
 			$t = implode(" ", $y);
 			
 			if($type == 'btn'){
-				$z[$i] = "<a class='btn btn-primary' href='".base_url('search?q='.$q.'&type=article')."'>".$t."</a>";
+				$z[$i] = "<a class='btn btn-primary' style='margin-bottom: 5px;' href='".base_url('search?q='.$q.'&type=article')."'>".$t."</a>";
 			}
 			else{
 				$z[$i] = "<a href='".base_url('search?q='.$q.'&type=article')."'>".$t."</a>";

@@ -83,7 +83,7 @@ class Videografi extends CI_Controller {
 				$day = !isset($q->day) ? 0 : $q->day;
 				
 				$img = "<a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive thumbnail' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive opacity' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a>";
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
