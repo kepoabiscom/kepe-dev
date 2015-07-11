@@ -69,16 +69,7 @@
     </form>
 	<nav class="text-center">
 		<ul class="pagination">
-			<li>
-				<a href="#" aria-label="Previous">
-					<span aria-hidden="true">&laquo; Previous</span>
-				</a>
-			</li>
-			<li>
-				<a href="#" aria-label="Next">
-					<span aria-hidden="true">Next &raquo;</span>
-				</a>
-			</li>
+			{prev_next}
 		</ul>
 	</nav>
 </div>

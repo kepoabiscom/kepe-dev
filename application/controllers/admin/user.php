@@ -183,7 +183,7 @@ class User extends CI_Controller {
 			 		if($t['is_uploaded']) {
 			 			$d['image'] = $t['data']['file_name'];
 			 			if($q->image != null) {
-			 				//unlink(base_url() . "assets/img/team/" . $q->image);
+			 				unlink(base_url() . "assets/img/team/" . $q->image);
 			 			} 
 			 		} else if(!$t['is_uploaded']) {
 			 			if(empty($t['data']['file_name'])) {
@@ -248,12 +248,14 @@ class User extends CI_Controller {
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
 		$config['encrypt_name'] = true;
+		//$config['overwrite'] = true;
 
 		$this->load->library('upload', $config);
 
 		$uploaded = $this->upload->do_upload();
 		$data = $this->upload->data();
 		if($uploaded) {
+			chmod($data['full_path'], 0777);
 			return array("is_uploaded" => true, "data" => $data);
 		} return array("is_uploaded" => false, "data"=> $data, "error_message" => $this->upload->display_errors());
 	 }

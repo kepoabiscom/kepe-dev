@@ -125,7 +125,7 @@ class Comment extends CI_Controller {
 	    }
 
 	    if (!$full) $string = array_slice($string, 0, 1);
-	    return $string ? "<em>" . implode(', ', $string) . " ago</em>" : "<em>just now</em>";
+	    return $string ? "<em>" . implode(', ', $string) . " ago</em>" : "<em>Just now</em>";
 	}
 
 }

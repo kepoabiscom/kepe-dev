@@ -178,7 +178,7 @@ class Home extends CI_Controller {
 	}
 
 	function slug($str='') {
-		return strtolower(preg_replace('/\s/', '-', $str));
+		return strtolower(preg_replace('/[\s\/\&%#,.\)\(\$]/', '-', $str));
 	}
 
 	function get_preview_summary($text, $see_more, $f='video') {
@@ -190,7 +190,7 @@ class Home extends CI_Controller {
 				$text .= $words[$i] . " ";
 			}
 			$link = ($f != 'video') ? "<a href='".$see_more."'>Read more</a>" : "";
-			$text .= "... " . $link;
+			$text .= "[...] " . $link;
 		}
 
 		return $text;
