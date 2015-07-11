@@ -29,6 +29,7 @@ class News_model extends CI_Model {
                 ,n.news_category_id
 				,n.image_id
 				,n.title
+				,n.tag
 				,n.summary
 				,n.body
 				,usr.nama_lengkap

@@ -17,6 +17,7 @@
 				<p class="post-body">On {created_date} By {full_name}, {count_news_comment} Comment</p>
 				{image}
 				{body}
+				<p>Tag {tag}</p>
 			</div>
 			{read_more}
 			{/get_news}

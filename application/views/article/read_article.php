@@ -96,6 +96,10 @@
 			{/get_article_category}
 		</ol>                 	 
 	</div>
+	<div class="sidebar-module">
+		<h2 class="title">Tag</h2>
+		{tag}                	 
+	</div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

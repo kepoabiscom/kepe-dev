@@ -55,6 +55,7 @@ class About extends CI_Controller {
 	 		"contact_facebook" => !isset($q->contact_facebook) ? "" : $q->contact_facebook,
 	 		"contact_twitter" => !isset($q->contact_twitter) ? "" : $q->contact_twitter,
 	 		"contact_googleplus" => !isset($q->contact_googleplus) ? "" : $q->contact_googleplus,
+	 		"contact_youtube" => !isset($q->contact_youtube) ? "" : $q->contact_youtube,
 	 		"background_color" => !isset($q->background_color) ? "" : $q->background_color,
 	 		"created_year" => $created_year,
 	 		"version" => !isset($q->version) ? "" : $q->version,
@@ -64,8 +65,8 @@ class About extends CI_Controller {
 	 		"logo_image" => $img,
 	 		"logo_name" => $logo, 
 	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id
-	     );
-		 
+	     ); 
+		
  		return $data;
 	}
 }
