@@ -14,7 +14,7 @@
 		<div class="col-md-6">
 			<div class="recent_post">
 				<div>
-					{title}
+					<h5 style='min-height: 41px;'>{title}</h5>
 					{image}
 					<p>
 						{description}

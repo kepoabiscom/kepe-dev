@@ -26,11 +26,11 @@
 			{/get_breadcrumb}
 		</ol>
 	</div>
+	<div class="fb-like" data-href="{url}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-text="{title}" data-via="kepoabiscom" data-hashtags="KepoAbis">Tweet</a>
 </div>
 <div class="col-md-8">
 	<div class="blog-post">
-		<div class="fb-like" data-href="{url}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-		<a href="https://twitter.com/share" class="twitter-share-button" data-text="{title}" data-via="kepoabiscom" data-hashtags="KepoAbis">Tweet</a>
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		{url}
@@ -84,7 +84,7 @@
 </div>
 <div class="col-md-4">
 	<div class="sidebar-module">
-		<div style="font-size: 24px; margin-bottom: 10px;">Recent Videografi</div>
+		<h2 class="blog-post-title">Recent Videografi</h2>
 			<ul class="recent_post">
 				{get_video}
 				<li>
@@ -99,7 +99,7 @@
 		</ul>                	 
 	</div>
 	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Category</h5>
+		<h2 class="blog-post-title">Category</h2>
 		<ol class="list-unstyled">
 			{get_video_category}
 				{list}
@@ -107,13 +107,13 @@
 		</ol>                 	 
 	</div>
 	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Archives</h5>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
+		<h2 class="blog-post-title">Archives</h2>
+		<ol class="list-unstyled">
+			{get_archives_list}
+				{list}
+			{/get_archives_list}
+		</ol>
     </div>
 </div>
 
-
+<script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>
