@@ -18,6 +18,7 @@
 				{image}
 				{summary}
 			</div>
+			{read_more}
 			{/get_article}
 			<div style="text-align: center;">
 				{page}

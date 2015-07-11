@@ -96,6 +96,7 @@ class Article extends CI_Controller {
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
+					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
 					"summary" => !isset($q->summary) ? "" : $q->summary,
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
