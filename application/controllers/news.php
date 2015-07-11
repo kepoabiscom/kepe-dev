@@ -95,9 +95,9 @@ class News extends CI_Controller {
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
-					"tag" => $this->global_common->get_list_tag($tag),
+					"tag" => $this->global_common->get_list_tag($tag, 'news'),
 					"summary" => !isset($q->summary) ? "" : $q->summary,
-					"body" => !isset($q->body) ? "" : $this->get_short_summary($q->body),
+					"body" => !isset($q->body) ? "" : $q->body,
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
@@ -197,7 +197,7 @@ class News extends CI_Controller {
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 		 				"title" => $title,
-		 				"tag" => $this->global_common->get_list_tag($tag, 'btn'),
+		 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
@@ -248,20 +248,6 @@ class News extends CI_Controller {
 					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
 			return $next;
 		}
-	}
-
-	function get_short_summary($text) {
-		$words = explode(" ", $text);
-		$N = 30;
-		if(count($words) > $N) {
-			$text = "";
-			for($i=0; $i < $N; $i++) {
-				$text .= $words[$i] . " ";
-			}
-			$text .= "[...]";
-		}
-
-		return $text;
 	}
 
 	function slug($str='') {

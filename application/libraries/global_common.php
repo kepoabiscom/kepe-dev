@@ -1,7 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Global_common {
-	function get_list_tag($tag, $type='list'){
+	function get_list_tag($tag, $type='article', $mode='list'){
 		$x = explode(',', $tag);
 		
 		$list = "";
@@ -17,15 +17,15 @@ class Global_common {
 
 			$t = implode(" ", $y);
 			
-			if($type == 'btn'){
-				$z[$i] = "<a class='btn btn-primary' style='margin-bottom: 5px;' href='".base_url('search?q='.$q.'&type=article')."'>".$t."</a>";
+			if($mode == 'btn'){
+				$z[$i] = "<a class='btn btn-primary' style='margin-bottom: 5px;' href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
 			}
 			else{
-				$z[$i] = "<a href='".base_url('search?q='.$q.'&type=article')."'>".$t."</a>";
+				$z[$i] = "<a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
 			}
 		}
 		
-		$list = ($type == 'btn') ? implode(" ", $z) : implode(", ", $z);
+		$list = ($mode == 'btn') ? implode(" ", $z) : implode(", ", $z);
 		
 		return $list;
 	}
