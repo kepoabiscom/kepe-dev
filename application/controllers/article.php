@@ -39,7 +39,8 @@ class Article extends CI_Controller {
 			'get_article' => $this->get_article_list($config['start'], $config['per_page'], $keyword),
 			'get_article_category' => $this->get_article_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
-			'page' => $config['page']
+			'page' => $config['page'],
+			"meta_tag" => "Kepo Article, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
@@ -196,6 +197,7 @@ class Article extends CI_Controller {
 	 					"full_name" => $q->nama_lengkap,
 		 				"title" => $title,
 		 				"tag" => $this->global_common->get_list_tag($tag, 'article', 'btn'),
+		 				"meta_tag" => $this->global_common->get_list_tag($tag, 'article', 'metadata'),
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,

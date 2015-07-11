@@ -19,9 +19,12 @@ class Global_common {
 			
 			if($mode == 'btn'){
 				$z[$i] = "<a class='btn btn-primary' style='margin-bottom: 5px;' href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
-			}
-			else{
+			} 
+			if($mode == 'list') {
 				$z[$i] = "<a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
+			}
+			if($mode == 'metadata') {
+				return $tag;
 			}
 		}
 		

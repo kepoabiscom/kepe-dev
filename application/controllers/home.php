@@ -24,7 +24,8 @@ class Home extends CI_Controller {
 			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "home"),
 			'get_video' => $this->get_video(),
 			'get_article' => $this->get_article(),
-			'get_news' => $this->get_news()
+			'get_news' => $this->get_news(),
+			"meta_tag" => "KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
