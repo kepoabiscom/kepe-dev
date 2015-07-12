@@ -100,16 +100,16 @@ class Global_common {
 		return $data;
 	}
 	
-	function echo_memory_usage() {
-        $mem_usage = memory_get_usage(true);
+	function echo_memory_usage($memory) {
+        $mem_usage = $memory;
        
         if ($mem_usage < 1024)
-            echo $mem_usage." bytes";
+            $memory_usage = $mem_usage." bytes";
         elseif ($mem_usage < 1048576)
-            echo round($mem_usage/1024,2)." kilobytes";
+            $memory_usage = round($mem_usage/1024,2)." kilobytes";
         else
-            echo round($mem_usage/1048576,2)." megabytes";
+            $memory_usage = round($mem_usage/1048576,2)." megabytes";
            
-        echo "<br/>";
+        return $memory_usage;
     } 
 }
