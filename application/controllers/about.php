@@ -24,6 +24,9 @@ class About extends CI_Controller {
 		$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $logo ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $logo ."'>";
 		$img .= "</a></div>";
+
+		$image = !isset($q->content_image) ? "" : $q->content_image;
+		$content_image = "<img  class='img-responsive' alt='' src='". base_url() . "assets/img/" . $image ."'>";
 		
 		$site_name = !isset($q->title) ? "" : $q->title;
 		$tagline = !isset($q->tagline) ? "" : $q->tagline;
@@ -56,6 +59,10 @@ class About extends CI_Controller {
 	 		"contact_twitter" => !isset($q->contact_twitter) ? "" : $q->contact_twitter,
 	 		"contact_googleplus" => !isset($q->contact_googleplus) ? "" : $q->contact_googleplus,
 	 		"contact_youtube" => !isset($q->contact_youtube) ? "" : $q->contact_youtube,
+	 		"content_title" => !isset($q->content_title) ? "" : $q->content_title,
+	 		"content_body" => !isset($q->content_body) ? "" : $q->content_body,
+	 		"content_mission" => !isset($q->content_mission) ? "" : $q->content_mission,
+	 		"content_image" => $content_image,
 	 		"background_color" => !isset($q->background_color) ? "" : $q->background_color,
 	 		"created_year" => $created_year,
 	 		"version" => !isset($q->version) ? "" : $q->version,

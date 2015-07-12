@@ -1,5 +1,5 @@
 # Host: localhost  (Version: 5.6.21)
-# Date: 2015-07-12 13:20:09
+# Date: 2015-07-12 22:14:46
 # Generator: MySQL-Front 5.3  (Build 4.191)
 
 /*!40101 SET NAMES latin1 */;
@@ -121,14 +121,14 @@ CREATE TABLE `article_stat` (
   `memory_usage` varchar(255) DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`article_stat_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 #
 # Data for table "article_stat"
 #
 
 /*!40000 ALTER TABLE `article_stat` DISABLE KEYS */;
-INSERT INTO `article_stat` VALUES (1,15,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681152','1835008','2015-07-12 13:05:52');
+INSERT INTO `article_stat` VALUES (1,15,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681152','1835008','2015-07-12 13:05:52'),(2,15,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436692445','1835008','2015-07-12 16:14:05'),(3,15,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436692447','1835008','2015-07-12 16:14:08');
 /*!40000 ALTER TABLE `article_stat` ENABLE KEYS */;
 
 #
@@ -279,14 +279,14 @@ CREATE TABLE `news_stat` (
   `memory_usage` varchar(255) DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`news_stat_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 #
 # Data for table "news_stat"
 #
 
 /*!40000 ALTER TABLE `news_stat` DISABLE KEYS */;
-INSERT INTO `news_stat` VALUES (1,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436680541','1835008','2015-07-12 12:55:41'),(2,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436680621','1835008','2015-07-12 12:57:01'),(3,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681149','1835008','2015-07-12 13:05:49'),(4,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681823','1835008','2015-07-12 13:17:03');
+INSERT INTO `news_stat` VALUES (1,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436680541','1835008','2015-07-12 12:55:41'),(2,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436680621','1835008','2015-07-12 12:57:01'),(3,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681149','1835008','2015-07-12 13:05:49'),(4,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681823','1835008','2015-07-12 13:17:03'),(5,3,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436714034','1835008','2015-07-12 22:13:55');
 /*!40000 ALTER TABLE `news_stat` ENABLE KEYS */;
 
 #
@@ -342,6 +342,10 @@ CREATE TABLE `setting` (
   `contact_twitter` varchar(255) DEFAULT NULL,
   `contact_googleplus` varchar(255) DEFAULT NULL,
   `contact_youtube` varchar(255) DEFAULT NULL,
+  `content_title` text,
+  `content_body` text,
+  `content_mission` text,
+  `content_image` varchar(255) DEFAULT NULL,
   `created_year` varchar(255) DEFAULT NULL,
   `version` varchar(255) DEFAULT NULL,
   `footer` text,
@@ -352,7 +356,7 @@ CREATE TABLE `setting` (
 # Data for table "setting"
 #
 
-INSERT INTO `setting` VALUES (1,0,'KepoAbis.com','b7d6537d27b26a5878d476104cf70186.png','Always make you curious','<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s. <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.</p>','#000000','Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati','085697309204','','','23456','hi@kepoabis.com','contact@kepoabis.com','-6.290491','106.860785','Jakarta Timur','DKI Jakarta','13540','Indonesia','https://www.facebook.com/kepoabiscom','https://twitter.com/KepoAbisCom','https://plus.google.com/108330573883645796122','https://www.youtube.com/channel/UCjCQDSEsDTqq7wmth70khLQ','2013','1.0.0','<p>© Copyright 2013 - 2015 Haamill Productions - All Rights reserved</p>');
+INSERT INTO `setting` VALUES (1,0,'KepoAbis.com','b7d6537d27b26a5878d476104cf70186.png','Always make you curious','<p><strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s. <strong>Lorem Ipsum</strong> is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s.</p>','#000000','Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati','085697309204','','','23456','hi@kepoabis.com','contact@kepoabis.com','-6.290491','106.860785','Jakarta Timur','DKI Jakarta','13540','Indonesia','https://www.facebook.com/kepoabiscom','https://twitter.com/KepoAbisCom','https://plus.google.com/108330573883645796122','https://www.youtube.com/channel/UCjCQDSEsDTqq7wmth70khLQ','Kepoabis.com is a <strong>videography community</strong>. Our Focus is to create a creative videos which can inspiring people to aplicated to their live what we showed.','Kepoabis.com is a videography community based in Jakarta, Indonesia. The embryo of this community was created back in October 2013 by 4 co-founders, Haris Millah Muhammad, Ahmad Khairi, Syahrul Ramadhan, and Herman Wahyudi.\n<br>\n<br>\nOur Focus is to create a creative videos which can inspiring people to aplicated to their live what we showed. We also act as a media partner for any client who needs a creative documentation. We commit to give a full service that help our clients expand their digital reach. ','To shows an emerging social reality that we pack as a video.\n<br>To give various entertaining and unique info. \n<br>Insert a humour value in our video without eliminating the substance of video’s topic.','logo.png','2013','1.0.0','<p>© Copyright 2013 - 2015 Haamill Productions - All Rights reserved</p>');
 
 #
 # Structure for table "static_content"
@@ -591,12 +595,12 @@ CREATE TABLE `video_stat` (
   `memory_usage` varchar(255) DEFAULT NULL,
   `created_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   PRIMARY KEY (`video_stat_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
+) ENGINE=MyISAM AUTO_INCREMENT=26 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 #
 # Data for table "video_stat"
 #
 
 /*!40000 ALTER TABLE `video_stat` DISABLE KEYS */;
-INSERT INTO `video_stat` VALUES (1,7,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681144','1835008','2015-07-12 13:05:44');
+INSERT INTO `video_stat` VALUES (1,7,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436681144','1835008','2015-07-12 13:05:44'),(2,10,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682788','1835008','2015-07-12 13:33:08'),(3,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682804','1835008','2015-07-12 13:33:24'),(4,6,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682807','1835008','2015-07-12 13:33:27'),(5,8,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682813','1835008','2015-07-12 13:33:34'),(6,9,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682815','1835008','2015-07-12 13:33:35'),(7,7,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682821','1835008','2015-07-12 13:33:42'),(8,5,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682823','1835008','2015-07-12 13:33:43'),(9,11,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682832','1835008','2015-07-12 13:33:52'),(10,10,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682834','1835008','2015-07-12 13:33:54'),(11,12,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682843','1835008','2015-07-12 13:34:03'),(12,13,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682845','1835008','2015-07-12 13:34:05'),(13,14,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682854','1835008','2015-07-12 13:34:14'),(14,15,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682856','1835008','2015-07-12 13:34:16'),(15,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682872','1835008','2015-07-12 13:34:32'),(16,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682873','1835008','2015-07-12 13:34:33'),(17,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682874','1835008','2015-07-12 13:34:34'),(18,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682875','1835008','2015-07-12 13:34:36'),(19,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682876','1835008','2015-07-12 13:34:37'),(20,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682890','1835008','2015-07-12 13:34:50'),(21,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682891','1835008','2015-07-12 13:34:51'),(22,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682892','1835008','2015-07-12 13:34:53'),(23,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682894','1835008','2015-07-12 13:34:54'),(24,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682895','1835008','2015-07-12 13:34:55'),(25,21,'::1','Mozilla/5.0 (Windows NT 6.3; WOW64; rv:39.0) Gecko/20100101 Firefox/39.0','1436682896','1835008','2015-07-12 13:34:56');
 /*!40000 ALTER TABLE `video_stat` ENABLE KEYS */;
