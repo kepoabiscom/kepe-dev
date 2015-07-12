@@ -5,7 +5,11 @@ class Article_model extends CI_Model {
     function __construct() {
         parent:: __construct();
     }
-
+	
+	function create_article_stat($data){
+		$this->db->insert('article_stat', $data);
+	}
+	
     function get_article_list($flag=0, $start, $limit, $keyword=array()) {	
     	if($flag == 0) {
             $this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
@@ -205,6 +209,18 @@ class Article_model extends CI_Model {
 		$this->db->select("COUNT(1) AS count_article_comment");
 		$this->db->from("article_comment acom");
 		$this->db->where("acom.article_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
+	
+	function count_article_stat($id){
+		$this->db->select("COUNT(1) AS count_article_stat");
+		$this->db->from("article_stat astat");
+		$this->db->where("astat.article_id", $id);
 		
 		$query = $this->db->get();
 		

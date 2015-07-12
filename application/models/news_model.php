@@ -131,6 +131,10 @@ class News_model extends CI_Model {
                 );
         $this->db->insert('news', $data);
     }
+	
+	function create_news_stat($data){
+		$this->db->insert('news_stat', $data);
+	}
 
     function delete_news($id) {
     	return $this->db->delete("news", array("news_id" => $id));
@@ -207,6 +211,18 @@ class News_model extends CI_Model {
 		$this->db->select("COUNT(1) AS count_news_comment");
 		$this->db->from("news_comment ncom");
 		$this->db->where("ncom.news_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
+	
+	function count_news_stat($id){
+		$this->db->select("COUNT(1) AS count_news_stat");
+		$this->db->from("news_stat nstat");
+		$this->db->where("nstat.news_id", $id);
 		
 		$query = $this->db->get();
 		

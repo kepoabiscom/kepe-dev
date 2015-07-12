@@ -25,7 +25,9 @@
 					<div class="title">{title}</div>
 					{image}
 					<br>
-					<p class="post-body">On {created_date} By {full_name}, {count_video_comment} Comment</p>
+					<p class="post-body">
+						On {created_date} By {full_name}, {count_video_comment} comment | {count_video_stat} views
+					</p>
 					<p>{description}</p>
 					 <p>Tag {tag}</p>
 				</div>
@@ -39,27 +41,6 @@
 		</div>
 	</div>
 </div>
-<!--
-<div class="col-md-4">
-	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Category</h5>
-		<ol class="list-unstyled">
-			{get_video_category}
-				{list}
-			{/get_video_category}
-		</ol>                 	 
-	</div>
-	<div class="sidebar-module">
-		<h5 style="font-weight: 400; font-size: 24px;">Archives</h5>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
-    </div>
-</div>
--->
-
 <script>
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();   

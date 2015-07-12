@@ -107,7 +107,9 @@ class Article extends CI_Controller {
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
 					"recent_article_category" => $recent_article_category,
-					"count_article_comment" => $this->article_model->count_article_comment($article_id)->count_article_comment
+					"count_article_comment" => $this->article_model->count_article_comment($article_id)->count_article_comment,
+					"count_article_stat" => $this->article_model->count_article_stat($article_id)->count_article_stat
+					
 				 );
 				 
 				 $i++;
@@ -212,7 +214,9 @@ class Article extends CI_Controller {
 		 				"prev_next" => $prev_next,
 		 				"article_id" => $id
 	     		));
-
+		
+		$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));
+		
  		$this->generate('article/read_article', $data);
 	}
 

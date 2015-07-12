@@ -5,7 +5,11 @@ class Video_model extends CI_Model {
     function __construct() {
         parent:: __construct();
     }
-
+	
+	function create_video_stat($data){
+		$this->db->insert('video_stat', $data);
+	}
+	
     function count_video($flag=0, $keyword=array()) {
 		if($flag==0){
 			return $this->db->count_all("video");
@@ -249,6 +253,18 @@ class Video_model extends CI_Model {
 		$this->db->select("COUNT(1) AS count_video_comment");
 		$this->db->from("video_comment vcom");
 		$this->db->where("vcom.video_id", $id);
+		
+		$query = $this->db->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+	}
+	
+	function count_video_stat($id){
+		$this->db->select("COUNT(1) AS count_video_stat");
+		$this->db->from("video_stat vstat");
+		$this->db->where("vstat.video_id", $id);
 		
 		$query = $this->db->get();
 		

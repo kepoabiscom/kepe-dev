@@ -99,6 +99,14 @@
 		<h2 class="title">Tag</h2>
 		{tag}                	 
 	</div>
+	<div class="sidebar-module">
+		<h2 class="title">Archives</h2>
+            <ol class="list-unstyled">
+				{get_archives_list}
+					{list}
+				{/get_archives_list}
+            </ol>
+    </div>
 </div>
 
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/comment.js'; ?>"></script>

@@ -106,7 +106,8 @@ class Videografi extends CI_Controller {
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
 					"recent_video_category" => $recent_video_category,
-					"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment
+					"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment,
+					"count_video_stat" => $this->video_model->count_video_stat($video_id)->count_video_stat
 				 );
 				 
 				 $i++;
@@ -220,7 +221,9 @@ class Videografi extends CI_Controller {
  				"video_id" => $id
 	        )
 		);
-
+		
+		$this->video_model->create_video_stat($this->global_common->stat('video_id', $id));
+		
  		$this->generate('videografi/view', $data);
 	}
 	

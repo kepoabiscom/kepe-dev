@@ -14,7 +14,9 @@
 			{get_news}
 			<div class="post">
 				<h2 class="post-title">{title}</h2>
-				<p class="post-body">On {created_date} By {full_name}, {count_news_comment} Comment</p>
+				<p class="post-body">
+					On {created_date} By {full_name}, {count_news_comment} comment | {count_news_stat} views
+				</p>
 				{image}
 				{body}
 				<p>Tag {tag}</p>

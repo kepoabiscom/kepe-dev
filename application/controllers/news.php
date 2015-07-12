@@ -103,7 +103,8 @@ class News extends CI_Controller {
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
 					"recent_news_category" => $recent_news_category,
-					"count_news_comment" => $this->news_model->count_news_comment($news_id)->count_news_comment
+					"count_news_comment" => $this->news_model->count_news_comment($news_id)->count_news_comment,
+					"count_news_stat" => $this->news_model->count_news_stat($news_id)->count_news_stat
 				 );
 				 
 				 $i++;
@@ -214,7 +215,9 @@ class News extends CI_Controller {
 		 				"prev_next" => $prev_next,
 		 				"news_id" => $id
 	     		));
-
+		
+		$this->news_model->create_news_stat($this->global_common->stat('news_id', $id));
+		
  		$this->generate('news/read_news', $data);
 	}
 	

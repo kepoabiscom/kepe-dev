@@ -14,7 +14,9 @@
 			{get_article}
 			<div class="post">
 				<h2 class="post-title">{title}</h2>
-				<p class="post-body">On {created_date} By {full_name}, {count_article_comment} Comment</p>
+				<p class="post-body">
+					On {created_date} By {full_name}, {count_article_comment} comment | {count_article_stat} views
+				</p>
 				{image}
 				{summary}
 				<p>Tag {tag}</p>
