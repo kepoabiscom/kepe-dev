@@ -59,7 +59,7 @@ class About extends CI_Controller {
 	 		"background_color" => !isset($q->background_color) ? "" : $q->background_color,
 	 		"created_year" => $created_year,
 	 		"version" => !isset($q->version) ? "" : $q->version,
-	 		"contact_footer" => "<a href='".base_url('home')."'>".$site_name."</a> &copy; ".$created_year." - ".date('Y')."<br>Haamill Productions<br>".$contact_address.", ".$contact_city." ".$contact_zip."<br>".$contact_country."<br><p>Phone: ".$contact_phone."<br>Email: <a href='mailto:#'>".$contact_email_address_first."</a></p>",
+	 		"contact_footer" => "<a href='".base_url('home')."'>".$site_name."</a> &copy; ".$created_year." - ".date('Y')."<br>Haamill Productions<br><br><i class='glyphicon glyphicon-road'></i>&nbsp;".$contact_address.", ".$contact_city." ".$contact_zip."<br><i class='glyphicon glyphicon-map-marker'></i>&nbsp;".$contact_country."<br><br><p><i class='glyphicon glyphicon-phone'></i>&nbsp;Phone: ".$contact_phone."<br><i class='glyphicon glyphicon-envelope'></i>&nbsp;Email: <a href='mailto:#'>".$contact_email_address_first."</a></p>",
 	 		"footer" => !isset($q->footer) ? "" : $q->footer, 
 	 		"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 	 		"logo_image" => $img,

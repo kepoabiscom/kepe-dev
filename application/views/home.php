@@ -69,7 +69,7 @@
 					</p>
 					<p>
 						<em>By <a href="#">{full_name}</a></em><br>
-						<em>Kategori : {category}</em>
+						<em>Category : {category}</em>
 					</p>
 				</div>
 			</div>                	 

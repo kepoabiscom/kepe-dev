@@ -28,9 +28,9 @@ class Videografi extends CI_Controller {
 		$keyword = array(
 			'year' => ($this->uri->segment(3)) ? $this->uri->segment(3) : 0,
 			'month' => $this->uri->segment(4) ? $this->uri->segment(4) : 0,
-			'category' => $this->uri->segment(5) ? $this->uri->segment(5) : 0
+			'category' => $this->uri->segment(5) ? str_replace('%20', ' ', $this->uri->segment(5)) : 0
 		);
-		
+
 		$config = $this->table_pagination($keyword);
 		$data = array(
 			'get_menu' => $this->menu->get_menu("header", "videografi"),
@@ -88,7 +88,7 @@ class Videografi extends CI_Controller {
 				$img .= "</a>";
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
-				$title = "<a href='".$view."'>".$this->get_title($title)."</a>";
+				$title = "<a href='".$view."'>".$this->global_common->get_title(45, $title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";
@@ -133,7 +133,7 @@ class Videografi extends CI_Controller {
 			
 			$r = $this->global_common->get_length_title(5, $title);
 			
-			$list = "<li ".$active."><a href='".base_url('videografi/page/0/0/'.$title)."' data-toggle='tooltip' data-placement='top' title='".$title."'>".$title." (".$total.")</a></li>";
+			$list = "<li ".$active."><a href='".base_url('videografi/page/0/0/'.$title)."' data-toggle='tooltip' data-placement='top' title='".$title."(".$total.")'>".$title."</a></li>";
 
 			$data[$i] = array(
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
@@ -292,40 +292,5 @@ class Videografi extends CI_Controller {
 		
 		$config['page'] = $this->pagination->create_links();
 		return $config;
-	}
-	
-	function get_title($text) {
-		$N = 45;
-		$array = str_split($text,1);
-		
-		$x = "";
-		
-		$length = strlen($text);
-		
-		if($length <= $N){
-			for ($i=0; $i < count($array); $i++) {
-				$x .= $array[$i];
-			}
-		}
-		else{
-			for ($i=0; $i < $N; $i++) {
-				$x .= $array[$i];
-			}
-		}
-		
-		$word1 = explode(" ", $text);
-		$word2 = explode(" ", $x);
-		
-		$text = "";
-		for ($i=0; $i < count($word2); $i++) {
-			if($word1[$i] == $word2[$i]){
-				$text .= $word2[$i]." ";
-			}
-		}
-		
-		$length = strlen($x);
-		
-		$text = ($length >= $N) ? $text." ..." : $text;		
-		return $text;
 	}
 }

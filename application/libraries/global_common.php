@@ -52,4 +52,38 @@ class Global_common {
 
 		return $text;
 	}
+	
+	function get_title($N, $text) {
+		$array = str_split($text,1);
+		
+		$x = "";
+		
+		$length = strlen($text);
+		
+		if($length <= $N){
+			for ($i=0; $i < count($array); $i++) {
+				$x .= $array[$i];
+			}
+		}
+		else{
+			for ($i=0; $i < $N; $i++) {
+				$x .= $array[$i];
+			}
+		}
+		
+		$word1 = explode(" ", $text);
+		$word2 = explode(" ", $x);
+		
+		$text = "";
+		for ($i=0; $i < count($word2); $i++) {
+			if($word1[$i] == $word2[$i]){
+				$text .= $word2[$i]." ";
+			}
+		}
+		
+		$length = strlen($x);
+		
+		$text = ($length >= $N) ? $text." ..." : $text;		
+		return $text;
+	}
 }

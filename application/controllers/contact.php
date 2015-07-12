@@ -72,7 +72,7 @@ class Contact extends CI_Controller {
 					<br>
 					<br>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati, Jakarta Timur 13540, Indonesia
 					<br><a href='http://kepoabis.com'>KepoAbis.com</a> by Haamill Productions
-					<br><p>Phone: 085697309204
+					<br>Phone: 085697309204
 					<br>Email: hi@kepoabis.com
 				</p>");
 			
