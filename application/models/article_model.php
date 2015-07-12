@@ -218,8 +218,9 @@ class Article_model extends CI_Model {
 	}
 	
 	function count_article_stat($id){
-        $query = $this->db->query("select count(ip_address) as count_article_stat
-                        from (select distinct ip_address from article_stat where article_id = '".$id."') as d");
+        $query = $this->db->select("count(ip_address) as count_article_stat")
+                        ->from("(select distinct ip_address from article_stat where article_id = '".$id."') as d")
+                        ->get();
         
         /*$this->db->select("COUNT(ip_address) AS count_article_stat");
 		$this->db->from("article_stat astat");

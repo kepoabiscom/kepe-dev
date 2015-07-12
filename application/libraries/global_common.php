@@ -90,7 +90,7 @@ class Global_common {
 	function stat($type_id, $id){
 		$data = array(
 			$type_id => $id,
-			'ip_address' => $_SERVER['SERVER_ADDR'],
+			'ip_address' => $_SERVER['REMOTE_ADDR'],
 			'user_agent' => $_SERVER['HTTP_USER_AGENT'],
 			'request_time' => $_SERVER['REQUEST_TIME'],
 			'memory_usage' => memory_get_usage(true),
