@@ -37,7 +37,7 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$is_maintenance = false;
+$is_maintenance = true;
 
 $route['default_controller'] = (!$is_maintenance) ? "home" : "maintenance";
 $route['admin'] = "admin/dashboard/index";

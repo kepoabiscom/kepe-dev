@@ -7,7 +7,16 @@ class Article_model extends CI_Model {
     }
 	
 	function create_article_stat($data){
-		$this->db->insert('article_stat', $data);
+        $query = $this->db->query("select distinct(ip_address) 
+            from article_stat where ip_address = '".$data['ip_address']."'");
+
+        if($query->num_rows() > 0) {
+            $this->db->where('article_id', $data['article_id']);
+            $this->db->update('article_stat', $data);
+        } else {
+            $this->db->insert('article_stat', $data);    
+        }
+		
 	}
 	
     function get_article_list($flag=0, $start, $limit, $keyword=array()) {	
