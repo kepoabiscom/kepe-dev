@@ -23,11 +23,10 @@
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>
-					{image}
-					<br>
 					<p class="post-body">
 						On {created_date} By {full_name}, {count_video_comment} comment | {count_video_stat} views
 					</p>
+					<p>{image}</p>
 					<p>{description}</p>
 					 <p>Tag {tag}</p>
 				</div>
