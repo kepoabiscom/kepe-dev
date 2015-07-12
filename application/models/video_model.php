@@ -262,14 +262,19 @@ class Video_model extends CI_Model {
 	}
 	
 	function count_video_stat($id){
-		$this->db->select("COUNT(1) AS count_video_stat");
+		$query = $this->db->query("select count(ip_address) as count_video_stat
+                        from (select distinct ip_address from video_stat where video_id = '".$id."') as v");
+        
+		/*
+		$this->db->select("COUNT(DISTINCT vstat.ip_address) AS count_video_stat");
 		$this->db->from("video_stat vstat");
 		$this->db->where("vstat.video_id", $id);
+		$this->db->group_by("vstat.ip_address");
 		
-		$query = $this->db->get();
+		$query = $this->db->get();*/
 		
         if($query->num_rows() == 1) {
             return $query->row();
-        } return;
+        } return (object) array("count_video_stat" => 0);
 	}
 }

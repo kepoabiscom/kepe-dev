@@ -220,14 +220,20 @@ class News_model extends CI_Model {
 	}
 	
 	function count_news_stat($id){
-		$this->db->select("COUNT(1) AS count_news_stat");
+        $query = $this->db->query("select count(ip_address) as count_news_stat
+                        from (select distinct ip_address from news_stat where news_id = '".$id."') as n");
+        
+
+        /*
+		$this->db->select("COUNT(DISTINCT nstat.ip_address) AS count_news_stat");
 		$this->db->from("news_stat nstat");
 		$this->db->where("nstat.news_id", $id);
+        $this->db->group_by("nstat.ip_address");
 		
-		$query = $this->db->get();
+		$query = $this->db->get();*/
 		
         if($query->num_rows() == 1) {
             return $query->row();
-        } return;
+        } return (object) array("count_news_stat" => 0);
 	}
 }

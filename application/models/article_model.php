@@ -218,14 +218,18 @@ class Article_model extends CI_Model {
 	}
 	
 	function count_article_stat($id){
-		$this->db->select("COUNT(1) AS count_article_stat");
+        $query = $this->db->query("select count(ip_address) as count_article_stat
+                        from (select distinct ip_address from article_stat where article_id = '".$id."') as d");
+        
+        /*$this->db->select("COUNT(ip_address) AS count_article_stat");
 		$this->db->from("article_stat astat");
 		$this->db->where("astat.article_id", $id);
+        */
 		
-		$query = $this->db->get();
+		//$query = $this->db->get();
 		
         if($query->num_rows() == 1) {
             return $query->row();
-        } return;
+        } return (object) array("count_article_stat" => 0);
 	}
 }
