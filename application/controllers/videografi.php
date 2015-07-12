@@ -88,7 +88,7 @@ class Videografi extends CI_Controller {
 				$img .= "</a>";
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
-				$title = "<a href='".$view."'>".$this->global_common->get_title(45, $title)."</a>";
+				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(45, $title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";

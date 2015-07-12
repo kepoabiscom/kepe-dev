@@ -100,7 +100,7 @@ class Global_common {
 		return $data;
 	}
 	
-	function echo_memory_usage($memory) {
+	function memory_usage($memory) {
         $mem_usage = $memory;
        
         if ($mem_usage < 1024)
