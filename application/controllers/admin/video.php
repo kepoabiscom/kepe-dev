@@ -156,7 +156,7 @@ class Video extends CI_Controller {
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		unset($d['submit']);
-			 		$q = $this->image_model->get_by_id($d['image_id']) ? $this->image_model->get_by_id($d['image_id']) : "";
+			 		$q = $this->image_model->get_by_id($d['image_id']) ? $this->image_model->get_by_id($d['image_id']) : (object) array("path" => "", "size" => 0);
 			 		$img_data = array("name" => $q->path, 
 								"size" => $q->size);
 					if($t['is_uploaded']) {

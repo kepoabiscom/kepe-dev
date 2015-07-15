@@ -1,5 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once("./././api/cloudinary/Cloudinary.php");
+require_once("./././api/cloudinary/Uploader.php");
+require_once("./././api/cloudinary/Api.php");
+
+require_once("./././api/config_api_key.php");
+
 class User extends CI_Controller {
 
 	/**
@@ -35,6 +41,12 @@ class User extends CI_Controller {
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
+	 }
+
+	 function test_upload_to_cloud() {
+	 	\Cloudinary\Uploader::upload("/home/hermanwahyudi/Downloads/wordpress-icon.png");
+
+	 	print_r("Success!");
 	 }
 
 	 function get_user_list($start, $limit) {
