@@ -44,9 +44,15 @@ class User extends CI_Controller {
 	 }
 
 	 function test_upload_to_cloud() {
-	 	\Cloudinary\Uploader::upload("/home/hermanwahyudi/Downloads/wordpress-icon.png");
-
-	 	print_r("Success!");
+	 	//\Cloudinary\Uploader::upload("/home/hermanwahyudi/Downloads/wordpress-icon.png");
+	 	if(isset($_POST['submit'])) {
+	 		$cloud = new \Cloudinary\Uploader();
+	 		$result = (object) $cloud->upload($_FILES["userfile"]["tmp_name"]);
+	 		if(!empty($result->signature)) {
+	 			print_r("Success!\n");
+	 			echo "<img src='".$result->url."' height=400 width=400 />";	
+	 		}
+	 	}
 	 }
 
 	 function get_user_list($start, $limit) {
