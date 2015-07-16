@@ -13,7 +13,7 @@
 		<div class="col-md-12">
 			{get_news}
 			<div class="post">
-				<h2 class="post-title">{title}</h2>
+				<h2 class="title">{title}</h2>
 				<p class="post-body">
 					On {created_date} By {full_name}, {count_news_comment} comment | {count_news_stat} views
 				</p>
@@ -31,15 +31,15 @@
 </div>
 <div class="col-md-4">
 	<div class="sidebar-module">
-		<h2>Category</h2>
-		<ol class="list-unstyled">
+		<h2 class="title">Category</h2>
+		<ol class="list-inline list-inline-btn">
 			{get_news_category}
 				{list}
 			{/get_news_category}
 		</ol>                 	 
 	</div>
 	<div class="sidebar-module">
-		<h2>Archives</h2>
+		<h2 class="title">Archives</h2>
             <ol class="list-unstyled">
 				{get_archives_list}
 					{list}

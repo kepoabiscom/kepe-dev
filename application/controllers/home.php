@@ -74,10 +74,10 @@ class Home extends CI_Controller {
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 				"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='" . $read_more . "'>".$this->global_common->get_title(28, $title)."</a>",
 				"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
-				"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
+				"full_name" => !isset($q->nama_lengkap) ? "" : "By ".$q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
-				"category" => !isset($q->category) ? "" : $q->category,
+				"category" => !isset($q->category) ? "" : "In <a href='".base_url('news/page/0/0/'.$q->category)."'>".$q->category."</a>"
 			 );
 			 
 			 $i++;
@@ -112,10 +112,10 @@ class Home extends CI_Controller {
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 					"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$this->global_common->get_title(45, $title)."</a>",
 					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
-					"full_name" => !isset($q->nama_lengkap) ? "" : "By <a href='#''>" . $q->nama_lengkap . "</a>",
+					"full_name" => !isset($q->nama_lengkap) ? "" : "By " . $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
-					"category" => !isset($q->category) ? "" : "Category : " . $q->category,
+					"category" => !isset($q->category) ? "" : "In <a href='".base_url('article/page/0/0/'.$q->category)."'>".$q->category."</a>",
 					"no_recent_art" => ""
 				 );
 				 
@@ -149,7 +149,7 @@ class Home extends CI_Controller {
 			$day = !isset($q->day) ? 0 : $q->day;
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
-			$img .= "<img class='img-responsive' width='536px' src='". base_url($path) ."' alt='".$title."' style='float: right; margin-top: 20px;'/>";
+			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='width: 536px;float: right; margin-top: 20px;'/>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
 			

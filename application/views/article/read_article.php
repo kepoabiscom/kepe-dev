@@ -77,20 +77,18 @@
 <div class="col-md-4">
 	<div class="widget">
 		<h2 class="title">Recent Article</h2>
-			<ul class="recent_post">
-				{get_article}
-				<li>
-					{title}
-					<br>{recent_article_category}
-					<br>{created_date}
-					<div class="clear"></div>
-				</li>		
-				{/get_article}
-		</ul>                	 
+		{get_article}
+		<div class="latest-post-blog">
+		{image}
+			<p>{title}</p>
+			<span>{created_date}</span>
+			<span>In {recent_article_category}</span>
+		</div>
+		{/get_article}
 	</div>
 	<div class="sidebar-module">
-		<h2>Category</h2>
-		<ol class="list-unstyled">
+		<h2 class="title">Category</h2>
+		<ol class="list-inline list-inline-btn">
 			{get_article_category}
 				{list}
 			{/get_article_category}

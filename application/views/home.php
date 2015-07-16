@@ -1,4 +1,11 @@
 <div class="col-md-12">
+	<div>
+		<ol class="breadcrumb">
+			<li class="active">Home</li>
+		</ol>
+	</div>
+</div>
+<div class="col-md-12">
 	<div clas="row">
 		<h2>
 			<strong class="bold-text">ABOUT</strong>
@@ -56,15 +63,13 @@
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>
-					<p><em>{created_date}</em></p>		
+					<p><em>{created_date} {full_name}</em></p>		
 					{image}
-					<br>
-					<p style="text-align: justify;">
-					{summary}
-					</p>
+					<div style="text-align: justify;">
+						{summary}
+					</div>
 					<p>
-						<em>By <a href="#">{full_name}</a></em><br>
-						<em>Category : {category}</em>
+						<em>{category}</em>
 					</p>
 				</div>
 			</div>                	 
@@ -88,13 +93,12 @@
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>
-					<p><em>{created_date}</em></p>		
+					<p><em>{created_date} {full_name}</em></p>		
 					{image}
-					<p style="text-align: justify;">
-					{summary}
-					</p>
+					<div style="text-align: justify;">
+						{summary}
+					</div>
 					<p>
-						<em>{full_name}</a></em><br>
 						<em>{category}</em>
 					</p>
 				</div>
@@ -107,6 +111,35 @@
 		</div>
     </div>
 </div>
+
+<div class="col-md-12">
+	<h2><strong class="bold-text">FOLLOW US</strong></h2>
+	<div class="social-media pull-center">
+	<ul class="list-inline">
+		<li class="social-icons">
+			<a target="_blank" title="Follow Twitter" href="{contact_twitter}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//twitter.png'); ?>">
+			</a>
+		</li>
+		<li class="social-icons">
+			<a target="_blank" title="Facebook group" href="{contact_facebook}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//facebook.png'); ?>">
+			</a>
+		</li>
+		<li class="social-icons">
+			<a target="_blank" title="Google Plus group" href="{contact_googleplus}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//googleplus.png'); ?>">
+			</a>
+		</li>
+		<li class="social-icons">
+			<a target="_blank" title="Watch Youtube" href="{contact_youtube}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//youtube.png'); ?>">
+			</a>
+		</li>
+	</ul>
+	</div>
+</div>
+
 <script>
 	$(document).ready(function(){
 		$('[data-toggle="tooltip"]').tooltip();   

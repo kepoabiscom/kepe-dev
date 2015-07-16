@@ -20,7 +20,7 @@ class Menu {
                     array("name" => "NEWS", "active" => $active[1], "url" => base_url('news')),
                     array("name" => "ARTICLE", "active" => $active[2], "url" => base_url('article')),
                     array("name" => "VIDEOGRAFI", "active" => $active[3], "url" => base_url('videografi')),
-                    array("name" => "CONTACT", "active" => $active[4], "url" => base_url('contact'))
+                    array("name" => "CONTACT US", "active" => $active[4], "url" => base_url('contact'))
                 );
         } else {
             $d = array(

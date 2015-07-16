@@ -37,6 +37,8 @@
     </div> <!-- /container -->
 	{map}
 	{footer}
+	<!-- Back To Top Button -->
+	<div id="backtotop"><a href="#"></a></div>
 	
 	<script>
 		var myCenter=new google.maps.LatLng("{contact_lat}", "{contact_long}");

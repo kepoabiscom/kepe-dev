@@ -88,7 +88,7 @@ class Videografi extends CI_Controller {
 				$img .= "</a>";
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
-				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(45, $title)."</a>";
+				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(26, $title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";
@@ -277,7 +277,7 @@ class Videografi extends CI_Controller {
 	
 	 function table_pagination($keyword){
 		$config['base_url'] = base_url("videografi/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 10;
+		$config['per_page'] = 9;
 		$config['total_rows'] = $this->video_model->count_video(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = '&gt;';

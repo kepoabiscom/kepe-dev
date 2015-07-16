@@ -75,21 +75,20 @@
 </div>
 <div class="col-md-4">
 	<div class="widget">
-		<h2 class="title">Recent Videografi</h2>
-			<ul class="recent_post">
-				{get_video}
-				<li>
-					{title}
-					<br>{recent_video_category}
-					<br>{created_date}
-					<div class="clear"></div>
-				</li>		
-				{/get_video}
-		</ul>                	 
+		<h2 class="title">Recent Videografi</h2> 
+		{get_video}
+		<div class="latest-post-blog">
+		{image}
+			<p>{title}</p>
+			<span>{created_date}</span>
+			<span>In {recent_video_category}</span>
+		</div>
+		{/get_video}
 	</div>
+	<div class="clear"></div>
 	<div class="sidebar-module">
 		<h2 class="blog-post-title">Category</h2>
-		<ol class="list-unstyled">
+		<ol class="list-inline list-inline-btn">
 			{get_video_category}
 				{list}
 			{/get_video_category}

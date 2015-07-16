@@ -77,22 +77,20 @@
     </form>
 </div>
 <div class="col-md-4">
-	<div class="widget">
+	<div class="sidebar-module">
 		<h2 class="title">Recent News</h2>
-			<ul class="recent_post">
-				{get_news}
-				<li>
-					{title}
-					<br>{recent_news_category}
-					<br>{created_date}
-					<div class="clear"></div>
-				</li>		
-				{/get_news}
-		</ul>                	 
+		{get_news}
+		<div class="latest-post-blog">
+		{image}
+			<p>{title}</p>
+			<span>{created_date}</span>
+			<span>In {recent_news_category}</span>
+		</div>
+		{/get_news}
 	</div>
 	<div class="sidebar-module">
 		<h2 class="title">Category</h2>
-		<ol class="list-unstyled">
+		<ol class="list-inline list-inline-btn">
 			{get_news_category}
 				{list}
 			{/get_news_category}
