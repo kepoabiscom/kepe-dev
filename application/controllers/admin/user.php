@@ -43,20 +43,35 @@ class User extends CI_Controller {
 	   	}
 	 }
 
-	 function test_upload_to_cloud() {
+	 function upload_to_cdn($files) {
 	 	//\Cloudinary\Uploader::upload("/home/hermanwahyudi/Downloads/wordpress-icon.png");
 	 	try {
 			if(isset($_POST['submit'])) {
 	 			$cloud = new \Cloudinary\Uploader();
-	 			$result = (object) $cloud->upload($_FILES["userfile"]["tmp_name"]);
+	 			$result = (object) $cloud->upload($files,
+	 					array("use_filename" => true)
+	 				);
 	 			if(!empty($result->signature)) {
-	 				print_r("Success!\n");
-	 				echo "<img src='".$result->url."' height=400 width=400 />";	
+	 				return array("status" => 1, "secure_url" => $result->secure_url, "f" => "generate");
 	 			}
 	 		}
 		} catch(Exception $e) {
-			print_r("Error" . $e->getMessage());
+			if(!empty($files))
+				return array("status" => 0, "error_message" => $e->getMessage());
+			return array("status" => 1, "f" => "default");
 		}
+	 }
+
+	 function delete_image_cdn($img) {
+		if(strpos($img, "cloudinary")) {
+ 			$x = explode("/", $img);
+ 			$y = explode(".", $x[count($x)-1]);
+ 			if($y[0] != "default") {
+ 				\Cloudinary\Uploader::destroy($y[0], 
+ 					array("invalidate" => true)
+ 				);	
+ 			}
+ 		}
 	 }
 
 	 function get_user_list($start, $limit) {
@@ -82,10 +97,12 @@ class User extends CI_Controller {
 	 function detail($id='') {
 	 	if($this->session->userdata('logged_in')) {
 	 		$q = $this->user_model->get_by_id($id);
-	 		
+			
+			$path_img = !strpos($q->image, "cloudinary") ? base_url() . "assets/img/team/" . $q->image : $q->image;
+
 	 		$img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-			$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/team/" . $q->image ."'>";
-			$img .= "<img class='img-responsive' src='". base_url() . "assets/img/team/" . $q->image ."'>";
+			$img .= "<a target='_blank' class='thumbnail' href='". $path_img ."'>";
+			$img .= "<img class='img-responsive' src='". $path_img ."'>";
 			$img .= "</a></div>";
 	 		$data = array(
 		     			"username" => $q->user_name,
@@ -116,19 +133,19 @@ class User extends CI_Controller {
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {
-	        	$img_name = "default.jpg";
-	 			$t = $this->upload();
-		 		if($t['is_uploaded']) {
-		 			$img_name = $t['data']['file_name'];
-		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+	        	$img_path = "http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg";
+	 			$t = $this->upload_to_cdn($_FILES['userfile']['tmp_name']);
+		 		if($t['status'] == 1 && $t['f'] == "generate") {
+		 			$img_path = $t['secure_url'];
+		 		} else if($t['status'] == 0) {
+		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span><br><br>";
 		 			$this->load->view("admin/user/create_user", $data);	
 		 			return;
 		 		}
 
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
-			 		$d['image'] = $img_name;
+			 		$d['image'] = $img_path;
 			 		$this->user_model->create_user($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/user/create_user", $data);
@@ -192,22 +209,32 @@ class User extends CI_Controller {
 
 	 function update($id='') {
 	 	if($this->session->userdata('logged_in')) {
-	        $img_name = "";
+	        $img_name = ""; $default = "http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg";
 	        $this->validation();
 
 	        if($this->form_validation->run() == true) {
-	 			$t = $this->upload();
+	 			//$t = $this->upload();
+	        	$t = $this->upload_to_cdn($_FILES['userfile']['tmp_name']);
 
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
 			 		unset($d['submit']);
 			 		$q = $this->user_model->get_by_id($d['user_id']);
-			 		if($t['is_uploaded']) {
-			 			$d['image'] = $t['data']['file_name'];
+			 		if($t['status'] == 1 && $t['f'] == "generate") {
+			 			$d['image'] = $t['secure_url']; //$t['data']['file_name'];
 			 			if($q->image != null) {
-			 				unlink(base_url() . "assets/img/team/" . $q->image);
+			 				//unlink(base_url() . "assets/img/team/" . $q->image);
+			 				$this->delete_image_cdn($q->image);
 			 			} 
-			 		} else if(!$t['is_uploaded']) {
+			 		} else if($t['status'] == 1 && $t['f'] == "default") {
+			 			$d['image'] = $q->image == null ? $default : $q->image;
+			 		} else if($t['status'] == 0) {
+		 				$data = array("error_message" => "<span style='color:red'>" . $t['error_message'] . "</span><br><br>");
+	 					$this->session->set_userdata("error_message", $data['error_message']);
+	 					redirect("admin/user/update/" . $d['user_id']);	
+			 		}	
+
+			 		/*else if(!$t['is_uploaded']) {
 			 			if(empty($t['data']['file_name'])) {
 			 				$d['image'] = $q->image == null ? "default.jpg" : $q->image;
 			 			} else {
@@ -215,7 +242,7 @@ class User extends CI_Controller {
 		 					$this->session->set_userdata("error_message", $data['error_message']);
 		 					redirect("admin/user/update/" . $d['user_id']);	
 			 			}	
-			 		}
+			 		}*/
 
 			 		$this->user_model->update_user($d['user_id'], $d);
 			 		$t = array("success" => true,
@@ -251,6 +278,15 @@ class User extends CI_Controller {
 	 function delete($id='') {
 	 	if($this->session->userdata('logged_in')) {
 	 		$r = $this->user_model->get_by_id($id);
+	 		if(strpos($r->image, "cloudinary")) {
+	 			$x = explode("/", $r->image);
+	 			$y = explode(".", $x[count($x)-1]);
+	 			if($y[0] != "default") {
+	 				\Cloudinary\Uploader::destroy($y[0], 
+	 					array("invalidate" => true)
+	 				);	
+	 			}	
+	 		}
 	 		$this->user_model->delete_user($id);
 	 		$t = array("success" => true,
 	 				"username" => $r->user_name,
