@@ -24,7 +24,7 @@
 						{count_video_comment} comment | {count_video_stat} views
 					</p>
 					<!--<p>{description}</p>-->
-					 <p>Tag {tag}</p>
+					 <p>{tag}</p>
 				</div>
 			</div>                	 
 		</div>

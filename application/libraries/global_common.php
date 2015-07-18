@@ -17,11 +17,15 @@ class Global_common {
 
 			$t = implode(" ", $y);
 			
+			$ol = "<ol>";
+			
 			if($mode == 'btn'){
+				$ol = "<ol class='list-inline list-inline-btn'>";
 				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 			} 
 			if($mode == 'list') {
-				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
+				$ol = "<ol class='list-inline'><li>In</li>";
+				$z[$i] = "<li style='padding-left: 5px;padding-right: 0px;'><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 			}
 			if($mode == 'metadata') {
 				return $tag;
@@ -29,7 +33,7 @@ class Global_common {
 		}
 		
 		$list = ($mode == 'btn') ? implode(" ", $z) : implode(", ", $z);
-		$list = "<ol class='list-inline list-inline-btn'>".$list."</ol>";
+		$list = $ol.$list."</ol>";
 		
 		return $list;
 	}

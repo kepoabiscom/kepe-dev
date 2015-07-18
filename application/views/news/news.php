@@ -19,7 +19,7 @@
 				</p>
 				{image}
 				{body}
-				<p>Tag {tag}</p>
+				<p>{tag}</p>
 			</div>
 			{read_more}
 			{/get_news}
