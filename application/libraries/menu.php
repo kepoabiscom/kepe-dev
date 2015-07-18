@@ -20,7 +20,7 @@ class Menu {
                     array("name" => "NEWS", "active" => $active[1], "url" => base_url('news')),
                     array("name" => "ARTICLE", "active" => $active[2], "url" => base_url('article')),
                     array("name" => "VIDEOGRAFI", "active" => $active[3], "url" => base_url('videografi')),
-                    array("name" => "CONTACT US", "active" => $active[4], "url" => base_url('contact'))
+                    array("name" => "CONTACT US", "active" => $active[4], "url" => base_url('contact')),
                 );
         } else {
             $d = array(
@@ -31,9 +31,9 @@ class Menu {
                        "videografi" => base_url('videografi'),
                        "contact" => base_url('contact'),
                        "membershipform" => '#',
-                       "membership" => '#',
-                       "organization" => '#',
-                       "history" => '#'
+                       "membership" => base_url('about/page/membership'),
+                       "organization" => base_url('about/page/organization'),
+                       "history" => base_url('about/page/history'),
                    ));
         }
 

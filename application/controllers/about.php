@@ -10,13 +10,68 @@ class About extends CI_Controller {
 		$this->load->model("about_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
+		$this->load->library("global_common");
+		$this->load->library("menu");
 	}
 
 	/**
 	 * Index Page for this controller.
 	 */
 	 
-	 public function get_about_detail() {
+	 public function index()
+	{
+		$data = array_merge(
+			$this->get_about_detail(), 
+			$this->global_header(),
+			$this->read($this->uri->segment(3))
+		);
+		
+		$this->generate('about/static_content', $data);
+	}
+	
+	public function global_header(){
+		$data = array(
+			'get_menu' => $this->menu->get_menu("header", "about"),
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "about"),
+			"meta_tag" => "Kepo About, KepoAbis, Kepo, Abis, Make you curious"
+		);
+		
+		return $data;
+	}
+
+	function page() {
+	 	if(!$this->uri->segment(3)) {
+	 		redirect("about/page/history");
+	 	} else {
+	 		$this->index();	
+	 	}
+	 }
+	
+	public function read($parameter) {
+		$q = $this->about_model->get_static_content($parameter);
+		
+		$title = !isset($q->title) ? "" : $q->title;
+		$tag = !isset($q->tag) ? "" : $q->tag;
+		
+ 		$data = array(
+			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
+			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+	 		"title" => $title,
+			"tag" => $this->global_common->get_list_tag($tag),
+	 		"parameter" => !isset($q->parameter) ? "" : $q->parameter,
+	 		"summary" => !isset($q->summary) ? "" : $q->summary,
+	 		"body" => !isset($q->body) ? "" : $q->body,
+	 		"status" => !isset($q->status) ? "" : $q->status,
+	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
+	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
+	     ); 
+		
+ 		return $data;
+	}
+	
+	public function get_about_detail() {
 		$q = $this->about_model->get_detail();
 		
 	    $logo = !isset($q->logo) ? "" : $q->logo;
@@ -71,9 +126,27 @@ class About extends CI_Controller {
 	 		"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 	 		"logo_image" => $img,
 	 		"logo_name" => $logo, 
-	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id
+	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id,
+	 		"membership" => base_url('about/page/membership'),
+	 		"organization" => base_url('about/page/organization'),
+	 		"history" => base_url('about/page/history'),
 	     ); 
 		
  		return $data;
+	}
+	
+	public function generate($view, $content = array())
+	{
+		$data = array(
+			'slider' => NULL,
+			'map' => NULL,
+			'header' => $this->parser->parse('templates/header', $content, TRUE),
+			'content' => $this->parser->parse($view, $content, TRUE),
+			'footer' => $this->parser->parse('templates/footer', $content, TRUE)
+		);
+		
+		$data = array_merge($content, $data);
+		
+		$this->parser->parse('index', $data);
 	}
 }
