@@ -751,7 +751,8 @@ a.feed span {
 	margin: 0 10px 10px 0;
 	border: 1px solid #dedede;
 	padding: 3px;
-	height: 49px; width: 49px;
+	/* height: 49px; width: 49px; */
+	width: 100px;
 	-webkit-transition: all 0.2s ease-in-out;
     -moz-transition: all 0.2s ease-in-out;
     -o-transition: all 0.2s ease-in-out;

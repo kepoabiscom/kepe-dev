@@ -30,8 +30,8 @@
 		</div>
 		{/get_video}
 		<div class="clear"></div>
-		<div class="col-md-3"></div>
-		<div class="col-md-6 pull-center">
+		<div class="col-md-2"></div>
+		<div class="col-md-8 pull-center">
 			<ol class="list-inline list-inline-btn">
 				<li <?php echo ($this->uri->segment(5) == '') ? "class='active'" : ""; ?>><a href='<?php echo base_url('videografi'); ?>' data-toggle='tooltip' data-placement='top' title='All'>All</a></li>
 				{get_video_category}
@@ -39,7 +39,7 @@
 				{/get_video_category}
 			</ol>                 	 
 		</div>
-		<div class="col-md-3"></div>
+		<div class="col-md-2"></div>
 		<div class="col-md-12">
 			<div style="text-align: center;">
 				{page}

@@ -1,7 +1,7 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-12">
-			<h2><strong class="bold-text">GOOGLE MAP</strong></h2>
+			<h2 class="line-title"><strong class="bold-text">GOOGLE MAP</strong></h2>
 		</div>
 	</div>
 </div>

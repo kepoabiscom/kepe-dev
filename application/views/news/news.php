@@ -13,7 +13,7 @@
 		<div class="col-md-12">
 			{get_news}
 			<div class="post">
-				<h2 class="title">{title}</h2>
+				<h2 class="post-title">{title}</h2>
 				<p class="post-body">
 					On {created_date} By {full_name}, {count_news_comment} comment | {count_news_stat} views
 				</p>

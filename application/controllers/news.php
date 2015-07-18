@@ -143,25 +143,8 @@ class News extends CI_Controller {
 		$table = "news";
 		
 		$query = $this->archives_model->get_archives_list($table);
-
-		$i = 0;
-		foreach ($query->result() as $q)
-		{
-			$month = !isset($q->month) ? "" : $q->month;
-			$m = !isset($q->m) ? "" : $q->m;
-			$year = !isset($q->year) ? "" : $q->year;
-			$total = !isset($q->total) ? "" : $q->total;
-			
-			$list = "<li><a href='".base_url('news/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a></li>";
-			
-			$data[$i] = array(
-				"list" => $list
-			 );
-			 
-			 $i++;
-		}
-
- 		return $data;
+	
+ 		return $this->global_common->archives($query, $table);
 	}
 	
 	public function profile(){
@@ -235,7 +218,7 @@ class News extends CI_Controller {
 		if($rank > 0 && $rank < $count-1) {
 			$p = $this->news_model->get_one_row($rank-1);
 			$prev = "<li><a href='". base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
-					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+					."aria-label='Previous'><span aria-hidden='true'>&laquo; Previous</span></a></li>";
 			$p = $this->news_model->get_one_row($rank+1);
 			$next = "<li><a href='".base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
 					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
@@ -244,7 +227,7 @@ class News extends CI_Controller {
 		if($count-1 == $rank) {
 			$p = $this->news_model->get_one_row($rank-1);
 			$prev = "<li><a href='". base_url("news/read/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->news_id . "/" . $this->slug($p->title) . "")."'"
-					."aria-label='Previous'><span aria-hidden='true'>&laquo;Previous</span></a></li>";
+					."aria-label='Previous'><span aria-hidden='true'>&laquo; Previous</span></a></li>";
 			return $prev;
 		} 
 		if($rank == 0) {
@@ -268,8 +251,8 @@ class News extends CI_Controller {
 		$config['per_page'] = 5;
 		$config['total_rows'] = $this->news_model->count_news(1, $keyword);
 		$config['uri_segment'] = 6;
-		$config['next_link'] = '&gt;';
-		$config['prev_link'] = '&lt;';
+		$config['next_link'] = 'Next &raquo;';
+		$config['prev_link'] = '&laquo; Previous';
 		$config['first_link'] = '&lt;&lt;';
 		$config['last_link'] = '&gt;&gt;';
 		$config['cur_tag_open'] = '<span><b>';

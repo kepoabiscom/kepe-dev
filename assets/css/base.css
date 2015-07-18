@@ -344,8 +344,8 @@ sidebar-module {
 }
 
 .list-inline-btn > li > a {
-	background-color: #337ab7;
-	color: #fff;
+	background-color: #f5f5f5;
+	color: #777;
 	border-radius: 4px;
 	padding: 10px 10px;
 	text-decoration: none;
@@ -381,4 +381,9 @@ sidebar-module {
 
 .social-media{
 	margin:5em 0;
+}
+
+hr{
+	margin-bottom: 10px;
+    margin-top: 10px;
 }

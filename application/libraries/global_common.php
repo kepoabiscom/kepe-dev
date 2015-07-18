@@ -18,10 +18,10 @@ class Global_common {
 			$t = implode(" ", $y);
 			
 			if($mode == 'btn'){
-				$z[$i] = "<a class='btn btn-primary' style='margin-bottom: 5px;' href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
+				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 			} 
 			if($mode == 'list') {
-				$z[$i] = "<a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a>";
+				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 			}
 			if($mode == 'metadata') {
 				return $tag;
@@ -29,6 +29,7 @@ class Global_common {
 		}
 		
 		$list = ($mode == 'btn') ? implode(" ", $z) : implode(", ", $z);
+		$list = "<ol class='list-inline list-inline-btn'>".$list."</ol>";
 		
 		return $list;
 	}
@@ -112,4 +113,27 @@ class Global_common {
            
         return $memory_usage;
     } 
+	
+	function archives($query, $table){
+		$i = 0;
+		foreach ($query->result() as $q)
+		{
+			$month = !isset($q->month) ? "" : $q->month;
+			$m = !isset($q->m) ? "" : $q->m;
+			$year = !isset($q->year) ? "" : $q->year;
+			$total = !isset($q->total) ? "" : $q->total;
+			
+			$hr = ($i == 0) ? "<hr>" : "";
+			
+			$list = $hr."<li><span class='glyphicon glyphicon-pushpin'></span>&nbsp;<a href='".base_url($table.'/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a><hr></li>";
+			
+			$data[$i] = array(
+				"list" => $list
+			 );
+			 
+			 $i++;
+		}
+		
+		return $data;
+	}
 }

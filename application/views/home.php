@@ -1,13 +1,6 @@
 <div class="col-md-12">
-	<div>
-		<ol class="breadcrumb">
-			<li class="active">Home</li>
-		</ol>
-	</div>
-</div>
-<div class="col-md-12">
 	<div clas="row">
-		<h2>
+		<h2 class="line-title">
 			<strong class="bold-text">ABOUT</strong>
 			<span class="light-text main-color">US</span>
 		</h2>
@@ -56,7 +49,7 @@
 <div class="col-md-12">
      <div class="row">
 		<div class="col-md-12">
-			<h2><strong class="bold-text">NEWS</strong></h2>
+			<h2 class="line-title"><strong class="bold-text">NEWS</strong></h2>
 		</div>
 		{get_news}
 		<div class="col-md-4">
@@ -85,7 +78,7 @@
 <div class="col-md-12">
      <div class="row">
 		<div class="col-md-12">
-			<h2><strong class="bold-text">ARTICLE</strong></h2>
+			<h2 class="line-title"><strong class="bold-text">ARTICLE</strong></h2>
 		</div>
 		{get_article}
         {no_recent_art}
@@ -113,7 +106,7 @@
 </div>
 
 <div class="col-md-12">
-	<h2><strong class="bold-text">FOLLOW US</strong></h2>
+	<h2 class="line-title"><strong class="bold-text">FOLLOW US</strong></h2>
 	<div class="social-media pull-center">
 	<ul class="list-inline">
 		<li class="social-icons">
