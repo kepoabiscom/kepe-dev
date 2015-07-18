@@ -32,10 +32,14 @@ class Category_video extends CI_Controller {
 	function get_list_category_video($start, $limit, $keyword='') {
 		$result = $this->category_video_model->get_list_category($start, $limit);
 	 	$data_array = ""; $i = 1;
+		$number = 0;
+		
 	 	if($result) {
 	 		foreach($result as $row) {
+				$number =  $start + $i;
+				
 		 		$id = $row->video_category_id;
-	        	$data_array .= "<tr><td>" . $id . "</td>";
+	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title . "</td>";
 	        	$data_array .= "<td>" . $row->body . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";

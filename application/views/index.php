@@ -17,13 +17,23 @@
     <!-- Bootstrap core CSS -->
     <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
-	
+	<style>
+		body{
+			background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed;
+		}
+		
+		@media (max-width: 415px) {
+			body{
+				background-color:rgba(255,255,255,0.5); background: none;
+			}
+		}
+	</style>
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
   </head>
 
-  <body style="background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed;">
+  <body>
     <!-- Fixed navbar -->
     {header}
     {slider}

@@ -173,14 +173,14 @@ img.align-right{float: right; margin: 0 0 12px 15px;}
 }
 
 .pagination > li > a {
-    color: #870000;
+     /* background-color: #870000; */
 }
 .pagination > li > a:hover {
-    background-color: #870000;
-    color: #ffffff;
+    /* background-color: #870000; */
+    /* color: #ffffff; */
 }
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-    background-color: #870000;
+    /* background-color: #870000; */
     border-color: #428bca;
     color: #ffffff;
     cursor: default;

@@ -112,7 +112,24 @@ class User_model extends CI_Model {
     }
 
     function get_by_id($id) {
-        $this->db->select('u.user_id, u.user_role_basic_id, urb.role_name AS user_role, u.user_name, u.nama_lengkap, u.email, u.position, u.body, u.image, u.created_date, u.modified_date');
+        $this->db->select("
+			u.user_id
+			, u.user_role_basic_id
+			, urb.role_name AS user_role
+			, DATE_FORMAT(u.date_of_birth, '%M %d, %Y') as date_of_birth_modified
+			, u.date_of_birth
+			, u.place_of_birth
+			, u.user_name
+			, u.nama_lengkap
+			, u.email
+			, u.phone_number
+			, u.address
+			, u.position
+			, u.body
+			, u.image
+			, u.created_date
+			, u.modified_date
+		",false);
         $this->db->from('user u');
         $this->db->join("user_role_basic urb","urb.user_role_basic_id = u.user_role_basic_id");
         $this->db->where("user_id", $id);

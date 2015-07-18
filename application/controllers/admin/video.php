@@ -90,10 +90,14 @@ class Video extends CI_Controller {
 	function get_list_video($start, $limit) {
 	 	$result = $this->video_model->get_video_list(0, $start, $limit);
 	 	$data_array = ""; $i = 1;
+		$number = 0;
+		
 	 	if($result) {
 	 		foreach($result as $row) {
+				$number =  $start + $i;
+				
 		 		$id = $row->video_id;
-	        	$data_array .= "<tr><td>" . $id . "</td>";
+	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_video . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
