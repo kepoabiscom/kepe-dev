@@ -1,3 +1,4 @@
+<section>
 <div class="col-md-12">
 	<div clas="row">
 		<h2 class="line-title">
@@ -46,6 +47,7 @@
 		</div>
 	</div>
 </div>
+</section>
 <div class="col-md-12">
      <div class="row">
 		<div class="col-md-12">
@@ -70,7 +72,7 @@
 		{/get_news}
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="<?php echo base_url('news'); ?>">View All News</a>
+			<a class="button medium yellow" href="<?php echo base_url('news'); ?>">View All News</a>
 		</div>
     </div>
 </div>
@@ -100,7 +102,7 @@
 		{/get_article}
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
-			<a class="btn btn-default" href="<?php echo base_url('article'); ?>">View All Articles</a>
+			<a class="button medium yellow" href="<?php echo base_url('article'); ?>">View All Articles</a>
 		</div>
     </div>
 </div>
@@ -127,6 +129,16 @@
 		<li class="social-icons">
 			<a target="_blank" title="Watch Youtube" href="{contact_youtube}">
 				<img class="img-responsive" src="<?php echo base_url('assets/img//youtube.png'); ?>">
+			</a>
+		</li>
+		<li class="social-icons">
+			<a target="_blank" title="Instagram" href="{contact_instagram}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//instagram.png'); ?>">
+			</a>
+		</li>
+		<li class="social-icons">
+			<a target="_blank" title="Path" href="{contact_path}">
+				<img class="img-responsive" src="<?php echo base_url('assets/img//path.png'); ?>">
 			</a>
 		</li>
 	</ul>

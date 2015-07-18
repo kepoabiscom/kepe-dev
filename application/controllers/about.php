@@ -114,6 +114,8 @@ class About extends CI_Controller {
 	 		"contact_twitter" => !isset($q->contact_twitter) ? "" : $q->contact_twitter,
 	 		"contact_googleplus" => !isset($q->contact_googleplus) ? "" : $q->contact_googleplus,
 	 		"contact_youtube" => !isset($q->contact_youtube) ? "" : $q->contact_youtube,
+	 		"contact_instagram" => !isset($q->contact_instagram) ? "" : $q->contact_instagram,
+	 		"contact_path" => !isset($q->contact_path) ? "" : $q->contact_path,
 	 		"content_title" => !isset($q->content_title) ? "" : $q->content_title,
 	 		"content_body" => !isset($q->content_body) ? "" : $q->content_body,
 	 		"content_mission" => !isset($q->content_mission) ? "" : $q->content_mission,

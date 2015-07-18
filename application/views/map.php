@@ -7,8 +7,8 @@
 </div>
 <div class="container-fluit">
 	<div class="row-fluit">
-		<div style="padding: 5px; background-color: #ddd;">
-			<div id="googleMap" style="width:100%;height:345px; border: 1px solid #fff;"></div>
+		<div>
+			<div id="googleMap" style="width:100%;height:345px; border-top: 1px solid #ccc; border-bottom: 1px solid #ccc;"></div>
 		</div>
 	</div>
 </div>

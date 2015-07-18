@@ -31,6 +31,8 @@ class About_model extends CI_Model {
 			,contact_twitter
 			,contact_googleplus
 			,contact_youtube
+			,contact_instagram
+			,contact_path
 			,content_title
 			,content_body
 			,content_mission

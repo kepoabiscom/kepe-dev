@@ -23,19 +23,20 @@
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
   </head>
 
-  <body>
+  <body style="background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed;">
     <!-- Fixed navbar -->
     {header}
     {slider}
+	<div style="background-color: rgba(255,255,255,0.9)">
+		<div class="container" style="padding-top: 10px; padding-bottom: 10px;">
 
-    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+		  <div class="row">
+			{content}
+		  </div>
 
-      <div class="row">
-		{content}
-      </div>
-
-    </div> <!-- /container -->
-	{map}
+		</div> <!-- /container -->
+	</div>
+	<div style="background-color: #fff; border-top: 1px solid #ccc;">{map}</div>
 	{footer}
 	<!-- Back To Top Button -->
 	<div id="backtotop"><a href="#"></a></div>
