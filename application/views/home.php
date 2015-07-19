@@ -72,9 +72,7 @@
 				<div>
 					<div class="title">{title}</div>
 					<p><em>{created_date} {full_name}</em></p>		
-					<div class="crop">
-						{img}
-					</div>
+					{image}
 					<div style="text-align: justify;">
 						{summary}
 					</div>
@@ -104,9 +102,7 @@
 				<div>
 					<div class="title">{title}</div>
 					<p><em>{created_date} {full_name}</em></p>		
-					<div class="crop">
-						{img}
-					</div>
+					{image}
 					<div style="text-align: justify;">
 						{summary}
 					</div>
