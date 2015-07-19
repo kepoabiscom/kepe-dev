@@ -17,7 +17,17 @@
     <!-- Bootstrap core CSS -->
     <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
-	
+	<style>
+		body{
+			background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed;
+		}
+		
+		@media (max-width: 415px) {
+			body{
+				background-color:rgba(255,255,255,0.5); background: none;
+			}
+		}
+	</style>
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
@@ -27,15 +37,16 @@
     <!-- Fixed navbar -->
     {header}
     {slider}
+	<div style="background-color: rgba(255,255,255,0.9)">
+		<div class="container" style="padding-top: 10px; padding-bottom: 10px;">
 
-    <div class="container" style="margin-top: 10px; margin-bottom: 10px;">
+		  <div class="row">
+			{content}
+		  </div>
 
-      <div class="row">
-		{content}
-      </div>
-
-    </div> <!-- /container -->
-	{map}
+		</div> <!-- /container -->
+	</div>
+	<div style="background-color: #fff; border-top: 1px solid #ccc;">{map}</div>
 	{footer}
 	<!-- Back To Top Button -->
 	<div id="backtotop"><a href="#"></a></div>

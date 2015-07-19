@@ -77,10 +77,14 @@ class User extends CI_Controller {
 	 function get_user_list($start, $limit) {
 	 	$result = $this->user_model->get_user_list($start, $limit);
 	 	$data_array = ""; $i = 1;
+		$number = 0;
+
 	 	if($result) {
 	 		foreach($result as $row) {
+				$number =  $start + $i;
+				
 		 		$id = $row->user_id;
-	        	$data_array .= "<tr><td>" . $id . "</td>";
+	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
 	        	$data_array .= "<td>" . $row->user_name . "</td>";
 	        	$data_array .= "<td>" . $row->user_role . "</td>";
@@ -110,6 +114,10 @@ class User extends CI_Controller {
 		 				"email" => $q->email,
 		 				"position" => $q->position,
 		 				"role" => $q->user_role,
+		 				"date_of_birth" => $q->date_of_birth_modified,
+						"place_of_birth" => $q->place_of_birth,
+		 				"address" => $q->address,
+		 				"phone_number" => $q->phone_number,
 		 				"description" => $q->body,
 		 				"image" => $img
 		     		);
@@ -261,6 +269,10 @@ class User extends CI_Controller {
 		 				"email" => $r->email,
 		 				"position" => $r->position,
 		 				"role_name" => $this->get_user_role_basic(2, $r->user_role_basic_id),
+						"date_of_birth" => $r->date_of_birth,
+						"place_of_birth" => $r->place_of_birth,
+		 				"address" => $r->address,
+		 				"phone_number" => $r->phone_number,
 		 				"description" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",

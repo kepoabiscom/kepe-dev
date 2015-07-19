@@ -35,6 +35,10 @@ class Profile extends CI_Controller {
 		 				"email" => $q->email,
 		 				"position" => $q->position,
 		 				"role" => $q->user_role,
+						"date_of_birth" => $q->date_of_birth_modified,
+						"place_of_birth" => $q->place_of_birth,
+		 				"address" => $q->address,
+		 				"phone_number" => $q->phone_number,
 		 				"description" => $q->body,
 		 				"image" => $img
 		     		);
@@ -122,6 +126,10 @@ class Profile extends CI_Controller {
 		 				"nama_lengkap" => $r->nama_lengkap,
 		 				"email" => $r->email,
 		 				"position" => $r->position,
+		 				"date_of_birth" => $r->date_of_birth,
+						"place_of_birth" => $r->place_of_birth,
+		 				"address" => $r->address,
+		 				"phone_number" => $r->phone_number,
 		 				"description" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",

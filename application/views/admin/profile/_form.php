@@ -18,10 +18,38 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2">Date Of Birth</label>
+    <div class="col-sm-6">
+        <?php $date_of_birth = ($flag == "update") ? $date_of_birth : ""; ?>
+        <input type="text" class="form-control" value="<?php echo $date_of_birth; ?>" name="date_of_birth">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Phone Number</label>
+    <div class="col-sm-6">
+        <?php $phone_number = ($flag == "update") ? $phone_number : ""; ?>
+        <input type="text" class="form-control" value="<?php echo $phone_number; ?>" name="phone_number">
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2">Email</label>
     <div class="col-sm-6">
         <?php $email = ($flag == "update") ? $email : ""; ?>
         <input type="email" class="form-control" value="<?php echo $email; ?>" name="email">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Place Of Birth</label>
+    <div class="col-sm-6">
+        <?php $place_of_birth = ($flag == "update") ? $place_of_birth : ""; ?>
+        <input type="text" class="form-control" value="<?php echo $place_of_birth; ?>" name="place_of_birth">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Address</label>
+    <div class="col-sm-6">
+        <?php $address = ($flag == "update") ? $address : ""; ?>
+        <input type="text" class="form-control" value="<?php echo $address; ?>" name="address">
     </div>
 </div>
 <?php if($flag == "create") { ?>

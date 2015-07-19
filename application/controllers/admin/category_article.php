@@ -32,10 +32,14 @@ class Category_article extends CI_Controller {
 	function get_list_category_article($start, $limit, $keyword='') {
 		$result = $this->category_article_model->get_list_category($start, $limit);
 	 	$data_array = ""; $i = 1;
+		$number = 0;
+		
 	 	if($result) {
 	 		foreach($result as $row) {
+				$number =  $start + $i;
+				
 		 		$id = $row->article_category_id;
-	        	$data_array .= "<tr><td>" . $id . "</td>";
+	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title . "</td>";
 	        	$data_array .= "<td>" . $row->body . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
