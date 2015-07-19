@@ -1,4 +1,9 @@
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
+<script>
+      $(document).ready(function(){
+          $('#datepicker').datepicker();
+      });
+</script>
 <?php if($flag == "update") { ?>
     <input type="hidden" class="form-control" value="<?php echo $user_id; ?>" name="user_id">
 <?php } ?>
@@ -22,14 +27,14 @@
     <label class="col-sm-2">Date Of Birth</label>
     <div class="col-sm-6">
         <?php $date_of_birth = ($flag == "update") ? $date_of_birth : ""; ?>
-        <input type="text" class="form-control" value="<?php echo $date_of_birth; ?>" name="date_of_birth">
-    </div>
+        <input type="text" id="datepicker" class="form-control" value="<?php echo $date_of_birth; ?>" name="date_of_birth">
+    </div>   
 </div>
 <div class="form-group">
     <label class="col-sm-2">Phone Number</label>
     <div class="col-sm-6">
         <?php $phone_number = ($flag == "update") ? $phone_number : ""; ?>
-        <input type="text" class="form-control" value="<?php echo $phone_number; ?>" name="phone_number">
+        <input type="text" class="form-control" onkeyup="this.value=this.value.replace(/[^\d]/,'')" value="<?php echo $phone_number; ?>" name="phone_number">
     </div>
 </div>
 <div class="form-group">
@@ -46,18 +51,17 @@
         <input type="text" class="form-control" value="<?php echo $place_of_birth; ?>" name="place_of_birth">
     </div>
 </div>
-<div class="form-group">
-    <label class="col-sm-2">Address</label>
-    <div class="col-sm-6">
-        <?php $address = ($flag == "update") ? $address : ""; ?>
-        <input type="text" class="form-control" value="<?php echo $address; ?>" name="address">
-    </div>
-</div>
 <?php if($flag == "create") { ?>
 <div class="form-group">
     <label class="col-sm-2">Password</label>
     <div class="col-sm-6">
         <input type="password" class="form-control" id="password" name="password">
+    </div>
+</div>
+<div class="form-group">
+    <label class="col-sm-2">Re-Password</label>
+    <div class="col-sm-6">
+        <input type="password" class="form-control" id="re_password" name="re_password">
     </div>
 </div>
 <?php } ?>
@@ -77,6 +81,13 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2">Address</label>
+    <div class="col-sm-6">
+        <?php $address = ($flag == "update") ? $address : ""; ?>
+        <textarea class="form-control" rows="3" value="<?php echo $address; ?>" name="address"><?php echo $address; ?></textarea>
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2">Description</label>
     <div class="col-sm-6">
         <?php $desc = ($flag == "update") ? $description : ""; ?>
@@ -84,7 +95,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2">User Image</label>
+    <label class="col-sm-2">Photo</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);">
     </div>

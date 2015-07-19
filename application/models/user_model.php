@@ -66,17 +66,9 @@ class User_model extends CI_Model {
     }
 
     function create_user($data) {
-        $data = array("user_name" => $data['user_name'],
-                    "password" => md5($data['password']),
-                    "email" => $data['email'],
-                    "nama_lengkap" => $data['nama_lengkap'],
-                    "user_role_basic_id" => $data['user_role_basic_id'],
-                    "position" => $data['position'],
-                    "body" => $data['body'],
-                    "created_date" => date("Y-m-d H:i:s"),
-                    "modified_date" => date("Y-m-d H:i:s"),
-                    "image" => $data['image']
-                );
+        $data["password"] = md5($data['password']);
+        $data["created_date"] = date("Y-m-d H:i:s");
+        $data["modified_date"] = date("Y-m-d H:i:s");
 		
         $this->db->insert('user', $data);
     }

@@ -153,10 +153,16 @@ class User extends CI_Controller {
 
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
-			 		$d['image'] = $img_path;
-			 		$this->user_model->create_user($d);
-			 		$data['success'] = true;
-			 		$this->load->view("admin/user/create_user", $data);
+			 		unset($d['submit']);
+			 		if($d['password'] == $d['re_password']) {
+			 			unset($d['re_password']);
+				 		$d['image'] = $img_path;
+				 		$this->user_model->create_user($d);
+				 		$data['success'] = true;
+				 	} else {
+				 		$data['error_message'] = "<span style='color:red'>Password isn't same.</span><br><br>";
+				 	}
+				 	$this->load->view("admin/user/create_user", $data);
 			 	}
 		 	} else {
 		 		$this->load->view("admin/user/create_user", $data);	
