@@ -9,7 +9,7 @@ class Menu {
         $j = 0;
         foreach($data as $i) {
             if($i == $menu) {
-                $active[$j] = 'active';
+                $active[$j] = 'current';
                 break;
             }
             $j++;

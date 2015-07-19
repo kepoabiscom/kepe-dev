@@ -27,6 +27,37 @@
 				background-color:rgba(255,255,255,0.5); background: none;
 			}
 		}
+		
+		#nav li:hover a, #nav li.current:hover a, #nav li.current a {
+			background: rgb(135, 0, 0) none repeat scroll 0px 0px;
+			color: #fff;
+		}		
+		
+		#navigation ul li:hover a, #navigation ul ul li:hover a, #navigation ul li a:hover {
+			color: #fff;
+		}
+		
+		#navigation ul ul li a {
+			border-bottom: 1px solid rgb(255, 255, 255);
+			margin: 0px 0px;
+			padding: 8px 16px;
+			width: 160px;
+		}
+		
+		#navigation ul ul {
+			margin: 0 0 0 -1px;
+			background: #fff none repeat scroll 0 0;
+			border-color: rgb(135, 0, 0);
+			border-image: none;
+			border-style: solid;
+			border-radius: 0px
+		}
+
+		#navigation ul ul li a:hover {
+			border-color: rgb(255, 255, 255);
+			background: rgb(255, 255, 255) none repeat scroll 0px 0px;
+			color: #777;
+		}
 	</style>
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
@@ -38,7 +69,7 @@
     {header}
     {slider}
 	<div style="background-color: rgba(255,255,255,0.9)">
-		<div class="container" style="padding-top: 10px; padding-bottom: 10px;">
+		<div class="container" style="padding-top: 10px; padding-bottom: 10px; min-height: 515px;">
 
 		  <div class="row">
 			{content}

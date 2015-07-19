@@ -157,8 +157,8 @@ h5.headline {
 	font-family: Arial, sans-serif;
 	display: inline-block;
 	color: #888;
-	padding: 31px 10px 28px 10px;
-	margin: 0 5px;
+	padding: 31px 15px 28px 15px;
+	/* margin: 0 5px; */
 	text-decoration: none;
 	font-size: 12px;
 	border-bottom: 3px solid transparent;
