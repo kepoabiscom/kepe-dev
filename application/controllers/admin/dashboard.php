@@ -61,9 +61,7 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
-	function get_stat() {
-		$year = $_GET['year'];
-		
+	function get_stat($year='') {		
 		$stat = array("Home" => $this->get_data($year),
 					"Article" => $this->get_data($year),
 					"News" => $this->get_data($year),
