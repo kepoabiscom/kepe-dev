@@ -44,7 +44,7 @@ $route['admin'] = "admin/dashboard/index";
 $route['category-article'] = "admin/category_article";
 $route['category-news'] = "admin/category_news";
 $route['category-video'] = "admin/category_video";
-$route['404_override'] = '';
+$route['404_override'] = 'Page_404';
 
 
 /* End of file routes.php */

@@ -69,7 +69,7 @@
 	<div class="container ie-dropdown-fix">
 		<!-- Logo -->
 		<div class="col-md-4">
-			<div class="title header"><a href="#">{site_name} | <span style="font-size: 14px;">{tagline}</span></a></div>
+			<div class="title header"><a href="<?php echo base_url(); ?>">{site_name} | <span style="font-size: 14px;">{tagline}</span></a></div>
 		</div>
 
 		<!-- Main Navigation Start -->

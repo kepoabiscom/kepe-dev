@@ -24,57 +24,152 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+     <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
     <script type="text/javascript">
-        window.onload = function () {
-        var chart = new CanvasJS.Chart("chartContainer",{
-          title:{
-            text: "Page View Statistics 2014 - KepoAbis.com"             
-          }, 
-          animationEnabled: true,     
-          axisY:{
-            titleFontFamily: "arial",
-            titleFontSize: 12,
-            includeZero: false
-          },
-          toolTip: {
-            shared: true
-          },
-          data: [{        
-            type: "spline",  
-            name: "Home Page",        
-            showInLegend: true,
-            dataPoints: [
-                {label: "January" , y: 13} ,     
-                {label: "February", y: 37} ,     
-                {label: "March", y: 34} ,     
-                {label: "April", y: 36} ,     
-                {label: "June", y: 46},
-                {label: "July", y: 20},
-                {label: "August", y: 14},
-                {label: "September", y: 5},
-                {label: "October", y: 10},
-                {label: "November", y: 1},
-                {label: "Desember", y: 1}             
-            ]
-          }],
-          legend:{
-            cursor:"pointer",
-            itemclick:function(e){
-              if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-              }
-              else {
-                e.dataSeries.visible = true;            
-              }
-              chart.render();
+        var defaultYear = 2014;
+        var baseUrl = "<?php echo base_url(); ?>";
+
+        $.getJSON(baseUrl+"admin/dashboard/get_stat", {"year": defaultYear}, function(data) {
+            var r = []; var t = []; var v = []; var x = [];
+            var s = []; var u = []; var w = []; var y = [];
+            var temp = [];
+            for(i = 0; i < 4; i++) {
+                if(i == 0) temp = data.Home; 
+                if(i == 1) temp = data.Article;
+                if(i == 2) temp = data.News;
+                if(i == 3) temp = data.Videografi;
+                var r = []; var s = [];
+                for(j = 0; j < temp.length; j++) {
+                    r[j] = temp[j].label;
+                    s[j] = temp[j].y;
+                }
+                if(i == 0) {
+                    t = r; u = s;
+                }
+                if(i == 1) {
+                    v = r; w = s;
+                }
+                if(i == 2) {
+                    x = r; y = s;
+                }
+                temp = [];
             }
-          }
+            
+             window.onload = function () {
+                var chart = new CanvasJS.Chart("chartContainer",{
+                  title:{
+                    text: "Unique Visitors Statistics 2014 - KepoAbis.com"             
+                  }, 
+                  animationEnabled: true,     
+                  axisY:{
+                    titleFontFamily: "arial",
+                    titleFontSize: 12,
+                    includeZero: false
+                  },
+                  toolTip: {
+                    shared: true
+                  },
+                  data: [{        
+                    type: "spline",  
+                    name: "Home Page",        
+                    showInLegend: true,
+                    dataPoints: [
+                        {label: t[0], y: u[0]},     
+                        {label: t[1], y: u[1]},     
+                        {label: t[2], y: u[2]},     
+                        {label: t[3], y: u[3]},     
+                        {label: t[4], y: u[4]},     
+                        {label: t[5], y: u[5]},     
+                        {label: t[6], y: u[6]},     
+                        {label: t[7], y: u[7]},
+                        {label: t[8], y: u[8]},     
+                        {label: t[9], y: u[9]},     
+                        {label: t[10], y: u[10]},     
+                        {label: t[11], y: u[11]}           
+                    ]
+                  },
+                  {
+                   type: "spline",  
+                    name: "Article Page",        
+                    showInLegend: true,
+                    dataPoints: [
+                        {label: v[0], y: w[0]},     
+                        {label: v[1], y: w[1]},     
+                        {label: v[2], y: w[2]},     
+                        {label: v[3], y: w[3]},     
+                        {label: v[4], y: w[4]},     
+                        {label: v[5], y: w[5]},     
+                        {label: v[6], y: w[6]},     
+                        {label: v[7], y: w[7]},
+                        {label: v[8], y: w[8]},     
+                        {label: v[9], y: w[9]},     
+                        {label: v[10], y: w[10]},     
+                        {label: v[11], y: w[11]}
+                    ]
+                  },
+                  {
+                   type: "spline",  
+                    name: "News Page",        
+                    showInLegend: true,
+                    dataPoints: [
+                        {label: x[0], y: y[0]},     
+                        {label: x[1], y: y[1]},     
+                        {label: x[2], y: y[2]},     
+                        {label: x[3], y: y[3]},     
+                        {label: x[4], y: y[4]},     
+                        {label: x[5], y: y[5]},     
+                        {label: x[6], y: y[6]},     
+                        {label: x[7], y: y[7]},
+                        {label: x[8], y: y[8]},     
+                        {label: x[9], y: y[9]},     
+                        {label: x[10], y: y[10]},     
+                        {label: x[11], y: y[11]}            
+                    ]
+                  },
+                  {
+                   type: "spline",  
+                    name: "Videografi Page",        
+                    showInLegend: true,
+                    dataPoints: [
+                        {label: r[0], y: s[0]},     
+                        {label: r[1], y: s[1]},     
+                        {label: r[2], y: s[2]},     
+                        {label: r[3], y: s[3]},     
+                        {label: r[4], y: s[4]},     
+                        {label: r[5], y: s[5]},     
+                        {label: r[6], y: s[6]},     
+                        {label: r[7], y: s[7]},
+                        {label: r[8], y: s[8]},     
+                        {label: r[9], y: s[9]},     
+                        {label: r[10], y: s[10]},     
+                        {label: r[11], y: s[11]}             
+                    ]
+                  }
+                  ],
+                  legend:{
+                    cursor:"pointer",
+                    itemclick:function(e){
+                      if(typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                        e.dataSeries.visible = false;
+                      }
+                      else {
+                        e.dataSeries.visible = true;            
+                      }
+                      chart.render();
+                    }
+                  }
+                });
+                chart.render();
+            }
         });
-        chart.render();
-    }
+
+       
     </script>
-    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/canvasjs.min.js"></script>
-    
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/canvasjs.min.js"></script>   
 
 </head>
 
@@ -107,7 +202,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>Home
+                                <i class="fa fa-file"></i>&nbsp;Home
                             </li>
                         </ol>
                     </div>
@@ -153,7 +248,7 @@
                                     </div>
                                     <div class="col-xs-9 text-right">
                                         <div class="huge">2</div>
-                                        <div>New Comments Article!</div>
+                                        <div>New Comments!<br>&nbsp;<br></div>
                                     </div>
                                 </div>
                             </div>
@@ -167,6 +262,18 @@
                         </div>
                     </div>
                 </div>
+                <div class='row'>
+                    <div class="form-group">
+                    <div class="col-sm-2">
+                        <label>Year</label>
+                        <select class="form-control" id="year" name="year" onkeyup="">
+                        <option value="2014">2014</option>
+                        <option value="2015">2015</option>
+                        <option value="2016">2016</option>
+                        </select>
+                    </div>
+                    </div>
+                </div>
                 <div id="chartContainer" style="height: 300px; width: 100%;">
             </div>
             <!-- /.container-fluid -->
@@ -177,11 +284,6 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 
 </body>
 
