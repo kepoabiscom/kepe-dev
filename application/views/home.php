@@ -1,4 +1,18 @@
-<section>
+<style>
+.crop {
+    float: left;
+    margin: .5em 10px .5em 0;
+    overflow: hidden; /* this is important */
+    position: relative; /* this is important too */
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 200px;
+}
+.crop img {
+    position: absolute;
+   width: 100%;
+}
+</style>
 <div class="col-md-12">
 	<div clas="row">
 		<h2 class="line-title">
@@ -47,7 +61,6 @@
 		</div>
 	</div>
 </div>
-</section>
 <div class="col-md-12">
      <div class="row">
 		<div class="col-md-12">
@@ -59,7 +72,9 @@
 				<div>
 					<div class="title">{title}</div>
 					<p><em>{created_date} {full_name}</em></p>		
-					{image}
+					<div class="crop">
+						{img}
+					</div>
 					<div style="text-align: justify;">
 						{summary}
 					</div>
@@ -89,7 +104,9 @@
 				<div>
 					<div class="title">{title}</div>
 					<p><em>{created_date} {full_name}</em></p>		
-					{image}
+					<div class="crop">
+						{img}
+					</div>
 					<div style="text-align: justify;">
 						{summary}
 					</div>

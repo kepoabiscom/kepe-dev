@@ -77,6 +77,7 @@ class Home extends CI_Controller {
 				"full_name" => !isset($q->nama_lengkap) ? "" : "By ".$q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
+				"img" => "<img src='". base_url($path) ."' alt='".$title."'/>",
 				"category" => !isset($q->category) ? "" : "In <a href='".base_url('news/page/0/0/'.$q->category)."'>".$q->category."</a>"
 			 );
 			 
@@ -115,6 +116,7 @@ class Home extends CI_Controller {
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By " . $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
+					"img" => "<img src='". base_url($path) ."' alt='".$title."'/>",
 					"category" => !isset($q->category) ? "" : "In <a href='".base_url('article/page/0/0/'.$q->category)."'>".$q->category."</a>",
 					"no_recent_art" => ""
 				 );
