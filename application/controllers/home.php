@@ -26,6 +26,7 @@ class Home extends CI_Controller {
 			'get_video' => $this->get_video(),
 			'get_article' => $this->get_article(),
 			'get_news' => $this->get_news(),
+			'title' => 'Home',
 			"meta_tag" => "KepoAbis, Kepo, Abis, Make you curious"
 		);
 		

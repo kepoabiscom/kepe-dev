@@ -244,23 +244,6 @@ body {
     color: #ddd;
 }
 
-@media (max-width: 767px) {
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
-		color: #ddd;
-	}
-
-	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
-		background-color: transparent;
-		color: #fff;
-	}
-}
-
-@media (max-width: 415px) {
-	body{
-		/* margin-top: 35px; */
-	}
-}
-
 ul.recent_post, ul.twitter_list, ul.links {
 	list-style: outside none none;
 	margin: 0;
@@ -360,11 +343,11 @@ sidebar-module {
 }
 
 .footer {
-	 background-color: #f5f5f5;
+	background-color: #f5f5f5;
     border-bottom: 1px solid rgb(221, 221, 221);
     border-top: 1px solid rgb(221, 221, 221);
     box-shadow: 0 0 10px 5px rgba(166, 166, 166, 0.1);
-    padding: 20px 0;
+    padding: 20px 10px;
 	vertical-align: middle;
 	 z-index: 1;
 }
@@ -379,6 +362,7 @@ sidebar-module {
     border: 2px solid #ccc;
     border-radius: 50%;
     margin-left: 2em;
+	margin-bottom: 10px;
     padding: 20px;
     transition: all 0.5s ease-out 0s;
 }
@@ -390,4 +374,27 @@ sidebar-module {
 hr{
 	margin-bottom: 10px;
     margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
+		color: #ddd;
+	}
+
+	.navbar-default .navbar-nav .open .dropdown-menu > li > a:hover, .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+		background-color: transparent;
+		color: #fff;
+	}
+	
+	.jumbo-text {
+		color: #272727;
+		font-size: 24px;
+		text-transform: uppercase;
+	}
+}
+
+@media (max-width: 415px) {
+	body{
+		/* margin-top: 35px; */
+	}
 }

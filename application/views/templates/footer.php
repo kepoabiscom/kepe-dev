@@ -1,7 +1,9 @@
 <div class="container-fluit">
-	<div class="row-fluit">
-		<div class="footer pull-center">
-			{footer}	
+	<div class="row">
+		<div class="col-md-12">
+			<div class="footer pull-center">
+				{footer}	
+			</div>
 		</div>
 	</div>
 </div>

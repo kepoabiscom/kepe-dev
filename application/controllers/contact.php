@@ -25,7 +25,7 @@ class Contact extends CI_Controller {
 	public function generate($view, $content = array())
 	{
 		$data = array(
-			'slider' => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			'map' => NULL,
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
 			'content' => $this->parser->parse($view, $content, TRUE),
@@ -91,11 +91,12 @@ class Contact extends CI_Controller {
 		}
 		
 		$data = array_merge(
-			array('sending_message' => base_url('contact/view/1')),
-			array('alert' => $alert),
 			array(
 				'get_menu' => $this->menu->get_menu("header", "contact"),
 				'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "contact"),
+				'sending_message' => base_url('contact/view/1'),
+				'alert' => $alert,
+				"title" => 'Contact Us'
 			),
 			$this->profile()->get_about_detail()
 		);

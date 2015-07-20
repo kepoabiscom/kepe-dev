@@ -9,7 +9,7 @@ class Menu {
         $j = 0;
         foreach($data as $i) {
             if($i == $menu) {
-                $active[$j] = 'current';
+                $active[$j] = 'active';
                 break;
             }
             $j++;
@@ -39,5 +39,15 @@ class Menu {
 
     	return $d; 
 		
+	}
+	
+	public function get_page_title($title = ""){
+		return "<div id='page-title'>
+						<div class='container'>
+							<div class='sixteen columns'>
+								<h2 style='color:white; margin-bottom: 0px; margin-top: 0px;'>".$title."</h2>
+							</div>
+						</div>		
+					</div>";
 	}
 }

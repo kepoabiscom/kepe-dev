@@ -40,6 +40,7 @@ class News extends CI_Controller {
 			'get_news_category' => $this->get_news_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page'],
+			"title" => "News",
 			"meta_tag" => "Kepo News, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
@@ -50,8 +51,9 @@ class News extends CI_Controller {
 	
 	public function generate($view, $content = array())
 	{
+
 		$data = array(
-			'slider' => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			'map' => NULL,
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
 			'content' => $this->parser->parse($view, $content, TRUE),

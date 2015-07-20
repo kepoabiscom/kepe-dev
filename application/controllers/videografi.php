@@ -39,6 +39,7 @@ class Videografi extends CI_Controller {
 			'get_video_category' => $this->get_video_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page'],
+			"title" => "Videografi",
 			"meta_tag" => "Kepo Video, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
@@ -56,7 +57,7 @@ class Videografi extends CI_Controller {
 	{
 		$data = array(
 			$content,
-			'slider' => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			'map' => NULL,
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
 			'content' => $this->parser->parse($view, $content, TRUE),

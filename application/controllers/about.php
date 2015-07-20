@@ -140,7 +140,7 @@ class About extends CI_Controller {
 	public function generate($view, $content = array())
 	{
 		$data = array(
-			'slider' => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			'map' => NULL,
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
 			'content' => $this->parser->parse($view, $content, TRUE),

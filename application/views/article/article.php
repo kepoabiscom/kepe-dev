@@ -19,7 +19,7 @@
 				</p>
 				{image}
 				{summary}
-				<p>{tag}</p>
+				{tag}
 			</div>
 			{read_more}
 			{/get_article}

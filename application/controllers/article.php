@@ -40,6 +40,7 @@ class Article extends CI_Controller {
 			'get_article_category' => $this->get_article_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page'],
+			"title" => "Article",
 			"meta_tag" => "Kepo Article, KepoAbis, Kepo, Abis, Make you curious"
 		);
 		
@@ -51,7 +52,7 @@ class Article extends CI_Controller {
 	public function generate($view, $content = array())
 	{
 		$data = array(
-			'slider' => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			'map' => NULL,
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
 			'content' => $this->parser->parse($view, $content, TRUE),
@@ -88,9 +89,9 @@ class Article extends CI_Controller {
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 					
-				$img = "<a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
-				$img .= "</a>";
+				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
+				$img .= "<img class='img-responsive opacity' style='width:480px;' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "</a></p>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_article_category = "<a href='".base_url('article/page/0/0/'.$category)."'>".$category."</a>";

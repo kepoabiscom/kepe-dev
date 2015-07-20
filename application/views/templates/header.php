@@ -61,7 +61,17 @@
       </div>
 </nav>
 */ ?>
-
+<style>
+	.navbar-form .input-group > .form-control {
+		width: auto;
+	}
+	
+	@media (max-width: 767px) {
+		.navbar-form .input-group > .form-control {
+			width: 100%;
+		}
+	}
+</style>
 <!-- Header -->
 <div id="header">
 
@@ -71,34 +81,28 @@
 		<div class="col-md-4">
 			<div class="title header"><a href="<?php echo base_url(); ?>">{site_name} | <span style="font-size: 14px;">{tagline}</span></a></div>
 		</div>
-
+		<div class="col-md-2">
+			<div style="margin-top: 25px;">
+			<form role="search" class="navbar-form" method="get" action="<?php echo base_url('search'); ?>">
+				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
+				<div class="input-group">
+					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
+					<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
+					<?php $t = "article"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
+					<input type="hidden" value="<?php echo $t; ?>" name="type">
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-sm" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</form>
+			</div>
+		</div>
 		<!-- Main Navigation Start -->
-		<div class="col-md-8">
+		<div class="col-md-6">
 			<div id="navigation">
 				<ul id="nav">	
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-							<span class="glyphicon glyphicon-search"><span></span>
-						</a>
-						 <ul class="dropdown-menu" role="menu">
-							<li>
-								<form role="search" class="navbar-form" method="get" action="<?php echo base_url('search'); ?>">
-								<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
-								<div style="width: 200px;" class="input-group">
-									<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
-									<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
-									<?php $t = "article"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
-									<input type="hidden" value="<?php echo $t; ?>" name="type">
-									<span class="input-group-btn">
-										<button class="btn btn-default btn-sm" type="submit">
-											<span class="glyphicon glyphicon-search"></span>
-										</button>
-									</span>
-								</div>
-								</form>
-							</li>
-						</ul>
-					</li>
 					{get_menu}
 					<li class="{active}">
 						<a title="{name}" href="{url}">

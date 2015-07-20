@@ -22,6 +22,7 @@ class Search extends CI_Controller {
 			'get_search' => $this->result($type, $q),
 			"q" => $q,
 			"tab_search" => $this->tab_search($type),
+			"title" => "Search",
 			'paging' => $this->pagination->create_links()
 		);
 		
@@ -33,7 +34,7 @@ class Search extends CI_Controller {
 	
 	public function generate($view, $content = array()) {
 		$data = array(
-			"slider" => NULL,
+			'slider' => $this->menu->get_page_title($content['title']),
 			"map" => NULL,
 			"header" => $this->parser->parse('templates/header', $content, true), 
 			"content" => $this->parser->parse($view, $content, true),
