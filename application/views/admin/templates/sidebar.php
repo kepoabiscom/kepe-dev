@@ -2,7 +2,8 @@
     <ul class="nav navbar-nav side-nav">
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
-                        'video', 'category', 'about', 'gallery', 'category_article', 'category_video', 'category_news');
+                        'video', 'category', 'about', 'gallery', 'category_article', 
+                        'category_video', 'category_news', 'comment_notif');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -55,6 +56,11 @@
                 </li>
             </ul>
         </li>
+        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+        <li class="<?php echo $active[13]; ?>">
+            <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif</a>
+        </li>
+        <?php } ?>
         <li class="<?php echo $active[8]; ?>">
             <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
         </li>
