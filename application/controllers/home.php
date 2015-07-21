@@ -194,7 +194,7 @@ class Home extends CI_Controller {
 			for($i=0; $i < $N; $i++) {
 				$text .= $words[$i] . " ";
 			}
-			$link = ($f != 'video') ? "<a href='".$see_more."'>Read more</a>" : "";
+			$link = ($f != 'video') ? "<br><a href='".$see_more."'>Read more</a>" : "";
 			$text .= "[...] " . $link;
 		}
 

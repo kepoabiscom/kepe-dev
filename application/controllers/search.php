@@ -63,6 +63,8 @@ class Search extends CI_Controller {
 				$m = explode("-", $date[0]);
 				$d = explode("-", $date[0]);
 
+				$home = new Home();
+
 				if($type == 'article') 
 					$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
 				if($type == 'news') 
@@ -72,7 +74,7 @@ class Search extends CI_Controller {
 				
 				$data[] = array(
 					"title" => $this->get_highlight($row->title, $q),
-					"summary" => ($type != 'video') ? $this->get_highlight($row->summary, $q) : $this->get_highlight($row->description, $q),
+					"summary" => ($type != 'video') ? $home->get_preview_summary($this->get_highlight($row->summary, $q), $url, '') : $home->get_preview_summary($this->get_highlight($row->description, $q), $url, 'video'),
 					"url" => $url,
 					"no_result" => ""
 				);
