@@ -34,6 +34,10 @@
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		{image}
+		<p>
+			<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_article_comment} comment | 
+			<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views
+		</p>
 		<p>{summary}</p>
 		<p>Category : {title_category}</p>
 		<nav class="text-center">
