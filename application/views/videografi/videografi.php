@@ -8,10 +8,8 @@
 		</ol>
 	</div>
 </div>
-
-<div class="col-md-12">
-	<div class="row">
-		{get_video}
+{get_video}
+	{open_parenthesis}
 		<div class="col-md-4" style="margin-bottom: 20px;">
 			<div class="recent_post">
 				<div>
@@ -21,15 +19,18 @@
 					</p>
 					<p>{image}</p>
 					<p>
-						{count_video_comment} comment | {count_video_stat} views
+						<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
+						<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 
+						<i class="glyphicon glyphicon-time"></i>&nbsp;{duration}
 					</p>
-					<!--<p>{description}</p>-->
 					 <p>{tag}</p>
 				</div>
 			</div>                	 
 		</div>
-		{/get_video}
-		<div class="clear"></div>
+	{closing_parenthesis}
+{/get_video}
+<div class="col-md-12">
+	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8 pull-center">
 			<ol class="list-inline list-inline-btn">

@@ -72,7 +72,8 @@ class Videografi extends CI_Controller {
 	public function get_video_list($start=0, $limit=10, $keyword=array()) {	
 		$query = $this->video_model->get_video_list(1, $start, $limit, $keyword);
 		if($query != NULL){
-			$i = 0;
+			$i = 0; $parenthesis = 1;
+			
 			foreach ($query->result() as $q)
 			{
 				$video_id = !isset($q->video_id) ? "" : $q->video_id;
@@ -94,6 +95,9 @@ class Videografi extends CI_Controller {
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('videografi/page/0/0/'.$category)."'>".$category."</a>";
 				
+				$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
+				$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
+				
 				$data[$i] = array(
 					"video_id" => $video_id,
 					"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
@@ -108,10 +112,12 @@ class Videografi extends CI_Controller {
 					"image" => $img,
 					"recent_video_category" => $recent_video_category,
 					"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment,
-					"count_video_stat" => $this->video_model->count_video_stat($video_id)->count_video_stat
+					"count_video_stat" => $this->video_model->count_video_stat($video_id)->count_video_stat,
+					"open_parenthesis" => $open_parenthesis,
+					"closing_parenthesis" => $closing_parenthesis,
 				 );
 				 
-				 $i++;
+				 $i++; $parenthesis++;
 			}
 		}
 		else{
@@ -202,7 +208,9 @@ class Videografi extends CI_Controller {
  				"op" => $comment->random_set_captcha(),
  				"n2" => $comment->random_set_captcha(0),
  				"prev_next" => $prev_next,
- 				"video_id" => $id
+ 				"video_id" => $id,
+				"count_video_comment" => $this->video_model->count_video_comment($id)->count_video_comment,
+				"count_video_stat" => $this->video_model->count_video_stat($id)->count_video_stat
 	        )
 		);
 		
