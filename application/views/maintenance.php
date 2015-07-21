@@ -35,8 +35,7 @@
 					<br>
 					<p>
 						email: 
-                                                <br>contact@kepoabis.com
-                                                <br>info@kepoabis.com
+                                                <br>hi@kepoabis.com
 
 					<p>	
 				</div>

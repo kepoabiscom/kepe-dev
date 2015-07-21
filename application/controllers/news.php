@@ -198,7 +198,9 @@ class News extends CI_Controller {
 		 				"op" => $comment->random_set_captcha(),
 		 				"n2" => $comment->random_set_captcha(0),
 		 				"prev_next" => $prev_next,
-		 				"news_id" => $id
+		 				"news_id" => $id,
+						"count_news_comment" => $this->news_model->count_news_comment($id)->count_news_comment,
+						"count_news_stat" => $this->news_model->count_news_stat($id)->count_news_stat
 	     		));
 		
 		$this->news_model->create_news_stat($this->global_common->stat('news_id', $id));

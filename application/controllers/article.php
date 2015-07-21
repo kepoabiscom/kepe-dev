@@ -90,7 +90,7 @@ class Article extends CI_Controller {
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 					
 				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive opacity' style='width:480px;' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a></p>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
@@ -196,7 +196,9 @@ class Article extends CI_Controller {
 		 				"op" => $comment->random_set_captcha(),
 		 				"n2" => $comment->random_set_captcha(0),
 		 				"prev_next" => $prev_next,
-		 				"article_id" => $id
+		 				"article_id" => $id,
+						"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
+						"count_article_stat" => $this->article_model->count_article_stat($id)->count_article_stat
 	     		));
 		
 		$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));

@@ -75,7 +75,7 @@
     </form>
 </div>
 <div class="col-md-4">
-	<div class="widget">
+	<div class="sidebar-module">
 		<h2 class="title">Recent Article</h2>
 		{get_article}
 		<div class="latest-post-blog">

@@ -13,5 +13,8 @@
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		<p>{body}</p>
 		<p>{tag}</p>
+		<p>
+			{membership_list}
+		</p>
 	</div>
 </div>

@@ -36,10 +36,16 @@ class User_model extends CI_Model {
         return false;
     }
 
-    function get_user_list($start, $limit) {
-        $this->db->limit($limit, $start);
+    function get_user_list($start, $limit, $flag=0) {
 		$this->db->select('u.*, urb.role_name AS user_role');
-        $this->db->order_by("user_id", "desc");
+		 if($flag == 0){
+			$this->db->order_by("user_id", "desc");
+			$this->db->limit($limit, $start);
+		 }
+		 else{
+			$this->db->order_by("nama_lengkap", "asc");
+			$this->db->where("role_name", "crew");
+		 }
         $this->db->from("user u");
         $this->db->join("user_role_basic urb","urb.user_role_basic_id = u.user_role_basic_id");
         $query = $this->db->get();

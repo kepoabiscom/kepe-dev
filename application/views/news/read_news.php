@@ -36,6 +36,10 @@
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		{image}
+		<p>
+			<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_news_comment} comment | 
+			<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_news_stat} views
+		</p>
 		<p>{summary}</p>
 		<p>Category : {title_category}</p>
 		<nav class="text-center">
@@ -81,7 +85,7 @@
 		<h2 class="title">Recent News</h2>
 		{get_news}
 		<div class="latest-post-blog">
-		{image}
+			{image}
 			<p>{title}</p>
 			<span>{created_date}</span>
 			<span>In {recent_news_category}</span>

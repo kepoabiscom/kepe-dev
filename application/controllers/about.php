@@ -8,6 +8,7 @@ class About extends CI_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->model("about_model");
+		$this->load->model("user_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->library("global_common");
@@ -54,6 +55,7 @@ class About extends CI_Controller {
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array(
+			"membership_list" => ($parameter == 'membership') ? $this->get_membership_list(0, 100) : NULL,
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
@@ -151,4 +153,23 @@ class About extends CI_Controller {
 		
 		$this->parser->parse('index', $data);
 	}
+	
+	 function get_membership_list($start, $limit) {
+	 	$result = $this->user_model->get_user_list($start, $limit, 1);
+	 	$data_array = ""; $i = 1;
+		$number = 0;
+
+	 	if($result) {
+	 		foreach($result as $row) {
+				$number =  $start + $i;
+				
+		 		$id = $row->user_id;
+	        	$data_array .= "<tr><td>" . $number.".&nbsp;" . "</td>";
+	        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
+
+	        	$i++;
+	        }
+	        return "<table/>".$data_array . "</tr></table>";
+	 	} else return "";
+	 }
 }

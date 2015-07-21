@@ -15,9 +15,13 @@
 			<div class="post">
 				<h2 class="post-title">{title}</h2>
 				<p class="post-body">
-					On {created_date} By {full_name}, {count_article_comment} comment | {count_article_stat} views
+					On {created_date} By {full_name}
 				</p>
 				{image}
+				<p>
+					<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_article_comment} comment | 
+					<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views
+				</p>
 				{summary}
 				{tag}
 			</div>
