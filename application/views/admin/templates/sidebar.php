@@ -3,7 +3,7 @@
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
                         'video', 'category', 'about', 'gallery', 'category_article', 
-                        'category_video', 'category_news', 'comment_notif');
+                        'category_video', 'category_news', 'comment_notif','static_content');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -33,6 +33,9 @@
                 </li>
                 <li class="<?php echo $active[5]; ?>">
                     <a href="<?php echo base_url(); ?>admin/news">News</a>
+                </li>
+				<li class="<?php echo $active[14]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/static-content">Static Content</a>
                 </li>
             </ul>
         </li>

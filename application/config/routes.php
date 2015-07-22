@@ -45,6 +45,7 @@ $route['category-article'] = "admin/category_article";
 $route['category-news'] = "admin/category_news";
 $route['category-video'] = "admin/category_video";
 $route['comment-notif'] = "admin/comment_notif";
+$route['static-content'] = "admin/static_content";
 $route['404_override'] = 'Page_404';
 
 

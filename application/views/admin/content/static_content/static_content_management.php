@@ -26,7 +26,7 @@
     <![endif]-->
     <script>
         function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this user?");
+            var x = confirm("Are you sure you want to delete this static content?");
             if (x) return true;
             return false;
         }
@@ -43,7 +43,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "user"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "content"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -55,14 +55,14 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            User Management
+                            Static Content Management
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>User Management
+                                <i class="fa fa-file"></i> Static Content Management
                             </li>
                         </ol>
                     </div>
@@ -70,7 +70,7 @@
                 <!-- /.row -->
 
                  <div class="col-lg-12">
-                        <h2>User List <strong>KepoAbis.com</strong></h2>
+                        <h2>Static Content List <strong>KepoAbis.com</strong></h2>
                         {success}
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
@@ -86,12 +86,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data_user}
+                                    {data_static_content}
                                 </tbody>
                             </table>
                             {link}<br><br>
                         </div>
-                        <a href='<?php echo base_url(); ?>admin/user/create' class="btn btn-lg btn-success">Add User</a>
                     </div>
                 </div>
 

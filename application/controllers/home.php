@@ -1,7 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Home extends CI_Controller {
-
 	/**
 	 * Constructor for this controller.
 	 */
@@ -47,7 +46,7 @@ class Home extends CI_Controller {
 		
 		$data = array_merge($content, $data);
 		
-		$this->parser->parse('index', $data);
+		$this->parser->parse('/index', $data);
 	}
 	
 	public function get_news(){
