@@ -34,9 +34,11 @@
                 <li class="<?php echo $active[5]; ?>">
                     <a href="<?php echo base_url(); ?>admin/news">News</a>
                 </li>
+				<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
 				<li class="<?php echo $active[14]; ?>">
                     <a href="<?php echo base_url(); ?>admin/static-content">Static Content</a>
                 </li>
+				<?php } ?>
             </ul>
         </li>
         <li class="<?php echo $active[6]; ?>">
@@ -45,6 +47,7 @@
         <li class="<?php echo $active[9]; ?>">
             <a href="<?php echo base_url(); ?>admin/gallery"><i class="fa fa-fw fa-desktop"></i>&nbsp;Gallery Management</a>
         </li>
+		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[7]; ?>">
             <a href="javascript:;" data-toggle="collapse" data-target="#category"><i class="fa fa-fw fa-edit"></i>&nbsp;Category Management<i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="category" class="collapse">
@@ -59,6 +62,7 @@
                 </li>
             </ul>
         </li>
+		<?php } ?>
         <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[13]; ?>">
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif</a>

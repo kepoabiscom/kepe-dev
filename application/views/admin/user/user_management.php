@@ -77,9 +77,10 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Title</th>
-                                        <th>Tag</th>
-                                        <th>Status</th>
+                                        <th>Nama Lengkap</th>
+                                        <th>Username</th>
+                                        <th>Role</th>
+                                        <th>Position</th>
                                         <th>Created Time</th>
                                         <th>Updated Time </th>
                                         <th>More</th>

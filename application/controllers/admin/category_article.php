@@ -14,16 +14,18 @@ class Category_article extends CI_Controller {
 	function index() {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
-
-		     $config = $this->page_config();
-
-		     $data = array(
-		     			'list_category_article' => $this->get_list_category_article($config['uri'], $config['per_page']),
-		     			'link' => $this->pagination->create_links(),
-		     			'success' => $this->notification()
-		     		);
-		     
-		     $this->parser->parse('admin/category/article/category_article_management', $data);
+			 if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
+				 $config = $this->page_config();
+				 $data = array(
+							'list_category_article' => $this->get_list_category_article($config['uri'], $config['per_page']),
+							'link' => $this->pagination->create_links(),
+							'success' => $this->notification()
+						);
+				 
+				 $this->parser->parse('admin/category/article/category_article_management', $data);
+			 } else {
+		     	print_r("<h1>Authorization required.</h1>");
+		     }
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
