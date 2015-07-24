@@ -45,6 +45,7 @@ class User_model extends CI_Model {
 		 else{
 			$this->db->order_by("nama_lengkap", "asc");
 			$this->db->where("role_name", "crew");
+			$this->db->or_where("role_name", "admin");
 		 }
         $this->db->from("user u");
         $this->db->join("user_role_basic urb","urb.user_role_basic_id = u.user_role_basic_id");

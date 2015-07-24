@@ -34,6 +34,20 @@ class Static_content_model extends CI_Model {
             return $query->row();
         } return;
     }
+	
+	 function get_enum_status() {
+        $enum = $this->db->query("SHOW COLUMNS FROM static_content WHERE Field = 'status' ");
+        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
+        $result = explode("','", $matches[1]);
+        return $result;
+    }
+	
+	function update_static_content($id, $data){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+		
+        $this->db->where('static_content_id', $id);
+        $this->db->update('static_content', $data); 
+    }
 }
 
 ?>

@@ -34,8 +34,7 @@
 					</p>
 					<br>
 					<p>
-                                                <br>hi@kepoabis.com
-						email: 
+                        <br>email: hi@kepoabis.com 
 					<p>	
 				</div>
 			</div>
