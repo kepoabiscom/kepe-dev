@@ -20,7 +20,7 @@
        <li class="<?php echo $active[1]; ?>">
             <a href="<?php echo base_url(); ?>admin/profile"><i class="fa fa-user"></i>&nbsp;Profile (<?php $data = $this->session->userdata('logged_in'); echo $data['username']; ?>)</a>
         </li>
-        <?php $q = $this->session->userdata['logged_in']; if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+        <?php $q = $this->session->userdata['logged_in']; if($q['role'] == "superadmin") { ?>
         <li class="<?php echo $active[2]; ?>">
             <a href="<?php echo base_url(); ?>admin/user"><i class="fa fa-fw fa-table"></i>&nbsp;User Management</a>
         </li>
