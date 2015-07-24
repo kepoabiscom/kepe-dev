@@ -51,4 +51,22 @@ class Static_content extends CI_Controller {
 	        return $data_array . "</tr>";
 	 	} else return "";
 	}
+	
+	function detail($id='') {
+		if($this->session->userdata('logged_in')) {
+	 		$q = $this->static_content_model->get_by_id($id);
+	 		$data = array("title" => $q->title,
+		 				"tag" => $q->tag,
+		 				"parameter" => $q->parameter,
+		 				"summary" => $q->summary,
+		 				"body" => $q->body,
+		 				"status" => $q->status,
+		 				"created_date" => $q->created_date,
+		 				"modified_date" => $q->modified_date
+		     		);
+	 		$this->parser->parse('admin/content/static_content/detail_static_content', $data);
+	 	} else {
+	 		direct('admin/login', 'refresh');
+	 	}
+	}
 }
