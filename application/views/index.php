@@ -93,7 +93,7 @@
 		</div> <!-- /container -->
 	</div>
 	<div style="background-color: #fff; border-top: 1px solid #ccc;">{map}</div>
-	{footer}
+	<div class="footer">{footer}</div>
 	
 	<!-- Back To Top Button -->
 	<div id="backtotop"><a href="#"></a></div>

@@ -27,17 +27,20 @@ class User extends CI_Controller {
 	function index() {
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
-		 	$success = $this->notification();
+		 	if($session_data['role'] == 'superadmin') {
+				$success = $this->notification();
+				$config = $this->page_config();
 
-		 	$config = $this->page_config();
-
-		    $data = array(
-		     			'username' => $session_data['username'],
-		     			'data_user' => $this->get_user_list($config['uri'], $config['per_page']),
-		     			'success' => $success,
-		     			'link' => $this->pagination->create_links()
-		     		);
-		    $this->parser->parse('admin/user/user_management', $data);
+				$data = array(
+							'username' => $session_data['username'],
+							'data_user' => $this->get_user_list($config['uri'], $config['per_page']),
+							'success' => $success,
+							'link' => $this->pagination->create_links()
+						);
+				$this->parser->parse('admin/user/user_management', $data);
+			} else {
+		     	print_r("<h1>Authorization required.</h1>");
+		    }
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}

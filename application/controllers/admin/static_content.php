@@ -110,10 +110,6 @@ class Static_content extends CI_Controller {
 
 			 	if(isset($_POST['submit'])) {
 			 		$d = $this->input->post(null, true);
-			 						
-					echo "<pre>";
-					print_r($d);
-					exit;			
 					unset($d['submit']);
 					
 					$this->static_content_model->update_static_content($d['static_content_id'], $d);

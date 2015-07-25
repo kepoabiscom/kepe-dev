@@ -97,7 +97,7 @@
 		</div>
 		{get_article}
         {no_recent_art}
-		<div class="col-md-6">
+		<div class="col-md-4">
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>
@@ -118,44 +118,6 @@
 			<a class="button medium yellow" href="<?php echo base_url('article'); ?>">View All Articles</a>
 		</div>
     </div>
-</div>
-
-<div class="col-md-12">
-	<h2 class="line-title"><strong class="bold-text">FOLLOW US</strong></h2>
-	<div class="social-media pull-center">
-	<ul class="list-inline">
-		<li class="social-icons">
-			<a target="_blank" title="Follow Twitter" href="{contact_twitter}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//twitter.png'); ?>">
-			</a>
-		</li>
-		<li class="social-icons">
-			<a target="_blank" title="Facebook group" href="{contact_facebook}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//facebook.png'); ?>">
-			</a>
-		</li>
-		<li class="social-icons">
-			<a target="_blank" title="Google Plus group" href="{contact_googleplus}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//googleplus.png'); ?>">
-			</a>
-		</li>
-		<li class="social-icons">
-			<a target="_blank" title="Watch Youtube" href="{contact_youtube}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//youtube.png'); ?>">
-			</a>
-		</li>
-		<li class="social-icons">
-			<a target="_blank" title="Instagram" href="{contact_instagram}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//instagram.png'); ?>">
-			</a>
-		</li>
-		<li class="social-icons">
-			<a target="_blank" title="Path" href="{contact_path}">
-				<img class="img-responsive" src="<?php echo base_url('assets/img//path.png'); ?>">
-			</a>
-		</li>
-	</ul>
-	</div>
 </div>
 
 <script>
