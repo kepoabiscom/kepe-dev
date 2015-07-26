@@ -138,9 +138,9 @@ class User extends CI_Controller {
 				"flag" => "create",
 				"role_name" => $this->get_user_role_basic()
 			);
-
+	 		$regex_username = '^[A-Za-z0-9]+(?:[._][A-Za-z0-9]+)*$';
 	        $this->validation();
-	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|regex_match[/^[a-zA-Z0-9]+$/]|callback_db_check_username');
+	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|regex_match[/'.$regex_username.'/]|callback_db_check_username');
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
 	        if($this->form_validation->run() == true) {

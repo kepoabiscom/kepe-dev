@@ -5,15 +5,27 @@ function username_check(username) {
 			var f = JSON.parse(obj.responseText);
 			document.getElementById("v_username").innerHTML = "Loading...";
 			setTimeout(function(){
-				if(username.match(/^[a-zA-Z0-9._]+$/)) {
-					if(username.length >= 3) {
-						if(f.success) {
-							document.getElementById("v_username").innerHTML = "<span style='color:green'>" + f.msg + "</span>";	
-						} else {
-							document.getElementById("v_username").innerHTML = "<span style='color:red'>" + f.msg + "</span>";
-						}
-					} else document.getElementById("v_username").innerHTML = "<span style='color:blue'>Must be more than 3 words.</span>";
-				} else document.getElementById("v_username").innerHTML = "<span style='color:blue'>Only alphanumeric.</span>";
+				var success = false;
+				var t = true;	
+				var regex = /^[A-Za-z0-9]+(?:[._][A-Za-z0-9]+)*$/;
+				if(username.length >= 6) {
+					if(username.match(regex)) {
+						success = f.success;
+					} else {
+						document.getElementById("v_username").innerHTML = "<span style='color:blue'>Should be user.name or user_name!</span>";
+						t = false;
+					}
+				} else {
+					document.getElementById("v_username").innerHTML = "<span style='color:blue'>Must be more than 6 words!</span>";
+					t = false;
+				}
+				if(t) {
+					if(success) {
+						document.getElementById("v_username").innerHTML = "<span style='color:green'>" + f.msg + "</span>";	
+					} else {
+						document.getElementById("v_username").innerHTML = "<span style='color:red'>" + f.msg + "</span>";
+					}	
+				}
 				
 			}, 1000);
 			
