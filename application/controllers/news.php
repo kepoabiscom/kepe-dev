@@ -47,6 +47,7 @@ class News extends CI_Controller {
 		
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = $data['site_description'];
+		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
 		$this->generate('news/news', $data);
 	}

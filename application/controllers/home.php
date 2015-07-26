@@ -29,9 +29,10 @@ class Home extends CI_Controller {
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
-
+		
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = $data['site_description'];
+		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
 		$this->generate('home', $data);
 	}

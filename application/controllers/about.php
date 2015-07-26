@@ -27,6 +27,8 @@ class About extends CI_Controller {
 			$this->read($this->uri->segment(3))
 		);
 		
+		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
+		
 		$this->generate('about/static_content', $data);
 	}
 	
