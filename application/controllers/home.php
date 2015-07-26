@@ -25,11 +25,13 @@ class Home extends CI_Controller {
 			'get_video' => $this->get_video(),
 			'get_article' => $this->get_article(),
 			'get_news' => $this->get_news(),
-			'title' => 'Home',
-			"meta_tag" => "KepoAbis, Kepo, Abis, Make you curious"
+			'title' => 'Home'
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
+
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_description'] = $data['site_description'];
 		
 		$this->generate('home', $data);
 	}

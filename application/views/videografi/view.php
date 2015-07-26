@@ -40,7 +40,7 @@
 			<i class="glyphicon glyphicon-time"></i>&nbsp;{duration}
 		</p>
 		<p>{description}</p>
-		<p>Category : {title_category}</p>
+		<p>In {title_category}</p>
 	</div>
 	<nav class="text-center">
 		<ul class="pagination">

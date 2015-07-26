@@ -101,6 +101,9 @@ class Contact extends CI_Controller {
 			$this->profile()->get_about_detail()
 		);
 		
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_description'] = $data['contact_footer'];
+		
 		$this->generate('contact', $data);
 	}
 	

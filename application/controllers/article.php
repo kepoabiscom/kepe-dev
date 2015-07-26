@@ -40,11 +40,13 @@ class Article extends CI_Controller {
 			'get_article_category' => $this->get_article_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page'],
-			"title" => "Article",
-			"meta_tag" => "Kepo Article, KepoAbis, Kepo, Abis, Make you curious"
+			"title" => "Article"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
+		
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_description'] = $data['site_description'];
 		
 		$this->generate('article/article', $data);
 	}
@@ -187,6 +189,7 @@ class Article extends CI_Controller {
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
+		 				"meta_description" => $q->summary,
 		 				"image" => $img, 
 		 				"url" => $url_share,
 		 				"og_image" => base_url($image),

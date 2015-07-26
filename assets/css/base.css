@@ -53,7 +53,7 @@
 /* #Basic Styles
 ================================================== */
 	body {
-		font: 12px Arial, sans-serif;
+		font: 14px Arial, sans-serif;
 		color: #606060;
 		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
 		-webkit-text-size-adjust: 100%;
