@@ -24,14 +24,16 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this user?");
-            if (x) return true;
-            return false;
-        }
-    </script>
-
+    <?php echo Tb::modal(array(
+            'id' => 'modal_confirm',
+            'header' => 'Delete',
+            'body' => '<strong>Apa anda yakin akan menghapus user ini?</strong>',
+            'footer' => array(
+                Tb::button('Ya', array('type' => Tb::BUTTON_TYPE_LINK, 'url' => "user/delete", 'color' => Tb::BUTTON_COLOR_WARNING)),
+                TB::button('Tidak', array('data-dismiss' => 'modal'))
+            )
+        ));
+    ?>
 </head>
 
 <body>
@@ -97,7 +99,7 @@
 
             </div>
             <!-- /.container-fluid -->
-
+           
         </div>
         <!-- /#page-wrapper -->
 
@@ -106,7 +108,7 @@
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
-
+   
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
 

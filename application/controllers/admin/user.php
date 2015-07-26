@@ -103,11 +103,13 @@ class User extends CI_Controller {
 
 		        $delete = Tb::button('Delete', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "ConfirmDelete()",
+		            'onclick' => "",
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_DANGER,
-		            'url' => "user/delete/".$id
+		            'url' => '#modal_confirm',
+                    'data-toggle' => 'modal'
 		        ));
+
 
 	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
