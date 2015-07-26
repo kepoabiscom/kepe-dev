@@ -82,7 +82,6 @@
                                         <th>Role</th>
                                         <th>Position</th>
                                         <th>Created Time</th>
-                                        <th>Updated Time </th>
                                         <th>More</th>
                                     </tr>
                                 </thead>
