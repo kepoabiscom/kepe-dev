@@ -58,13 +58,13 @@ img {
 		border-radius:5px;
     background-color:white;
     cursor:default;
-	width:600px;
-	height:340px;
+	width:800px;
+	height:440px;
 	position:absolute;
 	left:50%;
 	top:50%;
-	margin-left:-300px; /* (600/2) */
-	margin-top:-170px;  /* (340/2) */
+	margin-left:-400px; /* (600/2) */
+	margin-top:-250px;  /* (340/2) */
 }
 		
 .content{
