@@ -112,7 +112,7 @@ class Home extends CI_Controller {
 					"article_id" => $article_id,
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-					"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$this->global_common->get_title(45, $title)."</a>",
+					"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$this->global_common->get_title(28, $title)."</a>",
 					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By " . $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,

@@ -103,34 +103,43 @@
 
 		function initialize()
 		{
-		var mapProp = {
-			center:myCenter,
-			zoom:15,
-			scrollwheel: false,
-			panControl: true,
-			zoomControl: true,
-			scaleControl: true,
-			mapTypeId:google.maps.MapTypeId.ROADMAP
-		  };
+			var mapProp = {
+				center:myCenter,
+				zoom:15,
+				scrollwheel: false,
+				panControl: true,
+				zoomControl: true,
+				scaleControl: true,
+				mapTypeId:google.maps.MapTypeId.ROADMAP
+			};
 
-		var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+			var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
 
-		var marker=new google.maps.Marker({
-		  position:myCenter,
-		  });
+			var marker=new google.maps.Marker({
+			  position:myCenter,
+			});
 
-		marker.setMap(map);
+			marker.setMap(map);
 
-		var infowindow = new google.maps.InfoWindow({
-		  content:"{contact_footer}"
-		  });
+			var infowindow = new google.maps.InfoWindow({
+			  content:"{contact_footer}"
+			});
 
-		google.maps.event.addListener(marker, 'click', function() {
-		  infowindow.open(map,marker);
-		  });
+			google.maps.event.addListener(marker, 'click', function() {
+			  infowindow.open(map,marker);
+			});
 		}
 
 		google.maps.event.addDomListener(window, 'load', initialize);
+		
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		ga('create', 'UA-48862041-1', 'auto');
+		ga('send', 'pageview');
+
 	</script>
 	
     <!-- Bootstrap core JavaScript
