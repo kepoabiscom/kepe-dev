@@ -166,6 +166,7 @@ class Videografi extends CI_Controller {
 
 	function view($year, $month, $day, $id, $slug = "") {
 		$q = $this->video_model->get_by_id(1, $id);
+		$image = $this->video_model->get_image($id);
 		
 		$comment = new Comment();
 		$prev_next = $this->prev_next($id);
@@ -213,7 +214,8 @@ class Videografi extends CI_Controller {
  				"prev_next" => $prev_next,
  				"video_id" => $id,
 				"count_video_comment" => $this->video_model->count_video_comment($id)->count_video_comment,
-				"count_video_stat" => $this->video_model->count_video_stat($id)->count_video_stat
+				"count_video_stat" => $this->video_model->count_video_stat($id)->count_video_stat,
+				"og_image" => base_url($image->path)
 	        )
 		);
 		
