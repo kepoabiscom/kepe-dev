@@ -22,7 +22,7 @@ $host = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "h
 $host .=  "://".$_SERVER['HTTP_HOST'];
 $host .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
-$ENV = !strpos($host, 'localhost') || !strpos($host, '127.0.0.1') ? 'production' : 'development';
+$ENV = strpos($host, 'localhost') || strpos($host, '127.0.0.1') ? 'development' : 'production';
 
 define('ENVIRONMENT', $ENV);
 

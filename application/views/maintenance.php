@@ -25,9 +25,10 @@
 
 				<script type="text/javascript">
 					var clock;
+					var sec = "<?php echo $seconds; ?>";
 					$(document).ready(function() {
 						var clock;
-						clock = $('.clock').FlipClock({
+						clock = $('.clock').FlipClock(sec, {
 					        clockFace: 'DailyCounter',
 					        autoStart: false,
 					        callbacks: {
@@ -36,8 +37,6 @@
 					        	}
 					        }
 					    });
-					    var sec = "<?php echo $seconds; ?>";
-					    clock.setTime(sec);
 					    clock.setCountdown(true);
 					    clock.start();
 					});

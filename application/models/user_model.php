@@ -82,6 +82,7 @@ class User_model extends CI_Model {
 
     function update_user($id, $data){
         $data["modified_date"] = date("Y-m-d H:i:s");
+        unset($data["user_name"]);
         $this->db->where('user_id', $id);
         $this->db->update('user', $data); 
     }

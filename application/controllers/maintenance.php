@@ -13,16 +13,15 @@ class Maintenance extends CI_Controller {
 	  *
 	  */
 	public function index() {
-		$launch_date = "2015-08-01T00:00:00+07:00"; 
-		$now = new DateTime("now", new DateTimeZone('Asia/Jakarta'));
-	    $future = new DateTime($launch_date);
-	    $diff = $now->diff($future);
+		$launch_date = "2015-08-02 00:00:00";
+		$d1 = new DateTime("now");
+		$d2 = new DateTime($launch_date);
+		$diff = $d1->diff($d2)->days;
 
-	  	$seconds = ($diff->h * 60 * 60) + ($diff->i * 60) + $diff->s; 
+	  	$seconds = $d2->format('U') - $d1->format('U');
 	    $data = array(
 	    		"seconds" => $seconds
 	    	);
-		
 		$this->load->view("maintenance", $data);
 	}
 }
