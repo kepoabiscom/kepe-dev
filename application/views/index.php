@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="KepoAbiscom - Always Make You Curious">
+    <meta name="description" content="{meta_description}">
     <meta name="keywords" content="{meta_tag}"> 
    	<meta property="og:title" content="{title}"/>
 	<meta property="og:url" content="{url}"/>

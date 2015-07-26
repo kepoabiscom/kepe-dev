@@ -40,11 +40,13 @@ class News extends CI_Controller {
 			'get_news_category' => $this->get_news_category_list(),
 			'get_archives_list' => $this->get_archives_list(),
 			'page' => $config['page'],
-			"title" => "News",
-			"meta_tag" => "Kepo News, KepoAbis, Kepo, Abis, Make you curious"
+			"title" => "News"
 		);
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
+		
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_description'] = $data['site_description'];
 		
 		$this->generate('news/news', $data);
 	}
@@ -189,6 +191,7 @@ class News extends CI_Controller {
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
+		 				"meta_description" => $q->summary,
 		 				"image" => $img, 
 		 				"url" => $url_share,
 		 				"og_image" => base_url($image),

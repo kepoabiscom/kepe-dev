@@ -38,20 +38,27 @@ class Global_common {
 			if($mode == 'btn'){
 				$ol = "<ol class='list-inline list-inline-btn'>";
 				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
+				
+				$list = implode(" ", $z);
+				$list = $ol.$list."</ol>";
+				
+				return $list;
 			} 
+			
 			if($mode == 'list') {
 				$ol = "<ol class='list-inline'><li>In</li>";
 				$z[$i] = "<li style='padding-left: 5px;padding-right: 0px;'><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
+				
+				$list = implode(", ", $z);
+				$list = $ol.$list."</ol>";
+				
+				return $list;
 			}
+			
 			if($mode == 'metadata') {
 				return $tag;
 			}
 		}
-		
-		$list = ($mode == 'btn') ? implode(" ", $z) : implode(", ", $z);
-		$list = $ol.$list."</ol>";
-		
-		return $list;
 	}
 	
 	function get_length_title($N, $text){

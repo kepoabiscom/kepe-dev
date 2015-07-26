@@ -33,8 +33,7 @@ class About extends CI_Controller {
 	public function global_header(){
 		$data = array(
 			'get_menu' => $this->menu->get_menu("header", "about"),
-			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "about"),
-			"meta_tag" => "Kepo About, KepoAbis, Kepo, Abis, Make you curious"
+			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", "about")
 		);
 		
 		return $data;
@@ -69,6 +68,9 @@ class About extends CI_Controller {
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
 	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
 	     ); 
+		 
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis,".strip_tags($data['tag']);
+		$data['meta_description'] = $data['body'];
 		
  		return $data;
 	}
