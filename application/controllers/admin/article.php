@@ -44,15 +44,37 @@ class Article extends CI_Controller {
 	 	if($result) {
 	 		foreach($result as $row) {
 				$number =  $start + $i;
-				
 		 		$id = $row->article_id;
+
+		 		$detail = Tb::button('Detail', array(
+		            'type' => Tb::BUTTON_TYPE_LINK,
+		            'url' => base_url() . "admin/article/detail/".$id,
+		            'size' => Tb::BUTTON_SIZE_SMALL,
+		            'color' => Tb::BUTTON_COLOR_PRIMARY
+		        ));
+
+				$edit = Tb::button('Edit', array(
+		            'type' => Tb::BUTTON_TYPE_LINK,
+		            'url' => base_url() . "admin/article/update/".$id,
+		            'size' => Tb::BUTTON_SIZE_SMALL,
+		            'color' => Tb::BUTTON_COLOR_SUCCESS
+		        ));
+
+		        $delete = Tb::button('Delete', array(
+		            'type' => Tb::BUTTON_TYPE_LINK,
+		            'onclick' => "setId(".$id.")",
+		            'size' => Tb::BUTTON_SIZE_SMALL,
+		            'color' => Tb::BUTTON_COLOR_DANGER,
+		            'url' => '#modal_confirm',
+                    'data-toggle' => 'modal'
+		        ));
+
 	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_article . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
-	        	$data_array .= "<td>" . $row->modified_date . "</td>";
-	        	$data_array .= "<td><a href='". base_url()."admin/article/detail/".$id."'>Detail</a>&nbsp;<a href='". base_url()."admin/article/update/".$id."'>Edit</a>&nbsp;<a href='". base_url() ."admin/article/delete/".$id."' onclick='return ConfirmDelete();'>Delete</a></td></tr>";
+	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td></tr>";
 	        	$i++;
 	        }
 	        return $data_array . "</tr>";	
@@ -84,6 +106,7 @@ class Article extends CI_Controller {
 
 	function delete($id='') {
 		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
 	 		$r = $this->article_model->get_by_id($id);
 	 		$this->article_model->delete_article($id);
 	 		$t = array("success" => true,
@@ -91,7 +114,7 @@ class Article extends CI_Controller {
 	 				"f" => "delete"
 	 			);
 	 		$this->session->set_userdata("t", $t);
-	 		redirect('admin/article');
+	 		//redirect('admin/article');
 	 	} else {
 	 		redirect('admin/login', 'refresh');
 	 	}

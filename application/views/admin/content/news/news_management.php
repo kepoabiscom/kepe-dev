@@ -24,13 +24,18 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this news?");
-            if (x) return true;
-            return false;
-        }
-    </script>
+    <?php echo Tb::modal(array(
+        'id' => 'modal_confirm',
+        'header' => 'Delete',
+        'body' => '<strong>Apakah Anda yakin ingin menghapus news ini?</strong>',
+        'footer' => array(
+            Tb::button('Ya', array('onclick' => "deleted('news')", 'color' => Tb::BUTTON_COLOR_WARNING)),
+            TB::button('Tidak', array('data-dismiss' => 'modal'))
+        )
+    ));
+    ?>
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
+
 
 </head>
 
@@ -89,7 +94,6 @@
                                         <th>Title</th>
                                         <th>Status</th>
                                         <th>Created Time</th>
-                                        <th>Updated Time </th>
                                         <th>More</th>
                                     </tr>
                                 </thead>

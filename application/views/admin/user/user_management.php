@@ -29,12 +29,20 @@
    
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
-
-   
+    <?php echo Tb::modal(array(
+        'id' => 'modal_confirm',
+        'header' => 'Delete',
+        'body' => '<strong>Apakah Anda yakin ingin menghapus user ini?</strong>',
+        'footer' => array(
+            Tb::button('Ya', array('onclick' => "deleted('user')", 'color' => Tb::BUTTON_COLOR_WARNING)),
+            TB::button('Tidak', array('data-dismiss' => 'modal'))
+        )
+    ));
+    ?>
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 </head>
 
 <body>
-
     <div id="wrapper">
 
         <!-- Navigation -->
@@ -102,32 +110,6 @@
 
     </div>
     <!-- /#wrapper -->
-
-    <?php echo Tb::modal(array(
-            'id' => 'modal_confirm',
-            'header' => 'Delete',
-            'body' => '<strong>Apa anda yakin akan menghapus user ini?</strong>',
-            'footer' => array(
-                Tb::button('Ya', array('onclick' => 'deletee()', 'color' => Tb::BUTTON_COLOR_WARNING)),
-                TB::button('Tidak', array('data-dismiss' => 'modal'))
-            )
-        ));
-    ?>
-    <script type="text/javascript">
-        var uid = 0;
-        function setId(id) {
-            uid = id;
-        } 
-        function deletee() {
-            var url = "<?php echo base_url('admin/user'); ?>";
-            $(document).ready(function(){
-                $.post(url + "/delete", {id: uid}, function(e) {
-                    $(location).attr('href', url);
-                });
-            });
-            $('.close').trigger('click');
-        }
-    </script>
 
 </body>
 

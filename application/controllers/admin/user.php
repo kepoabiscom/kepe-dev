@@ -89,14 +89,14 @@ class User extends CI_Controller {
 
 				$detail = Tb::button('Detail', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'url' => "user/detail/".$id,
+		            'url' => base_url() . "admin/user/detail/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
 				$edit = Tb::button('Edit', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'url' => "user/update/".$id,
+		            'url' => base_url() . "admin/user/update/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_SUCCESS
 		        ));
