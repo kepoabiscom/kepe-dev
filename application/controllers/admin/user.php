@@ -103,7 +103,7 @@ class User extends CI_Controller {
 
 		        $delete = Tb::button('Delete', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "",
+		            'onclick' => "setId(".$id.")",
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_DANGER,
 		            'url' => '#modal_confirm',
@@ -321,6 +321,7 @@ class User extends CI_Controller {
 
 	 function delete($id='') {
 	 	if($this->session->userdata('logged_in')) {
+	 		$id = isset($_POST['id']) ? $_POST['id'] : 0; 	 		
 	 		$r = $this->user_model->get_by_id($id);
 	 		if(strpos($r->image, "cloudinary")) {
 	 			$x = explode("/", $r->image);
@@ -337,7 +338,7 @@ class User extends CI_Controller {
 	 				"f" => "delete"
 	 			);
 	 		$this->session->set_userdata("t", $t);
-	 		redirect('admin/user');
+	 		//redirect('admin/user');
 	 	} else {
 	 		redirect('admin/login', 'refresh');
 	 	}

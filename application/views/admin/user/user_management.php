@@ -24,16 +24,13 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <?php echo Tb::modal(array(
-            'id' => 'modal_confirm',
-            'header' => 'Delete',
-            'body' => '<strong>Apa anda yakin akan menghapus user ini?</strong>',
-            'footer' => array(
-                Tb::button('Ya', array('type' => Tb::BUTTON_TYPE_LINK, 'url' => "user/delete", 'color' => Tb::BUTTON_COLOR_WARNING)),
-                TB::button('Tidak', array('data-dismiss' => 'modal'))
-            )
-        ));
-    ?>
+     <!-- jQuery -->
+    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+   
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+
+   
 </head>
 
 <body>
@@ -106,11 +103,31 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
-   
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+    <?php echo Tb::modal(array(
+            'id' => 'modal_confirm',
+            'header' => 'Delete',
+            'body' => '<strong>Apa anda yakin akan menghapus user ini?</strong>',
+            'footer' => array(
+                Tb::button('Ya', array('onclick' => 'deletee()', 'color' => Tb::BUTTON_COLOR_WARNING)),
+                TB::button('Tidak', array('data-dismiss' => 'modal'))
+            )
+        ));
+    ?>
+    <script type="text/javascript">
+        var uid = 0;
+        function setId(id) {
+            uid = id;
+        } 
+        function deletee() {
+            var url = "<?php echo base_url('admin/user'); ?>";
+            $(document).ready(function(){
+                $.post(url + "/delete", {id: uid}, function(e) {
+                    $(location).attr('href', url);
+                });
+            });
+            $('.close').trigger('click');
+        }
+    </script>
 
 </body>
 
