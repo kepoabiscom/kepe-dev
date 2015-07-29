@@ -50,6 +50,8 @@ class Search extends CI_Controller {
 		$config = $this->page_config($type, $q);
 		$result = $this->search_model->get($type, $q, $config['page'], $config['limit']);
 
+		$home = new Home();
+		
 		if($result['data'] == false || $q == null) {
 			return array(array(	"title" => "",
 				"summary" => "",
@@ -62,8 +64,6 @@ class Search extends CI_Controller {
 				$y = explode("-", $date[0]);
 				$m = explode("-", $date[0]);
 				$d = explode("-", $date[0]);
-
-				$home = new Home();
 
 				if($type == 'article') 
 					$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
