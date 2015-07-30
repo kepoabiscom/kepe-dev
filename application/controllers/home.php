@@ -49,7 +49,7 @@ class Home extends CI_Controller {
 		
 		$data = array_merge($content, $data);
 		
-		$this->output->cache(15);
+		//$this->output->cache(15);
 		$this->parser->parse('/index', $data);
 	}
 	
@@ -68,9 +68,9 @@ class Home extends CI_Controller {
 				
 			$news_id = !isset($q->news_id) ? "" : $q->news_id;
 			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
-			$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
-			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
-			$img .= "</a>";
+			//$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
+			$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+			//$img .= "</a>";
 			
 			$data[$i] = array(
 				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
@@ -94,8 +94,9 @@ class Home extends CI_Controller {
 	public function get_article(){
 		$query = $this->home_model->get_recent_article();
 		
-		$i = 0;
 		if ($query != false) {
+			$i = 0; $parenthesis = 1;
+			
 			foreach ($query->result() as $q) {
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
@@ -107,9 +108,12 @@ class Home extends CI_Controller {
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 				
-				$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
-				$img .= "</a>";
+				//$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
+				$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+				//$img .= "</a>";
+				
+				$open_parenthesis =  ($parenthesis % 2 == 1) ? "<div class='col-md-12'><div class='row' style='margin-bottom: 20px;'>" : "";
+				$closing_parenthesis = ($parenthesis % 2 == 0) ? "</div></div>" : "";
 				
 				$data[$i] = array(
 					"article_id" => $article_id,
@@ -122,10 +126,12 @@ class Home extends CI_Controller {
 					"image" => $img,
 					"img" => "<img src='". base_url($path) ."' alt='".$title."'/>",
 					"category" => !isset($q->category) ? "" : "In <a href='".base_url('article/page/0/0/'.$q->category)."'>".$q->category."</a>",
-					"no_recent_art" => ""
+					"no_recent_art" => "",
+					"open_parenthesis" => $open_parenthesis,
+					"closing_parenthesis" => $closing_parenthesis
 				 );
 				 
-				 $i++;
+				 $i++; $parenthesis++;
 			}
 
 	 		return $data;
