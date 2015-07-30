@@ -33,7 +33,10 @@
 					        autoStart: false,
 					        callbacks: {
 					        	stop: function() {
-					        		$('.message').html('<h1>KepoAbis.com Launched!</h1>')
+					        		$('.message').html("<h2 style='color:green;'>KepoAbis.com Launched!</h2><h5>Loading...</h5>");
+					        		setTimeout(function(){
+					        			$(location).attr('href', location.href);
+					        		}, 1000);
 					        	}
 					        }
 					    });

@@ -37,9 +37,19 @@
 | in the URL cannot be matched to a valid route.
 |
 */
-$is_maintenance = true;
 
-$route['default_controller'] = (!$is_maintenance) ? "home" : "maintenance";
+// For launch KepoAbis.com
+date_default_timezone_set("Asia/Jakarta");
+
+$launch_date = "2015-08-01 09:20:00";
+$d1 = new DateTime("now");
+$d2 = new DateTime($launch_date);
+$diff = $d2->format('U') - $d1->format('U');
+
+$set_maintenance = ($diff < 0) ? false : true;
+
+
+$route['default_controller'] = (!$set_maintenance) ? "home" : "maintenance";
 $route['admin'] = "admin/dashboard/index";
 $route['category-article'] = "admin/category_article";
 $route['category-news'] = "admin/category_news";
@@ -47,6 +57,7 @@ $route['category-video'] = "admin/category_video";
 $route['comment-notif'] = "admin/comment_notif";
 $route['static-content'] = "admin/static_content";
 $route['404_override'] = 'Page_404';
+$route['sitemap\.xml'] = "sitemap";
 
 
 /* End of file routes.php */
