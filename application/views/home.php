@@ -8,9 +8,24 @@
     width: 100%;
     height: 200px;
 }
+
 .crop img {
     position: absolute;
    width: 100%;
+}
+
+.latest-post-blog {
+    height: 100%;
+    margin: 0 0 20px;
+}
+
+.latest-post-blog img {
+    border: 1px solid #dedede;
+    float: left;
+    margin: 0 10px 10px 0;
+    padding: 3px;
+    transition: all 0.2s ease-in-out 0s;
+    width: 225px;
 }
 </style>
 <div class="col-md-12">
@@ -73,6 +88,7 @@
 					<div class="title">{title}</div>
 					<p><em>{created_date} {full_name}</em></p>		
 					{image}
+					<br>
 					<div style="text-align: justify;">
 						{summary}
 					</div>
@@ -95,6 +111,26 @@
 		<div class="col-md-12">
 			<h2 class="line-title"><strong class="bold-text">ARTICLE</strong></h2>
 		</div>
+		<div class="sidebar-module">
+			{get_article}
+			{open_parenthesis}
+			{no_recent_art}
+			<div class="col-md-6">
+				<div class="latest-post-blog">
+					{image}
+					<p style='font-size: 16px; font-weight: bold;'>{title}</p>
+					<span>{created_date} {full_name}</span>
+					<br>
+					<div style="text-align: justify;">
+						{summary}
+					</div>
+					<span>{category}</span>
+				</div>
+			</div>
+			{closing_parenthesis}
+			{/get_article}
+		</div>
+		<!--
 		{get_article}
         {no_recent_art}
 		<div class="col-md-4">
@@ -113,6 +149,7 @@
 			</div>                	 
 		</div>
 		{/get_article}
+		-->
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
 			<a class="button medium yellow" href="<?php echo base_url('article'); ?>">View All Articles</a>
