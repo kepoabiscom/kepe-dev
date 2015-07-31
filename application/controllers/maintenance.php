@@ -13,7 +13,7 @@ class Maintenance extends CI_Controller {
 	  *
 	  */
 	public function index() {
-		$launch_date = "2015-08-01 09:20:00";
+		$launch_date = "2015-08-01 20:15:00";
 		$d1 = new DateTime("now");
 		$d2 = new DateTime($launch_date);
 		$diff = $d1->diff($d2)->days;
