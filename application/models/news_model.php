@@ -133,15 +133,15 @@ class News_model extends CI_Model {
     }
 	
 	function create_news_stat($data){
-		$query = $this->db->query("select distinct(ip_address) 
+		/*$query = $this->db->query("select distinct(ip_address) 
             from news_stat where ip_address = '".$data['ip_address']."'");
 
         if($query->num_rows() > 0) {
             $this->db->where('news_id', $data['news_id']);
             $this->db->update('news_stat', $data);
-        } else {
+        } else {*/
             $this->db->insert('news_stat', $data);    
-        }
+        //}
 	}
 
     function delete_news($id) {
