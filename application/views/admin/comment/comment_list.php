@@ -17,7 +17,7 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-
+    <link href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -34,7 +34,7 @@
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
-
+    
 </head>
 
 <body>
@@ -68,41 +68,61 @@
                                 <i class="fa fa-file"></i>&nbsp;Comment Notification
                             </li>
                         </ol>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Comment List - <b>KepoAbis.com</b>
+                                <div class="btn-group pull-right">
+                                    <a href="#">Add</a>
+                                </div>
+                            </div>
+                            <!-- /.panel-heading -->
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="comment-list">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Type</th>
+                                                <th>Nick Name</th>
+                                                <th>Comment</th>
+                                                <th>More</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                            <!-- /.panel-body -->
+                        </div>
+                    <!-- /.panel -->
                     </div>
                 </div>
-                <!-- /.row -->
-                <h2>Comment List - <strong>KepoAbis.com</strong></h2>
-                {success}
-                <div class="col-sm-2">
-                    <label>Sort by:</label>
-                    <select class="form-control" id="type" name="type" onchange="t(this.value)">
-                        <option value="null">- Select -</option>
-                        <option value="news">News</option>
-                        <option value="article">Article</option>
-                        <option value="video">Video</option>  
-                    </select>
-                </div><br><br>
-                <div class="col-lg-12">
-                    <div class="table-responsive">
-                        <table class="table table-bordered table-hover table-striped">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Type</th>
-                                    <th>Name</th>
-                                    <th>Content</th>
-                                    <th>Created Time</th>
-                                    <th>More</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {list_comment}
-                            </tbody>
-                        </table>
-                        {paging}<br><br>
-                    </div>
-                </div>
+                 <!-- jQuery -->
+                <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+                <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery.dataTables.min.js'; ?>"></script>
+                <script type="text/javascript" src="<?php echo base_url() . 'assets/js/jquery.dataTables.js'; ?>"></script>
 
+                <!-- Bootstrap Core JavaScript -->
+                <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+                <script>
+                    $(document).ready(function() {
+                        var t = $('#comment-list').DataTable( {
+                            "processing": true,
+                            "ajax": "<?php echo base_url(); ?>admin/comment-notif/ajax_",
+                            "order": [[ 1, 'asc' ]],
+                            "columns": [
+                                { 
+                                    "data": "id",
+                                    "width": "120px",
+                                    "sClass": "text-center"
+                                },
+                                { "data": "type" },
+                                { "data": "nick_name" },
+                                { "data": "body" },
+                                //{ "data": "action" },
+                            ]
+                        } );
+                    } );
+                </script>
             </div>
             <!-- /.container-fluid -->
 
@@ -112,11 +132,7 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+   
 
 </body>
 
