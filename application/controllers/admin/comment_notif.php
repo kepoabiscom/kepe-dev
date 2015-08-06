@@ -35,7 +35,16 @@ class Comment_notif extends CI_Controller {
 		   	$jsonResult = '{"data" : [ ';
 		   	$i=0;
 		   	foreach($result as $data) {
-		   		$temp = (object) array_merge((array) $data, array("type" => $type));
+		   		$ban = Tb::button('Ban', array(
+		            'type' => Tb::BUTTON_TYPE_LINK,
+		            'onclick' => "setId(".$data->id.")",
+		            'size' => Tb::BUTTON_SIZE_SMALL,
+		            'color' => Tb::BUTTON_COLOR_DANGER,
+		            'url' => '#modal_confirm',
+                    'data-toggle' => 'modal'
+		        ));
+
+		        $temp = (object) array_merge((array) $data, array("type" => $type, "ban" => $ban));
 		      	if($i != 0){
 		           $jsonResult .=',';
 		       	}
@@ -51,5 +60,16 @@ class Comment_notif extends CI_Controller {
 				);
 		    echo json_encode($data);
 		}
+	}
+
+	function banned() {
+		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
+	 		echo "<script>alert('hai')</script>";
+	 		
+	 		//redirect('admin/news');
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
 	}
 }

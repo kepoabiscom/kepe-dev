@@ -18,19 +18,24 @@
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
     <link href="https://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet" type="text/css">
+ 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-    <script>
-        function ConfirmBanned() {
-            var x = confirm("Are you sure you want to banned this comment?");
-            if (x) return true;
-            return false;
-        }
-    </script>
+     <?php echo Tb::modal(array(
+        'id' => 'modal_confirm',
+        'header' => 'Ban',
+        'body' => '<strong>Apakah Anda yakin ingin mem-banned comment ini?</strong>',
+        'footer' => array(
+            Tb::button('Ya', array('onclick' => "deleted('banned_comment')", 'color' => Tb::BUTTON_COLOR_WARNING)),
+            TB::button('Tidak', array('data-dismiss' => 'modal'))
+        )
+    ));
+    ?>
+    <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
@@ -72,7 +77,7 @@
                             <div class="panel-heading">
                                 Comment List - <b>KepoAbis.com</b>
                                 <div class="btn-group pull-right">
-                                    <a href="#">Add</a>
+                                    <a href="#"></a>
                                 </div>
                             </div>
                             <!-- /.panel-heading -->
@@ -109,6 +114,7 @@
                             "processing": true,
                             "ajax": "<?php echo base_url(); ?>admin/comment-notif/ajax_",
                             "order": [[ 1, 'asc' ]],
+                            "pagingType": "simple_numbers",
                             "columns": [
                                 { 
                                     "data": "id",
@@ -118,7 +124,7 @@
                                 { "data": "type" },
                                 { "data": "nick_name" },
                                 { "data": "body" },
-                                //{ "data": "action" },
+                                { "data": "ban" },
                             ]
                         } );
                     } );

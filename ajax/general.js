@@ -13,7 +13,8 @@ function deleted(t) {
         if(f[i] == t) found = true;
     }
     $(document).ready(function(){
-        $.post(url + "/delete", {id: uid}, function(e) {
+        str = (t == "banned_comment") ? "banned" : "delete";
+        $.post(url + "/" + str, {id: uid}, function(e) {
             $(location).attr('href', url);
         });
     });
