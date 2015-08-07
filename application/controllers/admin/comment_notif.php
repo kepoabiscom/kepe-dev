@@ -29,28 +29,29 @@ class Comment_notif extends CI_Controller {
 
 	function ajax_() {
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
-			$type = "article";
+			$types = array("article", "news", "video");
+			$jsonResult = '{"data" : [ ';
+			$i=0;
+			foreach($types as $type) {
+			   	$result = $this->comment_model->get_list_comment($type);
+			   	foreach($result as $data) {
+			   		$ban = Tb::button('Ban', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'onclick' => "setId(".$data->id.")",
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_DANGER,
+			            'url' => '#modal_confirm',
+	                    'data-toggle' => 'modal'
+			        ));
 
-		   	$result = $this->comment_model->get_list_comment($type);
-		   	$jsonResult = '{"data" : [ ';
-		   	$i=0;
-		   	foreach($result as $data) {
-		   		$ban = Tb::button('Ban', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "setId(".$data->id.")",
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_DANGER,
-		            'url' => '#modal_confirm',
-                    'data-toggle' => 'modal'
-		        ));
-
-		        $temp = (object) array_merge((array) $data, array("type" => $type, "ban" => $ban));
-		      	if($i != 0){
-		           $jsonResult .=',';
-		       	}
-		       	$jsonResult .=json_encode($temp);
-		       	$i++;
-		    }
+			        $temp = (object) array_merge((array) $data, array("no" => ($i+1), "type" => $type, "action" => $ban));
+			      	if($i != 0){
+			           $jsonResult .=',';
+			       	}
+			       	$jsonResult .=json_encode($temp);
+			       	$i++;
+			    }
+			}
 		    $jsonResult .= ']}';
 		    echo $jsonResult;
 		} else {

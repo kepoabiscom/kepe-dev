@@ -86,7 +86,7 @@
                                     <table class="table table-striped table-bordered table-hover" id="comment-list">
                                         <thead>
                                             <tr>
-                                                <th>ID</th>
+                                                <th>No</th>
                                                 <th>Type</th>
                                                 <th>Nick Name</th>
                                                 <th>Comment</th>
@@ -116,15 +116,16 @@
                             "order": [[ 1, 'asc' ]],
                             "pagingType": "simple_numbers",
                             "columns": [
-                                { 
+                                /*{ 
                                     "data": "id",
                                     "width": "120px",
                                     "sClass": "text-center"
-                                },
+                                },*/
+                                { "data": "no"},
                                 { "data": "type" },
                                 { "data": "nick_name" },
                                 { "data": "body" },
-                                { "data": "ban" },
+                                { "data": "action" },
                             ]
                         } );
                     } );
