@@ -134,7 +134,7 @@ class News_model extends CI_Model {
 	
 	function create_news_stat($data){
 		$query = $this->db->query("select distinct(ip_address) 
-            from news_stat where ip_address = '".$data['ip_address']."'");
+            from news_stat where news_id = '".$data['news_id']."' and ip_address = '".$data['ip_address']."'");
 
         if($query->num_rows() > 0) return;
         else {
