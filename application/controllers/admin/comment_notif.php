@@ -17,7 +17,10 @@ class Comment_notif extends CI_Controller {
 		     $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
 
-			   $this->load->view("admin/comment/comment_list");
+		     	$data = array(
+		     				"success" => $this->notification()
+		     			);
+			   	$this->load->view("admin/comment/comment_list", $data);
 		     
 		     } else {
 		     	print_r("<h1>Authorization required.</h1>");
@@ -35,9 +38,10 @@ class Comment_notif extends CI_Controller {
 			foreach($types as $type) {
 			   	$result = $this->comment_model->get_list_comment($type);
 			   	foreach($result as $data) {
+			   		$ban_id = $data->id . "-" . $type;
 			   		$ban = Tb::button('Ban', array(
 			            'type' => Tb::BUTTON_TYPE_LINK,
-			            'onclick' => "setId(".$data->id.")",
+			            'onclick' => "setId('".$ban_id."')",
 			            'size' => Tb::BUTTON_SIZE_SMALL,
 			            'color' => Tb::BUTTON_COLOR_DANGER,
 			            'url' => '#modal_confirm',
@@ -65,12 +69,35 @@ class Comment_notif extends CI_Controller {
 
 	function banned() {
 		if($this->session->userdata('logged_in')) {
-			$id = isset($_POST['id']) ? $_POST['id'] : 0;
-	 		echo "<script>alert('hai')</script>";
+			if(isset($_POST['id'])) {
+				$id = $_POST['id'];	
+				$ar = explode("-", $id);
+	 			
+	 			$this->comment_model->ban_comment($ar[0], $ar[1]);
+	 			$t = array("success" => true,
+	 				"f" => "ban"
+	 			);
+	 			$this->session->set_userdata("t", $t);
+	 		}
 	 		
-	 		//redirect('admin/news');
 	 	} else {
 	 		redirect('admin/login', 'refresh');
 	 	}
 	}
+
+	function notification() {
+	 	$notif = ""; $s = "";
+	 	if($this->session->userdata("t")) {
+			$t = $this->session->userdata("t");
+			if($t['success'] && $t['f'] == "ban") {
+				$notif = "One comment has been banned successfully.";
+			} 
+			$s = "<div class='alert alert-success fade in'>
+                    <a href='#'' class='close' data-dismiss='alert'>&times;</a>
+                    <strong></strong> ". $notif ."
+              </div>";
+		}
+		$this->session->unset_userdata("t");
+        return $s;
+	 }
 }

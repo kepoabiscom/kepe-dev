@@ -73,6 +73,7 @@
                                 <i class="fa fa-file"></i>&nbsp;Comment Notification
                             </li>
                         </ol>
+                        <?php echo $success; ?>
                         <div class="panel panel-default">
                             <div class="panel-heading">
                                 Comment List - <b>KepoAbis.com</b>

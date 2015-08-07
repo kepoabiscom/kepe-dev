@@ -46,6 +46,10 @@ class Comment_model extends CI_Model {
 
         return false;
     }
+
+    function ban_comment($id, $type) {
+        return $this->db->delete($type."_comment", array($type."_comment_id" => $id));
+    }
 }
 
 ?>
