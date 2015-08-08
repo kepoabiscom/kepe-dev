@@ -23,7 +23,7 @@ class News_model extends CI_Model {
                 }
                 return $data;
             }
-        } else {
+        } else if($flag == 1) {
 			$this->db->select(" 
 				n.news_id
                 ,n.news_category_id
@@ -62,6 +62,50 @@ class News_model extends CI_Model {
                 return $query;
             } 
         }
+		else{
+			$this->db->select(" 
+				n.news_id
+                ,n.news_category_id
+				,n.image_id
+				,n.title
+				,n.tag
+				,n.summary
+				,n.body
+				,usr.nama_lengkap
+				,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,img.path AS path_image
+				,nc.title AS category
+				,DATE_FORMAT(n.created_date, '%Y') as year
+				,DATE_FORMAT(n.created_date, '%m') as month
+				,DATE_FORMAT(n.created_date, '%d') as day
+				,COUNT(DISTINCT(ip_address)) AS count_news_stat"
+				,false);
+			$this->db->from("news as n");
+			$this->db->join('image as img', 'img.image_id = n.image_id', 'left');
+			$this->db->join('user as usr', 'n.user_id = usr.user_id', 'left');
+			$this->db->join('news_category as nc', 'nc.news_category_id = n.news_category_id', 'left');
+			$this->db->join('news_stat as nstat', 'nstat.news_id = n.news_id', 'left');
+			$this->db->where("n.status = 'published' AND n.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('nc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(n.created_date, '%m')", $keyword['month']); 
+			}
+			$this->db->group_by("n.news_id");
+			$this->db->order_by("nstat.count_news_stat", "DESC");	
+			$this->db->order_by("n.created_date", "DESC");
+			$this->db->limit($limit, $start);  
+			
+			$query = $this->db->get();
+			 
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
+		}
         return false;
     }
 

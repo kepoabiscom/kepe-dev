@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once(APPPATH . 'controllers/comment.php'); 
+require_once(APPPATH . 'controllers/home.php'); 
 
 class News extends CI_Controller {
 
@@ -68,10 +69,10 @@ class News extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_news_list($start=0, $limit=10, $keyword=array()){
-		include("home.php");
+	public function get_news_list($start=0, $limit=10, $keyword=array(), $type=1){
 		$obj = new Home();
-		$query = $this->news_model->get_news_list(1, $start, $limit, $keyword);
+		
+		$query = $this->news_model->get_news_list($type, $start, $limit, $keyword);
 		
 		if($query != NULL){
 			$i = 0;
@@ -182,7 +183,8 @@ class News extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "news"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
-						"get_news" => $this->get_news_list(0, 5, NULL),
+						"get_news_popular" => $this->get_news_list(0, 5, NULL, 2),
+						"get_news_recent" => $this->get_news_list(0, 5, NULL, 1),
 	 					"get_news_category" => $this->get_news_category_list(),
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",

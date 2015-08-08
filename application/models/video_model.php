@@ -72,7 +72,7 @@ class Video_model extends CI_Model {
                 }
                 return $data;
             }
-        } else {
+        } else if($flag == 1){
 			$this->db->select(" 
                   v.video_id
                   ,v.video_category_id
@@ -119,7 +119,58 @@ class Video_model extends CI_Model {
             if($query->num_rows() > 0) {
                 return $query;
             } 
-        }
+        } else {
+			$this->db->select(" 
+                  v.video_id
+                  ,v.video_category_id
+                  ,v.image_id
+                  ,v.title
+                  ,v.tag
+                  ,v.description
+                  ,v.url AS path_video
+                  ,v.duration
+				  ,usr.nama_lengkap AS full_name
+				  ,DATE_FORMAT(v.created_date, '%M %d, %Y %h:%i %p') as created_date
+				  ,DATE_FORMAT(v.created_date, '%Y') as year
+				  ,DATE_FORMAT(v.created_date, '%m') as month
+				  ,DATE_FORMAT(v.created_date, '%d') as day
+                  ,img.path AS path_image
+                  ,vc.title AS category
+				  ,COUNT(DISTINCT(vstat.ip_address)) AS count_video_stat"
+				  , false);
+			$this->db->from("video as v");
+			$this->db->join('image as img', 'img.image_id = v.image_id', 'left');
+			$this->db->join('user as usr', 'v.user_id = usr.user_id', 'left');
+			$this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id', 'left');
+			$this->db->join('video_stat as vstat', 'vstat.video_id = v.video_id', 'left');
+			$this->db->where("v.status = 'published' AND v.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('vc.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(v.created_date, '%m')", $keyword['month']); 
+			}
+			$this->db->group_by("v.video_id");
+			$this->db->order_by("count_video_stat", "DESC");	
+			$this->db->order_by("v.created_date", "DESC");
+			$this->db->limit($limit, $start);  
+			
+			$query = $this->db->get();
+			
+			/*
+			echo "<pre>";
+			print_r($this->db);
+			echo "</pre>";
+			exit;
+			*/
+			
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
+		}
     }
 
     function delete_video($id) {

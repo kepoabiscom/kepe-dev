@@ -72,8 +72,8 @@ class Videografi extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_video_list($start=0, $limit=10, $keyword=array()) {	
-		$query = $this->video_model->get_video_list(1, $start, $limit, $keyword);
+	public function get_video_list($start=0, $limit=10, $keyword=array(), $type=1) {	
+		$query = $this->video_model->get_video_list($type, $start, $limit, $keyword);
 		if($query != NULL){
 			$i = 0; $parenthesis = 1;
 			
@@ -190,7 +190,8 @@ class Videografi extends CI_Controller {
 	 			"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "videografi"),
 	 			"get_video_category" => $this->get_video_category_list(),
 	 			"get_archives_list" => $this->get_archives_list(),
-	 			"get_video" => $this->get_video_list(0, 5, NULL),
+				"get_video_popular" => $this->get_video_list(0, 5, NULL, 2),
+				"get_video_recent" => $this->get_video_list(0, 5, NULL, 1),
  				"title_category" => $category,
 	            "title" => $q->title_video,
 	            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),

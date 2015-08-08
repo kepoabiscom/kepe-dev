@@ -80,15 +80,33 @@
 </div>
 <div class="col-md-4">
 	<div class="sidebar-module">
-		<h2 class="title">Recent Article</h2>
-		{get_article}
-		<div class="latest-post-blog">
-		{image}
-			<p>{title}</p>
-			<span>{created_date}</span>
-			<span>In {recent_article_category}</span>
-		</div>
-		{/get_article}
+		<h2 class="title">Article</h2>
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#popular">Popular</a></li>
+			<li><a data-toggle="tab" href="#recent">Recent</a></li>
+		 </ul>
+		 <div style="padding: 20px 0;" class="tab-content">
+			<div id="popular" class="tab-pane fade in active">
+				{get_article_popular}
+				<div class="latest-post-blog">
+					{image}
+					<p>{title}</p>
+					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views</span>
+					<span>In {recent_article_category}</span>
+				</div>
+				{/get_article_popular}
+			</div>
+			<div id="recent" class="tab-pane fade">
+				{get_article_recent}
+				<div class="latest-post-blog">
+					{image}
+					<p>{title}</p>
+					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views</span>
+					<span>In {recent_article_category}</span>
+				</div>
+				{/get_article_recent}
+			</div>
+		  </div>
 	</div>
 	<div class="sidebar-module">
 		<h2 class="title">Category</h2>

@@ -34,7 +34,7 @@ class Article_model extends CI_Model {
                 }
                 return $data;
             }
-        } else {
+        } else if($flag == 1){
 			$this->db->select(" 
 				a.article_id
 				,a.article_category_id
@@ -71,7 +71,48 @@ class Article_model extends CI_Model {
             if($query->num_rows() > 0) {
                 return $query;
             } 
-        }
+        } else{
+			$this->db->select(" 
+				a.article_id
+				,a.article_category_id
+				,a.image_id
+				,a.title
+				,a.tag
+				,a.summary
+				,usr.nama_lengkap
+				,DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date
+				,img.path AS path_image
+				,ac.title AS category
+				,DATE_FORMAT(a.created_date, '%Y') as year
+				,DATE_FORMAT(a.created_date, '%m') as month
+				,DATE_FORMAT(a.created_date, '%d') as day
+				,COUNT(DISTINCT(astat.ip_address)) AS count_article_stat"
+				,false);
+			$this->db->from("article as a");
+			$this->db->join('image as img', 'img.image_id = a.image_id', 'left');
+			$this->db->join('user as usr', 'a.user_id = usr.user_id', 'left');
+			$this->db->join('article_category as ac', 'ac.article_category_id = a.article_category_id', 'left');
+			$this->db->join('article_stat as astat', 'astat.article_id = a.article_id', 'left');
+			$this->db->where("a.status = 'published' AND a.image_id > 0");
+			if($keyword['category']){
+				$this->db->like('ac.title', $keyword['category']); 
+			}
+			if($keyword['year']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%Y')", $keyword['year']); 
+			}
+			if($keyword['month']){
+				$this->db->like("DATE_FORMAT(a.created_date, '%m')", $keyword['month']); 
+			}
+			$this->db->group_by("a.article_id");
+			$this->db->order_by("count_article_stat", "DESC");	
+			$this->db->order_by("a.created_date", "DESC");	
+			$this->db->limit($limit, $start);  
+			$query = $this->db->get();
+			
+            if($query->num_rows() > 0) {
+                return $query;
+            } 
+		}
         return false;
     }
 
