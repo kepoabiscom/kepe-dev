@@ -57,7 +57,7 @@ $route['category-video'] = "admin/category_video";
 $route['comment-notif'] = "admin/comment_notif";
 $route['static-content'] = "admin/static_content";
 $route['404_override'] = 'Page_404';
-$route['sitemap\.xml'] = "sitemap";
+$route['sitemap\.xml'] = "feeds/sitemap";
 
 
 /* End of file routes.php */

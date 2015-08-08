@@ -29,7 +29,7 @@ class Sitemap extends CI_Controller {
 		$r = array(
 					"get_sitemap" => $data
 				);
-		$this->parser->parse('/sitemap', $r);
+		$this->parser->parse('/feeds/sitemap', $r);
 	}
 
 	function sitemap($t) {
@@ -55,7 +55,8 @@ class Sitemap extends CI_Controller {
 
 				$data[] = array("loc" => $url,
 								"lastmod" => $datetime->format('Y-m-d\TH:i:sP'),
-								"priority" => 0.5
+								"priority" => 0.5,
+								"changefreq" => "weekly"
 						);
 			}
 		}

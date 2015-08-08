@@ -31,6 +31,25 @@ class Comment_model extends CI_Model {
 
         return false;
     }
+
+    function get_list_comment($type='') {
+        $query = $this->db->select($type."_comment_id as id, nick_name, body, created_date")
+                ->from($type . "_comment")
+                ->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+
+        return false;
+    }
+
+    function ban_comment($id, $type) {
+        return $this->db->delete($type."_comment", array($type."_comment_id" => $id));
+    }
 }
 
 ?>

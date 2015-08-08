@@ -8,12 +8,10 @@ class Video_model extends CI_Model {
 	
 	function create_video_stat($data){
 		$query = $this->db->query("select distinct(ip_address) 
-            from video_stat where ip_address = '".$data['ip_address']."'");
+            from video_stat where video_id = '".$data['video_id']."' and ip_address = '".$data['ip_address']."'");
 
-        if($query->num_rows() > 0) {
-            $this->db->where('video_id', $data['video_id']);
-            $this->db->update('video_stat', $data);
-        } else {
+        if($query->num_rows() > 0) return;
+        else {
             $this->db->insert('video_stat', $data);    
         }
 	}

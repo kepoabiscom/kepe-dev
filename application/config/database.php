@@ -53,7 +53,7 @@ $username = 'kepe3788_user';
 $password = '1234_asdf';
 $database = 'kepe3788_db';
 $db_debug = FALSE;
-if(strpos($host, 'localhost') || strpos($host, '127.0.0.1')) {
+if(ENVIRONMENT == 'development') {
 	$hostname = 'localhost'; // Local Site
 	$username = 'root';
 	$password = '123456';
