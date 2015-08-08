@@ -130,26 +130,6 @@
 			{closing_parenthesis}
 			{/get_article}
 		</div>
-		<!--
-		{get_article}
-        {no_recent_art}
-		<div class="col-md-4">
-			<div class="recent_post">
-				<div>
-					<div class="title">{title}</div>
-					<p><em>{created_date} {full_name}</em></p>		
-					{image}
-					<div style="text-align: justify;">
-						{summary}
-					</div>
-					<p>
-						<em>{category}</em>
-					</p>
-				</div>
-			</div>                	 
-		</div>
-		{/get_article}
-		-->
 		<br>
 		<div class="col-md-12" style="text-align: center; margin-top: 20px;">
 			<a class="button medium yellow" href="<?php echo base_url('article'); ?>">View All Articles</a>

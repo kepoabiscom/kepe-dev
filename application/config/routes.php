@@ -41,7 +41,7 @@
 // For launch KepoAbis.com
 date_default_timezone_set("Asia/Jakarta");
 
-$launch_date = "2015-08-01 20:15:00";
+$launch_date = "2015-08-01 18:48:00";
 $d1 = new DateTime("now");
 $d2 = new DateTime($launch_date);
 $diff = $d2->format('U') - $d1->format('U');
