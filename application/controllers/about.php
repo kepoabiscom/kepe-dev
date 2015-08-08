@@ -56,7 +56,12 @@ class About extends CI_Controller {
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array(
-			"membership_list" => ($parameter == 'membership') ? $this->get_membership_list(0, 100) : NULL,
+			"membership_list" => ($parameter == 'membership') ? $this->get_membership_list(0, 100) : "",
+			"out_team" => ($parameter == 'membership') ? "{membership_list}<div class='col-lg-3 col-md-4 col-xs-6 thumb'>
+				<a class='thumbnail' href='#' data-image-id='' data-toggle='modal' data-title='{nama_lengkap}' data-caption='{nama_lengkap}' data-image='{img}' data-target='#image-gallery'>
+					<img class='img-responsive' src='{img}' alt='{nama_lengkap}'>
+				</a>
+		    </div>{/membership_list}" : "",
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
@@ -70,6 +75,12 @@ class About extends CI_Controller {
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
 	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
 	     ); 
+		 
+		 /*
+		 echo "<pre>";
+		 print_r($data['membership_list']);
+		 exit;
+		 */
 		 
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis,".strip_tags($data['tag']);
 		$data['meta_description'] = $data['body'];
