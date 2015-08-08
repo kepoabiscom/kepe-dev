@@ -12,9 +12,14 @@ class About extends CI_Controller {
 
 	function index() {
 		if($this->session->userdata('logged_in')) {
-		    $data = $this->get_about_detail();
+			 $session_data = $this->session->userdata('logged_in');
+		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
+				$data = $this->get_about_detail();
 
-	 		$this->parser->parse('admin/about/view_about', $data);
+				$this->parser->parse('admin/about/view_about', $data);
+			 } else {
+		     	print_r("<h1>Authorization required.</h1>");
+		     }
 	 	} else {
 	 		redirect('admin/login', 'refresh');
 	 	}

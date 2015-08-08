@@ -33,7 +33,7 @@ class Image_model extends CI_Model {
         $data["modified_date"] = date("Y-m-d H:i:s");
         $this->db->where('image_id', $id);
         $this->db->update('image', $data); 
-    }
+	}
 
     function get_last_image() {
         $this->db->select("image_id")

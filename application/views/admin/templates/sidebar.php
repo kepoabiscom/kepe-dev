@@ -68,8 +68,10 @@
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif</a>
         </li>
         <?php } ?>
+		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[8]; ?>">
             <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
         </li>
+		<?php } ?>
     </ul>
 </div>

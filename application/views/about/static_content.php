@@ -6,7 +6,6 @@
     height: 200px;
     text-align: center;
     vertical-align: middle;
-   
 }
 
 .crop img {
@@ -57,7 +56,7 @@
 								<button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
 							</div>
 
-							<div class="col-md-8 text-justify" id="image-gallery-caption">
+							<div class="col-md-12 text-justify" id="image-gallery-caption">
 								This text will be overwritten by jQuery
 							</div>
 

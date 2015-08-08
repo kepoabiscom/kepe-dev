@@ -8,16 +8,16 @@
 		</ol>
 	</div>
 </div>
-<div class="col-md-4">
-	<h2 class="title">Contact Info</h2>
+<div class="col-md-12" style="margin-bottom: 20px;">
+	<h1>Contact</h1>
 	<div style="padding: 5px; background-color: #ddd;">
 		<div id="googleMap" style="width:100%;height:310px; border: 1px solid #fff;"></div>
 	</div>
-	<br>
+</div>
+<div class="col-md-6">
 	{contact_footer}                     
 </div>
-<div class="col-md-8">
-	<h2 class="title">Get In Touch</h2>
+<div class="col-md-6">
 	{alert}
 	<form action="{sending_message}" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
 		<div class="form-group">
