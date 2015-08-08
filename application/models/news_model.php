@@ -96,7 +96,7 @@ class News_model extends CI_Model {
 				$this->db->like("DATE_FORMAT(n.created_date, '%m')", $keyword['month']); 
 			}
 			$this->db->group_by("n.news_id");
-			$this->db->order_by("nstat.count_news_stat", "DESC");	
+			$this->db->order_by("count_news_stat", "DESC");	
 			$this->db->order_by("n.created_date", "DESC");
 			$this->db->limit($limit, $start);  
 			
