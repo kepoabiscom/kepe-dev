@@ -104,7 +104,7 @@ class Video_model extends CI_Model {
 			if($keyword['month']){
 				$this->db->like("DATE_FORMAT(v.created_date, '%m')", $keyword['month']); 
 			}
-			$this->db->order_by("created_date", "DESC");
+			$this->db->order_by("v.created_date", "DESC");
 			$this->db->limit($limit, $start);  
 			
 			$query = $this->db->get();

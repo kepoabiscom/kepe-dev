@@ -179,6 +179,7 @@ class About extends CI_Controller {
 							"number" => $number,
 							"uid" => $row->user_id,
 							"nama_lengkap" => $row->nama_lengkap,
+							"body" => $row->body,
 							"img" => $row->image,
 							"thumbnail" => "thumbnail"
 						);
@@ -192,6 +193,7 @@ class About extends CI_Controller {
 				"number" => "",
 				"uid" => "",
 				"nama_lengkap" => "",
+				"body" => "",
 				"img" => "",
 				"thumbnail" => ""
 			);
