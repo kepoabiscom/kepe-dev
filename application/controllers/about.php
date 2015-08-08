@@ -174,6 +174,7 @@ class About extends CI_Controller {
 							"nama_lengkap" => $row->nama_lengkap,
 							"body" => $row->body,
 							"img" => $row->image,
+							"position" => $row->position,
 							"thumbnail" => "thumbnail"
 						);
 					$i++;
@@ -188,6 +189,7 @@ class About extends CI_Controller {
 				"nama_lengkap" => "",
 				"body" => "",
 				"img" => "",
+				"position" => "",
 				"thumbnail" => ""
 			);
 			return $data;

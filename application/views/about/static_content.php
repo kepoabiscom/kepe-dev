@@ -34,7 +34,7 @@
 		    	{membership_list}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
 					<div class="crop">
-						<a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{nama_lengkap}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
+						<a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
 							<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
 						</a>
 					</div>
@@ -56,7 +56,7 @@
 								<button type="button" class="btn btn-primary" id="show-previous-image">Previous</button>
 							</div>
 
-							<div class="col-md-12 text-justify" id="image-gallery-caption">
+							<div class="col-md-8 text-justify" id="image-gallery-caption">
 								This text will be overwritten by jQuery
 							</div>
 
