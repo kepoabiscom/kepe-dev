@@ -81,6 +81,7 @@
 		<div class="col-md-4">
 			<div class="title header"><a href="<?php echo base_url(); ?>">{site_name} | <span style="font-size: 14px;">{tagline}</span></a></div>
 		</div>
+		<!--
 		<div class="col-md-2">
 			<div style="margin-top: 25px;">
 			<form role="search" class="navbar-form" method="get" action="<?php echo base_url('search'); ?>">
@@ -99,8 +100,9 @@
 			</form>
 			</div>
 		</div>
+		-->
 		<!-- Main Navigation Start -->
-		<div class="col-md-6">
+		<div class="col-md-8">
 			<div id="navigation">
 				<ul id="nav">	
 					{get_menu}

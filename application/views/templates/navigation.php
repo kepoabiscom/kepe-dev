@@ -60,6 +60,7 @@
 					</ul>
 				</li>
 			</ul>
+			<!--
 			<form role="search" class="navbar-form navbar-right" method="get" action="tentang-situs/search">
 				<div style="width: 200px;" class="input-group">
 					<input type="text" placeholder="Search" class="form-control input-sm" value="" name="search">
@@ -70,7 +71,8 @@
 						</button>
 					</span>
 				</div>
-        </form>
+			</form>
+			-->
         </div><!--/.nav-collapse -->
       </div>
     </nav>

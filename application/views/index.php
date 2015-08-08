@@ -129,7 +129,7 @@
 			  infowindow.open(map,marker);
 			});
 		}
-
+		
 		google.maps.event.addDomListener(window, 'load', initialize);
 		
 		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -139,7 +139,7 @@
 
 		ga('create', 'UA-48862041-1', 'auto');
 		ga('send', 'pageview');
-
+		
 	</script>
 	
     <!-- Bootstrap core JavaScript

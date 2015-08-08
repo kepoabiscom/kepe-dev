@@ -30,6 +30,26 @@
 </style>
 <div class="col-md-12">
 	<div clas="row">
+		<div>
+			<form role="search" class="navbar-form navbar-right" method="get" action="<?php echo base_url('search'); ?>">
+				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
+				<div class="input-group">
+					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
+					<input type="text" placeholder="Search" class="form-control input-sm" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
+					<?php $t = "article"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
+					<input type="hidden" value="<?php echo $t; ?>" name="type">
+					<span class="input-group-btn">
+						<button class="btn btn-default btn-sm" type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div clas="row">
 		<h2 class="line-title">
 			<strong class="bold-text">ABOUT</strong>
 			<span class="light-text main-color">US</span>
