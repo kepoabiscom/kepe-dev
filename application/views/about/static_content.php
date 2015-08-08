@@ -2,14 +2,16 @@
 <style>
 .crop {
     overflow: hidden; /* this is important */
-    height: 200px;
+    max-height: 160px;
     text-align: center;
     vertical-align: middle;
+	margin-bottom: 20px;
 }
 
 .crop img {
     transition: all 1.4s ease-in-out 0s;
     width: 100% !important;
+	min-height: 160px;
 }
 </style>
 <div class="col-md-12">
