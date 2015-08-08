@@ -18,7 +18,7 @@
 	<div class="blog-post">
 		<div class="row">
 		    	{membership_list}
-		        <div class="col-lg-3 col-md-4 col-xs-12 thumb">
+		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
 		            <a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{nama_lengkap}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
 		                <img class="img-responsive" src="{img}" alt="{nama_lengkap}">
 		            </a>
