@@ -1,4 +1,19 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>ajax/member_gallery.js"></script>
+<style>
+.crop {
+    overflow: hidden; /* this is important */
+	display: table-cell;
+    height: 200px;
+    text-align: center;
+    vertical-align: middle;
+   
+}
+
+.crop img {
+    transition: all 1.4s ease-in-out 0s;
+    width: 100% !important;
+}
+</style>
 <div class="col-md-12">
 	<div>
 		<ol class="breadcrumb">
@@ -19,9 +34,11 @@
 		<div class="row">
 		    	{membership_list}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
-		            <a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{nama_lengkap}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
-		                <img class="img-responsive" src="{img}" alt="{nama_lengkap}">
-		            </a>
+					<div class="crop">
+						<a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{nama_lengkap}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
+							<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
+						</a>
+					</div>
 		        </div>
 		        {/membership_list}
 			<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
