@@ -125,6 +125,7 @@
                 </div>
                 <div class='row'>
                     <div class="form-group">
+                    <div>&nbsp;&nbsp;&nbsp;&nbsp;For this time, this chart only available on Firefox.</div>
                     <div class="col-sm-2">
                         <label>Year</label>
                         <select class="form-control" id="year" name="year" onchange="stat(this.value)">

@@ -167,13 +167,15 @@ class About extends CI_Controller {
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 				
-		 		$id = $row->user_id;
-	        	$data_array .= "<tr><td>" . $number.".&nbsp;" . "</td>";
-	        	$data_array .= "<td>" . $row->nama_lengkap . "</td>";
-
+				$data[] = array(
+						"number" => $number,
+						"uid" => $row->user_id,
+						"nama_lengkap" => $row->nama_lengkap,
+						"img" => $row->image
+					);
 	        	$i++;
 	        }
-	        return "<table/>".$data_array . "</tr></table>";
-	 	} else return "";
+	        return $data;
+	 	} else return;
 	 }
 }
