@@ -43,7 +43,7 @@ class User_model extends CI_Model {
 			$this->db->limit($limit, $start);
 		 }
 		 else{
-			$this->db->order_by("nama_lengkap", "asc");
+			$this->db->order_by("user_id", "asc");
 			$this->db->where("role_name", "crew");
 			$this->db->or_where("role_name", "admin");
 		 }
