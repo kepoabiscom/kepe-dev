@@ -2,7 +2,6 @@
 <style>
 .crop {
     overflow: hidden; /* this is important */
-	display: table-cell;
     height: 200px;
     text-align: center;
     vertical-align: middle;
