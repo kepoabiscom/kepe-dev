@@ -24,7 +24,7 @@ $host .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NA
 
 $ENV = strpos($host, 'localhost') || strpos($host, '127.0.0.1') ? 'development' : 'production';
 
-define('ENVIRONMENT', $ENV);
+define('ENVIRONMENT', "development");
 
 /*
  *---------------------------------------------------------------

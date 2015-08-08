@@ -56,12 +56,7 @@ class About extends CI_Controller {
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array(
-			"membership_list" => ($parameter == 'membership') ? $this->get_membership_list(0, 100) : "",
-			"out_team" => ($parameter == 'membership') ? "{membership_list}<div class='col-lg-3 col-md-4 col-xs-6 thumb'>
-				<a class='thumbnail' href='#' data-image-id='' data-toggle='modal' data-title='{nama_lengkap}' data-caption='{nama_lengkap}' data-image='{img}' data-target='#image-gallery'>
-					<img class='img-responsive' src='{img}' alt='{nama_lengkap}'>
-				</a>
-		    </div>{/membership_list}" : "",
+			"membership_list" => $this->get_membership_list($parameter, 0, 100),
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
@@ -77,6 +72,7 @@ class About extends CI_Controller {
 	     ); 
 		 
 		 /*
+		 echo "error";
 		 echo "<pre>";
 		 print_r($data['membership_list']);
 		 exit;
@@ -169,24 +165,37 @@ class About extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	 function get_membership_list($start, $limit) {
-	 	$result = $this->user_model->get_user_list($start, $limit, 1);
-	 	$data_array = ""; $i = 1;
-		$number = 0;
+	 function get_membership_list($parameter, $start, $limit) {
+	 	if($parameter == "membership"){
+			$result = $this->user_model->get_user_list($start, $limit, 1);
+			$data_array = ""; $i = 1;
+			$number = 0;
 
-	 	if($result) {
-	 		foreach($result as $row) {
-				$number =  $start + $i;
-				
-				$data[] = array(
-						"number" => $number,
-						"uid" => $row->user_id,
-						"nama_lengkap" => $row->nama_lengkap,
-						"img" => $row->image
-					);
-	        	$i++;
-	        }
-	        return $data;
-	 	} else return;
+			if($result) {
+				foreach($result as $row) {
+					$number =  $start + $i;
+					
+					$data[] = array(
+							"number" => $number,
+							"uid" => $row->user_id,
+							"nama_lengkap" => $row->nama_lengkap,
+							"img" => $row->image,
+							"thumbnail" => "thumbnail"
+						);
+					$i++;
+				}
+				return $data;
+			} else return;
+		}
+		else{
+			$data[] = array(
+				"number" => "",
+				"uid" => "",
+				"nama_lengkap" => "",
+				"img" => "",
+				"thumbnail" => ""
+			);
+			return $data;
+		}
 	 }
 }
