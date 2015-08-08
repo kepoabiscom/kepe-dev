@@ -49,7 +49,9 @@ class Home extends CI_Controller {
 		
 		$data = array_merge($content, $data);
 		
-		$this->output->cache(15);
+		if(ENVIRONMENT == 'production') 
+			$this->output->cache(15);
+		
 		$this->parser->parse('/index', $data);
 	}
 	
