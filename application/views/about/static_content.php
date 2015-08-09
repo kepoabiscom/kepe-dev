@@ -39,7 +39,7 @@
 								<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
 							</div>
 						</a>
-						<p class="pull-center"><b>{nama_lengkap}</b><br/>{position}</p>
+						<p class="pull-center" style="font-size: 12px;"><b>{nama_lengkap}</b><br/>{position}</p>
 					</div>
 		        </div>
 				{closing_parenthesis}
