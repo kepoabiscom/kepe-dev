@@ -1,8 +1,10 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>ajax/member_gallery.js"></script>
 <style>
 .crop {
-    overflow: hidden; /* this is important */
-    max-height: 160px;
+    display: table-cell;
+    height: 150px;
+    max-height: 150px;
+    overflow: hidden;
     text-align: center;
     vertical-align: middle;
 }
@@ -10,7 +12,6 @@
 .crop img {
     transition: all 1.4s ease-in-out 0s;
     width: 100% !important;
-	min-height: 160px;
 }
 </style>
 <div class="col-md-12">
@@ -32,6 +33,7 @@
 	<div class="blog-post">
 		<div class="row">
 		    	{membership_list}
+				{open_parenthesis}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
 					<a style="margin-bottom: 20px;" class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
 						<div class="crop">
@@ -39,6 +41,7 @@
 						</div>
 					</a>
 		        </div>
+				{closing_parenthesis}
 		        {/membership_list}
 			<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 				<div class="modal-dialog">

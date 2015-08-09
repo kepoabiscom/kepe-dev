@@ -162,12 +162,14 @@ class About extends CI_Controller {
 	 	if($parameter == "membership"){
 			$result = $this->user_model->get_user_list($start, $limit, 1);
 			$data_array = ""; $i = 1;
-			$number = 0;
+			$number = 0; $parenthesis = 1;
 
 			if($result) {
 				foreach($result as $row) {
 					$number =  $start + $i;
-					
+					$open_parenthesis =  ($parenthesis % 6 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
+					$closing_parenthesis = ($parenthesis % 6 == 0) ? "</div></div>" : "";
+				
 					$data[] = array(
 							"number" => $number,
 							"uid" => $row->user_id,
@@ -175,9 +177,11 @@ class About extends CI_Controller {
 							"body" => $row->body,
 							"img" => $row->image,
 							"position" => $row->position,
-							"thumbnail" => "thumbnail"
+							"thumbnail" => "thumbnail",
+							"open_parenthesis" => $open_parenthesis,
+							"closing_parenthesis" => $closing_parenthesis
 						);
-					$i++;
+					$i++; $parenthesis++;
 				}
 				return $data;
 			} else return;
