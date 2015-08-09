@@ -1,10 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once("./././api/cloudinary/Cloudinary.php");
-require_once("./././api/cloudinary/Uploader.php");
-require_once("./././api/cloudinary/Api.php");
+require_once("./././api-cloudinary/cloudinary/Cloudinary.php");
+require_once("./././api-cloudinary/cloudinary/Uploader.php");
+require_once("./././api-cloudinary/cloudinary/Api.php");
 
-require_once("./././api/config_api_key.php");
+require_once("./././api-cloudinary/config_api_key.php");
 
 class Profile extends CI_Controller {
 

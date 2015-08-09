@@ -58,6 +58,7 @@ $route['comment-notif'] = "admin/comment_notif";
 $route['static-content'] = "admin/static_content";
 $route['404_override'] = 'Page_404';
 $route['sitemap\.xml'] = "feeds/sitemap";
+$route['api/users/u/(:num)'] = 'api/users/u/id/$1';
 
 
 /* End of file routes.php */
