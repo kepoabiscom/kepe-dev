@@ -35,10 +35,10 @@ class Users extends REST_Controller {
             if ($users) {
                 $this->response($users, 200); 
             } else {
-                $this->response([
+                $this->response(array(
                     'status' => FALSE,
                     'message' => 'No users were found'
-                ], 404);
+                ), 404);
         	}
         }
 
@@ -58,10 +58,10 @@ class Users extends REST_Controller {
         if (!empty($user)) {
             $this->response($user, 200); 
         } else {
-            $this->response([
+            $this->response(array(
                 'status' => FALSE,
                 'message' => 'User could not be found'
-            ], 404);
+            ), 404);
         }
     }
 }
