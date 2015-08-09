@@ -33,11 +33,14 @@
 		    	{membership_list}
 				{open_parenthesis}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
-					<a style="margin-bottom: 20px;" class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
-						<div class="crop">
-							<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
-						</div>
-					</a>
+					<div style="margin-bottom: 20px;">
+						<a  style="margin-bottom: 10px;" class="{thumbnail} img-animation4" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
+							<div class="crop">
+								<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
+							</div>
+						</a>
+						<p class="pull-center"><b>{nama_lengkap}</b></p>
+					</div>
 		        </div>
 				{closing_parenthesis}
 		        {/membership_list}
