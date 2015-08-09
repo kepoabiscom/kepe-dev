@@ -5,7 +5,6 @@
     max-height: 160px;
     text-align: center;
     vertical-align: middle;
-	margin-bottom: 20px;
 }
 
 .crop img {
@@ -34,11 +33,11 @@
 		<div class="row">
 		    	{membership_list}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
-					<div class="crop">
-						<a class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
+					<a style="margin-bottom: 20px;" class="{thumbnail}" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
+						<div class="crop">
 							<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
-						</a>
-					</div>
+						</div>
+					</a>
 		        </div>
 		        {/membership_list}
 			<div class="modal fade" id="image-gallery" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
