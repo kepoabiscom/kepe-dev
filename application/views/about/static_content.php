@@ -1,8 +1,6 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>ajax/member_gallery.js"></script>
 <style>
 .crop {
-    display: table-cell;
-    height: 150px;
     max-height: 150px;
     overflow: hidden;
     text-align: center;
