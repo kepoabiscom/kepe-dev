@@ -178,22 +178,9 @@ class Video_model extends CI_Model {
     }
 
     function create_video($data) {
-        $data = array("video_category_id" => $data['video_category_id'],
-                    "title" => $data['title'],
-                    "tag" => $data['tag'],
-                    "status" => $data['status'],
-                    "description" => $data['description'],
-                    "story_ide" => $data['story_ide'],
-                    "screenwriter" => $data['screenwriter'],
-                    "film_director" => $data['film_director'],
-                    "cameramen" => $data['cameramen'],
-                    "artist" => $data['artist'],
-                    "url" => $data['url'],
-                    "duration" => $data['duration'],
-                    "image_id" => $data['image_id'],
-                    "created_date" => date("Y-m-d H:i:s"),
-                    "modified_date" => date("Y-m-d H:i:s")
-                );
+    	unset($data['submit']);
+        $data["created_date"] = date("Y-m-d H:i:s");
+        $data["modified_date"] = date("Y-m-d H:i:s");
         $this->db->insert('video', $data);
     }
 

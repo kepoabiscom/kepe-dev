@@ -33,7 +33,7 @@
 	<div class="blog-post">
 		<h2 class="blog-post-title">{title}</h2>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
-		{url}
+		{video_embed}
 		<p>
 			<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
 			<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 

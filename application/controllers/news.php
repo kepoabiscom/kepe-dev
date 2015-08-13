@@ -249,7 +249,8 @@ class News extends CI_Controller {
 	}
 
 	function slug($str='') {
-		return strtolower(preg_replace('/[\s\/\&\%\#\,\.\)\(\$]/', '-', $str));
+		$s = strtolower(preg_replace('/[\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		return strtolower(preg_replace('/[\s]/', '-', $s));
 	}
 	
 	function page() {
