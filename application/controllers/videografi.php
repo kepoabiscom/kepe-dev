@@ -117,7 +117,7 @@ class Videografi extends CI_Controller {
 					"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment,
 					"count_video_stat" => $this->video_model->count_video_stat($video_id)->count_video_stat,
 					"open_parenthesis" => $open_parenthesis,
-					"closing_parenthesis" => $closing_parenthesis,
+					"closing_parenthesis" => $closing_parenthesis
 				 );
 				 
 				 $i++; $parenthesis++;

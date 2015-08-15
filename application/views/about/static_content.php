@@ -11,6 +11,18 @@
     transition: all 1.4s ease-in-out 0s;
     width: 100% !important;
 }
+
+@media (max-width: 767px) {
+	.crop {
+		max-height: none;
+	}
+}
+
+@media (max-width: 415px) {
+	.crop {
+		max-height: none;
+	}
+}
 </style>
 <div class="col-md-12">
 	<div>

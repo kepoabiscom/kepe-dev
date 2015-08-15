@@ -7,6 +7,7 @@
 		margin-bottom: 0px;
 	}
 </style>
+<?php /*
 <!-- Slider -->
 <div id="slider" style="background: rgba(0, 0, 0, 0) linear-gradient(to bottom, #4c0000 0%, #870000 10%, #870000 100%) repeat scroll 0 0;">
 
@@ -34,3 +35,5 @@
 <!-- End Slider -->
 
 <script src=<?php echo base_url('assets/js/flexslider_slide.js'); ?>></script>
+
+*/ ?>

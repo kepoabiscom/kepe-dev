@@ -19,6 +19,7 @@ class home_model extends CI_Model {
 			  ,vid.created_date
 			  ,img.path AS path_image
 			  ,vid_cat.title AS category
+			  ,usr.nama_lengkap AS full_name
 			  ,DATE_FORMAT(vid.created_date, '%Y') as year
 		      ,DATE_FORMAT(vid.created_date, '%m') as month
 			  ,DATE_FORMAT(vid.created_date, '%d') as day
@@ -32,11 +33,15 @@ class home_model extends CI_Model {
 				  video_category vid_cat
 				ON
 				  vid.video_category_id = vid_cat.video_category_id
+				LEFT JOIN
+					user usr
+				ON
+					vid.user_id = usr.user_id
 			WHERE 
 				vid.status = 'published'
 				AND vid.image_id > 0
 			ORDER BY created_date DESC
-			LIMIT 0, 5
+			LIMIT 0, 9
 		";
 
         $query = $this->db->query($q);
@@ -128,7 +133,7 @@ class home_model extends CI_Model {
 				art.status = 'published'
 				AND art.image_id > 0
 			ORDER BY art.created_date DESC
-			LIMIT 0, 4;
+			LIMIT 0, 3;
 		";
 
         $query = $this->db->query($q);

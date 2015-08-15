@@ -84,7 +84,7 @@
     {header}
     {slider}
 	<div style="background-color: rgba(255,255,255,0.9)">
-		<div class="container" style="padding-top: 10px; padding-bottom: 10px; min-height: 515px;">
+		<div class="<?php echo (! $this->uri->segment(1) || $this->uri->segment(1) == 'home') ? 'container-fluid' : 'container'; ?>" style="padding-top: 10px; padding-bottom: 10px; min-height: 515px;">
 
 		  <div class="row">
 			{content}

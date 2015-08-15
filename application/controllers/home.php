@@ -78,7 +78,8 @@ class Home extends CI_Controller {
 				"article_id" => !isset($q->news_id) ? "" : $q->news_id,
 				"article_category_id" => !isset($q->news_category_id) ? "" : $q->news_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='" . $read_more . "'>".$this->global_common->get_title(28, $title)."</a>",
+				//"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='" . $read_more . "'>".$this->global_common->get_title(28, $title)."</a>",
+				"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='" . $read_more . "'>".$title."</a>",
 				"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
 				"full_name" => !isset($q->nama_lengkap) ? "" : "By ".$q->nama_lengkap,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -121,7 +122,8 @@ class Home extends CI_Controller {
 					"article_id" => $article_id,
 					"article_category_id" => !isset($q->article_category_id) ? "" : $q->article_category_id,
 					"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-					"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$this->global_common->get_title(28, $title)."</a>",
+					//"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$this->global_common->get_title(28, $title)."</a>",
+					"title" => "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='". $read_more ."'>".$title."</a>",
 					"summary" => !isset($q->summary) ? "" : $this->get_preview_summary($q->summary, $read_more, "x"),
 					"full_name" => !isset($q->nama_lengkap) ? "" : "By " . $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
@@ -151,7 +153,7 @@ class Home extends CI_Controller {
 	public function get_video(){
 		$query = $this->home_model->get_recent_video();
 		
-		$i = 0;
+		$i = 0; $parenthesis = 1;
 
 		foreach ($query->result() as $q)
 		{
@@ -163,10 +165,14 @@ class Home extends CI_Controller {
 			$day = !isset($q->day) ? 0 : $q->day;
 			
 			$img = "<a target='_blank' href='". base_url($path) ."'>";
-			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='width: 536px;float: right; margin-top: 20px;'/>";
+			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
+			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
 			
+			$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-9'><div class='row'>" : "";
+			$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
+				
 			$data[$i] = array(
 				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
@@ -178,10 +184,13 @@ class Home extends CI_Controller {
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"image" => $img,
 				"url" => $view_more,
+				"full_name" => !isset($q->full_name) ? "" : $q->full_name,
 				"category" => !isset($q->category) ? "" : $q->category,
+				"open_parenthesis" => $open_parenthesis,
+				"closing_parenthesis" => $closing_parenthesis,
 			 );
 			 
-			 $i++;
+			 $i++; $parenthesis++;
 		}
 
  		return $data;
