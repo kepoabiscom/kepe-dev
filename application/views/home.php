@@ -1,8 +1,4 @@
-<style>
-	body{
-		background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed; 
-	}
-</style>
+
 		<div class="col-md-3">
 			<div class="sidebar-module">
 				<h2 class="line-title"><strong class="bold-text">Recent News</strong></h2>
@@ -30,6 +26,7 @@
 					{/get_article}
 				</ol>				
 			</div>
+			<!--
 			<div class="sidebar-module">
 				<h2 class="line-title"><strong class="bold-text">Location On Map</strong></h2>
 				<div>
@@ -37,6 +34,7 @@
 					</div>
 				</div>
 			</div>
+			-->
 		</div>
 		<div class="col-md-9">
 			<div class="row">
