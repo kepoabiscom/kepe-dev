@@ -180,7 +180,7 @@ class Videografi extends CI_Controller {
 		
 		$title_category = $q->title_category;
 		$category = "<a href='".base_url('videografi/page/0/0/'.$title_category)."'>".$title_category."</a>";
-		
+		$url_share = base_url("videografi/view/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($q->title_video) . "");
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array_merge(
@@ -204,7 +204,8 @@ class Videografi extends CI_Controller {
 	            "film_director" => $q->film_director,
 	            "cameramen" => $q->cameramen,
 	            "artist" => $q->artist,
-	            "url" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
+	            "url" => $url_share,
+	            "video_embed" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
 	            "duration" => $q->duration,
 				"full_name" => $q->full_name,
 	            "created_date" => $q->created_date,
@@ -267,7 +268,8 @@ class Videografi extends CI_Controller {
 	}
 	
 	function slug($str='') {
-		return strtolower(preg_replace('/[\s\/\&\%\#\,\.\)\(\$]/', '-', $str));
+		$s = strtolower(preg_replace('/[\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		return strtolower(preg_replace('/[\s]/', '-', $s));
 	}
 	
 	function page() {

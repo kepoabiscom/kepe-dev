@@ -42,6 +42,7 @@ class Video extends CI_Controller {
 	 		$data = array("success" => false, 
 	 					"error_message" => "", 
 	 					"flag" => "create",
+	 					"user_id" => $sess_data['id'],
 	 					"title_category" => $this->get_category_video()
 	 				);
 

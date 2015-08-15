@@ -1,5 +1,7 @@
 <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
-<?php if($flag == "update") { ?>
+<?php if($flag != "update") { ?>
+<input type="hidden" class="form-control" value="<?php echo $user_id; ?>" name="user_id">
+<?php } else { ?>
 <input type="hidden" class="form-control" value="<?php echo $video_id; ?>" name="video_id">
 <input type="hidden" class="form-control" value="<?php echo $image_id; ?>" name="image_id">
 <?php } ?>
