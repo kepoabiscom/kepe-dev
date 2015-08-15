@@ -170,7 +170,7 @@ class Home extends CI_Controller {
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
 			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
 			
-			$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-9'><div class='row'>" : "";
+			$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
 			$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
 				
 			$data[$i] = array(
