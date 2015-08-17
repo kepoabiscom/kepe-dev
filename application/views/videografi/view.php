@@ -39,6 +39,10 @@
 			<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 
 			<i class="glyphicon glyphicon-time"></i>&nbsp;{duration}
 		</p>
+		<p>
+		<script src="https://apis.google.com/js/platform.js"></script>
+		<div class="g-ytsubscribe" data-channelid="UCjCQDSEsDTqq7wmth70khLQ" data-layout="default" data-count="default"></div>
+		</p>
 		<p>{description}</p>
 		<p>In {title_category}</p>
 	</div>

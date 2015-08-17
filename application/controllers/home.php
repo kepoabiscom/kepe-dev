@@ -164,7 +164,7 @@ class Home extends CI_Controller {
 			$month = !isset($q->month) ? 0 : $q->month;
 			$day = !isset($q->day) ? 0 : $q->day;
 			
-			$img = "<a target='_blank' href='". base_url($path) ."'>";
+			$img = "<a target='_blank' href='". base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
 			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
