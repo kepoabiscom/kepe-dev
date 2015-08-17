@@ -454,6 +454,10 @@ hr{
 	transform:scale(2,2);
 }
 
+.carousel-control.right, .carousel-control.left,{
+	background-image: transparent;
+}
+			
 @media (max-width: 767px) {
 	.navbar-default .navbar-nav .open .dropdown-menu > li > a {
 		color: #ddd;

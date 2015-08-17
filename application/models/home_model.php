@@ -5,7 +5,115 @@ class home_model extends CI_Model {
 	function __construct() {
 		parent:: __construct();
 	}
-
+	
+	function get_recent_all(){
+		$q = "
+			SELECT 
+				vid.video_id as id
+				,vid.title
+				,vid.description as summary
+				,'Video' as type
+				,img.path as path_image
+				,vid_cat.title as category
+				,usr.nama_lengkap
+				,vid.created_date as created_date
+				,DATE_FORMAT(vid.created_date, '%M %d, %Y %h:%i %p') as created_date_style
+				,DATE_FORMAT(vid.created_date, '%Y') as year
+				,DATE_FORMAT(vid.created_date, '%m') as month
+				,DATE_FORMAT(vid.created_date, '%d') as day
+			FROM
+				video vid
+				LEFT JOIN
+					image img
+				ON
+					vid.image_id = img.image_id
+				LEFT JOIN
+					video_category vid_cat
+				ON
+					vid.video_category_id = vid_cat.video_category_id
+				LEFT JOIN
+					user usr
+				ON
+					vid.user_id = usr.user_id
+			WHERE 
+				vid.status = 'published'
+				AND vid.image_id > 0
+			UNION  
+			SELECT 
+				n.news_id as id
+				,n.title
+				,n.summary
+				,'News' as type
+				,img.path as path_image
+				,n_cat.title as category
+				,usr.nama_lengkap
+				,n.created_date as created_date
+				,DATE_FORMAT(n.created_date, '%M %d, %Y %h:%i %p') as created_date_style
+				,DATE_FORMAT(n.created_date, '%Y') as year
+				,DATE_FORMAT(n.created_date, '%m') as month
+				,DATE_FORMAT(n.created_date, '%d') as day
+			FROM
+				news n
+				LEFT JOIN
+					user usr
+				ON
+					n.user_id = usr.user_id
+				LEFT JOIN
+					image img
+				ON
+					n.image_id = img.image_id
+				LEFT JOIN
+					news_category n_cat
+				ON
+					n.news_category_id = n_cat.news_category_id
+			WHERE 
+				n.status = 'published'
+				AND n.image_id > 0
+			UNION 
+			SELECT 
+				art.article_id as id
+				,art.title
+				,art.summary
+				,'Article' as type
+				,img.path as path_image
+				,art_cat.title as category
+				,usr.nama_lengkap
+				,art.created_date as created_date
+				,DATE_FORMAT(art.created_date, '%M %d, %Y %h:%i %p') as created_date_style	
+				,DATE_FORMAT(art.created_date, '%Y') as year
+				,DATE_FORMAT(art.created_date, '%m') as month
+				,DATE_FORMAT(art.created_date, '%d') as day
+			FROM
+				article art
+				LEFT JOIN
+					user usr
+				ON
+					art.user_id = usr.user_id
+				LEFT JOIN
+					image img
+				ON
+					art.image_id = img.image_id
+				LEFT JOIN
+					article_category art_cat
+				ON
+					art.article_category_id = art_cat.article_category_id
+			WHERE 
+				art.status = 'published'
+				AND art.image_id > 0
+			ORDER BY created_date DESC
+			LIMIT 0, 5
+		";
+		
+		$query = $this->db->query($q);
+		
+        if($query->num_rows() > 0) {
+            return $query;
+        } 
+		else{
+			return false;
+		}
+	}
+	
 	function get_recent_video() {
 		$q = "
 			SELECT 

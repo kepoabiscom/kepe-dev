@@ -25,6 +25,7 @@ class Home extends CI_Controller {
 			'get_video' => $this->get_video(),
 			'get_article' => $this->get_article(),
 			'get_news' => $this->get_news(),
+			'get_all' => $this->get_all(),
 			'title' => 'Home'
 		);
 		
@@ -53,6 +54,34 @@ class Home extends CI_Controller {
 			$this->output->cache(15);
 		
 		$this->parser->parse('/index', $data);
+	}
+	
+	public function get_all(){
+		$query = $this->home_model->get_recent_all();
+
+		$i = 0;
+		foreach ($query->result() as $q)
+		{	
+			$data[$i] = array(
+				"id" => !isset($q->id) ? "" : $q->id,
+				"title" => !isset($q->title) ? "" : $q->title,
+				"summary" => !isset($q->summary) ? "" : $q->summary,
+				"type" => !isset($q->type) ? "" : $q->type,
+				"path_image" => !isset($q->path_image) ? "" : base_url($q->path_image),
+				"category" => !isset($q->category) ? "" : $q->category,
+				"nama_lengkap" =>! isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
+				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+				"created_date_style" => !isset($q->created_date_style) ? "" : $q->created_date_style,
+				"year" => !!isset($q->year) ? "" : $q->year,
+				"month" => !!isset($q->month) ? "" : $q->month,
+				"day" => !!isset($q->day) ? "" : $q->day,
+				"status" => ($i == 0) ? "item active" : "item"
+			 );
+			 
+			 $i++;
+		}
+
+ 		return $data;
 	}
 	
 	public function get_news(){
