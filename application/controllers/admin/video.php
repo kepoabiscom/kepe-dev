@@ -347,9 +347,9 @@ class Video extends CI_Controller {
 	function upload_config() {
 		$config['upload_path'] = './assets/img/video/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
-		$config['max_size']	= '1000';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
+		$config['max_size']	= '2000';
+		$config['max_width']  = '2024';
+		$config['max_height']  = '1768';
 		$config['encrypt_name'] = true;
 
 		$this->load->library('upload', $config);
