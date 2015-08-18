@@ -104,7 +104,7 @@
 			</div>
 			-->
 		</div>
-		<div class="col-md-9" style="padding-top: 10px;">
+		<div class="col-md-9">
 			<div class="row">
 				{get_video}
 					{open_parenthesis}
