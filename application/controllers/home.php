@@ -42,7 +42,8 @@ class Home extends CI_Controller {
 	{
 		$data = array(
 			'header' => $this->parser->parse('templates/header', $content, TRUE),
-			'slider' => $this->parser->parse('templates/slider', $content, TRUE),
+			/* 'slider' => $this->parser->parse('templates/slider', $content, TRUE), */
+			'slider' => $this->menu->get_page_title(),
 			'content' => $this->parser->parse($view, $content, TRUE),
 			'map' => $this->parser->parse('map', $content, TRUE),
 			'footer' => $this->parser->parse('templates/footer', $content, TRUE)

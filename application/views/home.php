@@ -7,8 +7,13 @@
 				color: #ddd;
 				text-decoration: none;
 			}
+			
+			.carousel-control.left, .carousel-control.right {
+				background-image: none;
+				background-repeat: repeat-x;
+			}
 		</style>
-		<div class="col-md-3"  style="background: rgb(135, 0, 0) none repeat scroll 0 0; margin-top: -10px; padding-top: 15px; padding-bottom: 15px;">
+		<div class="col-md-3"  style="background: #009688 none repeat scroll 0 0; margin-top: -10px; margin-bottom: -10px; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -24,11 +29,11 @@
 				  <div class="carousel-inner" role="listbox">
 					{get_all}
 					<div class="{status}">
-						<div style="margin: 10px; color: #fff;">
+						<div style="padding: 10px 0; color: #ffffff; background-color: #009688;">
 							<span style="font-size: 16px;"><b>{title}</b></span>
 						</div>
 						<img src="{path_image}" alt="Chania">
-						<div style="margin: 5px 10px; min-height: 30px; color: #fff;">
+						<div style="padding: 5px 0; min-height: 30px; color: #ffffff; background-color: #009688;">
 							<span>On {created_date_style} | {type}</span>
 							<br><span>By {nama_lengkap}</span>
 						</div>
@@ -64,7 +69,7 @@
 				</form>
 			</div>
 			<div class="sidebar-module kp-news">
-				<h2 class="line-title"><strong class="bold-text" style="color: #fff;">Recent News</strong></h2>
+				<h2 class="line-title"><strong class="bold-text" style="color: #FFFF00;">Recent News</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_news}
@@ -77,7 +82,7 @@
 				</ol>
 			</div>
 			<div class="sidebar-module kp-article">
-				<h2 class="line-title"><strong class="bold-text" style="color: #fff;">Recent Articles</strong></h2>
+				<h2 class="line-title"><strong class="bold-text" style="color: #FFFF00;">Recent Articles</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_article}

@@ -19,8 +19,12 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 	<style>
 		body{
-			background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed;
+			/* background-color:rgba(17,183,152,0.5); background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 150%; background-attachment: fixed; */
 			font-size: 12px;
+		}
+		
+		#header{
+			#background: #ddd;
 		}
 		
 		#navigation ul li {
@@ -40,7 +44,8 @@
 			-moz-border-left-colors: none;
 			-moz-border-right-colors: none;
 			-moz-border-top-colors: none;
-			background: rgb(135, 0, 0) none repeat scroll 0px 0px; width: 1343px; float: left; display: block;
+			/* background: rgb(135, 0, 0) none repeat scroll 0px 0px; width: 1343px; float: left; display: block; */
+			background: #009688 none repeat scroll 0px 0px; width: 1343px; float: left; display: block;
 			border-color: #03db21 -moz-use-text-color;
 			border-image: none;
 			border-style: solid none;

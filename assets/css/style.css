@@ -50,13 +50,15 @@ h5.headline {
 	border-right: none;
 	margin-top: -1px;
 
-/*	background-image: linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
+	/*	
+	background-image: linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
 	background-image: -o-linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
 	background-image: -moz-linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
 	background-image: -webkit-linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
 	background-image: -ms-linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
-*/
-	background-color: #06a11c;
+	*/
+	/* background-color: #06a11c; */
+	background-color: #FFFF00; 
 }
 
 #page-title h2 {

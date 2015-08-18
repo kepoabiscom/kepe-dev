@@ -343,7 +343,7 @@ sidebar-module {
 }
 
 .footer {
-	background-color: #f5f5f5;
+	/* background-color: #f5f5f5; */
     border-bottom: 1px solid rgb(221, 221, 221);
     border-top: 1px solid rgb(221, 221, 221);
     box-shadow: 0 0 10px 5px rgba(166, 166, 166, 0.1);
