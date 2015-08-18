@@ -109,11 +109,11 @@
 				{get_video}
 					{open_parenthesis}
 					<div class="col-md-4">
+						<p>{image}</p>
 						<div  style="font-size: 18px;">{title}</div>
 						<p  style="font-size: 12px;" class="post-body">
 							On {created_date} By {full_name}
 						</p>
-						<p>{image}</p>
 					</div>
 					{closing_parenthesis}
 				{/get_video}
