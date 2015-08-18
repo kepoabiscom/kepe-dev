@@ -117,6 +117,11 @@ class News_model extends CI_Model {
     }
 
     function count_news($flag=0, $keyword=array()) {
+		$keyword['category'] = "";
+		$keyword['year'] = "";
+		$keyword['month'] = "";
+		
+		
 		if($flag == 0){
 			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
@@ -232,6 +237,7 @@ class News_model extends CI_Model {
         $query = $this->db->query("
                     select @i:=@i+1 as i, news_id
                     from news, (select @i:=-1) r 
+					where news.status = 'published'
                     order by news_id desc");
 
         if ($query->num_rows() > 0) {
@@ -249,7 +255,7 @@ class News_model extends CI_Model {
                     ,DATE_FORMAT(n.created_date, '%Y') as year
                     ,DATE_FORMAT(n.created_date, '%m') as month
                     ,DATE_FORMAT(n.created_date, '%d') as day
-                    from news n order by n.news_id desc
+                    from news n where n.status = 'published' order by n.news_id desc
                     limit ". $rank .", 1 ");
 
         if($query->num_rows() == 1) {
