@@ -37,7 +37,7 @@
 	<div>
 			<form role="search" method="get" action="<?php echo base_url('search'); ?>">
 				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
-				<div style="width: 225px;" class="input-group">
+				<div class="input-group">
 					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
 					<input type="text" placeholder="Search news" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
 					<?php $t = "news"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>

@@ -1,4 +1,14 @@
-		<div class="col-md-3">
+		<style>
+			.kp-news a, .kp-article a{
+				color: #fff;
+			}
+			
+			.kp-news a:hover, .kp-article a:hover{
+				color: #ddd;
+				text-decoration: none;
+			}
+		</style>
+		<div class="col-md-3"  style="background: rgb(135, 0, 0) none repeat scroll 0 0; margin-top: -10px; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -14,8 +24,14 @@
 				  <div class="carousel-inner" role="listbox">
 					{get_all}
 					<div class="{status}">
+						<div style="margin: 10px; color: #fff;">
+							<span style="font-size: 16px;"><b>{title}</b></span>
+						</div>
 						<img src="{path_image}" alt="Chania">
-						<div style="margin: 5px 10px; min-height: 30px;">{title} - {type}</div>
+						<div style="margin: 5px 10px; min-height: 30px; color: #fff;">
+							<span>On {created_date_style} | {type}</span>
+							<br><span>By {nama_lengkap}</span>
+						</div>
 					</div>
 					{/get_all}
 				  </div>
@@ -36,7 +52,7 @@
 				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
 				<div class="input-group">
 					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
-					<input type="text" placeholder="Search article / news / video" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
+					<input type="text" placeholder="search article / news / video" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
 					<?php $t = "video"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
 					<input type="hidden" value="<?php echo $t; ?>" name="type">
 					<span class="input-group-btn">
@@ -47,8 +63,8 @@
 				</div>
 				</form>
 			</div>
-			<div class="sidebar-module">
-				<h2 class="line-title"><strong class="bold-text">Recent News</strong></h2>
+			<div class="sidebar-module kp-news">
+				<h2 class="line-title"><strong class="bold-text" style="color: #fff;">Recent News</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_news}
@@ -60,8 +76,8 @@
 					{/get_news}
 				</ol>
 			</div>
-			<div class="sidebar-module">
-				<h2 class="line-title"><strong class="bold-text">Recent Articles</strong></h2>
+			<div class="sidebar-module kp-article">
+				<h2 class="line-title"><strong class="bold-text" style="color: #fff;">Recent Articles</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_article}

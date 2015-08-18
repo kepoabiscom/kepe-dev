@@ -62,9 +62,11 @@ class Home extends CI_Controller {
 		$i = 0;
 		foreach ($query->result() as $q)
 		{	
+			$title = $this->global_common->get_title(28, !isset($q->title) ? "" : $q->title);
+			
 			$data[$i] = array(
 				"id" => !isset($q->id) ? "" : $q->id,
-				"title" => !isset($q->title) ? "" : $q->title,
+				"title" => $title,
 				"summary" => !isset($q->summary) ? "" : $q->summary,
 				"type" => !isset($q->type) ? "" : $q->type,
 				"path_image" => !isset($q->path_image) ? "" : base_url($q->path_image),
