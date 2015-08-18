@@ -13,7 +13,7 @@
 				background-repeat: repeat-x;
 			}
 		</style>
-		<div class="col-md-3"  style="background: #009688 none repeat scroll 0 0; margin-top: -10px; margin-bottom: -10px; padding-top: 15px; padding-bottom: 15px;">
+		<div class="col-md-3"  style="background: #009688 none repeat scroll 0 0; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -29,7 +29,7 @@
 				  <div class="carousel-inner" role="listbox">
 					{get_all}
 					<div class="{status}">
-						<div style="padding: 10px 0; color: #ffffff; background-color: #009688;">
+						<div style="padding-bottom: 10px; color: #ffffff; background-color: #009688;">
 							<span style="font-size: 16px;"><b>{title}</b></span>
 						</div>
 						<img src="{path_image}" alt="Chania">
@@ -104,7 +104,7 @@
 			</div>
 			-->
 		</div>
-		<div class="col-md-9">
+		<div class="col-md-9" style="padding-top: 10px;">
 			<div class="row">
 				{get_video}
 					{open_parenthesis}

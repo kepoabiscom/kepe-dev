@@ -56,8 +56,12 @@
 		#page-title {
 			border-bottom: 1px solid #f0f0f0;
 			border-top: 1px solid #f0f0f0;
-			margin-bottom: 10px;
+			/* margin-bottom: 10px; */
 			width: 100%;
+		}
+		
+		.breadcrumb{
+			margin-top: 10px; 
 		}
 		
 		@media (max-width: 767px) {
@@ -90,7 +94,7 @@
     {header}
     {slider}
 	<div style="background-color: rgba(255,255,255,0.9)">
-		<div class="<?php echo (! $this->uri->segment(1) || $this->uri->segment(1) == 'home') ? 'container-fluid' : 'container'; ?>" style="padding-top: 10px; padding-bottom: 10px; min-height: 515px;">
+		<div class="<?php echo (! $this->uri->segment(1) || $this->uri->segment(1) == 'home') ? 'container-fluid' : 'container'; ?>" style="min-height: 515px;">
 
 		  <div class="row">
 			{content}
