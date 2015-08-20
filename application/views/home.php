@@ -4,7 +4,7 @@
 			}
 			
 			.kp-news a:hover, .kp-article a:hover{
-				color: #ddd;
+				color: blue;
 				text-decoration: none;
 			}
 			
