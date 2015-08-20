@@ -179,6 +179,8 @@ class About extends CI_Controller {
 							"img" => $row->image,
 							"position" => $row->position,
 							"thumbnail" => "thumbnail",
+							//"loading" => base_url('assets/img/loading.gif'),
+							"loading" => 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg',
 							"open_parenthesis" => $open_parenthesis,
 							"closing_parenthesis" => $closing_parenthesis
 						);
@@ -195,7 +197,8 @@ class About extends CI_Controller {
 				"body" => "",
 				"img" => "",
 				"position" => "",
-				"thumbnail" => ""
+				"thumbnail" => "",
+				"loading" => ""
 			);
 			return $data;
 		}

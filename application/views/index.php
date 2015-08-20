@@ -86,7 +86,19 @@
 	</style>
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
+    <script src="<?php echo base_url('assets/js/jquery.lazyload.js?v=1.9.1'); ?>"></script>
 	<script src="http://maps.googleapis.com/maps/api/js"></script>
+	<script type="text/javascript" charset="utf-8">
+		$(function() {
+			$("img.lazy").lazyload({
+				event : "sporty"
+			});
+		});
+
+		$(window).bind("load", function() {
+			var timeout = setTimeout(function() { $("img.lazy").trigger("sporty") }, 5000);
+		});   
+		</script>
   </head>
 
   <body>

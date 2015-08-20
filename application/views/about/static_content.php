@@ -48,7 +48,8 @@
 					<div style="margin-bottom: 20px;">
 						<a  style="margin-bottom: 5px;" class="{thumbnail} img-animation4" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
 							<div class="crop">
-								<img class="img-responsive" src="{img}" alt="{nama_lengkap}">
+								<!--<img class="img-responsive" src="{img}" alt="{nama_lengkap}">-->
+								<img src="{loading}" class="lazy" data-original="{img}" alt="{nama_lengkap}">
 							</div>
 						</a>
 						<p class="pull-center" style="font-size: 12px;"><b>{nama_lengkap}</b><br/>{position}</p>
