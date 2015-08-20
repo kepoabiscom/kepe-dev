@@ -99,11 +99,13 @@ class Home extends CI_Controller {
 			$year = !isset($q->year) ? 0 : $q->year;
 			$month = !isset($q->month) ? 0 : $q->month;
 			$day = !isset($q->day) ? 0 : $q->day;
-				
+			$default = base_url('assets/img/news/default-image.png');
+			
 			$news_id = !isset($q->news_id) ? "" : $q->news_id;
 			$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
 			//$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
-			$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+			//$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+			$img = "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 			//$img .= "</a>";
 			
 			$data[$i] = array(
@@ -139,12 +141,14 @@ class Home extends CI_Controller {
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
-			
+				$default = base_url('assets/img/article/default-image.png');
+				
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 				
 				//$img = "<a target='_blank' class='thumbnail' href='". base_url($path) ."'>";
-				$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+				//$img = "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."'/>";
+				$img = "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				//$img .= "</a>";
 				
 				$open_parenthesis =  ($parenthesis % 2 == 1) ? "<div class='col-md-12'><div class='row' style='margin-bottom: 20px;'>" : "";
@@ -195,9 +199,11 @@ class Home extends CI_Controller {
 			$year = !isset($q->year) ? 0 : $q->year;
 			$month = !isset($q->month) ? 0 : $q->month;
 			$day = !isset($q->day) ? 0 : $q->day;
+			$default = base_url('assets/img/video/default-image.png');
 			
 			$img = "<a target='_blank' href='". base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
-			$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
+			//$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
+			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 20px;'>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
 			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
