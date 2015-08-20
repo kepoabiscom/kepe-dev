@@ -85,12 +85,14 @@ class News extends CI_Controller {
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
+				$default = base_url('assets/img/news/default-image.png');
 				
 				$news_id = !isset($q->news_id) ? "" : $q->news_id;
 				$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
 
 				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
-				$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
+				//$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive opacity lazy' width='480px' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				$img .= "</a></p>";
 				
 				$category = !isset($q->category) ? "" : $q->category;

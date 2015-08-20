@@ -87,10 +87,12 @@ class Videografi extends CI_Controller {
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
+				$default = base_url('assets/img/video/default-image.png');
 				
 				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 				$img = "<a target='_blank' href='". $view ."'>";
-				$img .= "<img class='img-responsive opacity' src='". base_url($path) ."' alt='".$title."'/>";
+				//$img .= "<img class='img-responsive opacity' src='". base_url($path) ."' alt='".$title."'/>";
+				$img .= "<img class='img-responsive opacity lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				$img .= "</a>";
 				
 				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(26, $title)."</a>";
