@@ -1,6 +1,6 @@
 		<style>
 			.kp-news a, .kp-article a{
-				color: #fff;
+				color: black;
 			}
 			
 			.kp-news a:hover, .kp-article a:hover{
@@ -13,7 +13,7 @@
 				background-repeat: repeat-x;
 			}
 		</style>
-		<div class="col-md-3"  style="background: #009688 none repeat scroll 0 0; padding-top: 15px; padding-bottom: 15px;">
+		<div class="col-md-3"  style="background: none repeat scroll 0 0; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
@@ -25,15 +25,31 @@
 					<li data-target="#myCarousel" data-slide-to="4"></li>
 				  </ol>
 
+				 <div class="sidebar-module">
+					<form role="search" method="get" action="<?php echo base_url('search'); ?>">
+					<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
+					<div class="input-group">
+						<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
+						<input type="text" placeholder="Search article / news / video" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
+						<?php $t = "video"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
+						<input type="hidden" value="<?php echo $t; ?>" name="type">
+						<span class="input-group-btn">
+							<button class="btn btn-default" type="submit">
+								<span class="glyphicon glyphicon-search"></span>
+							</button>
+						</span>
+					</div>
+					</form>
+				</div>
 				  <!-- Wrapper for slides -->
 				  <div class="carousel-inner" role="listbox">
 					{get_all}
 					<div class="{status}">
-						<div style="padding-bottom: 10px; color: #ffffff; background-color: #009688;">
+						<div style="padding-bottom: 10px; color: black;">
 							<span style="font-size: 16px;"><b>{title}</b></span>
 						</div>
 						<img src="{path_image}" alt="Chania">
-						<div style="padding: 5px 0; min-height: 30px; color: #ffffff; background-color: #009688;">
+						<div style="padding: 5px 0; min-height: 30px; color: black;">
 							<span>On {created_date_style} | {type}</span>
 							<br><span>By {nama_lengkap}</span>
 						</div>
@@ -52,24 +68,9 @@
 				  </a>
 				</div>
 			</div>
-			<div class="sidebar-module">
-				<form role="search" method="get" action="<?php echo base_url('search'); ?>">
-				<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
-				<div class="input-group">
-					<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
-					<input type="text" placeholder="Search article / news / video" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
-					<?php $t = "video"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
-					<input type="hidden" value="<?php echo $t; ?>" name="type">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<span class="glyphicon glyphicon-search"></span>
-						</button>
-					</span>
-				</div>
-				</form>
-			</div>
+			
 			<div class="sidebar-module kp-news">
-				<h2 class="line-title"><strong class="bold-text" style="color: #FFFF00;">Recent News</strong></h2>
+				<h2 class="line-title"><strong class="bold-text" style="color: black;">Recent News</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_news}
@@ -82,7 +83,7 @@
 				</ol>
 			</div>
 			<div class="sidebar-module kp-article">
-				<h2 class="line-title"><strong class="bold-text" style="color: #FFFF00;">Recent Articles</strong></h2>
+				<h2 class="line-title"><strong class="bold-text" style="color: black;">Recent Articles</strong></h2>
 				<ol class="list-unstyled">
 					<hr>
 					{get_article}

@@ -30,7 +30,7 @@
 			{get_breadcrumb}
 			<li><a href="{home}">Home</a></li>
 			<li class="active">About Us</li>
-			<li class="active">Our Team</li>
+			<li class="active">{title}</li>
 			{/get_breadcrumb}
 		</ol>
 	</div>

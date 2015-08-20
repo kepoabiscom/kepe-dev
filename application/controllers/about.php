@@ -136,7 +136,7 @@ class About extends CI_Controller {
 	 		"logo_image" => $img,
 	 		"logo_name" => $logo, 
 	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id,
-	 		"membership" => base_url('about/page/membership'),
+	 		"membership" => base_url('about/page/team'),
 	 		"organization" => base_url('about/page/organization'),
 	 		"history" => base_url('about/page/history'),
 	     ); 
@@ -160,7 +160,7 @@ class About extends CI_Controller {
 	}
 	
 	 function get_membership_list($parameter, $start, $limit) {
-	 	if($parameter == "membership"){
+	 	if($parameter == "team"){
 			$result = $this->user_model->get_user_list($start, $limit, 1);
 			$data_array = ""; $i = 1;
 			$number = 0; $parenthesis = 1;

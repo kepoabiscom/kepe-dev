@@ -271,6 +271,7 @@ class Video_model extends CI_Model {
         $query = $this->db->query("
                     select @i:=@i+1 as i, video_id
                     from video, (select @i:=-1) r 
+                    where video.status = 'published'
                     order by video_id desc");
 
         if ($query->num_rows() > 0) {

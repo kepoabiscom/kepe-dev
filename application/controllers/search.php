@@ -114,7 +114,7 @@ class Search extends CI_Controller {
 	}
 
 	function tab_search($type='article') {
-		$arr = array("Article", "News", "Video");
+		$arr = array("Video", "Article", "News");
 		$qry_str = $_SERVER['QUERY_STRING'];
 		$q = explode("&", $qry_str);
 		$class = array_fill(0, count($arr), '');

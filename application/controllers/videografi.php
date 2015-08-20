@@ -88,11 +88,11 @@ class Videografi extends CI_Controller {
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
 				
-				$img = "<a target='_blank' href='". base_url($path) ."'>";
+				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
+				$img = "<a target='_blank' href='". $view ."'>";
 				$img .= "<img class='img-responsive opacity' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "</a>";
 				
-				$view = base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(26, $title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
@@ -268,7 +268,7 @@ class Videografi extends CI_Controller {
 	}
 	
 	function slug($str='') {
-		$s = strtolower(preg_replace('/[\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		$s = strtolower(preg_replace('/[\!\@\+\=\}\{\-\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
 		return strtolower(preg_replace('/[\s]/', '-', $s));
 	}
 	

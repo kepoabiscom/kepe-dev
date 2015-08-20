@@ -228,6 +228,7 @@ class Article_model extends CI_Model {
         $query = $this->db->query("
                     select @i:=@i+1 as i, article_id
                     from article, (select @i:=-1) r 
+                    where article.status = 'published'
                     order by article_id desc");
 
         if ($query->num_rows() > 0) {

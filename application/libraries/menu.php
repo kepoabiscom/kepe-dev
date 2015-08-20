@@ -31,7 +31,7 @@ class Menu {
                        "videografi" => base_url('videografi'),
                        "contact" => base_url('contact'),
                        "membershipform" => '#',
-                       "membership" => base_url('about/page/membership'),
+                       "team" => base_url('about/page/team'),
                        "organization" => base_url('about/page/organization'),
                        "history" => base_url('about/page/history'),
                    ));

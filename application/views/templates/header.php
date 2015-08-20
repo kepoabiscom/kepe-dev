@@ -118,7 +118,7 @@
 						</a>
 						 <ul class="dropdown-menu" role="menu">
 							<!--<li><a href="{membershipform}">MEMBERSHIP FORM</a></li>-->
-							<li><a href="{membership}">MEMBERSHIP</a></li>
+							<li><a href="{membership}">OUR TEAM</a></li>
 							<li><a href="{organization}">ORGANIZATIONS</a></li>
 							<li><a href="{history}">HISTORY</a></li>
 						</ul>
