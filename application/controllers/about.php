@@ -136,7 +136,7 @@ class About extends CI_Controller {
 	 		"logo_image" => $img,
 	 		"logo_name" => $logo, 
 	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id,
-	 		"membership" => base_url('about/page/team'),
+	 		"team" => base_url('about/page/team'),
 	 		"organization" => base_url('about/page/organization'),
 	 		"history" => base_url('about/page/history'),
 	     ); 
