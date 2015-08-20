@@ -33,6 +33,7 @@ class About_model extends CI_Model {
 			,contact_youtube
 			,contact_instagram
 			,contact_path
+			,contact_askfm
 			,content_title
 			,content_body
 			,content_mission

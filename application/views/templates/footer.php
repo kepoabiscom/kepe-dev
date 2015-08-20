@@ -34,6 +34,11 @@
 							<img class="img-responsive" src="<?php echo base_url('assets/img//path.png'); ?>">
 						</a>
 					</li>
+					<li class="social-icons">
+						<a target="_blank" title="Ask.fm" href="{contact_askfm}">
+							<img class="img-responsive" src="<?php echo base_url('assets/img//askfm.png'); ?>">
+						</a>
+					</li>
 				</ul>
 			</div>
 		</div>

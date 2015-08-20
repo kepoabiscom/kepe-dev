@@ -128,6 +128,12 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="col-sm-2">Contact Ask.fm</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" value="<?php echo $contact_askfm; ?>" name="contact_askfm">
+    </div>
+</div>
+<div class="form-group">
     <label class="col-sm-2">Logo</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);">

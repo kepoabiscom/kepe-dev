@@ -56,6 +56,7 @@ class About extends CI_Controller {
 	 		"contact_youtube" => !isset($q->contact_youtube) ? "" : $q->contact_youtube,
 	 		"contact_instagram" => !isset($q->contact_instagram) ? "" : $q->contact_instagram,
 	 		"contact_path" => !isset($q->contact_path) ? "" : $q->contact_path,
+	 		"contact_askfm" => !isset($q->contact_askfm) ? "" : $q->contact_askfm,
 	 		"content_title" => !isset($q->content_title) ? "" : htmlentities($q->content_title),
 	 		"content_body" => !isset($q->content_body) ? "" : htmlentities($q->content_body),
 	 		"content_mission" => !isset($q->content_mission) ? "" : htmlentities($q->content_mission),

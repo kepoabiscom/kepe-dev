@@ -128,6 +128,9 @@
                                         <td align="left"><strong>Path<strong></td><td>:</td><td align="left"><a href="{contact_path}">{contact_path}</a></td>
                                     </tr>
 									<tr>
+                                        <td align="left"><strong>Ask.fm<strong></td><td>:</td><td align="left"><a href="{contact_askfm}">{contact_askfm}</a></td>
+                                    </tr>
+									<tr>
                                         <td align="left"><strong>Content Title</strong></td><td>:</td><td align="left">{content_title}   
                                     </td>     
                                     </tr>
