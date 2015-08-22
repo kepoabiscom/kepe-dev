@@ -1,4 +1,17 @@
 <!-- appId=876274572459160 appId for KepoAbis.com -->
+<style>
+.crop {
+    max-height: 60px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+	float: left;
+}
+
+.crop img {
+    transition: all 1.4s ease-in-out 0s;
+}
+</style>
 <div id="fb-root"></div>
 <script>
 	(function(d, s, id) {
@@ -89,7 +102,7 @@
 			<div id="popular" class="tab-pane fade in active">
 				{get_article_popular}
 				<div class="latest-post-blog">
-					{image}
+					<div class="crop">{image}</div>
 					<p>{title}</p>
 					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views</span>
 					<span>In {recent_article_category}</span>
@@ -99,7 +112,7 @@
 			<div id="recent" class="tab-pane fade">
 				{get_article_recent}
 				<div class="latest-post-blog">
-					{image}
+					<div class="crop">{image}</div>
 					<p>{title}</p>
 					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_article_stat} views</span>
 					<span>In {recent_article_category}</span>

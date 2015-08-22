@@ -12,6 +12,32 @@
 				background-image: none;
 				background-repeat: repeat-x;
 			}
+	
+			box-img {
+				position: relative;
+				display: inline-block;
+				border: 1px solid green;
+			}
+			
+			#box-img * {
+				-moz-box-sizing: border-box;
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			
+			#image {
+				z-index: 9;
+				text-align: center;
+				border: 1px solid blue;
+			}
+			
+			#play {
+				background: url('http://kepoabis.com/assets/img/play-btn.png') center center no-repeat;
+				margin: -155px 10px 0 0;
+				height: 160px;
+				position: relative;
+				z-index: 10;
+			}
 		</style>
 		<div class="col-md-3"  style="background: none repeat scroll 0 0; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
@@ -45,7 +71,7 @@
 				  <div class="carousel-inner" role="listbox">
 					{get_all}
 					<div class="{status}">
-						<div style="padding-bottom: 10px; color: black;">
+						<div style="background-color: #fff; padding-bottom: 10px; color: black;">
 							<span style="font-size: 16px;"><b>{title}</b></span>
 						</div>
 						<img src="{path_image}" alt="Chania">
@@ -112,9 +138,9 @@
 					<div class="col-md-4">
 						<p>{image}</p>
 						<div  style="font-size: 18px;">{title}</div>
-						<p  style="font-size: 12px;" class="post-body">
+						<div style="font-size: 12px;" class="post-body">
 							On {created_date} By {full_name}
-						</p>
+						</div>
 					</div>
 					{closing_parenthesis}
 				{/get_video}

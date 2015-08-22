@@ -203,7 +203,7 @@ class Home extends CI_Controller {
 			
 			$img = "<a target='_blank' href='". base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
 			//$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
-			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 20px;'>";
+			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 15px;'>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
 			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";

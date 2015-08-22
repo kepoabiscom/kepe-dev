@@ -80,8 +80,9 @@ class News extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
+				$title = ($type == 2 || $type == 3) ? $this->global_common->get_title(26, $title) : $title ;
 				$tag = !isset($q->tag) ? "" : $q->tag;
-
+				
 				$year = !isset($q->year) ? 0 : $q->year;
 				$month = !isset($q->month) ? 0 : $q->month;
 				$day = !isset($q->day) ? 0 : $q->day;
@@ -89,8 +90,8 @@ class News extends CI_Controller {
 				
 				$news_id = !isset($q->news_id) ? "" : $q->news_id;
 				$read_more = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$news_id . "/" . $this->slug($title) . "");
-
-				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
+				
+				$img = "<p><a class='crop' target='_blank' href='". base_url($path) ."'>";
 				//$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "<img class='img-responsive opacity lazy' width='480px' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				$img .= "</a></p>";
@@ -185,8 +186,8 @@ class News extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "news"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
-						"get_news_popular" => $this->get_news_list(0, 5, NULL, 2),
-						"get_news_recent" => $this->get_news_list(0, 5, NULL, 1),
+						"get_news_popular" => $this->get_news_list(0, 5, NULL, 3),
+						"get_news_recent" => $this->get_news_list(0, 5, NULL, 2),
 	 					"get_news_category" => $this->get_news_category_list(),
 	 					"get_archives_list" => $this->get_archives_list(),
 	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",

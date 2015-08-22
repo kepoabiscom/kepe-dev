@@ -58,7 +58,7 @@ h5.headline {
 	background-image: -ms-linear-gradient(bottom, #FAFAFA 0%, #FCFCFC 100%);
 	*/
 	/* background-color: #06a11c; */
-	background-color: #FFFF00; 
+	background-color: #009688; 
 }
 
 #page-title h2 {
@@ -732,7 +732,7 @@ a.feed span {
 
 
 /* Tabs */
-.latest-post-blog {margin: 0 0 20px 0; height: 50px;}
+.latest-post-blog {margin: 0 0 20px 0; /* height: 50px; */}
 .latest-post-blog:last-child {margin-bottom: 5px;}
 
 .latest-post-blog p,
@@ -750,9 +750,10 @@ a.feed span {
 
 .latest-post-blog img {
 	float: left;
-	margin: 0 10px 10px 0;
-	border: 1px solid #dedede;
-	padding: 3px;
+	/* margin: 0 10px 10px 0; */
+	margin: 0 10px 0 0;
+	/* border: 1px solid #dedede; */
+	/* padding: 3px; */
 	/* height: 49px; width: 49px; */
 	width: 100px;
 	-webkit-transition: all 0.2s ease-in-out;

@@ -34,7 +34,7 @@ class Article_model extends CI_Model {
                 }
                 return $data;
             }
-        } else if($flag == 1){
+        } else if($flag == 1 || $flag == 2){
 			$this->db->select(" 
 				a.article_id
 				,a.article_category_id

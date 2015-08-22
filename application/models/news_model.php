@@ -23,7 +23,7 @@ class News_model extends CI_Model {
                 }
                 return $data;
             }
-        } else if($flag == 1) {
+        } else if($flag == 1 || $flag == 2) {
 			$this->db->select(" 
 				n.news_id
                 ,n.news_category_id

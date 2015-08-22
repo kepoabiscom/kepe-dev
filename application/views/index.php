@@ -39,12 +39,12 @@
 			background-color: #ffffff;
 		}
 		
+		/*
 		#page-title {
 			-moz-border-bottom-colors: none;
 			-moz-border-left-colors: none;
 			-moz-border-right-colors: none;
 			-moz-border-top-colors: none;
-			/* background: rgb(135, 0, 0) none repeat scroll 0px 0px; width: 1343px; float: left; display: block; */
 			background: #009688 none repeat scroll 0px 0px; width: 1343px; float: left; display: block;
 			border-color: #03db21 -moz-use-text-color;
 			border-image: none;
@@ -52,6 +52,7 @@
 			border-width: 1px medium;
 			margin-top: -1px;
 		}
+		*/
 		
 		#page-title {
 			border-bottom: 1px solid #f0f0f0;
@@ -106,7 +107,7 @@
     {header}
     {slider}
 	<div style="background-color: rgba(255,255,255,0.9)">
-		<div class="<?php echo (! $this->uri->segment(1) || $this->uri->segment(1) == 'home') ? 'container-fluid' : 'container'; ?>" style="min-height: 515px;">
+		<div class="<?php echo (! $this->uri->segment(1) || $this->uri->segment(1) == 'home') ? 'container-fluid' : 'container'; ?>" style="min-height: 515px; padding-bottom: 20px;">
 
 		  <div class="row">
 			{content}

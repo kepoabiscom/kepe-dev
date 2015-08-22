@@ -1,6 +1,19 @@
 <!-- appId=876274572459160 appId for KepoAbis.com -->
+<style>
+.crop {
+    max-height: 60px;
+    overflow: hidden;
+    text-align: center;
+    vertical-align: middle;
+	float: left;
+}
+
+.crop img {
+    transition: all 1.4s ease-in-out 0s;
+}
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+</style>
 <div id="fb-root"></div>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script>
 	(function(d, s, id) {
 	  var js, fjs = d.getElementsByTagName(s)[0];
@@ -90,17 +103,19 @@
 			<div id="popular" class="tab-pane fade in active">
 				{get_news_popular}
 				<div class="latest-post-blog">
-					{image}
-					<p>{title}</p>
-					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_news_stat} views</span>
-					<span>In {recent_news_category}</span>
+					<div class="crop">{image}</div>
+					<div>
+						<p>{title}</p>
+						<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_news_stat} views</span>
+						<span>In {recent_news_category}</span>
+					</div>
 				</div>
 				{/get_news_popular}
 			</div>
 			<div id="recent" class="tab-pane fade">
 				{get_news_recent}
 				<div class="latest-post-blog">
-					{image}
+					<div class="crop">{image}</div>
 					<p>{title}</p>
 					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_news_stat} views</span>
 					<span>In {recent_news_category}</span>

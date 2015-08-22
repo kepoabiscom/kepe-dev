@@ -44,8 +44,10 @@ class Menu {
 	public function get_page_title($title = ""){
 		return "<div id='page-title'>
 						<div class='container'>
-							<div class='sixteen columns'>
+						<div class='row'>
+							<div class='col-md-12'>
 								<h2 style='color:white; margin-bottom: 0px; margin-top: 0px;'>".$title."</h2>
+							</div>
 							</div>
 						</div>		
 					</div>";
