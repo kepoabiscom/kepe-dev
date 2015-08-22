@@ -79,7 +79,7 @@
                         </div>
                     </div>
                     <div class="col-lg-12">
-                        {notif}
+                        <div class="notif">{notif}</div>
                         <h1 class="page-header">Gallery <strong>KepoAbis.com</strong> - Behind the Sceen </h1>
                         <div class="img_bts">{images_list}</div>
                     </div>

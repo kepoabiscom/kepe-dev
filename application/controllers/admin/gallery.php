@@ -71,6 +71,9 @@ class Gallery extends CI_Controller {
 		 			"path" => $f['file_name']
 		 		);
 		 	$this->image_model->insert_image($data);
+		 	@chmod($f['full_path'], 0777);
+		 	$user = (ENVIRONMENT == 'development') ? 'hermanwahyudi' : 'kepe3788';
+		 	@chown($f['full_path'], $user);
 		  	$status = array('status' => true, 
 		  					'msg' => 'Image uploaded.',
 		  					"get_img" => $this->get_list_image("behindsceen", 1)
@@ -82,6 +85,9 @@ class Gallery extends CI_Controller {
 	function delete($id='') {
 		if($this->session->userdata('logged_in')) {
 	 		$this->image_model->delete_image($id);
+	 		$r = $this->image_model->get_by_id($id);
+	 		$full_path = base_url() . "assets/img/bts/" . $r->path;
+	 		@unlink($full_path);
 	 		$t = array("success" => true,
 	 				"f" => "delete"
 	 			);

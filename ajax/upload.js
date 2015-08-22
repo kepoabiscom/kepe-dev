@@ -15,7 +15,7 @@ function uploadFile(file){
                 if(fx.status) {
                     document.getElementById("msg").innerHTML = "<span style='color:green'>" + fx.msg + "</span>";  
                     $('.img_bts').prepend(fx.get_img);
-                    $('.alert-success').html('');
+                    $('.notif').html('');
                 } else {
                     document.getElementById("msg").innerHTML = "<span style='color:red'>" + fx.msg + "</span>";      
                 }
