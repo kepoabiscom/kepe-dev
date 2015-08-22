@@ -71,25 +71,33 @@
                     </div>
                 </div>
                 <!-- /.row -->
-
-                    <div class="col-lg-12">
-                        <h1 class="page-header">Gallery</h1>
-                        {images_list}
-
-                    </div>
                     <div class ="col-md-6">
+                        <div class="form-group">
+                            <label><strong>Upload your image here</strong></label>
+                            <div id="msg"></div>
+                            <input type="file" id="fileinput" class = "form-control" name="userfile" multiple="multiple" accept="image/*" size="20" onchange="read_image(this);" /><br />
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        {notif}
+                        <h1 class="page-header">Gallery <strong>KepoAbis.com</strong> - Behind the Sceen </h1>
+                        <div class="img_bts">{images_list}</div>
+                    </div>
+
+                    <!--<div class ="col-md-6">
                    
-                    <div class ="msg"></div>
+                    
                     <div class="form-group">
+                        
                         <label class="col-sm-2">Preview</label>
                         <div class="col-sm-6">
                             <img id="img_prev" style="border-radius:25px; box-shadow: 10px 10px 5px #888888; max-width:95%;border:6px groove #545565;" src="<?php $image = 'default-image.png'; echo base_url() . 'assets/img/' . $image;?>"  width="150" height="200"/>
                         </div>
-                    </div>
-                    <form id="upload-image-form" action="<?php echo base_url(); ?>admin/gallery/upload" method="post" enctype="multipart/form-data" role="form">
-                        <input type="file" class = "form-control" name="userfile" size="20" onchange="read_image(this);" /><br />
-                        <input type="submit" id='submit' name = "submit" value="Upload" class ="btn btn-primary" />
-                    </form>
+                    </div>-->
+                    <!--<form id="upload-image-form" action="<?php base_url(); ?>admin/gallery/upload" method="post" enctype="multipart/form-data" role="form">-->
+                    <!--<input type="file" id="fileinput" class = "form-control" name="userfile" multiple="multiple" accept="image/*" size="20" onchange="read_image(this);" /><br />
+                    <input type="submit" id='submit' name = "submit" value="Upload" class ="btn btn-primary" />
+                    </form>-->
                     </div>
                     <script src="<?php echo base_url() . "ajax/upload.js"; ?>"></script>
                 </div>
