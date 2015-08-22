@@ -101,6 +101,7 @@
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#popular">Popular</a></li>
 			<li><a data-toggle="tab" href="#recent">Recent</a></li>
+			<li><a data-toggle="tab" href="#comment">Comment</a></li>
 		 </ul>
 		 <div style="padding: 20px 0;" class="tab-content">
 			<div id="popular" class="tab-pane fade in active">
@@ -108,8 +109,12 @@
 				<div class="latest-post-blog">
 					<div class="crop">{image}</div>
 					<p>{title}</p>
-					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views</span>
-					<span>In {recent_video_category}</span>
+					<span>{created_date}</span>
+					<span>
+						In {recent_video_category} | 
+						<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views |
+						<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment
+					</span>
 				</div>
 				{/get_video_popular}
 			</div>
@@ -118,10 +123,28 @@
 				<div class="latest-post-blog">
 					<div class="crop">{image}</div>
 					<p>{title}</p>
-					<span>{created_date} | <i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views</span>
-					<span>In {recent_video_category}</span>
+					<span>{created_date}</span>
+					<span>
+						In {recent_video_category} | 
+						<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views |
+						<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment
+					</span>
 				</div>
 				{/get_video_recent}
+			</div>
+			<div id="comment" class="tab-pane fade">
+				{get_video_comment}
+				<div class="latest-post-blog">
+					<div class="crop">{image}</div>
+					<p>{title}</p>
+					<span>{created_date}</span>
+					<span>
+						In {recent_video_category} | 
+						<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views |
+						<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment
+					</span>
+				</div>
+				{/get_video_comment}
 			</div>
 		  </div>
 	</div>

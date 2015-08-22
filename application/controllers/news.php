@@ -80,7 +80,7 @@ class News extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
-				$title = ($type == 2 || $type == 3) ? $this->global_common->get_title(26, $title) : $title ;
+				$title = ($type == 2 || $type == 3 || $type == 4) ? $this->global_common->get_title(26, $title) : $title ;
 				$tag = !isset($q->tag) ? "" : $q->tag;
 				
 				$year = !isset($q->year) ? 0 : $q->year;
@@ -186,6 +186,7 @@ class News extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "news"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
+						"get_news_comment" => $this->get_news_list(0, 5, NULL, 4),
 						"get_news_popular" => $this->get_news_list(0, 5, NULL, 3),
 						"get_news_recent" => $this->get_news_list(0, 5, NULL, 2),
 	 					"get_news_category" => $this->get_news_category_list(),

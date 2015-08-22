@@ -79,7 +79,7 @@ class Article extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
-				$title = ($type == 2 || $type == 3) ? $this->global_common->get_title(26, $title) : $title ;
+				$title = ($type == 2 || $type == 3 || $type == 4) ? $this->global_common->get_title(26, $title) : $title ;
 				$tag = !isset($q->tag) ? "" : $q->tag;
 				
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
@@ -182,6 +182,7 @@ class Article extends CI_Controller {
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "article"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
+						"get_article_comment" => $this->get_article_list(0, 5, NULL, 4),
 						"get_article_popular" => $this->get_article_list(0, 5, NULL, 3),
 						"get_article_recent" => $this->get_article_list(0, 5, NULL, 2),
 	 					"get_article_category" => $this->get_article_category_list(),
