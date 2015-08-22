@@ -9,6 +9,7 @@ class About extends CI_Controller {
 		parent:: __construct();
 		$this->load->model("about_model");
 		$this->load->model("user_model");
+		$this->load->model("image_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->library("global_common");
@@ -56,7 +57,7 @@ class About extends CI_Controller {
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array(
-			"membership_list" => $this->get_membership_list($parameter, 0, 100),
+			"membership_list" => $this->get_list($parameter, 0, 100),
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
@@ -137,6 +138,7 @@ class About extends CI_Controller {
 	 		"logo_name" => $logo, 
 	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id,
 	 		"team" => base_url('about/page/team'),
+	 		"bts" => base_url('about/page/behind-the-sceen'),
 	 		"organization" => base_url('about/page/organization'),
 	 		"history" => base_url('about/page/history'),
 	     ); 
@@ -159,9 +161,10 @@ class About extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	 function get_membership_list($parameter, $start, $limit) {
-	 	if($parameter == "team"){
-			$result = $this->user_model->get_user_list($start, $limit, 1);
+	 function get_list($parameter, $start, $limit) {
+	 	if($parameter == "team" || $parameter == "behind-the-sceen"){
+	 		$result = ($parameter == "team") ? $result = $this->user_model->get_user_list($start, $limit, 1) : $result = $this->image_model->get_bts('behindsceen', 0);
+			
 			$data_array = ""; $i = 1;
 			$number = 0; $parenthesis = 1;
 
@@ -170,26 +173,26 @@ class About extends CI_Controller {
 					$number =  $start + $i;
 					$open_parenthesis =  ($parenthesis % 6 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
 					$closing_parenthesis = ($parenthesis % 6 == 0) ? "</div></div>" : "";
-				
+					
 					$data[] = array(
-							"number" => $number,
-							"uid" => $row->user_id,
-							"nama_lengkap" => $row->nama_lengkap,
-							"body" => $row->body,
-							"img" => $row->image,
-							"position" => $row->position,
-							"thumbnail" => "thumbnail",
-							//"loading" => base_url('assets/img/loading.gif'),
-							"default" => 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg',
-							"open_parenthesis" => $open_parenthesis,
-							"closing_parenthesis" => $closing_parenthesis
-						);
+						"number" => $number,
+						"uid" => ($parameter == "team") ? $row->user_id : "",
+						"nama_lengkap" => ($parameter == "team") ? $row->nama_lengkap : "",
+						"body" => $row->body,
+						"img" => ($parameter == "team") ? $row->image : base_url() . "assets/img/bts/" . $row->path,
+						"position" => ($parameter == "team") ? $row->position : "",
+						"thumbnail" => "thumbnail",
+						//"loading" => base_url('assets/img/loading.gif'),
+						"default" => 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg',
+						"open_parenthesis" => $open_parenthesis,
+						"closing_parenthesis" => $closing_parenthesis
+					);
+
 					$i++; $parenthesis++;
 				}
 				return $data;
 			} else return;
-		}
-		else{
+		} else {
 			$data[] = array(
 				"number" => "",
 				"uid" => "",
@@ -198,7 +201,9 @@ class About extends CI_Controller {
 				"img" => "",
 				"position" => "",
 				"thumbnail" => "",
-				"default" => ""
+				"default" => "",
+				"open_parenthesis" => "",
+				"closing_parenthesis" => ""
 			);
 			return $data;
 		}

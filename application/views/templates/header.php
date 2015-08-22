@@ -113,12 +113,13 @@
 					</li>
 					{/get_menu}
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<a href="<?php echo base_url(); ?>about" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
 							ABOUT US &nbsp;<span class="caret"></span>
 						</a>
 						 <ul class="dropdown-menu" role="menu">
 							<!--<li><a href="{membershipform}">MEMBERSHIP FORM</a></li>-->
 							<li><a href="{team}">OUR TEAM</a></li>
+							<li><a href="{bts}">BEHIND THE SCEEN</a></li>
 							<li><a href="{organization}">ORGANIZATIONS</a></li>
 							<li><a href="{history}">HISTORY</a></li>
 						</ul>
