@@ -65,11 +65,11 @@ class Image_model extends CI_Model {
     function get_bts($type='', $x=0) {
         $var = ($x == 1) ? array("limit" => 1, "order_by" => "desc") : array("limit" => 50, "order_by" => "desc");
 
-        $this->db->select("image_id, title, path")
-        ->from("image")
-        ->where("type", $type)
-        ->order_by("image_id", $var['order_by'])
-        ->limit($var['limit']);
+        $this->db->select("image_id, title, body, path")
+            ->from("image")
+            ->where("type", $type)
+            ->order_by("image_id", $var['order_by'])
+            ->limit($var['limit']);
 
         $query = $this->db->get();
  

@@ -32,6 +32,7 @@ class Menu {
                        "contact" => base_url('contact'),
                        "membershipform" => '#',
                        "team" => base_url('about/page/team'),
+                       "bts" => base_url('about/page/behind-the-sceen'),
                        "organization" => base_url('about/page/organization'),
                        "history" => base_url('about/page/history'),
                    ));
