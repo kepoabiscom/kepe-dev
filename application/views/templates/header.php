@@ -119,7 +119,7 @@
 						 <ul class="dropdown-menu" role="menu">
 							<!--<li><a href="{membershipform}">MEMBERSHIP FORM</a></li>-->
 							<li><a href="{team}">OUR TEAM</a></li>
-							<li><a href="{bts}">BEHIND THE SCEEN</a></li>
+							<li><a href="{bts}">BEHIND THE SCENE</a></li>
 							<li><a href="{organization}">ORGANIZATIONS</a></li>
 							<li><a href="{history}">HISTORY</a></li>
 						</ul>

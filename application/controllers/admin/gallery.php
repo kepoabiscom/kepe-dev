@@ -18,7 +18,7 @@ class Gallery extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 
-		    $data = array("images_list" => $this->get_list_image("behindsceen", 0),
+		    $data = array("images_list" => $this->get_list_image("behindscene", 0),
 		    			"notif" => $this->notification()
 		    		);
 		    
@@ -63,10 +63,10 @@ class Gallery extends CI_Controller {
 					);
 		} else{
 		 	$f = $this->upload->data();
-		 	$data = array("title" => "Behind the Sceen",
-		 			"tag" => "kepo, abis, kepo abis, di belakang layar, behind, sceen",
-		 			"body" => "Behind the Sceen",
-		 			"type" => "behindsceen",
+		 	$data = array("title" => "Behind the Scene",
+		 			"tag" => "kepo, abis, kepo abis, di belakang layar, behind, scene",
+		 			"body" => "Behind the Scene",
+		 			"type" => "behindscene",
 		 			"size" => $f['file_size'],
 		 			"path" => $f['file_name']
 		 		);
@@ -76,7 +76,7 @@ class Gallery extends CI_Controller {
 		 	@chown($f['full_path'], $user);
 		  	$status = array('status' => true, 
 		  					'msg' => 'Image uploaded.',
-		  					"get_img" => $this->get_list_image("behindsceen", 1)
+		  					"get_img" => $this->get_list_image("behindscene", 1)
 		  			);
 		} 
 		echo(json_encode($status));
