@@ -138,7 +138,7 @@ class About extends CI_Controller {
 	 		"logo_name" => $logo, 
 	 		"setting_id" => !isset($q->setting_id) ? "" : $q->setting_id,
 	 		"team" => base_url('about/page/team'),
-	 		"bts" => base_url('about/page/behind-the-sceen'),
+	 		"bts" => base_url('about/page/behind-the-scene'),
 	 		"organization" => base_url('about/page/organization'),
 	 		"history" => base_url('about/page/history'),
 	     ); 
@@ -162,8 +162,8 @@ class About extends CI_Controller {
 	}
 	
 	 function get_list($parameter, $start, $limit) {
-	 	if($parameter == "team" || $parameter == "behind-the-sceen"){
-	 		$result = ($parameter == "team") ? $result = $this->user_model->get_user_list($start, $limit, 1) : $result = $this->image_model->get_bts('behindsceen', 0);
+	 	if($parameter == "team" || $parameter == "behind-the-scene"){
+	 		$result = ($parameter == "team") ? $result = $this->user_model->get_user_list($start, $limit, 1) : $result = $this->image_model->get_bts('behindscene', 0);
 			
 			$data_array = ""; $i = 1;
 			$number = 0; $parenthesis = 1;

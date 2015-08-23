@@ -97,7 +97,7 @@
 		});
 
 		$(window).bind("load", function() {
-			var timeout = setTimeout(function() { $("img.lazy").trigger("sporty") }, 5000);
+			var timeout = setTimeout(function() { $("img.lazy").trigger("sporty") }, 100);
 		});   
 		</script>
   </head>

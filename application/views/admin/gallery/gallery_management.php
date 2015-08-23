@@ -26,7 +26,7 @@
     <![endif]-->
     <script>
         function ConfirmDelete() {
-            var x = confirm("Are you sure you want to delete this article?");
+            var x = confirm("Are you sure you want to delete this picture?");
             if (x) return true;
             return false;
         }
@@ -80,7 +80,7 @@
                     </div>
                     <div class="col-lg-12">
                         <div class="notif">{notif}</div>
-                        <h1 class="page-header">Gallery <strong>KepoAbis.com</strong> - Behind the Sceen </h1>
+                        <h1 class="page-header">Gallery <strong>KepoAbis.com</strong> - Behind the Scene </h1>
                         <div class="img_bts">{images_list}</div>
                     </div>
 
