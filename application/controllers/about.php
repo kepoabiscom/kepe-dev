@@ -82,13 +82,13 @@ class About extends CI_Controller {
 		$q = $this->about_model->get_detail();
 		
 	    $logo = !isset($q->logo) ? "" : $q->logo;
-	    $img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
-		$img .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $logo ."'>";
-		$img .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $logo ."'>";
-		$img .= "</a></div>";
+	    $img = "<img  class='img-responsive' alt='' src='". base_url() . "assets/img/" . $logo ."'>";
 
 		$image = !isset($q->content_image) ? "" : $q->content_image;
-		$content_image = "<img  class='img-responsive' alt='' src='". base_url() . "assets/img/" . $image ."'>";
+		$content_image = "<div class='pull-right col-lg-4 col-md-6 col-xs-6 thumb'>";
+		$content_image .= "<a target='_blank' class='thumbnail' href='". base_url() . "assets/img/" . $image ."'>";
+		$content_image .= "<img class='img-responsive' src='". base_url() . "assets/img/" . $image ."'>";
+		$content_image .= "</a></div>";
 		
 		$site_name = !isset($q->title) ? "" : $q->title;
 		$tagline = !isset($q->tagline) ? "" : $q->tagline;

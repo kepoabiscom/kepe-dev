@@ -37,7 +37,7 @@
 	<div class="blog-post">
 		<h1 class="page-header">{title}</h1>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
-		<?php if($this->uri->segment(3) == "history" || $this->uri->segment(3) == "organization") { ?><p>{logo_image}</p><?php } ?>
+		<?php if($this->uri->segment(3) == "history" || $this->uri->segment(3) == "organization") { ?><p>{content_image}</p><?php } ?>
 		<p>{body}</p>
 		<p>{tag}</p>
 	</div>
