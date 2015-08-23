@@ -56,6 +56,14 @@
 		<script src="https://apis.google.com/js/platform.js"></script>
 		<div class="g-ytsubscribe" data-channelid="UCjCQDSEsDTqq7wmth70khLQ" data-layout="default" data-count="default"></div>
 		</p>
+		<p><strong>Producer</strong> : {producer}</p>
+		<p><strong>Film Director</strong> : {film_director}</p>
+		<p><strong>Cameraman</strong> : {cameramen}</p>
+		<p><strong>Host</strong> : {editor}</p>
+		<p><strong>Editor</strong> : {editor}</p>
+		<p><strong>Story Ide</strong> : {story_ide}</p>
+		<p><strong>Script Writer</strong> : {screenwriter}</p>
+		<p><strong>Artist</strong> : {artist}</p><hr>
 		<p>{description}</p>
 		<p>In {title_category}</p>
 	</div>

@@ -266,9 +266,12 @@ class Video_model extends CI_Model {
 				,v.title as title_video
 				,vc.title as title_category
 				,v.status
+				,v.producer
 				,v.artist
 				,v.story_ide
 				,v.cameramen
+				,v.host
+				,v.editor
 				,v.url
 				,v.duration
 				,v.screenwriter
