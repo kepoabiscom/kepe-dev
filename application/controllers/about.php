@@ -165,6 +165,8 @@ class About extends CI_Controller {
 	 	if($parameter == "team" || $parameter == "behind-the-scene"){
 	 		$result = ($parameter == "team") ? $result = $this->user_model->get_user_list($start, $limit, 1) : $result = $this->image_model->get_bts('behindscene', 0);
 			
+			$count = count($result);
+			
 			$data_array = ""; $i = 1;
 			$number = 0; $parenthesis = 1;
 
@@ -172,7 +174,7 @@ class About extends CI_Controller {
 				foreach($result as $row) {
 					$number =  $start + $i;
 					$open_parenthesis =  ($parenthesis % 6 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
-					$closing_parenthesis = ($parenthesis % 6 == 0) ? "</div></div>" : "";
+					$closing_parenthesis = ($parenthesis == $count && $count % 6 != 0) ? "</div></div>" : ($parenthesis % 6 == 0) ? "</div></div>" : "";
 					
 					$data[] = array(
 						"number" => $number,
