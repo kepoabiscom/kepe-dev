@@ -62,7 +62,7 @@ class About extends CI_Controller {
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 	 		"title" => $title,
-			"tag" => $this->global_common->get_list_tag($tag),
+			"tag" => $this->global_common->get_list_tag($tag, "", "list"),
 	 		"parameter" => !isset($q->parameter) ? "" : $q->parameter,
 	 		"summary" => !isset($q->summary) ? "" : $q->summary,
 	 		"body" => !isset($q->body) ? "" : $q->body,

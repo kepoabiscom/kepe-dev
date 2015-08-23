@@ -20,22 +20,25 @@ class Global_common {
 	function get_list_tag($tag, $type='article', $mode='list'){
 		$x = explode(',', $tag);
 		
-		$list = "";
-		for($i=0; $i<count($x); $i++){
-			$q = trim($x[$i]);
+		$list = ""; $list_array = array();
+		
+		/*
+		if($mode == 'btn'){
+			for($i=0; $i<count($x); $i++){
+				$q = trim($x[$i]);
 
-			$array = explode(' ', $q);
+				$array = explode(' ', $q);
+				
+				
+				$y = array();
+				for($j=0; $j<count($array); $j++){
+					$y[$j] = ucfirst(trim($array[$j]));
+				}
 
-			$y = array();
-			for($j=0; $j<count($array); $j++){
-				$y[$j] = ucfirst(trim($array[$j]));
-			}
+				$t = implode(" ", $y);
+				
+				$ol = "<ol>";
 
-			$t = implode(" ", $y);
-			
-			$ol = "<ol>";
-			
-			if($mode == 'btn'){
 				$ol = "<ol class='list-inline list-inline-btn'>";
 				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 				
@@ -44,8 +47,24 @@ class Global_common {
 				
 				return $list;
 			} 
+		}
+		
+		if($mode == 'list') {
+			for($i=0; $i<count($x); $i++){
+				$q = trim($x[$i]);
+
+				$array = explode(' ', $q);
+				
+				
+				$y = array();
+				for($j=0; $j<count($array); $j++){
+					$y[$j] = ucfirst(trim($array[$j]));
+				}
+
+				$t = implode(" ", $y);
+				
+				$ol = "<ol>";
 			
-			if($mode == 'list') {
 				$ol = "<ol class='list-inline'><li>In</li>";
 				$z[$i] = "<li style='padding-left: 5px;padding-right: 0px;'><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 				
@@ -54,10 +73,55 @@ class Global_common {
 				
 				return $list;
 			}
+		}
+		*/
+		
+		if($mode == 'btn'){
+			for($i=0; $i<count($x); $i++){
+				$q = trim($x[$i]);
+
+				$array = explode(' ', $q);
+				
+				
+				$y = array();
+				for($j=0; $j<count($array); $j++){
+					$y[$j] = ucfirst(trim($array[$j]));
+				}
+
+				$t = implode(" ", $y);
+				
+				$list_array[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";			
+			} 
 			
-			if($mode == 'metadata') {
-				return $tag;
+			$list = implode(" ", $list_array);
+			
+			return "<ol class='list-inline list-inline-btn'>".$list."</ol>"; 
+		}
+		
+		if($mode == 'list') {
+			for($i=0; $i<count($x); $i++){
+				$q = trim($x[$i]);
+			
+				$array = explode(' ', $q);
+				
+				$y = array();
+				
+				for($j=0; $j<count($array); $j++){
+					$y[$j] = ucfirst(trim($array[$j]));
+				}
+			
+				$t = implode(" ", $y);
+				
+				$list_array[$i] = "<li style='padding-left: 5px;padding-right: 0px;'><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
 			}
+			
+			$list = implode(" ", array_merge(array('<li>In</li>'), $list_array));
+			
+			return "<ol class='list-inline'>".$list."</ol>"; 
+		}
+		
+		if($mode == 'metadata') {
+			return $tag;
 		}
 	}
 	
