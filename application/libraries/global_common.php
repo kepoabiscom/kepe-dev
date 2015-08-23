@@ -18,64 +18,11 @@ class Global_common {
 	}
 
 	function get_list_tag($tag, $type='article', $mode='list'){
+		
 		$x = explode(',', $tag);
 		
 		$list = ""; $list_array = array();
-		
-		/*
-		if($mode == 'btn'){
-			for($i=0; $i<count($x); $i++){
-				$q = trim($x[$i]);
 
-				$array = explode(' ', $q);
-				
-				
-				$y = array();
-				for($j=0; $j<count($array); $j++){
-					$y[$j] = ucfirst(trim($array[$j]));
-				}
-
-				$t = implode(" ", $y);
-				
-				$ol = "<ol>";
-
-				$ol = "<ol class='list-inline list-inline-btn'>";
-				$z[$i] = "<li><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
-				
-				$list = implode(" ", $z);
-				$list = $ol.$list."</ol>";
-				
-				return $list;
-			} 
-		}
-		
-		if($mode == 'list') {
-			for($i=0; $i<count($x); $i++){
-				$q = trim($x[$i]);
-
-				$array = explode(' ', $q);
-				
-				
-				$y = array();
-				for($j=0; $j<count($array); $j++){
-					$y[$j] = ucfirst(trim($array[$j]));
-				}
-
-				$t = implode(" ", $y);
-				
-				$ol = "<ol>";
-			
-				$ol = "<ol class='list-inline'><li>In</li>";
-				$z[$i] = "<li style='padding-left: 5px;padding-right: 0px;'><a href='".base_url('search?q='.$q.'&type='.$type)."'>".$t."</a></li>";
-				
-				$list = implode(", ", $z);
-				$list = $ol.$list."</ol>";
-				
-				return $list;
-			}
-		}
-		*/
-		
 		if($mode == 'btn'){
 			for($i=0; $i<count($x); $i++){
 				$q = trim($x[$i]);
