@@ -15,9 +15,6 @@
 	</div>
 </div>
 <div class="col-md-6">
-	{contact_footer}                     
-</div>
-<div class="col-md-6">
 	{alert}
 	<form action="{sending_message}" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
 		<div class="form-group">
@@ -49,4 +46,7 @@
 			<input type="submit" value="SEND" class="btn btn-primary">
 		</div>
 	</form>
+</div>
+<div class="col-md-6">
+	{contact_footer}                     
 </div>
