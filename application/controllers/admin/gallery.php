@@ -76,7 +76,7 @@ class Gallery extends CI_Controller {
 		 	@chown($f['full_path'], $user);
 		  	$status = array('status' => true, 
 		  					'msg' => 'Image uploaded.',
-		  					"get_img" => $this->get_list_image("behindsceen", 1)
+		  					"get_img" => $this->get_list_image("behindscene", 1)
 		  			);
 		} 
 		echo(json_encode($status));
