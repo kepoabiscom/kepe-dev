@@ -182,8 +182,7 @@ class About extends CI_Controller {
 						"img" => ($parameter == "team") ? $row->image : base_url() . "assets/img/bts/" . $row->path,
 						"position" => ($parameter == "team") ? $row->position : "",
 						"thumbnail" => "thumbnail",
-						//"loading" => base_url('assets/img/loading.gif'),
-						"default" => 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg',
+						"default" =>  ($parameter == "team") ? 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg' : base_url('assets/img/default-image.png'),
 						"open_parenthesis" => $open_parenthesis,
 						"closing_parenthesis" => $closing_parenthesis
 					);
