@@ -59,7 +59,7 @@
 		<p><strong>Producer</strong> : {producer}</p>
 		<p><strong>Film Director</strong> : {film_director}</p>
 		<p><strong>Cameraman</strong> : {cameramen}</p>
-		<p><strong>Host</strong> : {editor}</p>
+		<p><strong>Host</strong> : {host}</p>
 		<p><strong>Editor</strong> : {editor}</p>
 		<p><strong>Story Ide</strong> : {story_ide}</p>
 		<p><strong>Script Writer</strong> : {screenwriter}</p>
