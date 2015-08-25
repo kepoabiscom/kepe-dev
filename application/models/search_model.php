@@ -11,10 +11,11 @@ class Search_model extends CI_Model {
     function get($type='article', $q='', $start=0, $limit=0) {
         $t = ($type != 'video') ? 'summary' : 'description'; 
 
-        $this->db->select($type."_id, title, ". $t .", created_date")
+        $this->db->select($type."_id, title, status, ". $t .", created_date")
                     ->from($type)
                     ->where("MATCH(title) AGAINST('". $q ."' IN BOOLEAN MODE)")
-                    ->or_where("MATCH(". $t .") AGAINST('". $q ."' IN BOOLEAN MODE)");
+                    ->or_where("MATCH(". $t .") AGAINST('". $q ."' IN BOOLEAN MODE)")
+                    ->order_by("created_date", "desc");
         $query = ($limit != 0) ? $this->db->limit($limit, $start)->get() : $this->db->get();
 		
         if ($query->num_rows() > 0) {

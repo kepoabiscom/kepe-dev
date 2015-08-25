@@ -247,7 +247,7 @@ class Home extends CI_Controller {
 
 	function get_preview_summary($text, $see_more, $f='video') {
 		$words = explode(" ", $text);
-		$N = 20;
+		$N = 50;
 		if(count($words) > $N) {
 			$text = "";
 			for($i=0; $i < $N; $i++) {

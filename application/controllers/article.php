@@ -93,7 +93,7 @@ class Article extends CI_Controller {
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
 					
-				$img = "<p><a target='_blank' href='". base_url($path) ."'>";
+				$img = "<p><a target='_blank' href='". $read_more ."'>";
 				//$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "<img class='img-responsive opacity lazy' width='480px' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				$img .= "</a></p>";
