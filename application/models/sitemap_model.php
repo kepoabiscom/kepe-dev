@@ -9,6 +9,7 @@ class Sitemap_model extends CI_Model {
 	function get_url_sitemap($type='') {
         $query = $this->db->select($type."_id, title, created_date")
         		->from($type)
+                ->where("status", "published")
         		->get();      
 
         if ($query->num_rows() > 0) {
