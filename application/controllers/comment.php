@@ -19,38 +19,48 @@ class Comment extends CI_Controller {
 	function ajax_() {
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
+			$n1 = $this->random_set_captcha(0);
+			$op = $this->random_set_captcha();
+			$n2 = $this->random_set_captcha(0);
 			if(!empty($d['nick_name']) && !empty($d['body'])) { 
-				//if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
-					//unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
-				$type = $d['type']; unset($d['type']);
-				$this->comment_model->post_comment($type, $d);
-				if($type == "news")
-					$id = $d['news_id'];
-				if($type == "article")
-					$id = $d['article_id'];
-				if($type == "video")
-					$id = $d['video_id'];
+				if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
+					unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
+					$type = $d['type']; unset($d['type']);
+					$this->comment_model->post_comment($type, $d);
+					if($type == "news")
+						$id = $d['news_id'];
+					if($type == "article")
+						$id = $d['article_id'];
+					if($type == "video")
+						$id = $d['video_id'];
 
-				$status = array('status' => true, 
-		  					'msg' => 'Success',
-		  					'get_comment' => $this->get_comment($type, $id, 1)
+					$status = array('status' => true, 
+			  					'msg' => 'Success',
+			  					'get_comment' => $this->get_comment($type, $id, 1),
+			  					'n1' => $n1,
+			  					'op' => $op,
+			  					'n2' => $n2
 		  			);	
-				/*} else {
-
+				} else {
 					$status = array('status' => false, 
-			  					'msg' => 'Invalid captcha.',
-			  					'result' => $d['answer']
+			  					'msg' => 'Your answer is incorrect!',
+			  					'result' => $d['answer'],
+			  					'n1' => $n1,
+			  					'op' => $op,
+			  					'n2' => $n2
 			  			);	
-				}*/
-				
+				}			
 			} else {
 				$status = array('status' => false, 
-			  					'msg' => 'Nick name and your comment is required.'
+			  					'msg' => 'Nick name and your comment is required!',
+			  					'n1' => $n1,
+			  					'op' => $op,
+			  					'n2' => $n2
 			  			);
 			}
 		} else {
 			$status = array('status' => false, 
-		  					'msg' => 'Comment not sent.'
+		  					'msg' => 'Ajax request isnt authorized .'
 		  			);
 		}
 
