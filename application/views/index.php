@@ -6,12 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{meta_description}">
     <meta name="keywords" content="{meta_tag}"> 
+	<meta name="author" content="administrator">
    	<meta property="og:title" content="{title}"/>
 	<meta property="og:url" content="{url}"/>
 	<meta property="og:image" content="{og_image}"/>
+	
+	<meta name="twitter:card" content="player">
+	<meta name="twitter:url" content="{url}">
+	<meta name="twitter:title" content="{site_name} - {title}">
+	<meta name="twitter:description" content="{meta_description}">
+	<meta name="twitter:image" content="{og_image}">
+	
+	<meta name="twitter:site" content="@kepoabiscom">
+	<meta name="twitter:creator" content="@kepoabiscom">
+	  
+
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
     
-
     <title>{site_name} &trade; - {title}</title>
 
     <!-- Bootstrap core CSS -->
