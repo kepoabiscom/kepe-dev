@@ -1,12 +1,12 @@
 var uid = 0;
-var t = "";
+var ban_id = "";
 
 function setId(id) {
     if(typeof id == "number") {
         uid = id;
     }
     else {
-        t = String(id);
+        ban_id = String(id);
     }
 } 
 
@@ -22,7 +22,7 @@ function deleted(t) {
     $(document).ready(function(){
         if(t == "banned_comment") {
             str = "banned";
-            $.post(url + "/" + str, {id: t}, function(e) {
+            $.post(url + "/" + str, {id: ban_id}, function(e) {
                 $(location).attr('href', url);
             });
         } else {
