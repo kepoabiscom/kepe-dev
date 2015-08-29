@@ -33,8 +33,7 @@ class Comment_notif extends CI_Controller {
 	function ajax_() {
 		if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$types = array("article", "news", "video");
-			$jsonResult = '{"data" : [ ';
-			$i=0;
+			$i = 0; $json_data = '{"data" : [ ';
 			foreach($types as $type) {
 			   	$result = $this->comment_model->get_list_comment($type);
 			   	foreach($result as $data) {
@@ -49,19 +48,19 @@ class Comment_notif extends CI_Controller {
 			        ));
 
 			        $temp = (object) array_merge((array) $data, array("no" => ($i+1), "type" => $type, "action" => $ban));
-			      	if($i != 0){
-			           $jsonResult .=',';
+			      	if($i != 0) {
+			           $json_data .= ',';
 			       	}
-			       	$jsonResult .=json_encode($temp);
+			       	$json_data .= json_encode($temp);
 			       	$i++;
 			    }
 			}
-		    $jsonResult .= ']}';
-		    echo $jsonResult;
+		    $json_data .= ']}';
+		    echo $json_data;
 		} else {
 			$data = array(
 					"status" => false,
-					"error_message" => "Error"
+					"error_message" => "Ajax request isn't required!"
 				);
 		    echo json_encode($data);
 		}

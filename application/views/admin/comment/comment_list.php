@@ -91,6 +91,7 @@
                                                 <th>Type</th>
                                                 <th>Nick Name</th>
                                                 <th>Comment</th>
+                                                <th>Created Date</th>
                                                 <th>More</th>
                                             </tr>
                                         </thead>
@@ -114,7 +115,7 @@
                         var t = $('#comment-list').DataTable( {
                             "processing": true,
                             "ajax": "<?php echo base_url(); ?>admin/comment-notif/ajax_",
-                            "order": [[ 1, 'asc' ]],
+                            "order": [[ 4, 'desc' ]],
                             "pagingType": "simple_numbers",
                             "columns": [
                                 /*{ 
@@ -122,13 +123,19 @@
                                     "width": "120px",
                                     "sClass": "text-center"
                                 },*/
-                                { "data": "no"},
+                                { "data": "no" },
                                 { "data": "type" },
                                 { "data": "nick_name" },
                                 { "data": "body" },
+                                { "data": "created_date" },
                                 { "data": "action" },
                             ]
                         } );
+                        t.on('order.dt search.dt', function () {
+                            t.column(0, {search:'applied', order:'applied'}).nodes().each( function (cell, i) {
+                                cell.innerHTML = i+1;
+                            } );
+                        } ).draw();
                     } );
                 </script>
             </div>
