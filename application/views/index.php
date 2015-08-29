@@ -11,14 +11,17 @@
 	<meta property="og:url" content="{url}"/>
 	<meta property="og:image" content="{og_image}"/>
 	
-	<meta name="twitter:card" content="player">
+	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content="{url}">
 	<meta name="twitter:title" content="{site_name} - {title}">
-	<meta name="twitter:description" content="{meta_description}">
-	<meta name="twitter:image" content="{og_image}">
-	
-	<meta name="twitter:site" content="@kepoabiscom">
-	<meta name="twitter:creator" content="@kepoabiscom">
+	<meta name="twitter:site" content="@kepoabiscom" />
+	<meta name="twitter:site:id" content="@kepoabiscom" />
+	<meta name="twitter:creator" content="@kepoabiscom" />
+	<meta name="twitter:description" content="{meta_description}" />
+	<meta name="twitter:image:src" content="{og_image}?w=650" />
+    <meta property="twitter:domain" content="http://www.kepoabis.com" />
+	<meta property="og:locale" content="id_ID" />
+    <meta property="og:locale:alternate" content="id_ID" />
 	  
 
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
