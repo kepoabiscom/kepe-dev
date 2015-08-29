@@ -52,36 +52,41 @@ class Search extends CI_Controller {
 
 		$home = new Home();
 		
-		if($result['data'] == false || $q == null) {
-			return array(array(	"title" => "",
-				"summary" => "",
-				"url" => "",
-				"no_result" => "<h2>No result</h2>."
-			));
-		} else {
-			foreach($result['data'] as $row) {
-				$date = explode(" ", $row->created_date);
-				$y = explode("-", $date[0]);
-				$m = explode("-", $date[0]);
-				$d = explode("-", $date[0]);
+		$default = array(array(	"title" => "",
+						"summary" => "",
+						"url" => "",
+						"no_result" => "<h2>No result.</h2>."
+					));
 
-				if($type == 'article') 
-					$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
-				if($type == 'news') 
-					$url = base_url("news/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->news_id . "/" . $this->slug($row->title) . "");
-				if($type == 'video')
-					$url = base_url('videografi/view/'.$y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id.'/'. $this->slug($row->title));
-				
-				$data[] = array(
-					"title" => $this->get_highlight($row->title, $q),
-					"summary" => ($type != 'video') ? $home->get_preview_summary($this->get_highlight($row->summary, $q), $url, '') : $home->get_preview_summary($this->get_highlight($row->description, $q), $url, 'video'),
-					"url" => $url,
-					"no_result" => ""
-				);
+		if($result['data'] == false || $q == null) {
+			return $default;
+		} else {
+			$counter = 0;
+			foreach($result['data'] as $row) {
+				if($row->status == 'published') {
+					$date = explode(" ", $row->created_date);
+					$y = explode("-", $date[0]);
+					$m = explode("-", $date[0]);
+					$d = explode("-", $date[0]);
+
+					if($type == 'article') 
+						$url = base_url("article/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->article_id . "/" . $this->slug($row->title) . "");
+					if($type == 'news') 
+						$url = base_url("news/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->news_id . "/" . $this->slug($row->title) . "");
+					if($type == 'video')
+						$url = base_url('videografi/view/'.$y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id.'/'. $this->slug($row->title));
+					
+					$data[] = array(
+						"title" => $this->get_highlight($row->title, $q),
+						"summary" => ($type != 'video') ? $home->get_preview_summary($this->get_highlight($row->summary, $q), $url, '') : $home->get_preview_summary($this->get_highlight($row->description, $q), $url, 'video'),
+						"url" => $url,
+						"no_result" => ""
+					);
+					$counter++;
+				}
 			}
+			return $counter > 0 ? $data : $default;
 		}
-		
-		return $data;
 	}
 
 	public function profile(){

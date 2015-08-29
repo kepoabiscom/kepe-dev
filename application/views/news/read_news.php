@@ -11,7 +11,7 @@
 .crop img {
     transition: all 1.4s ease-in-out 0s;
 }
-<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+
 </style>
 <div id="fb-root"></div>
 <script>
@@ -79,14 +79,16 @@
             <label for="comment">Comment* :</label>
             <textarea type="text" class="form-control" name="body" placeholder="Your Comment"></textarea>
         </div>
-        <!--
+        
         <div class="form-group">
-            <label for="n1"><h3>{n1}</h3></label>&nbsp;<label for="op"><h3>{op}</h3></label>&nbsp;<label for="n2"><h3>{n2}</h3></label>
-            <input type="text" class="form-control" name="answer" placeholder="Your Abswer?">
-        	<input type="hidden" class="form-control" value="{n1}" name="n1">
-        	<input type="hidden" class="form-control" value="{op}" name="op">
-        	<input type="hidden" class="form-control" value="{n2}" name="n2">
-        </div>-->
+            <div class="questions">
+            	<strong>{n1}</strong>&nbsp;<strong>{op}</strong>&nbsp;<strong>{n2}</strong><br><br>
+            	<input type="hidden" class="form-control" value="{n1}" name="n1">
+	        	<input type="hidden" class="form-control" value="{op}" name="op">
+	        	<input type="hidden" class="form-control" value="{n2}" name="n2">
+            </div>
+            <input type="text" class="form-control" name="answer" placeholder="Your Answer?">
+        </div>
 
 		<input type="submit" id='submit' value='Submit' class="btn btn-success">
 
