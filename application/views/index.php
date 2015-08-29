@@ -17,7 +17,7 @@
 	<meta name="twitter:site" content="@kepoabiscom" />
 	<meta name="twitter:site:id" content="@kepoabiscom" />
 	<meta name="twitter:creator" content="@kepoabiscom" />
-	<meta name="twitter:description" content="{meta_description}" />
+	<!--<meta name="twitter:description" content="{meta_description}" />-->
 	<meta name="twitter:image:src" content="{og_image}?w=650" />
     <meta property="twitter:domain" content="http://www.kepoabis.com" />
 	<meta property="og:locale" content="id_ID" />
