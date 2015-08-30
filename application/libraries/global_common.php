@@ -178,7 +178,7 @@ class Global_common {
 	function archives($query, $table){
 		$i = 0; $x = 1; $y = 0; $html = "";
 
-		$close = "</ul></div></div></div>";
+		$close = "</ul></div>";
 		
 		foreach ($query->result() as $q)
 		{
@@ -193,21 +193,19 @@ class Global_common {
 			
 			if($y != $year){
 				$html .= "
-					<div class='panel-group'>
-						<div class='panel panel-default'>
-							<div class='panel-heading'>
+							<div style='padding: 5px 0'>
 								<h4 class='panel-title'>
 									<a data-toggle='collapse' href='#collapse" . $x ."'>" . $year . "</a>
 								</h4>
 							</div>
 							<div id='collapse" . $x ."' class='panel-collapse collapse'>
-								<ul class='list-group'>
+								<ul class='list-group' style='margin-bottom: 0px'><hr>
 				";
 				
 				$y = $year; $x++; 
 			}
-
-			$html .= "<li class='list-group-item'><span class='glyphicon glyphicon-pushpin'></span>&nbsp;<a href='".base_url($table.'/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a></li>";
+			
+			$html .= "<li class=''><span class='glyphicon glyphicon-pushpin'></span>&nbsp;<a href='".base_url($table.'/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a><hr></li>";
 			
 			$i++;
 		}
