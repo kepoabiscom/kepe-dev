@@ -163,7 +163,7 @@ class Videografi extends CI_Controller {
 		$table = "video";
 		
 		$query = $this->archives_model->get_archives_list($table);
-	
+
  		return $this->global_common->archives($query, 'videografi');
 	}
 

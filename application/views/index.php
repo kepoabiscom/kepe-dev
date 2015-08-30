@@ -79,6 +79,10 @@
 			margin-top: 10px; 
 		}
 		
+		.panel-group {
+			margin-bottom: 5px;
+		}
+
 		@media (max-width: 767px) {
 			body{
 				background-color:rgba(255,255,255,0.5); background: none;

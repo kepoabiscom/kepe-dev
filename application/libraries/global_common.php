@@ -152,7 +152,7 @@ class Global_common {
         return $memory_usage;
     } 
 	
-	function archives($query, $table){
+	function archivesx($query, $table){
 		$i = 0;
 		foreach ($query->result() as $q)
 		{
@@ -173,5 +173,47 @@ class Global_common {
 		}
 		
 		return $data;
+	}
+	
+	function archives($query, $table){
+		$i = 0; $x = 1; $y = 0; $html = "";
+
+		$close = "</ul></div></div></div>";
+		
+		foreach ($query->result() as $q)
+		{
+			$month = !isset($q->month) ? "" : $q->month;
+			$m = !isset($q->m) ? "" : $q->m;
+			$year = !isset($q->year) ? "" : $q->year;
+			$total = !isset($q->total) ? "" : $q->total;
+			
+			if($y != $year && $x > 1){
+				$html .= $close;
+			}
+			
+			if($y != $year){
+				$html .= "
+					<div class='panel-group'>
+						<div class='panel panel-default'>
+							<div class='panel-heading'>
+								<h4 class='panel-title'>
+									<a data-toggle='collapse' href='#collapse" . $x ."'>" . $year . "</a>
+								</h4>
+							</div>
+							<div id='collapse" . $x ."' class='panel-collapse collapse'>
+								<ul class='list-group'>
+				";
+				
+				$y = $year; $x++; 
+			}
+
+			$html .= "<li class='list-group-item'><span class='glyphicon glyphicon-pushpin'></span>&nbsp;<a href='".base_url($table.'/page/'.$year.'/'.$m.'/0')."'>".$month." ".$year." (".$total.")</a></li>";
+			
+			$i++;
+		}
+		
+		$html .= $close;
+		
+		return $html;
 	}
 }

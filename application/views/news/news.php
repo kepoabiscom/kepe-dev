@@ -60,11 +60,7 @@
 	</div>
 	<div class="sidebar-module">
 		<h2 class="title">Archives</h2>
-            <ol class="list-unstyled">
-				{get_archives_list}
-					{list}
-				{/get_archives_list}
-            </ol>
+			{get_archives_list}
     </div>
 </div>
 </div>
