@@ -84,10 +84,31 @@ class Gallery extends CI_Controller {
 
 	function delete($id='') {
 		if($this->session->userdata('logged_in')) {
-	 		$this->image_model->delete_image($id);
 	 		$r = $this->image_model->get_by_id($id);
 	 		$full_path = base_url() . "assets/img/bts/" . $r->path;
-	 		@unlink($full_path);
+			
+			$x = explode("//", $full_path);
+			
+			$y = explode("/", $x[1]);
+			
+			$z = array();
+			
+			for($i=0; $i < count($y); $i++){
+				if($i > 0){
+					$z[] = $y[$i];
+				}
+			}
+			
+			$path = implode("/", $z);
+			
+			$path = $_SERVER['DOCUMENT_ROOT'] . "/" . $path;
+			
+			if(! @unlink($path)){
+				die ("Error deleting $path");
+			} else{
+				$this->image_model->delete_image($id);
+			}
+			
 	 		$t = array("success" => true,
 	 				"f" => "delete"
 	 			);
