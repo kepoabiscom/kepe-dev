@@ -42,25 +42,27 @@ class Article extends CI_Controller {
 		$number = 0;
 
 	 	if($result) {
+			$session_data = $this->session->userdata('logged_in');
+			
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 		 		$id = $row->article_id;
 
-		 		$detail = Tb::button('Detail', array(
+		 		$button[0] = Tb::button('Detail', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'url' => base_url() . "admin/article/detail/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
-				$edit = Tb::button('Edit', array(
+				$button[1] = Tb::button('Edit', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'url' => base_url() . "admin/article/update/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_SUCCESS
 		        ));
-
-		        $delete = Tb::button('Delete', array(
+				
+		        $button[2] = Tb::button('Delete', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'onclick' => "setId(".$id.")",
 		            'size' => Tb::BUTTON_SIZE_SMALL,
@@ -68,13 +70,26 @@ class Article extends CI_Controller {
 		            'url' => '#modal_confirm',
                     'data-toggle' => 'modal'
 		        ));
-
+				
+				if($session_data['role'] == 'superadmin') {
+					$button[3] = Tb::button('Approve', array(
+						'type' => Tb::BUTTON_TYPE_LINK,
+						'onclick' => "setId(".$id.")",
+						'size' => Tb::BUTTON_SIZE_SMALL,
+						'color' => Tb::BUTTON_COLOR_WARNING,
+						'url' => '#modal_approve',
+						'data-toggle' => 'modal'
+					));
+				}
+				
+				$btn = implode("&nbsp;", $button);
+				
 	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_article . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
-	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td></tr>";
+	        	$data_array .= "<td>".$btn."</td></tr>";
 	        	$i++;
 	        }
 	        return $data_array . "</tr>";	

@@ -18,16 +18,16 @@ class News extends CI_Controller {
 
 	function index() {
 		if($this->session->userdata('logged_in')) {
-		     $session_data = $this->session->userdata('logged_in');
+		    $session_data = $this->session->userdata('logged_in');
 
-		     $config = $this->page_config();
+		    $config = $this->page_config();
 
-		     $data = array(
+		    $data = array(
 		     			'list_news' => $this->get_list_news($config['uri'], $config['per_page']),
 		     			'link' => $this->pagination->create_links(),
 		     			'success' => $this->notification()
 		     		);
-		     $this->parser->parse('admin/content/news/news_management', $data);
+		    $this->parser->parse('admin/content/news/news_management', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}
@@ -39,25 +39,27 @@ class News extends CI_Controller {
 		$number = 0;
 		
 	 	if($result) {
+			 $session_data = $this->session->userdata('logged_in');
+			 
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 		 		$id = $row->news_id;
-
-		 		$detail = Tb::button('Detail', array(
+				
+		 		$button[0] = Tb::button('Detail', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'url' => base_url() . "admin/news/detail/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
-				$edit = Tb::button('Edit', array(
+				$button[1] = Tb::button('Edit', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'url' => base_url() . "admin/news/update/".$id,
 		            'size' => Tb::BUTTON_SIZE_SMALL,
 		            'color' => Tb::BUTTON_COLOR_SUCCESS
 		        ));
 
-		        $delete = Tb::button('Delete', array(
+		        $button[2] = Tb::button('Delete', array(
 		            'type' => Tb::BUTTON_TYPE_LINK,
 		            'onclick' => "setId(".$id.")",
 		            'size' => Tb::BUTTON_SIZE_SMALL,
@@ -66,12 +68,24 @@ class News extends CI_Controller {
                     'data-toggle' => 'modal'
 		        ));
 
+				if($session_data['role'] == 'superadmin') {
+					$button[3] = Tb::button('Approve', array(
+						'type' => Tb::BUTTON_TYPE_LINK,
+						'onclick' => "setId(".$id.")",
+						'size' => Tb::BUTTON_SIZE_SMALL,
+						'color' => Tb::BUTTON_COLOR_WARNING,
+						'url' => '#modal_approve',
+						'data-toggle' => 'modal'
+					));
+				}
+				
+				$btn = implode("&nbsp;", $button);
+
 	        	$data_array .= "<tr><td>" . $number . "</td>";
-	        	$data_array .= "<td>" . $row->title_category . "</td>";
-	        	$data_array .= "<td>" . $row->title_news . "</td>";
+	        	$data_array .= "<td>" . $row->title_news . "<br>In " . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
-	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td></tr>";
+	        	$data_array .= "<td>".$btn."</td></tr>";
 	        	$i++;
 	        }
 	        return $data_array . "</tr>";	

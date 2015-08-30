@@ -90,7 +90,6 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Category</th>
                                         <th>Title</th>
                                         <th>Status</th>
                                         <th>Created Time</th>
