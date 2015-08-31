@@ -47,7 +47,7 @@ class Article extends CI_Controller {
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
-		$data['meta_description'] = $data['site_description'];
+		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
 		$this->generate('article/article', $data);
@@ -79,7 +79,6 @@ class Article extends CI_Controller {
 			{
 				$path = !isset($q->path_image) ? "" : $q->path_image;
 				$title = !isset($q->title) ? "" : $q->title;
-				$title = ($type == 2 || $type == 3 || $type == 4) ? $this->global_common->get_title(26, $title) : $title ;
 				$tag = !isset($q->tag) ? "" : $q->tag;
 				
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
@@ -92,7 +91,9 @@ class Article extends CI_Controller {
 				
 				$article_id = !isset($q->article_id) ? "" : $q->article_id;
 				$read_more = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$article_id . "/" . $this->slug($title) . "");
-					
+				
+				$title = ($type == 2 || $type == 3 || $type == 4) ? $this->global_common->get_title(26, $title) : $title ;
+				
 				$img = "<p><a target='_blank' href='". $read_more ."'>";
 				//$img .= "<img class='img-responsive opacity' width='480px' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "<img class='img-responsive opacity lazy' width='480px' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
@@ -194,7 +195,7 @@ class Article extends CI_Controller {
 		 				"title_category" => $category,
 		 				"status" => $q->status,
 		 				"summary" => $q->summary,
-		 				"meta_description" => $q->summary,
+		 				"meta_description" => strip_tags($q->summary),
 		 				"image" => $img, 
 		 				"url" => $url_share,
 		 				"og_image" => base_url($image),

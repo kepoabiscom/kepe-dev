@@ -45,7 +45,7 @@ class Videografi extends CI_Controller {
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
-		$data['meta_description'] = $data['site_description'];
+		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
 		$this->generate('videografi/videografi', $data);
@@ -201,7 +201,7 @@ class Videografi extends CI_Controller {
 	            "meta_tag" => $this->global_common->get_list_tag($tag, 'video', 'metadata'),
 	            "status" => $q->status,
 	            "description" => $q->description,
-	            "meta_description" => $q->description,
+	            "meta_description" => strip_tags($q->description),
 	            "producer" => $q->producer,
 	            "story_ide" => $q->story_ide,
 	            "screenwriter" => $q->screenwriter,
