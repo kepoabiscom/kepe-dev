@@ -200,7 +200,9 @@ class About extends CI_Controller {
 				}
 				return $data;
 			} else return;
-		} else {
+		} else if($parameter == "membership"){
+			redirect("about/page/team", 'refresh');
+		} else if ($parameter == "organization" || $parameter == "history"){
 			$data[] = array(
 				"number" => "",
 				"uid" => "",
@@ -215,7 +217,11 @@ class About extends CI_Controller {
 				"box" => "",
 				"brithday" => ""
 			);
+			
 			return $data;
+		}
+		else{
+			redirect("home", 'refresh');
 		}
 	 }
 }
