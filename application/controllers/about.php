@@ -177,9 +177,9 @@ class About extends CI_Controller {
 					$closing_parenthesis = ($parenthesis == $count && $count % 6 != 0) ? "</div></div>" : ($parenthesis % 6 == 0) ? "</div></div>" : "";
 					
 					$date_of_birth = !isset($row->date_of_birth) ? "" : $row->date_of_birth;
-					$box = ($date_of_birth == date("Y-m-d")) ? 'background-color: #009688; border-radius: 4px; color: #fff; padding: 5px;' : 'margin-bottom: 20px;';
+					$box = (substr($date_of_birth, 5, 5) == date("m-d")) ? 'background-color: #009688; border-radius: 4px; color: #fff; padding: 5px;' : 'margin-bottom: 20px;';
 
-					$brithday =  ($date_of_birth == date("Y-m-d")) ? "Friends' Birthdays" : "";
+					$brithday =  (substr($date_of_birth, 5, 5)  == date("m-d")) ? "Friends' Birthdays" : "";
 					
 					$data[] = array(
 						"number" => $number,
