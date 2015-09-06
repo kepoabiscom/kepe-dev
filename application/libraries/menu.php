@@ -4,7 +4,7 @@ class Menu {
 
     public function get_menu($q='header', $menu='') {
 
-    	$data = array('home', 'news', 'article', 'videografi', 'contact');
+    	$data = array('home', 'news', 'article', 'video', 'contact');
         $active = array_fill(0, count($data), '');
         $j = 0;
         foreach($data as $i) {
@@ -19,7 +19,7 @@ class Menu {
                     array("name" => "HOME", "active" => $active[0], "url" => base_url('home')),
                     array("name" => "NEWS", "active" => $active[1], "url" => base_url('news')),
                     array("name" => "ARTICLE", "active" => $active[2], "url" => base_url('article')),
-                    array("name" => "VIDEOGRAFI", "active" => $active[3], "url" => base_url('videografi')),
+                    array("name" => "VIDEO", "active" => $active[3], "url" => base_url('video')),
                     array("name" => "CONTACT US", "active" => $active[4], "url" => base_url('contact')),
                 );
         } else {
@@ -28,7 +28,7 @@ class Menu {
                        "home" => base_url('home'),
                        "news" => base_url('news'),
                        "article" => base_url('article'),
-                       "videografi" => base_url('videografi'),
+                       "video" => base_url('video'),
                        "contact" => base_url('contact'),
                        "membershipform" => '#',
                        "team" => base_url('about/page/team'),

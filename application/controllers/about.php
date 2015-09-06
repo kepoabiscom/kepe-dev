@@ -176,6 +176,11 @@ class About extends CI_Controller {
 					$open_parenthesis =  ($parenthesis % 6 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
 					$closing_parenthesis = ($parenthesis == $count && $count % 6 != 0) ? "</div></div>" : ($parenthesis % 6 == 0) ? "</div></div>" : "";
 					
+					$date_of_birth = !isset($row->date_of_birth) ? "" : $row->date_of_birth;
+					$box = ($date_of_birth == date("Y-m-d")) ? 'background-color: #009688; border-radius: 4px; color: #fff; padding: 5px;' : 'margin-bottom: 20px;';
+
+					$brithday =  ($date_of_birth == date("Y-m-d")) ? "Friends' Birthdays" : "";
+					
 					$data[] = array(
 						"number" => $number,
 						"uid" => ($parameter == "team") ? $row->user_id : "",
@@ -186,7 +191,9 @@ class About extends CI_Controller {
 						"thumbnail" => "thumbnail",
 						"default" =>  ($parameter == "team") ? 'http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg' : base_url('assets/img/default-image.png'),
 						"open_parenthesis" => $open_parenthesis,
-						"closing_parenthesis" => $closing_parenthesis
+						"closing_parenthesis" => $closing_parenthesis,
+						"box" => $box,
+						"brithday" => $brithday
 					);
 
 					$i++; $parenthesis++;
@@ -204,7 +211,9 @@ class About extends CI_Controller {
 				"thumbnail" => "",
 				"default" => "",
 				"open_parenthesis" => "",
-				"closing_parenthesis" => ""
+				"closing_parenthesis" => "",
+				"box" => "",
+				"brithday" => ""
 			);
 			return $data;
 		}

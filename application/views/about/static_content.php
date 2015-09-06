@@ -46,7 +46,8 @@
 		    	{membership_list}
 				{open_parenthesis}
 		        <div class="col-lg-2 col-md-2 col-xs-12 thumb">
-					<div style="margin-bottom: 20px;">
+					<div style="{box}">
+						<p class="pull-center" style="font-size: 12px;"><b>{brithday}</b></p>
 						<a  style="margin-bottom: 5px;" class="{thumbnail} img-animation4" href="#" data-image-id="" data-toggle="modal" data-title="{position}" data-caption="{nama_lengkap}" data-image="{img}" data-target="#image-gallery">
 							<div class="crop">
 								<!--<img class="img-responsive" src="{img}" alt="{nama_lengkap}">-->
