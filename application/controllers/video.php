@@ -89,7 +89,7 @@ class Video extends CI_Controller {
 				$day = !isset($q->day) ? 0 : $q->day;
 				$default = base_url('assets/img/video/default-image.png');
 				
-				$view = base_url('video/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
+				$view = base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'.$this->slug($title));
 				$img = "<a target='_blank' href='". $view ."'>";
 				//$img .= "<img class='img-responsive opacity' src='". base_url($path) ."' alt='".$title."'/>";
 				$img .= "<img class='img-responsive opacity lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
@@ -167,7 +167,7 @@ class Video extends CI_Controller {
  		return $this->global_common->archives($query, 'video');
 	}
 
-	function view($year, $month, $day, $id, $slug = "") {
+	function watch($year, $month, $day, $id, $slug = "") {
 		$q = $this->video_model->get_by_id(1, $id);
 		$image = $this->video_model->get_image($id);
 		
@@ -182,7 +182,7 @@ class Video extends CI_Controller {
 		
 		$title_category = $q->title_category;
 		$category = "<a href='".base_url('video/page/0/0/'.$title_category)."'>".$title_category."</a>";
-		$url_share = base_url("video/view/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($q->title_video) . "");
+		$url_share = base_url("video/watch/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($q->title_video) . "");
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array_merge(
@@ -230,7 +230,7 @@ class Video extends CI_Controller {
 		
 		$this->video_model->create_video_stat($this->global_common->stat('video_id', $id));
 		
- 		$this->generate('video/view', $data);
+ 		$this->generate('video/watch', $data);
 	}
 	
 	function prev_next($current_id) {
@@ -246,22 +246,22 @@ class Video extends CI_Controller {
 		
 		if($rank > 0 && $rank < $count-1) {
 			$p = $this->video_model->get_one_row($rank-1);
-			$prev = "<li><a href='". base_url("video/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+			$prev = "<li><a href='". base_url("video/watch/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
 					."aria-label='Previous'><span aria-hidden='true'>&laquo; Previous</span></a></li>";
 			$p = $this->video_model->get_one_row($rank+1);
-			$next = "<li><a href='".base_url("video/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+			$next = "<li><a href='".base_url("video/watch/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
 					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
 			return $prev . $next;
 		}
 		if($count-1 == $rank) {
 			$p = $this->video_model->get_one_row($rank-1);
-			$prev = "<li><a href='". base_url("video/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+			$prev = "<li><a href='". base_url("video/watch/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
 					."aria-label='Previous'><span aria-hidden='true'>&laquo; Previous</span></a></li>";
 			return $prev;
 		} 
 		if($rank == 0) {
 			$p = $this->video_model->get_one_row($rank+1);
-			$next = "<li><a href='".base_url("video/view/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
+			$next = "<li><a href='".base_url("video/watch/" .  $p->year.'/'.$p->month.'/'.$p->day.'/'.$p->video_id . "/" . $this->slug($p->title) . "")."'"
 					."aria-label='Next'><span aria-hidden='true'>Next &raquo;</span></a></li>";
 			return $next;
 		}
@@ -302,5 +302,11 @@ class Video extends CI_Controller {
 		
 		$config['page'] = $this->pagination->create_links();
 		return $config;
+	}
+	
+	function view() {
+		$redirect = str_replace("view", "watch", $_SERVER['REDIRECT_QUERY_STRING']);
+		
+		redirect($redirect, 'refresh');
 	}
 }

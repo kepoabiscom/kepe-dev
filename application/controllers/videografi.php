@@ -25,6 +25,7 @@ class Videografi extends CI_Controller {
 	
 	function view() {
 		$redirect = str_replace("videografi", "video", $_SERVER['REDIRECT_QUERY_STRING']);
+		$redirect = str_replace("view", "watch", $redirect);
 		
 		redirect($redirect, 'refresh');
 	}
