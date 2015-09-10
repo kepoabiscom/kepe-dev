@@ -273,9 +273,10 @@ class Video extends CI_Controller {
 		return $obj = new about();
 	}
 	
-	function slug($str='') {
-		$s = strtolower(preg_replace('/[\!\@\+\=\}\{\:\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
-		return strtolower(preg_replace('/[\s]/', '-', $s));
+	function slug($str='', $maxlen=0) {
+		//$s = strtolower(preg_replace('/[\!\@\+\=\}\{\:\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		//return strtolower(preg_replace('/[\s]/', '-', $s));
+		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
 	}
 	
 	function page() {

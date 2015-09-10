@@ -201,12 +201,12 @@ class Home extends CI_Controller {
 			$day = !isset($q->day) ? 0 : $q->day;
 			$default = base_url('assets/img/video/default-image.png');
 			
-			$img = "<a target='_blank' href='". base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
+			$img = "<a target='_blank' href='". base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
 			//$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 15px;'>";
 			$img .= "</a>";
-			$view_more = "<a href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
-			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('videografi/view/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
+			$view_more = "<a href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
+			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
 			
 			$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
 			$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
@@ -240,9 +240,10 @@ class Home extends CI_Controller {
 		return $obj = new about();
 	}
 
-	function slug($str='') {
-		$s = strtolower(preg_replace('/[\!\@\+\=\}\{\:\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
-		return strtolower(preg_replace('/[\s]/', '-', $s));
+	function slug($str='', $maxlen=0) { 
+		//return strtolower(preg_replace('/^[a-z0-9]+(?:-[a-z0-9]+)*$/', '-', $str));
+		//return strtolower(preg_replace('/[\s]/', '-', $s));
+		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
 	}
 
 	function get_preview_summary($text, $see_more, $f='video') {

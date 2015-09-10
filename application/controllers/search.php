@@ -74,7 +74,7 @@ class Search extends CI_Controller {
 					if($type == 'news') 
 						$url = base_url("news/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->news_id . "/" . $this->slug($row->title) . "");
 					if($type == 'video')
-						$url = base_url('videografi/view/'.$y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id.'/'. $this->slug($row->title));
+						$url = base_url('video/watch/'.$y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id.'/'. $this->slug($row->title));
 					
 					$data[] = array(
 						"title" => $this->get_highlight($row->title, $q),

@@ -257,8 +257,9 @@ class Article extends CI_Controller {
 	}
 
 	function slug($str='') {
-		$s = strtolower(preg_replace('/[\!\@\+\=\}\{\-\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
-		return strtolower(preg_replace('/[\s]/', '-', $s));
+		//$s = strtolower(preg_replace('/[\!\@\+\=\}\{\-\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		//return strtolower(preg_replace('/[\s]/', '-', $s));
+		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
 	}
 	
 	function page() {

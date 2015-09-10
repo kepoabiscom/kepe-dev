@@ -10,6 +10,7 @@ class Sitemap_model extends CI_Model {
         $query = $this->db->select($type."_id, title, created_date")
         		->from($type)
                 ->where("status", "published")
+                ->order_by("created_date", "desc")
         		->get();      
 
         if ($query->num_rows() > 0) {

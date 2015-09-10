@@ -20,9 +20,9 @@ class Sitemap extends CI_Controller {
 	}
 
 	function get_all_sitemap() {
-		$data_1 = $this->sitemap('article');
+		$data_1 = $this->sitemap('video');
 		$data_2 = $this->sitemap('news');
-		$data_3 = $this->sitemap('video');
+		$data_3 = $this->sitemap('article');
 
 		$d = array_merge($data_1, $data_2);
 		$data = array_merge($d, $data_3);
@@ -49,7 +49,7 @@ class Sitemap extends CI_Controller {
 				if($t == 'news')
 					$url = base_url("news/read/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->news_id . "/" . $home->slug($row->title) . "");
 				if($t == 'video')
-					$url = base_url("videografi/view/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id . "/" . $home->slug($row->title) . "");
+					$url = base_url("video/watch/" .  $y[0].'/'.$m[1].'/'.$d[2].'/'.$row->video_id . "/" . $home->slug($row->title) . "");
 				
 				$datetime = new DateTime($row->created_date);
 
