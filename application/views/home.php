@@ -135,11 +135,17 @@
 			<div class="row">
 				{get_video}
 					{open_parenthesis}
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<p>{image}</p>
-						<div  style="font-size: 18px;">{title}</div>
+						<div  style="font-size: 16px;">{title}</div>
 						<div style="font-size: 12px;" class="post-body">
-							On {created_date} By {full_name}
+							<!--
+							<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
+							<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 
+							<i class="glyphicon glyphicon-time"></i>&nbsp;{duration}
+							-->
+							On {created_date} 
+							<br/>By {full_name}
 						</div>
 					</div>
 					{closing_parenthesis}

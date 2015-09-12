@@ -131,6 +131,7 @@ class home_model extends CI_Model {
 			  ,DATE_FORMAT(vid.created_date, '%Y') as year
 		      ,DATE_FORMAT(vid.created_date, '%m') as month
 			  ,DATE_FORMAT(vid.created_date, '%d') as day
+			  ,DATE_FORMAT(vid.created_date, '%M %d, %Y %h:%i %p') as created_date
 			FROM
 				video vid
 				LEFT JOIN
@@ -149,7 +150,7 @@ class home_model extends CI_Model {
 				vid.status = 'published'
 				AND vid.image_id > 0
 			ORDER BY created_date DESC
-			LIMIT 0, 9
+			LIMIT 0, 16
 		";
 
         $query = $this->db->query($q);

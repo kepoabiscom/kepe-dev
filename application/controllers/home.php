@@ -7,6 +7,7 @@ class Home extends CI_Controller {
 	function __construct() {
 		parent:: __construct();
 		$this->load->model("home_model");
+		$this->load->model('video_model','', true);
 		$this->load->helper(array("url", "form"));
 		$this->load->library("menu");
 		$this->load->library("parser");
@@ -201,15 +202,15 @@ class Home extends CI_Controller {
 			$day = !isset($q->day) ? 0 : $q->day;
 			$default = base_url('assets/img/video/default-image.png');
 			
-			$img = "<a target='_blank' href='". base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
+			$img = "<a href='". base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title)) ."'>";
 			//$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 15px;'>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
-			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(28, $title)."</a>";
+			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(22, $title)."</a>";
 			
-			$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
-			$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
+			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
+			$closing_parenthesis = ($parenthesis % 4 == 0) ? "</div></div>" : "";
 				
 			$data[$i] = array(
 				"video_id" => $video_id,
@@ -226,6 +227,8 @@ class Home extends CI_Controller {
 				"category" => !isset($q->category) ? "" : $q->category,
 				"open_parenthesis" => $open_parenthesis,
 				"closing_parenthesis" => $closing_parenthesis,
+				"count_video_comment" => $this->video_model->count_video_comment($video_id)->count_video_comment,
+				"count_video_stat" => $this->video_model->count_video_stat($video_id)->count_video_stat
 			 );
 			 
 			 $i++; $parenthesis++;
