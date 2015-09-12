@@ -95,13 +95,13 @@ class Video extends CI_Controller {
 				$img .= "<img class='img-responsive opacity lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."'>";
 				$img .= "</a>";
 				
-				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(26, $title)."</a>";
+				$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".$view."'>".$this->global_common->get_title(18, $title)."</a>";
 				
 				$category = !isset($q->category) ? "" : $q->category;
 				$recent_video_category = "<a href='".base_url('video/page/0/0/'.$category)."'>".$category."</a>";
 				
-				$open_parenthesis =  ($parenthesis % 3 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
-				$closing_parenthesis = ($parenthesis % 3 == 0) ? "</div></div>" : "";
+				$open_parenthesis =  ($parenthesis % 4 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
+				$closing_parenthesis = ($parenthesis % 4 == 0) ? "</div></div>" : "";
 				
 				$data[$i] = array(
 					"video_id" => $video_id,
@@ -285,7 +285,7 @@ class Video extends CI_Controller {
 	
 	 function table_pagination($keyword){
 		$config['base_url'] = base_url("video/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 9;
+		$config['per_page'] = 12;
 		$config['total_rows'] = $this->video_model->count_video(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = 'Next &raquo;';

@@ -137,7 +137,7 @@
 					{open_parenthesis}
 					<div class="col-md-3">
 						<p>{image}</p>
-						<div  style="font-size: 16px;">{title}</div>
+						<div  style="font-size: 20px;">{title}</div>
 						<div style="font-size: 12px;" class="post-body">
 							<!--
 							<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
@@ -153,4 +153,8 @@
 			</div>
 		</div>
 			
-
+<script>
+	$(document).ready(function(){
+		$('[data-toggle="tooltip"]').tooltip();   
+	});
+</script>

@@ -28,7 +28,7 @@
 </div>
 {get_video}
 	{open_parenthesis}
-		<div class="col-md-4" style="margin-bottom: 20px;">
+		<div class="col-md-3" style="margin-bottom: 20px;">
 			<div class="recent_post">
 				<div>
 					<div class="title">{title}</div>
