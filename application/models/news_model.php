@@ -160,11 +160,12 @@ class News_model extends CI_Model {
     }
 
     function count_news($flag=0, $keyword=array()) {
+		/*
 		$keyword['category'] = "";
 		$keyword['year'] = "";
 		$keyword['month'] = "";
-		
-		
+		*/
+			
 		if($flag == 0){
 			if($keyword != NULL) {
 				$this->db->like('title', $keyword);

@@ -32,6 +32,12 @@ class News extends CI_Controller {
 			'category' => $this->uri->segment(5) ? $this->uri->segment(5) : 0
 		);
 		
+		/*
+		echo "<pre>";
+		print_r($keyword);
+		exit;
+		*/
+		
 		$config = $this->table_pagination($keyword);
 		
 		$data = array(
