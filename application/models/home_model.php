@@ -149,7 +149,7 @@ class home_model extends CI_Model {
 			WHERE 
 				vid.status = 'published'
 				AND vid.image_id > 0
-			ORDER BY created_date DESC
+			ORDER BY vid.created_date DESC
 			LIMIT 0, 16
 		";
 
