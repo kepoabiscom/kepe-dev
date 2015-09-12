@@ -31,13 +31,7 @@ class News extends CI_Controller {
 			'month' => $this->uri->segment(4) ? $this->uri->segment(4) : 0,
 			'category' => $this->uri->segment(5) ? $this->uri->segment(5) : 0
 		);
-		
-		/*
-		echo "<pre>";
-		print_r($keyword);
-		exit;
-		*/
-		
+
 		$config = $this->table_pagination($keyword);
 		
 		$data = array(
@@ -75,7 +69,7 @@ class News extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_news_list($start=0, $limit=10, $keyword=array(), $type=1){
+	public function get_news_list($start=0, $limit=10, $keyword, $type=1){
 		$obj = new Home();
 		
 		$query = $this->news_model->get_news_list($type, $start, $limit, $keyword);
@@ -176,9 +170,9 @@ class News extends CI_Controller {
 		$title = $q->title_news;
 
 		$prev_next = $this->prev_next($id);
-
+		
 		$comment = new Comment();
-
+	
 		$image = ($r != false) ? $r->path : "";
 		
 		$title_category = $q->title_category;
@@ -190,6 +184,7 @@ class News extends CI_Controller {
 		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
 		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
 		$img .= "</a>";
+		
  		$data = array_merge($this->profile()->get_about_detail(), 
  					array("get_menu" => $this->menu->get_menu("header", "news"),
 	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
@@ -227,7 +222,7 @@ class News extends CI_Controller {
 	
 	function prev_next($current_id) {
 		$result = $this->news_model->get_rank();
-		$count = $this->news_model->count_news(1);
+		$count = $this->news_model->count_news();
 		$rank = 0;
 		foreach($result as $k) {
 			if($current_id == $k->news_id) {

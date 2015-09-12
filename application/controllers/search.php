@@ -78,7 +78,7 @@ class Search extends CI_Controller {
 					
 					$data[] = array(
 						"title" => $this->get_highlight($row->title, $q),
-						"summary" => ($type != 'video') ? $home->get_preview_summary($this->get_highlight($row->summary, $q), $url, '') : $home->get_preview_summary($this->get_highlight($row->description, $q), $url, 'video'),
+						"summary" => ($type != 'video') ? strip_tags($home->get_preview_summary($this->get_highlight($row->summary, $q), $url, ''), '<a></a>') : strip_tags($home->get_preview_summary($this->get_highlight($row->description, $q), $url, 'video'), '<a></a>'),
 						"url" => $url,
 						"no_result" => ""
 					);

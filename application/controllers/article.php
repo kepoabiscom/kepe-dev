@@ -68,7 +68,7 @@ class Article extends CI_Controller {
 		$this->parser->parse('index', $data);
 	}
 	
-	public function get_article_list($start=0, $limit=10, $keyword=array(), $type=1){
+	public function get_article_list($start=0, $limit=10, $keyword, $type=1){
 		$obj = new Home();
 
 		$query = $this->article_model->get_article_list($type, $start, $limit, $keyword);
@@ -268,7 +268,7 @@ class Article extends CI_Controller {
 	 
 	function table_pagination($keyword){
 		$config['base_url'] = base_url("article/page/".$keyword['year'] ."/".$keyword['month'].'/'.$keyword['category']);
-		$config['per_page'] = 10;
+		$config['per_page'] = 5;
 		$config['total_rows'] = $this->article_model->count_article(1, $keyword);
 		$config['uri_segment'] = 6;
 		$config['next_link'] = 'Next &raquo;';

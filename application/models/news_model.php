@@ -10,7 +10,7 @@ class News_model extends CI_Model {
         if($flag == 0) {
             $this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
         	$this->db->from("news as a");
-            if($keyword != NULL) 
+            if($keyword != "") 
                 $this->db->like("a.title", $keyword);
         	$this->db->limit($limit, $start);
             $this->db->order_by("news_id", "desc");
@@ -159,13 +159,7 @@ class News_model extends CI_Model {
         return $result;
     }
 
-    function count_news($flag=0, $keyword=array()) {
-		/*
-		$keyword['category'] = "";
-		$keyword['year'] = "";
-		$keyword['month'] = "";
-		*/
-			
+    function count_news($flag=0, $keyword=array()) {			
 		if($flag == 0){
 			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
