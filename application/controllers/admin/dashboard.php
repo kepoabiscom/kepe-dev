@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+
 class Dashboard extends CI_Controller {
 
 	/**
@@ -16,6 +18,13 @@ class Dashboard extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
+		/* Set counter notif new comment */
+		$comment_notif = new Comment_notif();
+	    $t = $comment_notif->counter_comment_notif();
+	    $this->session->set_userdata("counter_comment_notif",
+ 			array("counter" => $t)
+ 		);
+
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 		     $data = $this->get_api_weather(); 
@@ -44,8 +53,8 @@ class Dashboard extends CI_Controller {
 	}
 
 	function get_now() {
-		$month = array("January", "February", "March", "April", "May", "June",
-					"July", "August", "September", "October", "November", "December"
+		$month = array("Jan", "Feb", "March", "April", "May", "June",
+					"July", "August", "Sept", "Oct", "Nov", "Dec"
 			);
 		$now = date("l") . ", " . date("d") . " " . $month[(int) date("m")-1] . " " . date("Y");
 		return $now;

@@ -6,6 +6,8 @@ require_once("./././api-cloudinary/cloudinary/Api.php");
 
 require_once("./././api-cloudinary/config_api_key.php");
 
+require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+
 class User extends CI_Controller {
 
 	/**
@@ -25,6 +27,13 @@ class User extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
+		/* Set counter notif new comment */
+		$comment_notif = new Comment_notif();
+	    $t = $comment_notif->counter_comment_notif();
+	    $this->session->set_userdata("counter_comment_notif",
+ 			array("counter" => $t)
+ 		);
+ 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		 	if($session_data['role'] == 'superadmin') {

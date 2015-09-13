@@ -14,17 +14,11 @@
         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
         <ul class="dropdown-menu alert-dropdown">
             <li>
-                <a href="#"><span class="label label-default">2 New Comments Article</span></a>
-            </li>
-            <li>
-                <a href="#"><span class="label label-primary">3 New Comments News</span></a>
-            </li>
-            <li>
-                <a href="#"><span class="label label-success">3 New Comments Videografi</span></a>
+                <a href="<?php echo base_url() . "admin/comment-notif"; ?>"><span class="label label-default"><?php $data = $this->session->userdata('counter_comment_notif'); echo $data['counter']; ?> New Comments</span></a>
             </li>
             <li class="divider"></li>
             <li>
-                <a href="#">View All</a>
+                <a href="<?php echo base_url() . "admin/comment-notif"; ?>">View All</a>
             </li>
         </ul>
     </li>

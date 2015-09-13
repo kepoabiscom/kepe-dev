@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+
 class About extends CI_Controller {
 
 	function __construct() {
@@ -11,6 +13,13 @@ class About extends CI_Controller {
 	}
 
 	function index() {
+		/* Set counter notif new comment */
+		$comment_notif = new Comment_notif();
+	    $t = $comment_notif->counter_comment_notif();
+	    $this->session->set_userdata("counter_comment_notif",
+ 			array("counter" => $t)
+ 		);
+
 		if($this->session->userdata('logged_in')) {
 			 $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {

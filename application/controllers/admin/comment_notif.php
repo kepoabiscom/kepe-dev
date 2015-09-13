@@ -20,6 +20,16 @@ class Comment_notif extends CI_Controller {
 		     	$data = array(
 		     				"success" => $this->notification()
 		     			);
+		     	$types = array("article", "news", "video");
+		     	foreach($types as $type) {
+		     		$this->comment_model->update_is_read($type);
+		     	}
+		     	$this->session->unset_userdata("counter_comment_notif");
+		     	$t = $this->counter_comment_notif();
+		     	$this->session->set_userdata("counter_comment_notif",
+		     			array("counter" => $t)
+		     		);
+
 			   	$this->load->view("admin/comment/comment_list", $data);
 		     
 		     } else {
@@ -99,4 +109,13 @@ class Comment_notif extends CI_Controller {
 		$this->session->unset_userdata("t");
         return $s;
 	 }
+
+	function counter_comment_notif() {
+	 	$types = array("article", "news", "video");
+	 	$counter = 0;
+	 	foreach($types as $type) {
+	 		$counter += $this->comment_model->count_notif($type)->counter_comment_notif;
+	 	}
+		return $counter; 	
+	}
 }

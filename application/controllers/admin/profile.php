@@ -6,6 +6,8 @@ require_once("./././api-cloudinary/cloudinary/Api.php");
 
 require_once("./././api-cloudinary/config_api_key.php");
 
+require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+
 class Profile extends CI_Controller {
 
 	/**
@@ -20,6 +22,13 @@ class Profile extends CI_Controller {
 	}
 
 	function index() {
+		/* Set counter notif new comment */
+		$comment_notif = new Comment_notif();
+	    $t = $comment_notif->counter_comment_notif();
+	    $this->session->set_userdata("counter_comment_notif",
+ 			array("counter" => $t)
+ 		);
+ 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		    $q = $this->user_model->get_by_id($session_data['id']);
