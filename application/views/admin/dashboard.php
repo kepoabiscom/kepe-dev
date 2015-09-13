@@ -108,7 +108,7 @@
                                         <i class="fa fa-comments fa-5x"></i>
                                     </div>
                                     <div class="col-xs-9 text-right">
-                                        <div class="huge">2</div>
+                                        <div class="huge"><?php $data = $this->session->userdata('counter_comment_notif'); echo "<strong>" . $data['counter'] . "</strong>"; ?></div>
                                         <div>New Comments!<br>&nbsp;<br></div>
                                     </div>
                                 </div>

@@ -50,6 +50,22 @@ class Comment_model extends CI_Model {
     function ban_comment($id, $type) {
         return $this->db->delete($type."_comment", array($type."_comment_id" => $id));
     }
+
+    function count_notif($type='') {
+        $query = $this->db->select("count(1) as counter_comment_notif")
+                ->from($type . "_comment")
+                ->where("is_read", "0")
+                ->get();
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+    }
+
+    function update_is_read($type='') {
+        $data['is_read'] = '1';
+        $this->db->update($type."_comment", $data); 
+    }
 }
 
 ?>

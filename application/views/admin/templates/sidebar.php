@@ -65,7 +65,7 @@
 		<?php } ?>
         <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[13]; ?>">
-            <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif</a>
+            <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
         </li>
         <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
