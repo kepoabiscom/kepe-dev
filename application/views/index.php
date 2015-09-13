@@ -82,13 +82,6 @@
 		.panel-group {
 			margin-bottom: 5px;
 		}
-		
-		.pricing-container ol, ul {
-			list-style-type: circle;;
-		}
-		ol, ul {
-			list-style-type: circle;;
-		}
 
 		@media (max-width: 767px) {
 			body{
