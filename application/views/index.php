@@ -84,12 +84,10 @@
 		}
 		
 		.pricing-container ol, ul {
-			list-style: outside none none;
-			list-style-type: lower-alpha;
+			list-style-type: circle;;
 		}
 		ol, ul {
-			list-style: outside none none;
-			list-style-type: lower-alpha;
+			list-style-type: circle;;
 		}
 
 		@media (max-width: 767px) {
