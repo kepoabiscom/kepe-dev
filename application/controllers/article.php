@@ -46,6 +46,8 @@ class Article extends CI_Controller {
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('article');
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
@@ -211,6 +213,8 @@ class Article extends CI_Controller {
 	     		));
 		
 		$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));
+		
+		$data['author'] = $data['full_name'];
 		
  		$this->generate('article/read_article', $data);
 	}

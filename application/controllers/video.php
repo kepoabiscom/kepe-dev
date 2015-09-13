@@ -44,6 +44,8 @@ class Video extends CI_Controller {
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('video');
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
@@ -229,6 +231,8 @@ class Video extends CI_Controller {
 		);
 		
 		$this->video_model->create_video_stat($this->global_common->stat('video_id', $id));
+		
+		$data['author'] = $data['full_name'];
 		
  		$this->generate('video/watch', $data);
 	}

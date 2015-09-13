@@ -46,10 +46,12 @@ class News extends CI_Controller {
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('news');
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
-		
+
 		$this->generate('news/news', $data);
 	}
 	
@@ -216,6 +218,8 @@ class News extends CI_Controller {
 	     		));
 		
 		$this->news_model->create_news_stat($this->global_common->stat('news_id', $id));
+		
+		$data['author'] = strip_tags($data['full_name']);
 		
  		$this->generate('news/read_news', $data);
 	}

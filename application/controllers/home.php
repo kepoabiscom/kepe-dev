@@ -32,6 +32,8 @@ class Home extends CI_Controller {
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('home');
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);

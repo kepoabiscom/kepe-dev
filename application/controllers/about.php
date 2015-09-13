@@ -28,6 +28,9 @@ class About extends CI_Controller {
 			$this->read($this->uri->segment(3))
 		);
 		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('about/page/' .  $this->uri->segment(3));
+		$data['meta_tag'] = strip_tags($data['meta_tag']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
 		$this->generate('about/static_content', $data);
@@ -61,7 +64,7 @@ class About extends CI_Controller {
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-	 		"title" => $title,
+	 		"title" => $title, 
 			"tag" => $this->global_common->get_list_tag($tag),
 	 		"parameter" => !isset($q->parameter) ? "" : $q->parameter,
 	 		"summary" => !isset($q->summary) ? "" : $q->summary,

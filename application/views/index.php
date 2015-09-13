@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{meta_description}">
     <meta name="keywords" content="{meta_tag}"> 
-	<meta name="author" content="administrator">
+	<meta name="author" content="{author}">
    	<meta property="og:title" content="{title}"/>
 	<meta property="og:url" content="{url}"/>
 	<meta property="og:image" content="{og_image}"/>
@@ -17,7 +17,7 @@
 	<meta name="twitter:site" content="@kepoabiscom" />
 	<meta name="twitter:site:id" content="@kepoabiscom" />
 	<meta name="twitter:creator" content="@kepoabiscom" />
-	<!--<meta name="twitter:description" content="{meta_description}" />-->
+	<meta name="twitter:description" content="{meta_description}" />
 	<meta name="twitter:image:src" content="{og_image}?w=650" />
     <meta property="twitter:domain" content="http://www.kepoabis.com" />
 	<meta property="og:locale" content="id_ID" />
@@ -82,7 +82,7 @@
 		.panel-group {
 			margin-bottom: 5px;
 		}
-
+		
 		@media (max-width: 767px) {
 			body{
 				background-color:rgba(255,255,255,0.5); background: none;

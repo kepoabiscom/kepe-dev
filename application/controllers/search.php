@@ -23,9 +23,15 @@ class Search extends CI_Controller {
 			'get_count_search' => $this->search_model->count_search(),
 			"q" => $q,
 			"tab_search" => $this->tab_search($type),
-			"title" => "Search",
+			"title" => "Search " . $q,
 			'paging' => $this->pagination->create_links()
 		);
+		
+		$data['author'] = 'Administrator';
+		$data['url'] = base_url('search?q=' . $q . '&type=' .  $type);
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, " . $q;
+		$data['meta_description'] = $data['get_search'][0]['summary'];
+		$data['og_image'] = base_url('assets/img/logo.png');
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
 		
