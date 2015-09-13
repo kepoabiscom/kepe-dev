@@ -105,6 +105,21 @@ class Article extends CI_Controller {
 	 	} else return "";
 	}
 
+	function approve() {
+		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
+	 		$r = $this->article_model->get_by_id($id);
+	 		$this->article_model->update_status($id);
+	 		$t = array("success" => true,
+	 				"title_article" => $r->title_article,
+	 				"f" => "approve"
+	 			);
+	 		$this->session->set_userdata("t", $t);
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
+	}
+
 	function get_category_article($flag=1, $id='') {
 		$result = $this->category_article_model->get_category();
 	 	$category = "";
@@ -342,14 +357,13 @@ class Article extends CI_Controller {
 	function get_status($t=1, $s='') {
 		$session_data = $this->session->userdata('logged_in');
 		$status = $this->article_model->get_enum_status();
-		$enum = ""; $f = "<option value='pending'>Waiting</option>"; 
+		$enum = ""; $f = ""; 
 		foreach($status as $r) {
 			 $enum = $r->COLUMN_TYPE;
 		}
 		preg_match_all("/enum\(\'(.*)\'\)$/", $enum, $matches);
         $results = explode("','", $matches[1][0]);
         if($session_data['role'] == 'superadmin') {
-        	$f = "";
 			if($t == 1) {
 		 		foreach($results as $result) {
 		 			$f .= "<option value='". $result ."'>" . $result . "</option>";
@@ -366,6 +380,12 @@ class Article extends CI_Controller {
 		 			}
 		 		}	
 		 	}
+	 	} else {
+	 		if($s == "published") {
+	 			$f = "<option value='". $s ."'>published</option>";
+	 		} else {
+	 			$f = "<option value='pending'>waiting</option>";
+	 		}
 	 	}
 	 	return $f;
 	}
@@ -413,6 +433,8 @@ class Article extends CI_Controller {
 				$notif = $t['article_title'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['title_article'] . " has been updated successfully.";
+			} else if($t['success'] && $t['f'] == 'approve') {
+				$notif = $t['title_article'] . " has been approved successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

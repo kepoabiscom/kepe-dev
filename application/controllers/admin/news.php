@@ -101,6 +101,21 @@ class News extends CI_Controller {
 	 	} else return "";
 	}
 
+	function approve() {
+		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
+	 		$r = $this->news_model->get_by_id($id);
+	 		$this->news_model->update_status($id);
+	 		$t = array("success" => true,
+	 				"title_news" => $r->title_news,
+	 				"f" => "approve"
+	 			);
+	 		$this->session->set_userdata("t", $t);
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
+	}
+
 	function get_category_news($flag=1, $id='') {
 		$result = $this->category_news_model->get_category();
 	 	$category = "";
@@ -340,7 +355,7 @@ class News extends CI_Controller {
 	function get_status($t=1, $s='') {
 		$session_data = $this->session->userdata('logged_in');
 		$status = $this->news_model->get_enum_status();
-		$enum = ""; $f = "<option value='pending'>Waiting</option>"; 
+		$enum = ""; $f = ""; 
 		foreach($status as $r) {
 			 $enum = $r->COLUMN_TYPE;
 		}
@@ -364,6 +379,12 @@ class News extends CI_Controller {
 		 			}
 		 		}	
 		 	}
+	 	} else {
+	 		if($s == "published") {
+	 			$f = "<option value='". $s ."'>published</option>";
+	 		} else {
+	 			$f = "<option value='pending'>waiting</option>";
+	 		}
 	 	}
 	 	return $f;		
 	}
@@ -411,6 +432,8 @@ class News extends CI_Controller {
 				$notif = $t['news_title'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['title_news'] . " has been updated successfully.";
+			} else if($t['success'] && $t['f'] == 'approve') {
+				$notif = $t['title_news'] . " has been approved successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

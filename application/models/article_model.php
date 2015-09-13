@@ -276,6 +276,13 @@ class Article_model extends CI_Model {
         $this->db->update('article', $data); 
     }
 
+    function update_status($id){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $data['status'] = 'published';
+        $this->db->where('article_id', $id);
+        $this->db->update('article', $data); 
+    }
+
     function get_rank() {
         $query = $this->db->query("
                     select @i:=@i+1 as i, article_id

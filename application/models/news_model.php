@@ -167,6 +167,13 @@ class News_model extends CI_Model {
         }
     }
 
+    function update_status($id){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $data['status'] = 'published';
+        $this->db->where('news_id', $id);
+        $this->db->update('news', $data); 
+    }
+
     function count_news($flag=0, $keyword=array()) {		
 		if($flag == 0){
 			if($keyword != NULL) {
