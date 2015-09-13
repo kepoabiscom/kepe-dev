@@ -159,14 +159,19 @@ class News_model extends CI_Model {
         return $result;
     }
 
-    function count_news($flag=0, $keyword=array()) {			
+    function count_news($flag=0, $keyword=array()) {		
 		if($flag == 0){
 			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
 				$this->db->from('news');
+				$this->db->where("status = 'published'");
 				return $this->db->count_all_results();
 			}
-			return $this->db->count_all("news");
+			else{
+				$this->db->from('news');
+				$this->db->where("status = 'published'");
+				return $this->db->count_all_results();
+			}
 		}
 		else{
 			$this->db->select(" 
