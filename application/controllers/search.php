@@ -30,7 +30,7 @@ class Search extends CI_Controller {
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('search?q=' . $q . '&type=' .  $type);
 		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, " . $q;
-		$data['meta_description'] = $data['get_search'][0]['summary'];
+		$data['meta_description'] = ($data['get_search'][0]['summary']) ? $data['get_search'][0]['summary'] : "No result" ;
 		$data['og_image'] = base_url('assets/img/logo.png');
 		
 		$data = array_merge($this->profile()->get_about_detail(), $data);
