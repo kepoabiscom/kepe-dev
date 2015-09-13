@@ -153,10 +153,18 @@ class News_model extends CI_Model {
     }
 
     function get_enum_status() {
-        $enum = $this->db->query("SHOW COLUMNS FROM news WHERE Field = 'status' ");
-        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
-        $result = explode("','", $matches[1]);
-        return $result;
+        $query = $this->db->query("
+        		SELECT COLUMN_TYPE
+				FROM information_schema.COLUMNS
+				WHERE TABLE_NAME = 'news'
+				      AND COLUMN_NAME = 'status';
+        		");
+        if($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
     }
 
     function count_news($flag=0, $keyword=array()) {			

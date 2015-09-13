@@ -151,7 +151,8 @@ class Article extends CI_Controller {
 	 					"error_message" => "", 
 	 					"flag" => "create",
 	 					"user_id" => $sess_data['id'],
-	 					"category" => $this->get_category_article()
+	 					"category" => $this->get_category_article(),
+	 					"status" => $this->get_status()
 	 				);
 
 	        $this->validation();
@@ -316,7 +317,7 @@ class Article extends CI_Controller {
 		 		$data = array("article_id" => $r->article_id,
 		 				"title" => $r->title_article,
 		 				"category" => $this->get_category_article(2, $r->article_category_id),
-		 				"status" => $r->status,
+		 				"status" => $this->get_status(2, $r->status),
 		 				"tag" => $r->tag,
 		 				"image" => $this->get_article_image($r->article_id), 
 		 				"summary" => $r->summary,
@@ -339,8 +340,34 @@ class Article extends CI_Controller {
 	}
 
 	function get_status($t=1, $s='') {
+		$session_data = $this->session->userdata('logged_in');
 		$status = $this->article_model->get_enum_status();
-		print_r($status);		
+		$enum = ""; $f = "<option value='pending'>Waiting</option>"; 
+		foreach($status as $r) {
+			 $enum = $r->COLUMN_TYPE;
+		}
+		preg_match_all("/enum\(\'(.*)\'\)$/", $enum, $matches);
+        $results = explode("','", $matches[1][0]);
+        if($session_data['role'] == 'superadmin') {
+        	$f = "";
+			if($t == 1) {
+		 		foreach($results as $result) {
+		 			$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 		}	
+		 	} else {
+		 		foreach($results as $result) {
+		 			if($s == $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";	
+		 			}
+		 		}
+		 		foreach($results as $result) {
+		 			if($s != $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 			}
+		 		}	
+		 	}
+	 	}
+	 	return $f;
 	}
 
 	function page_config($flag=null) {
