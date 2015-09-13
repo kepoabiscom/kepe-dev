@@ -34,6 +34,7 @@ class category_article_model extends CI_Model {
                         article art
                     ON
                         art_cat.article_category_id = art.article_category_id
+						AND art.status = 'published'
                     GROUP BY art_cat.article_category_id
                 ";
                 

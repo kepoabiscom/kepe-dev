@@ -74,8 +74,8 @@ class About extends CI_Controller {
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
 	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
 	     ); 
-		 
-		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis,".$data['tag'];
+		
+		$data['meta_tag'] = "Kepo ".$data['title'].", Kepo Abis, Kepo, Abis, " . $tag;
 		$data['meta_description'] = strip_tags($data['body']);
 		
  		return $data;

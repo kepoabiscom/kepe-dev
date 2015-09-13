@@ -177,10 +177,13 @@ class Article_model extends CI_Model {
 			if($keyword != NULL) {
 				$this->db->like('title', $keyword);
 				$this->db->from('article');
+				$this->db->where("status = 'published'");
 				return $this->db->count_all_results();
 			}
 			else{
-				 return $this->db->count_all("article");
+				$this->db->from('article');
+				$this->db->where("status = 'published'");
+				return $this->db->count_all_results();
 			}
         }
 		else{
@@ -295,7 +298,7 @@ class Article_model extends CI_Model {
                     ,DATE_FORMAT(n.created_date, '%Y') as year
                     ,DATE_FORMAT(n.created_date, '%m') as month
                     ,DATE_FORMAT(n.created_date, '%d') as day
-                    from article n order by n.article_id desc
+                    from article n where n.status = 'published' order by n.article_id desc
                     limit ". $rank .", 1 ");
 
         if($query->num_rows() == 1) {

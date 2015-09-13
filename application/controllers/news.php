@@ -227,6 +227,7 @@ class News extends CI_Controller {
 	function prev_next($current_id) {
 		$result = $this->news_model->get_rank();
 		$count = $this->news_model->count_news();
+		
 		$rank = 0;
 		foreach($result as $k) {
 			if($current_id == $k->news_id) {

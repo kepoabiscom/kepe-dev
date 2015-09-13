@@ -336,7 +336,7 @@ class Video_model extends CI_Model {
                     ,DATE_FORMAT(n.created_date, '%Y') as year
                     ,DATE_FORMAT(n.created_date, '%m') as month
                     ,DATE_FORMAT(n.created_date, '%d') as day
-                    from video n order by n.video_id desc
+                    from video n where n.status = 'published' order by n.video_id desc
                     limit ". $rank .", 1 ");
 
         if($query->num_rows() == 1) {
