@@ -82,6 +82,15 @@
 		.panel-group {
 			margin-bottom: 5px;
 		}
+		
+		.pricing-container ol, ul {
+			list-style: outside none none;
+			list-style-type: lower-alpha;
+		}
+		ol, ul {
+			list-style: outside none none;
+			list-style-type: lower-alpha;
+		}
 
 		@media (max-width: 767px) {
 			body{

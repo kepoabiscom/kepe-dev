@@ -7,6 +7,22 @@
 			{/get_breadcrumb}
 		</ol>
 	</div>
+	<div>
+	<form role="search" method="get" action="<?php echo base_url('search'); ?>">
+		<?php $s = explode("&", $_SERVER['QUERY_STRING']); ?>
+		<div class="input-group">
+			<?php $q = explode("=", $s[0]); $q = isset($q[1]) ? $q[1] : ""; ?>
+			<input type="text" placeholder="Search article / news / video" class="form-control" value="<?php echo strtolower(preg_replace('/\+/', ' ', $q)); ?>" name="q">
+			<?php $t = "video"; if($q != "") { $t = explode("=", $s[1]); $t = $t[1]; } ?>
+			<input type="hidden" value="<?php echo $t; ?>" name="type">
+			<span class="input-group-btn">
+				<button class="btn btn-default" type="submit">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</span>
+		</div>
+	</form>
+	</div>
 	<div class="btn-group" role="group" aria-label="...">
 		{tab_search}
 			{tab}

@@ -32,6 +32,7 @@ class Search_model extends CI_Model {
     }
 
     function count_search() {
+		
         return $this->count_search;
     }
 

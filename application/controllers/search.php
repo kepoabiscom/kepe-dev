@@ -20,6 +20,7 @@ class Search extends CI_Controller {
 			'get_menu' => $this->menu->get_menu("header", ""),
 			'get_breadcrumb' => $this->menu->get_menu("breadcrumb", ""),
 			'get_search' => $this->result($type, $q),
+			'get_count_search' => $this->search_model->count_search(),
 			"q" => $q,
 			"tab_search" => $this->tab_search($type),
 			"title" => "Search",
@@ -85,6 +86,7 @@ class Search extends CI_Controller {
 					$counter++;
 				}
 			}
+			
 			return $counter > 0 ? $data : $default;
 		}
 	}
