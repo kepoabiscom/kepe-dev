@@ -34,6 +34,7 @@ class Category_news_model extends CI_Model {
                     news n
                 ON
                     n_cat.news_category_id = n.news_category_id
+					AND n.status = 'published'
                 GROUP BY n_cat.news_category_id
             ";
                 
