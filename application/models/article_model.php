@@ -19,7 +19,7 @@ class Article_model extends CI_Model {
 	
     function get_article_list($flag=0, $start, $limit, $keyword=array()) {	
     	if($flag == 0) {
-            $this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
+            $this->db->select("a.article_id, a.user_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
         	$this->db->from("article as a");
             if($keyword != '') 
                 $this->db->like("a.title", $keyword);

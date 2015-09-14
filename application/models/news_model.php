@@ -8,7 +8,7 @@ class News_model extends CI_Model {
 
     function get_news_list($flag=0, $start, $limit, $keyword=array()) {
         if($flag == 0) {
-            $this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
+            $this->db->select("a.news_id, a.user_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
         	$this->db->from("news as a");
             if($keyword != "") 
                 $this->db->like("a.title", $keyword);

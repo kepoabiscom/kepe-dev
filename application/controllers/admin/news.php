@@ -61,21 +61,23 @@ class News extends CI_Controller {
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
-				$button[1] = Tb::button('Edit', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'url' => base_url() . "admin/news/update/".$id,
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_SUCCESS
-		        ));
+		 		if($session_data['role'] == 'superadmin' ||  $session_data['id']== $row->user_id) {
+					$button[1] = Tb::button('Edit', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'url' => base_url() . "admin/news/update/".$id,
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_SUCCESS
+			        ));
 
-		        $button[2] = Tb::button('Delete', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "setId(".$id.")",
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_DANGER,
-		            'url' => '#modal_confirm',
-                    'data-toggle' => 'modal'
-		        ));
+			        $button[2] = Tb::button('Delete', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'onclick' => "setId(".$id.")",
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_DANGER,
+			            'url' => '#modal_confirm',
+	                    'data-toggle' => 'modal'
+			        ));
+			    }
 
 				if($session_data['role'] == 'superadmin') {
 					$button[3] = Tb::button('Approve', array(
@@ -95,6 +97,7 @@ class News extends CI_Controller {
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
 	        	$data_array .= "<td>".$btn."</td></tr>";
+	        	$button[1] = ""; $button[2] = ""; $button[3] = ""; 
 	        	$i++;
 	        }
 	        return $data_array . "</tr>";	
