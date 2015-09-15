@@ -138,7 +138,7 @@
 					<div class="col-md-3">
 						<p>{image}</p>
 						<div  style="font-size: 20px;">{title}</div>
-						<div style="font-size: 12px;" class="post-body">
+						<div class="post-body">
 							<!--
 							<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
 							<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 

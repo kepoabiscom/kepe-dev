@@ -33,8 +33,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets/css/style.css'); ?>">
 	<style>
 		body{
-			/* background-color:rgba(17,183,152,0.5); */background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 380%; background-attachment: fixed;
-			font-size: 12px;
+			background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 380%; background-attachment: fixed;
 		}
 		
 		#header{

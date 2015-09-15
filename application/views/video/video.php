@@ -33,7 +33,8 @@
 				<div>
 					<div class="title">{title}</div>
 					<p class="post-body">
-						On {created_date} By {full_name}
+						On {created_date} 
+						<br/>By {full_name}
 					</p>
 					<p>{image}</p>
 					<p>
