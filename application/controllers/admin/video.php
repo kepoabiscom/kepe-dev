@@ -31,15 +31,19 @@ class Video extends CI_Controller {
  		
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
+		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
 		     
-		     $config = $this->page_config();
+			     $config = $this->page_config();
 
-		     $data = array(
-		     			'list_video' => $this->get_list_video($config['uri'], $config['per_page']),
-		     			'link' => $this->pagination->create_links(),
-		     			'success' => $this->notification()
-		     		);
-		     $this->parser->parse('admin/video/video_management', $data);
+			     $data = array(
+			     			'list_video' => $this->get_list_video($config['uri'], $config['per_page']),
+			     			'link' => $this->pagination->create_links(),
+			     			'success' => $this->notification()
+			     		);
+			     $this->parser->parse('admin/video/video_management', $data);
+			} else {
+				print_r("<h1>Authorization required.</h1>");
+			}
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}

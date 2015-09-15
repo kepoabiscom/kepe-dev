@@ -64,21 +64,23 @@ class Article extends CI_Controller {
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
-				$button[1] = Tb::button('Edit', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'url' => base_url() . "admin/article/update/".$id,
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_SUCCESS
-		        ));
-				
-		        $button[2] = Tb::button('Delete', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "setId(".$id.")",
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_DANGER,
-		            'url' => '#modal_confirm',
-                    'data-toggle' => 'modal'
-		        ));
+		 		if($session_data['role'] == 'superadmin' ||  $session_data['id']== $row->user_id) {
+					$button[1] = Tb::button('Edit', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'url' => base_url() . "admin/article/update/".$id,
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_SUCCESS
+			        ));
+					
+			        $button[2] = Tb::button('Delete', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'onclick' => "setId(".$id.")",
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_DANGER,
+			            'url' => '#modal_confirm',
+	                    'data-toggle' => 'modal'
+			        ));
+		    	}
 				
 				if($session_data['role'] == 'superadmin') {
 					$button[3] = Tb::button('Approve', array(
@@ -99,10 +101,26 @@ class Article extends CI_Controller {
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>" . $row->created_date . "</td>";
 	        	$data_array .= "<td>".$btn."</td></tr>";
+	        	$button[1] = ""; $button[2] = ""; $button[3] = ""; 
 	        	$i++;
 	        }
 	        return $data_array . "</tr>";	
 	 	} else return "";
+	}
+
+	function approve() {
+		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
+	 		$r = $this->article_model->get_by_id($id);
+	 		$this->article_model->update_status($id);
+	 		$t = array("success" => true,
+	 				"title_article" => $r->title_article,
+	 				"f" => "approve"
+	 			);
+	 		$this->session->set_userdata("t", $t);
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
 	}
 
 	function get_category_article($flag=1, $id='') {
@@ -151,7 +169,8 @@ class Article extends CI_Controller {
 	 					"error_message" => "", 
 	 					"flag" => "create",
 	 					"user_id" => $sess_data['id'],
-	 					"category" => $this->get_category_article()
+	 					"category" => $this->get_category_article(),
+	 					"status" => $this->get_status()
 	 				);
 
 	        $this->validation();
@@ -316,7 +335,7 @@ class Article extends CI_Controller {
 		 		$data = array("article_id" => $r->article_id,
 		 				"title" => $r->title_article,
 		 				"category" => $this->get_category_article(2, $r->article_category_id),
-		 				"status" => $r->status,
+		 				"status" => $this->get_status(2, $r->status),
 		 				"tag" => $r->tag,
 		 				"image" => $this->get_article_image($r->article_id), 
 		 				"summary" => $r->summary,
@@ -339,8 +358,39 @@ class Article extends CI_Controller {
 	}
 
 	function get_status($t=1, $s='') {
+		$session_data = $this->session->userdata('logged_in');
 		$status = $this->article_model->get_enum_status();
-		print_r($status);		
+		$enum = ""; $f = ""; 
+		foreach($status as $r) {
+			 $enum = $r->COLUMN_TYPE;
+		}
+		preg_match_all("/enum\(\'(.*)\'\)$/", $enum, $matches);
+        $results = explode("','", $matches[1][0]);
+        if($session_data['role'] == 'superadmin') {
+			if($t == 1) {
+		 		foreach($results as $result) {
+		 			$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 		}	
+		 	} else {
+		 		foreach($results as $result) {
+		 			if($s == $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";	
+		 			}
+		 		}
+		 		foreach($results as $result) {
+		 			if($s != $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 			}
+		 		}	
+		 	}
+	 	} else {
+	 		if($s == "published") {
+	 			$f = "<option value='". $s ."'>published</option>";
+	 		} else {
+	 			$f = "<option value='pending'>waiting</option>";
+	 		}
+	 	}
+	 	return $f;
 	}
 
 	function page_config($flag=null) {
@@ -386,6 +436,8 @@ class Article extends CI_Controller {
 				$notif = $t['article_title'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['title_article'] . " has been updated successfully.";
+			} else if($t['success'] && $t['f'] == 'approve') {
+				$notif = $t['title_article'] . " has been approved successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

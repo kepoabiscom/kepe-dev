@@ -10,6 +10,15 @@ function setId(id) {
     }
 } 
 
+function approve(t) {
+    var url = location.href;
+    $(document).ready(function() {
+        $.post(url + "/approve", {id: uid}, function(e) {
+            $(location).attr('href', url);
+        });
+    });
+}
+
 function deleted(t) {
     var url = location.href;
     var f = url.split("/");

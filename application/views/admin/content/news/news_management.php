@@ -34,6 +34,16 @@
         )
     ));
     ?>
+    <?php echo Tb::modal(array(
+        'id' => 'modal_approve',
+        'header' => 'Approve',
+        'body' => '<strong>Apakah Anda yakin ingin meng-approve news ini?</strong>',
+        'footer' => array(
+            Tb::button('Ya', array('onclick' => "approve('news')", 'color' => Tb::BUTTON_COLOR_WARNING)),
+            TB::button('Tidak', array('data-dismiss' => 'modal'))
+        )
+    ));
+    ?>
     <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 
 

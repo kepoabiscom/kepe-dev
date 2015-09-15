@@ -41,9 +41,11 @@
 				<?php } ?>
             </ul>
         </li>
+        <?php if($q['role'] == "superadmin" or $q['role'] == "admin") { ?>
         <li class="<?php echo $active[6]; ?>">
             <a href="<?php echo base_url(); ?>admin/video"><i class="fa fa-fw fa-desktop"></i>&nbsp;Video Management</a>
         </li>
+        <?php } ?>
         <li class="<?php echo $active[9]; ?>">
             <a href="<?php echo base_url(); ?>admin/gallery"><i class="fa fa-fw fa-desktop"></i>&nbsp;Gallery Management</a>
         </li>

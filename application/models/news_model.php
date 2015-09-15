@@ -8,7 +8,7 @@ class News_model extends CI_Model {
 
     function get_news_list($flag=0, $start, $limit, $keyword=array()) {
         if($flag == 0) {
-            $this->db->select("a.news_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
+            $this->db->select("a.news_id, a.user_id, a.title as title_news, ac.title as title_category, a.status, DATE_FORMAT(a.created_date, '%M %d, %Y %h:%i %p') as created_date, a.modified_date", false);
         	$this->db->from("news as a");
             if($keyword != "") 
                 $this->db->like("a.title", $keyword);
@@ -153,10 +153,25 @@ class News_model extends CI_Model {
     }
 
     function get_enum_status() {
-        $enum = $this->db->query("SHOW COLUMNS FROM news WHERE Field = 'status' ");
-        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
-        $result = explode("','", $matches[1]);
-        return $result;
+        $query = $this->db->query("
+        		SELECT COLUMN_TYPE
+				FROM information_schema.COLUMNS
+				WHERE TABLE_NAME = 'news'
+				      AND COLUMN_NAME = 'status';
+        		");
+        if($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
+    }
+
+    function update_status($id){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $data['status'] = 'published';
+        $this->db->where('news_id', $id);
+        $this->db->update('news', $data); 
     }
 
     function count_news($flag=0, $keyword=array()) {		

@@ -19,7 +19,7 @@ class Article_model extends CI_Model {
 	
     function get_article_list($flag=0, $start, $limit, $keyword=array()) {	
     	if($flag == 0) {
-            $this->db->select("a.article_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
+            $this->db->select("a.article_id, a.user_id, a.title as title_article, ac.title as title_category, a.status, a.created_date, a.modified_date", false);
         	$this->db->from("article as a");
             if($keyword != '') 
                 $this->db->like("a.title", $keyword);
@@ -158,10 +158,18 @@ class Article_model extends CI_Model {
     }
 
     function get_enum_status() {
-        $enum = $this->db->query("SHOW COLUMNS FROM article WHERE Field = 'status' ");
-        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
-        $result = explode("','", $matches[1]);
-        return $result;
+        $query = $this->db->query("
+        		SELECT COLUMN_TYPE
+				FROM information_schema.COLUMNS
+				WHERE TABLE_NAME = 'article'
+				      AND COLUMN_NAME = 'status';
+        		");
+        if($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
     }
 
     function count_article($flag=0, $keyword=array()) {
@@ -264,6 +272,13 @@ class Article_model extends CI_Model {
 
     function update_article($id, $data){
         $data["modified_date"] = date("Y-m-d H:i:s");
+        $this->db->where('article_id', $id);
+        $this->db->update('article', $data); 
+    }
+
+    function update_status($id){
+        $data["modified_date"] = date("Y-m-d H:i:s");
+        $data['status'] = 'published';
         $this->db->where('article_id', $id);
         $this->db->update('article', $data); 
     }
