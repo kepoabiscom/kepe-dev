@@ -105,7 +105,7 @@
 </div>
 <div class="col-md-4">
 	<div class="sidebar-module">
-		<h2 class="title">Videografi</h2>
+		<h2 class="title">Video</h2>
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#popular">Popular</a></li>
 			<li><a data-toggle="tab" href="#recent">Recent</a></li>
