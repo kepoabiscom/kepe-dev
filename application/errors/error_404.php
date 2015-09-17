@@ -1,62 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<title>404 Page Not Found</title>
-<style type="text/css">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>404 Page Not Found!</title>
+    <style>
+                ::-moz-selection {
+                    background: #b3d4fc;
+                    text-shadow: none;
+                }
 
-::selection{ background-color: #E13300; color: white; }
-::moz-selection{ background-color: #E13300; color: white; }
-::webkit-selection{ background-color: #E13300; color: white; }
+                ::selection {
+                    background: #b3d4fc;
+                    text-shadow: none;
+                }
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+                html {
+                    padding: 30px 10px;
+                    font-size: 20px;
+                    line-height: 1.4;
+                    color: #737373;
+                    background: #f0f0f0;
+                    -webkit-text-size-adjust: 100%;
+                    -ms-text-size-adjust: 100%;
+                }
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
+                html,
+                input {
+                    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+                }
 
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
+                body {
+                    max-width: 500px;
+                    _width: 500px;
+                    padding: 30px 20px 50px;
+                    border: 1px solid #b3b3b3;
+                    border-radius: 4px;
+                    margin: 0 auto;
+                    box-shadow: 0 1px 10px #a7a7a7, inset 0 1px 0 #fff;
+                    background: #fcfcfc;
+                }
 
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
+                h1 {
+                    margin: 0 10px;
+                    font-size: 50px;
+                    text-align: center;
+                }
 
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	-webkit-box-shadow: 0 0 8px #D0D0D0;
-}
+                h1 span {
+                    color: #bbb;
+                }
 
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
-</head>
-<body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
-	</div>
-</body>
+                h3 {
+                    margin: 1.5em 0 0.5em;
+                }
+
+                p {
+                    margin: 1em 0;
+                }
+
+                ul {
+                    padding: 0 0 0 40px;
+                    margin: 1em 0;
+                }
+
+                .container {
+                    max-width: 380px;
+                    _width: 380px;
+                    margin: 0 auto;
+                }
+
+                /* google search */
+
+                #goog-fixurl ul {
+                    list-style: none;
+                    padding: 0;
+                    margin: 0;
+                }
+
+                #goog-fixurl form {
+                    margin: 0;
+                }
+
+                #goog-wm-qt,
+                #goog-wm-sb {
+                    border: 1px solid #bbb;
+                    font-size: 16px;
+                    line-height: normal;
+                    vertical-align: top;
+                    color: #444;
+                    border-radius: 2px;
+                }
+
+                #goog-wm-qt {
+                    width: 220px;
+                    height: 20px;
+                    padding: 5px;
+                    margin: 5px 10px 0 0;
+                    box-shadow: inset 0 1px 1px #ccc;
+                }
+
+                #goog-wm-sb {
+                    display: inline-block;
+                    height: 32px;
+                    padding: 0 10px;
+                    margin: 5px 0 0;
+                    white-space: nowrap;
+                    cursor: pointer;
+                    background-color: #f5f5f5;
+                    background-image: -webkit-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+                    background-image: -moz-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+                    background-image: -ms-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+                    background-image: -o-linear-gradient(rgba(255,255,255,0), #f1f1f1);
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                    appearance: none;
+                    *overflow: visible;
+                    *display: inline;
+                    *zoom: 1;
+                }
+
+                #goog-wm-sb:hover,
+                #goog-wm-sb:focus {
+                    border-color: #aaa;
+                    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+                    background-color: #f8f8f8;
+                }
+
+                #goog-wm-qt:hover,
+                #goog-wm-qt:focus {
+                    border-color: #105cb6;
+                    outline: 0;
+                    color: #222;
+                }
+
+                input::-moz-focus-inner {
+                    padding: 0;
+                    border: 0;
+                }
+    </style>
+    </head>
+    <body>
+
+    <h1>404 <br>Page Not Found! <span><br>:(</span></h1>
+    <p>Sorry, but the page you were trying to view does not exist.</p>
+    <p>It looks like this was the result of either:</p>
+    <ul>
+    	<li>a mistyped address</li>
+    	<li>an out-of-date link</li>
+     </ul>
+    <script>
+    	var GOOG_FIXURL_LANG = (navigator.language || '').slice(0,2),GOOG_FIXURL_SITE = location.host;
+    </script>
+    <script src="//linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js"></script>
+    </div>
+    </body>
 </html>
+
