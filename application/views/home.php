@@ -133,6 +133,7 @@
 		</div>
 		<div class="col-md-9">
 			<div class="row">
+				<h2 class="line-title"><strong class="bold-text" style="color: black; margin-left: 15px;">Recent Video</strong></h2>
 				{get_video}
 					{open_parenthesis}
 					<div class="col-md-3">
