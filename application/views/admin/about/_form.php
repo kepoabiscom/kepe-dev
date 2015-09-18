@@ -16,7 +16,7 @@
 <div class="form-group">
     <label class="col-sm-2">Description</label>
     <div class="col-sm-6">
-        <textarea class="form-control" rows="3" value="<?php echo $description; ?>" name="description"><?php echo $description; ?></textarea>    
+        <textarea class="form-control" rows="3" name="description"><?php echo $description; ?></textarea>    
     </div>
 </div>
 <div class="form-group">
@@ -161,13 +161,13 @@
 <div class="form-group">
     <label class="col-sm-2">Content Body</label>
     <div class="col-sm-6">
-        <textarea class="form-control" rows="3" value="<?php echo $content_body; ?>" name="content_body"><?php echo $content_body; ?></textarea>    
+        <textarea class="form-control" rows="3" name="content_body"><?php echo $content_body; ?></textarea>    
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2">Content Mission</label>
     <div class="col-sm-6">
-        <textarea class="form-control" rows="3" value="<?php echo $content_mission; ?>" name="content_mission"><?php echo $content_mission; ?></textarea>    
+        <textarea class="form-control" rows="3" name="content_mission"><?php echo $content_mission; ?></textarea>    
     </div>
 </div>
 <div class="form-group">
@@ -191,7 +191,7 @@
 <div class="form-group">
     <label class="col-sm-2">Footer</label>
     <div class="col-sm-6">
-        <textarea class="form-control" rows="3" value="<?php echo $footer; ?>" name="footer"><?php echo $footer; ?></textarea>    
+        <textarea class="form-control" rows="3" name="footer"><?php echo $footer; ?></textarea>    
     </div>
 </div>
 
