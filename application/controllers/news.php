@@ -165,63 +165,66 @@ class News extends CI_Controller {
 		return $obj = new about();
 	}
 
-	function read($year, $month, $day, $id, $slug) {
+	function read($year=0, $month=0, $day=0, $id=0, $slug='') {
 		$q = $this->news_model->get_by_id($id);
-		
 		$r = $this->news_model->get_image($id);
-		$title = $q->title_news;
 
-		$prev_next = $this->prev_next($id);
+		if($q == null) show_404();
+		else {
+			$title = $q->title_news;
+
+			$prev_next = $this->prev_next($id);
+			
+			$comment = new Comment();
 		
-		$comment = new Comment();
-	
-		$image = ($r != false) ? $r->path : "";
-		
-		$title_category = $q->title_category;
-		$category = "<a href='".base_url('news/page/0/0/'.$title_category)."'>".$title_category."</a>";
-		
-		$tag = !isset($q->tag) ? "" : $q->tag;
-		
-		$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
-		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
-		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-		$img .= "</a>";
-		
- 		$data = array_merge($this->profile()->get_about_detail(), 
- 					array("get_menu" => $this->menu->get_menu("header", "news"),
-	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
-						"get_news_comment" => $this->get_news_list(0, 5, NULL, 4),
-						"get_news_popular" => $this->get_news_list(0, 5, NULL, 3),
-						"get_news_recent" => $this->get_news_list(0, 5, NULL, 2),
-	 					"get_news_category" => $this->get_news_category_list(),
-	 					"get_archives_list" => $this->get_archives_list(),
-	 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
-		 				"title" => $title,
-		 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
-		 				"meta_tag" => $this->global_common->get_list_tag($tag, 'news', 'metadata'),
-		 				"title_category" => $category,
-		 				"status" => $q->status,
-		 				"summary" => $q->summary,
-		 				"meta_description" => strip_tags($q->summary),
-		 				"image" => $img, 
-		 				"url" => $url_share,
-		 				"og_image" => base_url($image),
-		 				"created_date" => $q->created_date,
-		 				"get_comment" => $comment->get_comment("news", $id),
-		 				"n1" => $comment->random_set_captcha(0),
-		 				"op" => $comment->random_set_captcha(),
-		 				"n2" => $comment->random_set_captcha(0),
-		 				"prev_next" => $prev_next,
-		 				"news_id" => $id,
-						"count_news_comment" => $this->news_model->count_news_comment($id)->count_news_comment,
-						"count_news_stat" => $this->news_model->count_news_stat($id)->count_news_stat
-	     		));
-		
-		$this->news_model->create_news_stat($this->global_common->stat('news_id', $id));
-		
-		$data['author'] = strip_tags($data['full_name']);
-		
- 		$this->generate('news/read_news', $data);
+			$image = ($r != false) ? $r->path : "";
+			
+			$title_category = $q->title_category;
+			$category = "<a href='".base_url('news/page/0/0/'.$title_category)."'>".$title_category."</a>";
+			
+			$tag = !isset($q->tag) ? "" : $q->tag;
+			
+			$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
+			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
+			$img .= "</a>";
+			
+	 		$data = array_merge($this->profile()->get_about_detail(), 
+	 					array("get_menu" => $this->menu->get_menu("header", "news"),
+		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "news"),
+							"get_news_comment" => $this->get_news_list(0, 5, NULL, 4),
+							"get_news_popular" => $this->get_news_list(0, 5, NULL, 3),
+							"get_news_recent" => $this->get_news_list(0, 5, NULL, 2),
+		 					"get_news_category" => $this->get_news_category_list(),
+		 					"get_archives_list" => $this->get_archives_list(),
+		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
+			 				"title" => $title,
+			 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
+			 				"meta_tag" => $this->global_common->get_list_tag($tag, 'news', 'metadata'),
+			 				"title_category" => $category,
+			 				"status" => $q->status,
+			 				"summary" => $q->summary,
+			 				"meta_description" => strip_tags($q->summary),
+			 				"image" => $img, 
+			 				"url" => $url_share,
+			 				"og_image" => base_url($image),
+			 				"created_date" => $q->created_date,
+			 				"get_comment" => $comment->get_comment("news", $id),
+			 				"n1" => $comment->random_set_captcha(0),
+			 				"op" => $comment->random_set_captcha(),
+			 				"n2" => $comment->random_set_captcha(0),
+			 				"prev_next" => $prev_next,
+			 				"news_id" => $id,
+							"count_news_comment" => $this->news_model->count_news_comment($id)->count_news_comment,
+							"count_news_stat" => $this->news_model->count_news_stat($id)->count_news_stat
+		     		));
+			
+			$this->news_model->create_news_stat($this->global_common->stat('news_id', $id));
+			
+			$data['author'] = strip_tags($data['full_name']);
+			
+	 		$this->generate('news/read_news', $data);
+	 	}
 	}
 	
 	function prev_next($current_id) {

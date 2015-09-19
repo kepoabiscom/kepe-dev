@@ -161,62 +161,65 @@ class Article extends CI_Controller {
  		return $this->global_common->archives($query, $table);
 	}
 
-	function read($year, $month, $day, $id, $slug) {
+	function read($year=0, $month=0, $day=0, $id=0, $slug='') {
 		$q = $this->article_model->get_by_id($id);
 		$r = $this->article_model->get_image($id);
 		
-		$comment = new Comment();
+		if($q == null) show_404();
+		else {
+			$comment = new Comment();
 
-		$prev_next = $this->prev_next($id);
+			$prev_next = $this->prev_next($id);
 
-		$title = $q->title_article;
-		
-		$image = ($r != false) ? $r->path : "";
-		
-		$title_category = $q->title_category;
-		$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
-		
-		$tag = !isset($q->tag) ? "" : $q->tag;
-		
-		$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
-		$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
-		$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
-		$img .= "</a>";
- 		$data = array_merge($this->profile()->get_about_detail(), 
- 					array("get_menu" => $this->menu->get_menu("header", "article"),
-	 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
-						"get_article_comment" => $this->get_article_list(0, 5, NULL, 4),
-						"get_article_popular" => $this->get_article_list(0, 5, NULL, 3),
-						"get_article_recent" => $this->get_article_list(0, 5, NULL, 2),
-	 					"get_article_category" => $this->get_article_category_list(),
-	 					"get_archives_list" => $this->get_archives_list(),
-	 					"full_name" => $q->nama_lengkap,
-		 				"title" => $title,
-		 				"tag" => $this->global_common->get_list_tag($tag, 'article', 'btn'),
-		 				"meta_tag" => $this->global_common->get_list_tag($tag, 'article', 'metadata'),
-		 				"title_category" => $category,
-		 				"status" => $q->status,
-		 				"summary" => $q->summary,
-		 				"meta_description" => strip_tags($q->summary),
-		 				"image" => $img, 
-		 				"url" => $url_share,
-		 				"og_image" => base_url($image),
-		 				"created_date" => $q->created_date,
-		 				"get_comment" => $comment->get_comment("article", $id),
-		 				"n1" => $comment->random_set_captcha(0),
-		 				"op" => $comment->random_set_captcha(),
-		 				"n2" => $comment->random_set_captcha(0),
-		 				"prev_next" => $prev_next,
-		 				"article_id" => $id,
-						"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
-						"count_article_stat" => $this->article_model->count_article_stat($id)->count_article_stat
-	     		));
-		
-		$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));
-		
-		$data['author'] = $data['full_name'];
-		
- 		$this->generate('article/read_article', $data);
+			$title = $q->title_article;
+			
+			$image = ($r != false) ? $r->path : "";
+			
+			$title_category = $q->title_category;
+			$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
+			
+			$tag = !isset($q->tag) ? "" : $q->tag;
+			
+			$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
+			$img = "<a target='_blank' class='thumbnail' href='". base_url() . $image ."'>";
+			$img .= "<img class='img-responsive' src='". base_url() . $image ."'>";
+			$img .= "</a>";
+	 		$data = array_merge($this->profile()->get_about_detail(), 
+	 					array("get_menu" => $this->menu->get_menu("header", "article"),
+		 					"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "article"),
+							"get_article_comment" => $this->get_article_list(0, 5, NULL, 4),
+							"get_article_popular" => $this->get_article_list(0, 5, NULL, 3),
+							"get_article_recent" => $this->get_article_list(0, 5, NULL, 2),
+		 					"get_article_category" => $this->get_article_category_list(),
+		 					"get_archives_list" => $this->get_archives_list(),
+		 					"full_name" => $q->nama_lengkap,
+			 				"title" => $title,
+			 				"tag" => $this->global_common->get_list_tag($tag, 'article', 'btn'),
+			 				"meta_tag" => $this->global_common->get_list_tag($tag, 'article', 'metadata'),
+			 				"title_category" => $category,
+			 				"status" => $q->status,
+			 				"summary" => $q->summary,
+			 				"meta_description" => strip_tags($q->summary),
+			 				"image" => $img, 
+			 				"url" => $url_share,
+			 				"og_image" => base_url($image),
+			 				"created_date" => $q->created_date,
+			 				"get_comment" => $comment->get_comment("article", $id),
+			 				"n1" => $comment->random_set_captcha(0),
+			 				"op" => $comment->random_set_captcha(),
+			 				"n2" => $comment->random_set_captcha(0),
+			 				"prev_next" => $prev_next,
+			 				"article_id" => $id,
+							"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
+							"count_article_stat" => $this->article_model->count_article_stat($id)->count_article_stat
+		     		));
+			
+			$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));
+			
+			$data['author'] = $data['full_name'];
+			
+	 		$this->generate('article/read_article', $data);
+ 		}
 	}
 
 	function prev_next($current_id) {

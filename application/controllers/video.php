@@ -169,72 +169,75 @@ class Video extends CI_Controller {
  		return $this->global_common->archives($query, 'video');
 	}
 
-	function watch($year, $month, $day, $id, $slug = "") {
+	function watch($year=0, $month=0, $day=0, $id=0, $slug = "") {
 		$q = $this->video_model->get_by_id(1, $id);
 		$image = $this->video_model->get_image($id);
-		
-		$comment = new Comment();
-		$prev_next = $this->prev_next($id);
 
- 		$youtube_id = ""; $link = $q->url;
- 		if(strpos($link, "v=")) {
- 			$arr = explode("v=", $link);
- 			$youtube_id = $arr[1];
- 		}
-		
-		$title_category = $q->title_category;
-		$category = "<a href='".base_url('video/page/0/0/'.$title_category)."'>".$title_category."</a>";
-		$url_share = base_url("video/watch/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($q->title_video) . "");
-		$tag = !isset($q->tag) ? "" : $q->tag;
-		
- 		$data = array_merge(
-			$this->profile()->get_about_detail(),
- 			array(
-				"get_menu" => $this->menu->get_menu("header", "video"),
-	 			"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "video"),
-	 			"get_video_category" => $this->get_video_category_list(),
-	 			"get_archives_list" => $this->get_archives_list(),
-				"get_video_comment" => $this->get_video_list(0, 5, NULL, 3),
-				"get_video_popular" => $this->get_video_list(0, 5, NULL, 2),
-				"get_video_recent" => $this->get_video_list(0, 5, NULL, 1),
- 				"title_category" => $category,
-	            "title" => $q->title_video,
-	            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),
-	            "meta_tag" => $this->global_common->get_list_tag($tag, 'video', 'metadata'),
-	            "status" => $q->status,
-	            "description" => $q->description,
-	            "meta_description" => strip_tags($q->description),
-	            "producer" => $q->producer,
-	            "story_ide" => $q->story_ide,
-	            "screenwriter" => $q->screenwriter,
-	            "film_director" => $q->film_director,
-	            "cameramen" => $q->cameramen,
-	            "host" => $q->host,
-	            "editor" => $q->editor,
-	            "artist" => $q->artist,
-	            "url" => $url_share,
-	            "video_embed" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
-	            "duration" => $q->duration,
-				"full_name" => $q->full_name,
-	            "created_date" => $q->created_date,
-	            "modified_date" => $q->modified_date,
-	            "get_comment" => $comment->get_comment("video", $id),
- 				"n1" => $comment->random_set_captcha(0),
- 				"op" => $comment->random_set_captcha(),
- 				"n2" => $comment->random_set_captcha(0),
- 				"prev_next" => $prev_next,
- 				"video_id" => $id,
-				"count_video_comment" => $this->video_model->count_video_comment($id)->count_video_comment,
-				"count_video_stat" => $this->video_model->count_video_stat($id)->count_video_stat,
-				"og_image" => base_url($image->path)
-	        )
-		);
-		
-		$this->video_model->create_video_stat($this->global_common->stat('video_id', $id));
-		
-		$data['author'] = $data['full_name'];
-		
- 		$this->generate('video/watch', $data);
+		if($q == null) show_404();
+		else {
+			$comment = new Comment();
+			$prev_next = $this->prev_next($id);
+
+	 		$youtube_id = ""; $link = $q->url;
+	 		if(strpos($link, "v=")) {
+	 			$arr = explode("v=", $link);
+	 			$youtube_id = $arr[1];
+	 		}
+			
+			$title_category = $q->title_category;
+			$category = "<a href='".base_url('video/page/0/0/'.$title_category)."'>".$title_category."</a>";
+			$url_share = base_url("video/watch/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($q->title_video) . "");
+			$tag = !isset($q->tag) ? "" : $q->tag;
+			
+	 		$data = array_merge(
+				$this->profile()->get_about_detail(),
+	 			array(
+					"get_menu" => $this->menu->get_menu("header", "video"),
+		 			"get_breadcrumb" => $this->menu->get_menu("breadcrumb", "video"),
+		 			"get_video_category" => $this->get_video_category_list(),
+		 			"get_archives_list" => $this->get_archives_list(),
+					"get_video_comment" => $this->get_video_list(0, 5, NULL, 3),
+					"get_video_popular" => $this->get_video_list(0, 5, NULL, 2),
+					"get_video_recent" => $this->get_video_list(0, 5, NULL, 1),
+	 				"title_category" => $category,
+		            "title" => $q->title_video,
+		            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),
+		            "meta_tag" => $this->global_common->get_list_tag($tag, 'video', 'metadata'),
+		            "status" => $q->status,
+		            "description" => $q->description,
+		            "meta_description" => strip_tags($q->description),
+		            "producer" => $q->producer,
+		            "story_ide" => $q->story_ide,
+		            "screenwriter" => $q->screenwriter,
+		            "film_director" => $q->film_director,
+		            "cameramen" => $q->cameramen,
+		            "host" => $q->host,
+		            "editor" => $q->editor,
+		            "artist" => $q->artist,
+		            "url" => $url_share,
+		            "video_embed" => "<div class='embed-responsive embed-responsive-16by9' style='margin-bottom: 10px;'><iframe class=embed-responsive-item' src='//www.youtube.com/embed/".$youtube_id."?rel=0'></iframe></div>",
+		            "duration" => $q->duration,
+					"full_name" => $q->full_name,
+		            "created_date" => $q->created_date,
+		            "modified_date" => $q->modified_date,
+		            "get_comment" => $comment->get_comment("video", $id),
+	 				"n1" => $comment->random_set_captcha(0),
+	 				"op" => $comment->random_set_captcha(),
+	 				"n2" => $comment->random_set_captcha(0),
+	 				"prev_next" => $prev_next,
+	 				"video_id" => $id,
+					"count_video_comment" => $this->video_model->count_video_comment($id)->count_video_comment,
+					"count_video_stat" => $this->video_model->count_video_stat($id)->count_video_stat,
+					"og_image" => base_url($image->path)
+		        )
+			);
+			
+			$this->video_model->create_video_stat($this->global_common->stat('video_id', $id));
+			
+			$data['author'] = $data['full_name'];
+			
+	 		$this->generate('video/watch', $data);
+	 	}
 	}
 	
 	function prev_next($current_id) {
