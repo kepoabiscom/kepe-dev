@@ -26,7 +26,7 @@
 
     <link rel="icon" href="<?php echo base_url('favicon.png'); ?>">
     
-    <title>{site_name} &trade; - {title}</title>
+    <title>{title} | {site_name}</title>
 
     <!-- Bootstrap core CSS -->
     <link  rel="stylesheet" href="<?php echo base_url('assets/css/bootstrap.min.css'); ?>">
