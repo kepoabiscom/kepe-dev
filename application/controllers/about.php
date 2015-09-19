@@ -109,7 +109,7 @@ class About extends CI_Controller {
 			$tag = !isset($q->tag) ? "" : $q->tag;
 			$parameter =  !isset($q->parameter) ? "" : $q->parameter;
 			
-			$read_more = base_url($parameter);
+			$read_more = base_url("about/page/" . $parameter);
 			
 			$data[$i] = array(
 				"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",

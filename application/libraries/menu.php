@@ -4,7 +4,7 @@ class Menu {
 
     public function get_menu($q='header', $menu='') {
 
-    	$data = array('home', 'news', 'article', 'video', 'contact');
+    	$data = array('home', 'news', 'article', 'video', 'contact', 'about');
         $active = array_fill(0, count($data), '');
         $j = 0;
         foreach($data as $i) {

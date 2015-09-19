@@ -3,7 +3,7 @@
 		<ol class="breadcrumb">
 			{get_breadcrumb}
 			<li><a href="{home}">Home</a></li>
-			<li class="active">Video</li>
+			<li class="active">About</li>
 			{/get_breadcrumb}
 		</ol>
 	</div>
