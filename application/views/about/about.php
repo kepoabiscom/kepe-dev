@@ -12,12 +12,11 @@
 		<div class="col-md-3" style="margin-bottom: 20px;">
 			<div class="recent_post">
 				<div>
-					<div class="title" style="margin-bottom: 5px;">{sub_title}</div>
-					<p class="post-body">
-						On {created_date} 
-						<br/>By {full_name}
-					</p>
+					<div class="title" style="margin-bottom: 5px;">{sub_title}</div>	
 					<p>{summary}</p>
+					<p class="post-body">
+						By {full_name}
+					</p>
 					{read_more}
 				</div>
 			</div>                	 
