@@ -30,6 +30,7 @@ class Menu {
                        "article" => base_url('article'),
                        "video" => base_url('video'),
                        "contact" => base_url('contact'),
+                       "about" => base_url('about'),
                        "membershipform" => '#',
                        "team" => base_url('about/page/team'),
                        "bts" => base_url('about/page/behind-the-scene'),

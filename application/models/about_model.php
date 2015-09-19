@@ -64,7 +64,7 @@ class About_model extends CI_Model {
     	return 1;
     }
 	
-	function get_static_content($parameter = 'history') {
+	function get_static_content($parameter = NULL) {
         $this->db->select('
 			sc.static_content_id
 			,sc.user_id
@@ -81,13 +81,12 @@ class About_model extends CI_Model {
 		
         $this->db->from('static_content sc');
 		$this->db->join('user as usr', 'usr.user_id = sc.user_id', 'left');
-        $this->db->where("parameter = '".$parameter."'");
-        $this->db->limit(1);
+		if($parameter != NULL){ $this->db->where("parameter = '".$parameter."'");  $this->db->limit(1); }
 
         $query = $this->db->get();
 		
-        if($query->num_rows() == 1) {
-            return $query->row();
+        if($query->num_rows() >= 1) {
+            return ($parameter != NULL) ? $query->row() : $query ;
         } return false;
     }
 }

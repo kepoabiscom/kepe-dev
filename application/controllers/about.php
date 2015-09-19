@@ -24,16 +24,18 @@ class About extends CI_Controller {
 	{
 		$data = array_merge(
 			$this->get_about_detail(), 
-			$this->global_header(),
-			$this->read($this->uri->segment(3))
+			$this->global_header()
 		);
 		
+		$data['title'] = 'About';
+		$data['get_content_static'] = $this->get_static_content_multi(NULL, $this->about_model->get_static_content());
 		$data['author'] = 'Administrator';
-		$data['url'] = base_url('about/page/' .  $this->uri->segment(3));
-		$data['meta_tag'] = strip_tags($data['meta_tag']);
+		$data['url'] = base_url('about');
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
-		$this->generate('about/static_content', $data);
+		$this->generate('about/about', $data);
 	}
 	
 	public function global_header(){
@@ -49,22 +51,43 @@ class About extends CI_Controller {
 	 	if(!$this->uri->segment(3)) {
 	 		redirect("about/page/history");
 	 	} else {
-	 		$this->index();	
+	 		$data = array_merge(
+				$this->get_about_detail(), 
+				$this->global_header(),
+				$this->read($this->uri->segment(3))
+			);
+			
+			$data['author'] = 'Administrator';
+			$data['url'] = base_url('about/page/' .  $this->uri->segment(3));
+			$data['meta_tag'] = strip_tags($data['meta_tag']);
+			$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
+			
+			$this->generate('about/static_content', $data);
 	 	}
 	 }
 	
 	public function read($parameter) {
 		$q = $this->about_model->get_static_content($parameter);
 		
+		$data = $this->get_static_content_single($parameter, $q);
+		
+		$data['meta_tag'] = "Kepo ".$data['title'].", Kepo Abis, Kepo, Abis, " . $data['keyword'];
+		$data['meta_description'] = strip_tags($data['body']);
+		
+ 		return $data;
+	}
+	
+	public function get_static_content_single($parameter, $q){
 		$title = !isset($q->title) ? "" : $q->title;
 		$tag = !isset($q->tag) ? "" : $q->tag;
 		
  		$data = array(
-			"membership_list" => $this->get_list($parameter, 0, 100),
+			"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
 			"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
 			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
 	 		"title" => $title, 
+			"keyword" => $tag,
 			"tag" => $this->global_common->get_list_tag($tag),
 	 		"parameter" => !isset($q->parameter) ? "" : $q->parameter,
 	 		"summary" => !isset($q->summary) ? "" : $q->summary,
@@ -74,11 +97,42 @@ class About extends CI_Controller {
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
 	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
 	     ); 
+		 
+		 return $data;
+	}
+	
+	public function get_static_content_multi($parameter, $query){
+		$i = 0;
 		
-		$data['meta_tag'] = "Kepo ".$data['title'].", Kepo Abis, Kepo, Abis, " . $tag;
-		$data['meta_description'] = strip_tags($data['body']);
+		foreach ($query->result() as $q){
+			$title = !isset($q->title) ? "" : $q->title;
+			$tag = !isset($q->tag) ? "" : $q->tag;
+			$parameter =  !isset($q->parameter) ? "" : $q->parameter;
+			
+			$read_more = base_url($parameter);
+			
+			$data[$i] = array(
+				"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
+				"static_content_id" => !isset($q->static_content_id) ? "" : $q->static_content_id,
+				"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+				"sub_title" => $title, 
+				"keyword" => $tag,
+				"tag" => $this->global_common->get_list_tag($tag),
+				"parameter" => $parameter,
+				"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
+				"summary" => !isset($q->summary) ? "" : $q->summary,
+				"body" => !isset($q->body) ? "" : $q->body,
+				"status" => !isset($q->status) ? "" : $q->status,
+				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+				"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
+				"full_name" => !isset($q->full_name) ? "" : $q->full_name
+			 ); 
+			 
+			 $i++;
+		}
 		
- 		return $data;
+		 return $data;
 	}
 	
 	public function get_about_detail() {

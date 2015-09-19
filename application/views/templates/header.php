@@ -113,7 +113,7 @@
 					</li>
 					{/get_menu}
 					<li class="dropdown">
-						<a href="<?php echo base_url(); ?>about" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+						<a href="<?php echo base_url('about'); ?>"> <!-- class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" -->
 							ABOUT US &nbsp;<span class="caret"></span>
 						</a>
 						 <ul class="dropdown-menu" role="menu">
