@@ -35,7 +35,7 @@ class Home extends CI_Controller {
 		
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('home');
-		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
@@ -265,7 +265,7 @@ class Home extends CI_Controller {
 		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
 	}
 
-	function get_preview_summary($text, $see_more='', $f='video') {
+	function get_preview_summary($text, $see_more, $f='video') {
 		$words = explode(" ", $text);
 		$N = 50;
 		if(count($words) > $N) {
