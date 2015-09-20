@@ -48,7 +48,7 @@ class News extends CI_Controller {
 		
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('news');
-		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 
@@ -200,7 +200,7 @@ class News extends CI_Controller {
 		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 			 				"title" => $title,
 			 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
-			 				"meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'news', 'metadata'),
+			 				"meta_tag" => "kepoabis, kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'news', 'metadata'),
 			 				"title_category" => $category,
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,

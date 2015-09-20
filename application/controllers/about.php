@@ -10,6 +10,7 @@ class About extends CI_Controller {
 		$this->load->model("about_model");
 		$this->load->model("user_model");
 		$this->load->model("image_model");
+		$this->load->model("divisi_model");
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->library("global_common");
@@ -31,7 +32,7 @@ class About extends CI_Controller {
 		$data['get_content_static'] = $this->get_static_content_multi(NULL, $this->about_model->get_static_content());
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('about');
-		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
@@ -48,31 +49,116 @@ class About extends CI_Controller {
 	}
 
 	function page() {
-	 	if(!$this->uri->segment(3)) {
+	 	if(! $this->uri->segment(3)) {
 	 		redirect("about/page/history");
 	 	} else {
-	 		$data = array_merge(
-				$this->get_about_detail(), 
-				$this->global_header(),
-				$this->read($this->uri->segment(3))
-			);
-			
-			$data['author'] = 'Administrator';
-			$data['url'] = base_url('about/page/' .  $this->uri->segment(3));
-			$data['meta_tag'] = strip_tags($data['meta_tag']);
-			$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
+			if(! $this->uri->segment(4)) {
+				$data = array_merge(
+					$this->get_about_detail(), 
+					$this->global_header(),
+					$this->read($this->uri->segment(3))
+				);
+				
+				$data['author'] = 'Administrator';
+				$data['url'] = base_url('about/page/' .  $this->uri->segment(3));
+				$data['meta_tag'] = strip_tags($data['meta_tag']);
+				$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
+			}
+			else{
+				$data = array_merge(
+					$this->get_about_detail(), 
+					$this->global_header(),
+					$this->read_divisi($this->uri->segment(3), $this->uri->segment(4))
+				);
+				
+				$data['author'] = $data['full_name'];
+				$data['url'] = base_url('about/page/organization/' .  $this->uri->segment(4));
+				$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, " . $data['keyword'];
+				$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
+				$data['get_divisi'] = $this->get_divisi($this->uri->segment(3), $this->uri->segment(4));
+			}
 			
 			$this->generate('about/static_content', $data);
 	 	}
 	 }
+
+	public function read_divisi($parameter, $divisi_id){
+		$q = $this->divisi_model->get_by_id($divisi_id);
+		
+		$title = !isset($q->title) ? "" : $q->title;
+		$tag = !isset($q->tag) ? "" : $q->tag;
+		
+ 		$data = array(
+			"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
+			"static_content_id" => !isset($q->divisi_id) ? "" : $q->divisi_id,
+			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+	 		"title" => $title, 
+			"keyword" => $tag,
+			"tag" => $this->global_common->get_list_tag($tag),
+	 		"parameter" => "",
+	 		"summary" => !isset($q->summary) ? "" : $q->summary,
+	 		"body" => !isset($q->body) ? "" : $q->body,
+	 		"status" => !isset($q->status) ? "" : $q->status,
+	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
+	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
+	     ); 
+		 
+		 return $data;
+	}
+	
+	public function get_divisi($parameter, $video_id){
+		$query = $this->divisi_model->get_divisi_list();
+		
+		if($parameter == "organization" && empty($video_id)){
+			$i = 0;		
+			
+			foreach ($query->result() as $q){
+				$divisi_id = !isset($q->divisi_id) ? "" : $q->divisi_id;
+				$title = !isset($q->title) ? "" : $q->title;
+				$tag = !isset($q->tag) ? "" : $q->tag;					
+				$read_more = base_url("about/page/organization/" . $divisi_id);
+				
+				$data[$i] = array(
+					"divisi_id" => $divisi_id,
+					"sub_title" => $title,
+					"sub_tag" => $tag,
+					"sub_summary" => !isset($q->summary) ? "" : $q->summary,
+					"sub_body" => !isset($q->body) ? "" : $q->body,
+					"sub_read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
+				 ); 
+				 
+				 $i++;
+			}
+		}else{
+			$data[] = array(
+					"divisi_id" => "",
+					"sub_title" => "",
+					"sub_tag" => "",
+					"sub_summary" => "",
+					"sub_body" => "",
+					"sub_read_more" => ""
+				 ); 
+		}
+
+		return $data;
+	}
+	
+	function slug($str='', $maxlen=0) {
+		//$s = strtolower(preg_replace('/[\!\@\+\=\}\{\-\?\-\/\&\%\#\,\.\)\(\$]/', '', $str));
+		//return strtolower(preg_replace('/[\s]/', '-', $s));
+		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
+	}
 	
 	public function read($parameter) {
 		$q = $this->about_model->get_static_content($parameter);
 		
 		$data = $this->get_static_content_single($parameter, $q);
 		
-		$data['meta_tag'] = "Kepo ".$data['title'].", Kepo Abis, Kepo, Abis, " . $data['keyword'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, " . $data['keyword'];
 		$data['meta_description'] = strip_tags($data['body']);
+		$data['get_divisi'] = $this->get_divisi($parameter, $this->uri->segment(4));
 		
  		return $data;
 	}
@@ -274,7 +360,7 @@ class About extends CI_Controller {
 				"box" => "",
 				"brithday" => ""
 			);
-			
+	
 			return $data;
 		}
 		else{

@@ -29,7 +29,8 @@
 		<ol class="breadcrumb">
 			{get_breadcrumb}
 			<li><a href="{home}">Home</a></li>
-			<li class="active">About Us</li>
+			<li><a href="{about}">About Us</a></li>
+			<?php if($this->uri->segment(3) == "organization" && ! empty($this->uri->segment(4))) { ?><li><a href="<?php echo base_url('about/page/organization'); ?>">Organization</a></li><?php } ?>
 			<li class="active">{title}</li>
 			{/get_breadcrumb}
 		</ol>
@@ -37,9 +38,27 @@
 	<div class="blog-post">
 		<h1 class="page-header">{title}</h1>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
-		<?php if($this->uri->segment(3) == "history" || $this->uri->segment(3) == "organization") { ?><p>{content_image}</p><?php } ?>
+		<?php if($this->uri->segment(3) == "history") { ?><p>{content_image}</p><?php } ?>
 		<p>{body}</p>
 		<p>{tag}</p>
+	</div>
+	<div class="row">
+		{get_divisi}
+		<div class="col-md-4" style="margin-bottom: 20px;">
+			<div class="recent_post">
+				<div>
+					<div class="title" style="margin-bottom: 5px;">{sub_title}</div>	
+					<p>{sub_summary}</p>
+					<!--
+					<p class="post-body">
+						By {full_name}
+					</p>
+					-->
+					{sub_read_more}
+				</div>
+			</div>                	 
+		</div>
+		{/get_divisi}
 	</div>
 	<div class="blog-post">
 		<div class="row">
