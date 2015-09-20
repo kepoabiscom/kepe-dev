@@ -42,7 +42,7 @@
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		<?php if($this->uri->segment(3) == "history") { ?><p>{content_image}</p><?php } ?>
 		<p>{body}</p>
-		<p>{tag}</p>
+		<?php if(! $this->uri->segment(3) == "organization") { ?><p>{tag}</p><?php } ?>
 	</div>
 	<div class="row">
 		{get_divisi}

@@ -118,7 +118,7 @@ class About extends CI_Controller {
 				$divisi_id = !isset($q->divisi_id) ? "" : $q->divisi_id;
 				$title = !isset($q->title) ? "" : $q->title;
 				$tag = !isset($q->tag) ? "" : $q->tag;					
-				$read_more = base_url("about/page/organization/" . $divisi_id);
+				$read_more = base_url("about/page/organization/" . $divisi_id . "/" . $this->slug($title));
 				
 				$data[$i] = array(
 					"divisi_id" => $divisi_id,
