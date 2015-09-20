@@ -4,11 +4,14 @@
     <head>
 
         <meta charset="utf-8">
-        <title>KepoAbis.com - Video Competition</title>
+        <title>Video Competition | KepoAbis.com</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="keywords" content="Video Competition, Competition, Indosat, Ulang Tahun, SMA/MA Jakarta Selatan, Kepo Abis"> 
+        <meta name="keywords" content="Video Competition, Competition, Kompetisi, Indosat, Ulang Tahun, SMA/MA Jakarta Selatan, Lomba, Video, Kepo Abis, Kepo, Abis"> 
         <meta name="description" content="Video Competition KepoAbis.com bersama Indosat, dalam rangka Ulang Tahun Indosat, Antar SMA/MA Se-Jakarta Selatan">
         <meta name="author" content="Administrator">
+		<meta property="og:title" content="Video Competition"/>
+		<meta property="og:url" content="http://kepoabis.com/video-competition"/>
+		<meta property="og:image" content="<?php echo base_url('assets/img/competition/img/backgrounds/1.jpg'); ?>"/>
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
