@@ -265,7 +265,7 @@ class Home extends CI_Controller {
 		return trim(preg_replace('/[^a-z0-9]+/', '-', strtolower($str)), '-');
 	}
 
-	function get_preview_summary($text, $see_more, $f='video') {
+	function get_preview_summary($text, $see_more='', $f='video') {
 		$words = explode(" ", $text);
 		$N = 50;
 		if(count($words) > $N) {

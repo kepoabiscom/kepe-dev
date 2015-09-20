@@ -111,7 +111,7 @@ class Article extends CI_Controller {
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
 					"tag" => $this->global_common->get_list_tag($tag, 'article'),
-					"summary" => !isset($q->summary) ? "" : $q->summary,
+					"summary" => !isset($q->summary) ? "" : $obj->get_preview_summary($q->summary),
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
