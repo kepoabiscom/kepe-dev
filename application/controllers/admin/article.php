@@ -96,13 +96,14 @@ class Article extends CI_Controller {
 				}
 				$d1 = explode(" ", $row->created_date);
 		        $d2 = explode("-", $d1[0]);
+		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("article/read/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_article))."'>View</a>" : "";
 				$btn = implode("&nbsp;", $button);
 				
 	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_article . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
-	        	$data_array .= "<td><a target='_blank' href='".base_url("article/read/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_article))."'>View</a></td>";
+	        	$data_array .= "<td>".$url."</td>";
 	        	$data_array .= "<td>".$btn."</td></tr>";
 	        	$button[1] = ""; $button[2] = ""; $button[3] = ""; 
 	        	$i++;

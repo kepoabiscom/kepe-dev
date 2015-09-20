@@ -137,13 +137,14 @@ class Video extends CI_Controller {
 		        ));
 		        $d1 = explode(" ", $row->created_date);
 		        $d2 = explode("-", $d1[0]);
-
+		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_video))."'>View</a>" : "";
+		        
 		        $data_array .= "<tr>";
 	        	$data_array .= "<td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_video . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
-	        	$data_array .= "<td><a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_video))."'>View</a></td>";
+	        	$data_array .= "<td>".$url."</td>";
 	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td>";
 	        	$data_array .= "</tr>";
 	        	$i++;
