@@ -46,7 +46,7 @@ class Video extends CI_Controller {
 		
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('video');
-		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
@@ -202,7 +202,7 @@ class Video extends CI_Controller {
 	 				"title_category" => $category,
 		            "title" => $q->title_video,
 		            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),
-		            "meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'video', 'metadata'),
+		            "meta_tag" => "kepoabis, kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'video', 'metadata'),
 		            "status" => $q->status,
 		            "description" => $q->description,
 		            "meta_description" => strip_tags($q->description),
