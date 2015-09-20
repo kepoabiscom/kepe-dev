@@ -30,7 +30,9 @@
 			{get_breadcrumb}
 			<li><a href="{home}">Home</a></li>
 			<li><a href="{about}">About Us</a></li>
-			<!--<?php if($this->uri->segment(3) == "organization" && ! empty($this->uri->segment(4))) { ?><li><a href="<?php echo base_url('about/page/organization'); ?>">Organization</a></li><?php } ?>-->
+			<?php if($this->uri->segment(3) == "organization" && $this->uri->segment(4)) { ?>
+				<li><a href="<?php echo base_url('about/page/organization'); ?>">Organization</a></li>
+			<?php } ?>
 			<li class="active">{title}</li>
 			{/get_breadcrumb}
 		</ol>
