@@ -195,7 +195,7 @@ class Article extends CI_Controller {
 		 					"full_name" => $q->nama_lengkap,
 			 				"title" => $title,
 			 				"tag" => $this->global_common->get_list_tag($tag, 'article', 'btn'),
-			 				"meta_tag" => $this->global_common->get_list_tag($tag, 'article', 'metadata'),
+			 				"meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'article', 'metadata'),
 			 				"title_category" => $category,
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
@@ -213,7 +213,7 @@ class Article extends CI_Controller {
 							"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
 							"count_article_stat" => $this->article_model->count_article_stat($id)->count_article_stat
 		     		));
-			
+
 			$this->article_model->create_article_stat($this->global_common->stat('article_id', $id));
 			
 			$data['author'] = $data['full_name'];

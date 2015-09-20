@@ -202,7 +202,7 @@ class Video extends CI_Controller {
 	 				"title_category" => $category,
 		            "title" => $q->title_video,
 		            "tag" => $this->global_common->get_list_tag($tag, 'video', 'btn'),
-		            "meta_tag" => $this->global_common->get_list_tag($tag, 'video', 'metadata'),
+		            "meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'video', 'metadata'),
 		            "status" => $q->status,
 		            "description" => $q->description,
 		            "meta_description" => strip_tags($q->description),

@@ -200,7 +200,7 @@ class News extends CI_Controller {
 		 					"full_name" => "<a href='#'>".$q->nama_lengkap."</a>",
 			 				"title" => $title,
 			 				"tag" => $this->global_common->get_list_tag($tag, 'news', 'btn'),
-			 				"meta_tag" => $this->global_common->get_list_tag($tag, 'news', 'metadata'),
+			 				"meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'news', 'metadata'),
 			 				"title_category" => $category,
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
