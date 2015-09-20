@@ -102,7 +102,7 @@
                                         <th>ID</th>
                                         <th>Title</th>
                                         <th>Status</th>
-                                        <th>Created Time</th>
+                                        <th>URL</th>
                                         <th>More</th>
                                     </tr>
                                 </thead>

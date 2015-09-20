@@ -61,6 +61,8 @@ class Video_model extends CI_Model {
             $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, 
                             v.status, v.created_date, v.modified_date", false);
             $this->db->from("video as v");
+            if($keyword != "") 
+            	$this->db->like("v.title", $keyword);
             $this->db->limit($limit, $start);
             $this->db->order_by("video_id", "desc");
             $this->db->join('video_category as vc', 'vc.video_category_id = v.video_category_id');

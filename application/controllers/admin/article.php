@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+require_once APPPATH . 'controllers/home.php';
 
 class Article extends CI_Controller {
 
@@ -54,6 +55,7 @@ class Article extends CI_Controller {
 			$session_data = $this->session->userdata('logged_in');
 			
 	 		foreach($result as $row) {
+	 			$home = new Home();
 				$number =  $start + $i;
 		 		$id = $row->article_id;
 
@@ -92,14 +94,15 @@ class Article extends CI_Controller {
 						'data-toggle' => 'modal'
 					));
 				}
-				
+				$d1 = explode(" ", $row->created_date);
+		        $d2 = explode("-", $d1[0]);
 				$btn = implode("&nbsp;", $button);
 				
 	        	$data_array .= "<tr><td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_article . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
-	        	$data_array .= "<td>" . $row->created_date . "</td>";
+	        	$data_array .= "<td><a target='_blank' href='".base_url("article/read/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_article))."'>View</a></td>";
 	        	$data_array .= "<td>".$btn."</td></tr>";
 	        	$button[1] = ""; $button[2] = ""; $button[3] = ""; 
 	        	$i++;

@@ -76,6 +76,14 @@
                  <div class="col-lg-12">
                         <h2>Video List - <strong>KepoAbis.com</strong></h2>
                         {success}
+                        <!--
+                        <div class="row">
+                            <form action="<?php echo base_url(); ?>admin/video/filter" method="get">
+                            <div class="col-sm-3">
+                                <input type="text" class="form-control" value="" name="title" placeholder="Title">
+                            </div><button type="submit" name="submit" value="s" id="filter" class="btn btn-primary">Filter</button>
+                            </form>
+                        </div><br>-->
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
@@ -84,7 +92,7 @@
                                         <th>Category</th>
                                         <th>Video Title</th>
                                         <th>Status</th>
-                                        <th>Created Time</th>
+                                        <th>URL</th>
                                         <th>More</th>
                                     </tr>
                                 </thead>

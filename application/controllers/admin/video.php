@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+require_once APPPATH . 'controllers/admin/comment_notif.php';
+require_once APPPATH . 'controllers/home.php'; 
 
 class Video extends CI_Controller {
 
@@ -101,12 +102,13 @@ class Video extends CI_Controller {
 		return ($result != false) ? $result->image_id : 0;
 	}
 
-	function get_list_video($start, $limit) {
-	 	$result = $this->video_model->get_video_list(0, $start, $limit);
+	function get_list_video($start, $limit, $keyword='') {
+	 	$result = $this->video_model->get_video_list(0, $start, $limit, $keyword);
 	 	$data_array = ""; $i = 1;
 		$number = 0;
 		
 	 	if($result) {
+	 		$home = new Home();
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 		 		$id = $row->video_id;
@@ -133,16 +135,20 @@ class Video extends CI_Controller {
 		            'url' => '#modal_confirm',
                     'data-toggle' => 'modal'
 		        ));
+		        $d1 = explode(" ", $row->created_date);
+		        $d2 = explode("-", $d1[0]);
 
-	        	$data_array .= "<tr><td>" . $number . "</td>";
+		        $data_array .= "<tr>";
+	        	$data_array .= "<td>" . $number . "</td>";
 	        	$data_array .= "<td>" . $row->title_category . "</td>";
 	        	$data_array .= "<td>" . $row->title_video . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
-	        	$data_array .= "<td>" . $row->created_date . "</td>";
-	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td></tr>";
+	        	$data_array .= "<td><a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_video))."'>View</a></td>";
+	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td>";
+	        	$data_array .= "</tr>";
 	        	$i++;
 	        }
-	        return $data_array . "</tr>";	
+	        return $data_array;	
 	 	} else return "";
 	 }
 
@@ -304,6 +310,22 @@ class Video extends CI_Controller {
 	 	} else {
 	 		direct('admin/login', 'refresh');
 	 	}
+	}
+
+	function filter() {
+		if($this->session->userdata('logged_in')) {
+		    $keyword = $this->input->get('title', true);
+			$config = $this->page_config(array('filter', $keyword));
+
+		    $data = array(
+		   			'list_news' => $this->get_list_video($config['uri'], $config['per_page'], $keyword),
+		   			'link' => $this->pagination->create_links(),
+		   			'success' => $this->notification()
+		   		);
+		    $this->parser->parse('admin/video/video_management', $data);
+		} else {
+			redirect('admin/login', 'refresh');
+		}
 	}
 
 	function page_config() {
