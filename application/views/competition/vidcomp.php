@@ -6,8 +6,9 @@
         <meta charset="utf-8">
         <title>KepoAbis.com - Video Competition</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="">
-        <meta name="author" content="">
+        <meta name="keywords" content="Video Competition, Competition, Indosat, Ulang Tahun, SMA/MA Jakarta Selatan, Kepo Abis"> 
+        <meta name="description" content="Video Competition KepoAbis.com bersama Indosat, dalam rangka Ulang Tahun Indosat, Antar SMA/MA Se-Jakarta Selatan">
+        <meta name="author" content="Administrator">
 
         <!-- CSS -->
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lobster">
@@ -82,10 +83,10 @@
             <div class="row">
                 <div class="span12 social">
                     <h5>FOLLOW ME ON</h5>
-                    <a href="facebook.com/kepoabiscom" target='_blank' class="facebook" rel="tooltip" data-placement="top" data-original-title="Facebook">
+                    <a target='_blank' class="facebook" href="{facebook}" rel="tooltip" data-placement="top" data-original-title="Facebook">
                         <img class="img-responsive" src="<?php echo base_url('assets/img/competition/img/social-icons/facebook.png'); ?>">
                     </a>
-                    <a href="twitter.com/kepoabiscom" target='_blank' class="twitter" rel="tooltip" data-placement="top" data-original-title="Twitter">
+                    <a target='_blank' class="twitter" href="{twitter}" rel="tooltip" data-placement="top" data-original-title="Twitter">
                         <img class="img-responsive" src="<?php echo base_url('assets/img/competition/img/social-icons/twitter.png'); ?>">
                     </a>
                 </div>
@@ -98,7 +99,17 @@
         <script src="<?php echo base_url(); ?>assets/js/jquery.backstretch.min.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/jquery.countdown.js"></script>
         <script src="<?php echo base_url(); ?>assets/js/scripts.js"></script>
+        <script>
+            <?php if(ENVIRONMENT == 'production') { ?>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+            ga('create', 'UA-48862041-1', 'auto');
+            ga('send', 'pageview');
+            <?php } ?>
+        </script>
     </body>
 
 </html>

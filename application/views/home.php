@@ -94,7 +94,18 @@
 				  </a>
 				</div>
 			</div>
-			
+			<div class="sidebar-module kp-news">
+				<h2 class="line-title"><strong class="bold-text" style="color: black;">Upcoming Events</strong></h2>
+				<ol class="list-unstyled">
+					<hr>
+					{get_upcoming_events}
+					<li>
+						<a data-toggle='tooltip' data-placement='top' title='{title}' href="<?php echo base_url(); ?>{url}" target="_blank">{title}</a>
+						<hr>
+					</li>
+					{/get_upcoming_events}
+				</ol>
+			</div>
 			<div class="sidebar-module kp-news">
 				<h2 class="line-title"><strong class="bold-text" style="color: black;">Recent News</strong></h2>
 				<ol class="list-unstyled">

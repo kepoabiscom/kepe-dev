@@ -27,6 +27,7 @@ class Home extends CI_Controller {
 			'get_article' => $this->get_article(),
 			'get_news' => $this->get_news(),
 			'get_all' => $this->get_all(),
+			'get_upcoming_events' => $this->get_upcoming_events(),
 			'title' => 'Home'
 		);
 		
@@ -237,6 +238,19 @@ class Home extends CI_Controller {
 		}
 
  		return $data;
+	}
+
+	function get_upcoming_events() {
+		$events = array(
+					array("video-competition", "Video Competition - KepoAbis.com")
+				  );
+		foreach($events as $event) {
+			$data[] = array(
+						"url" => $event[0],
+						"title" => $event[1]
+					);
+		}
+		return $data;
 	}
 	
 	public function profile() {
