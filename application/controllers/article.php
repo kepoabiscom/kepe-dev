@@ -48,7 +48,7 @@ class Article extends CI_Controller {
 		
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('article');
-		$data['meta_tag'] = "Kepo ".$data['title'].", KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
@@ -111,7 +111,7 @@ class Article extends CI_Controller {
 					"title" => "<a href='" . $read_more . "'>".$title."</a>",
 					"read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
 					"tag" => $this->global_common->get_list_tag($tag, 'article'),
-					"summary" => !isset($q->summary) ? "" : $q->summary,
+					"summary" => !isset($q->summary) ? "" : $obj->get_preview_summary($q->summary),
 					"full_name" => !isset($q->nama_lengkap) ? "" : $q->nama_lengkap,
 					"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 					"image" => $img,
@@ -195,7 +195,7 @@ class Article extends CI_Controller {
 		 					"full_name" => $q->nama_lengkap,
 			 				"title" => $title,
 			 				"tag" => $this->global_common->get_list_tag($tag, 'article', 'btn'),
-			 				"meta_tag" => "kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'article', 'metadata'),
+			 				"meta_tag" => "kepoabis, kepo Abis, kepo, abis, " . $this->global_common->get_list_tag($tag, 'article', 'metadata'),
 			 				"title_category" => $category,
 			 				"status" => $q->status,
 			 				"summary" => $q->summary,
