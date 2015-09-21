@@ -3,7 +3,7 @@
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
                         'video', 'category', 'about', 'gallery', 'category_article', 
-                        'category_video', 'category_news', 'comment_notif','static_content');
+                        'category_video', 'category_news', 'comment_notif','static_content', 'divisi');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -31,6 +31,11 @@
                 <li class="<?php echo $active[4]; ?>">
                     <a href="<?php echo base_url(); ?>admin/article">Article</a>
                 </li>
+				<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+				<li class="<?php echo $active[15]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/divisi">Divisi</a>
+                </li>
+				<?php } ?>
                 <li class="<?php echo $active[5]; ?>">
                     <a href="<?php echo base_url(); ?>admin/news">News</a>
                 </li>

@@ -9,7 +9,7 @@ class Static_content_model extends CI_Model {
     function get_list_static_content() {
 		$query = $this->db->select("*")
     		->from("static_content")
-			->where("status", "published")
+			/* ->where("status", "published") */
     		->get();
 
     	if ($query->num_rows() > 0) {
