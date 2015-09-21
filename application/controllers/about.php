@@ -32,7 +32,7 @@ class About extends CI_Controller {
 		$data['get_content_static'] = $this->get_static_content_multi(NULL, $this->about_model->get_static_content());
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('about');
-		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		

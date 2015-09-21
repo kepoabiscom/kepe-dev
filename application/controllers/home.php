@@ -35,7 +35,7 @@ class Home extends CI_Controller {
 		
 		$data['author'] = 'Administrator';
 		$data['url'] = base_url('home');
-		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, KepoAbis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
+		$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, ".$data['site_name'].", ".$data['tagline'];
 		$data['meta_description'] = strip_tags($data['site_description']);
 		$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 		
