@@ -41,6 +41,7 @@
 		<h1 class="page-header">{title}</h1>
 		<p class="blog-post-meta">{created_date} by <a href="#">{full_name}</a></p>
 		<?php if($this->uri->segment(3) == "history") { ?><p>{content_image}</p><?php } ?>
+		<p>{image}</p>
 		<p>{body}</p>
 		<?php if($this->uri->segment(3) != "organization" || $this->uri->segment(4)) { ?><p>{tag}</p><?php } ?>
 	</div>
@@ -50,6 +51,7 @@
 			<div class="recent_post">
 				<div>
 					<div class="title" style="margin-bottom: 5px;">{sub_title}</div>	
+					<p>{sub_image}</p>
 					<p>{sub_summary}</p>
 					<!--
 					<p class="post-body">

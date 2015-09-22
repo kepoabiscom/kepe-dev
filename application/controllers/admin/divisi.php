@@ -96,10 +96,11 @@ class Divisi extends CI_Controller {
 	 	$notif = ""; $s = "";
 	 	if($this->session->userdata("t")) {
 			$t = $this->session->userdata("t");
+			
 			if($t['success'] && $t['f'] == "delete") {
-				$notif = $t['title'] . " has been deleted successfully.";
+				$notif = $t['title_divisi'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
-				$notif = $t['title'] . " has been updated successfully.";
+				$notif = $t['title_divisi'] . " has been updated successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

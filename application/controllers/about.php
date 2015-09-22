@@ -87,12 +87,15 @@ class About extends CI_Controller {
 		
 		$title = !isset($q->title) ? "" : $q->title;
 		$tag = !isset($q->tag) ? "" : $q->tag;
+		$image_id =  !isset($q->image_id) ? "" : $q->image_id;
+		
+		$image = $this->image_model->get_by_id($image_id) ? $this->image_model->get_by_id($image_id) : "";
 		
  		$data = array(
 			"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
 			"static_content_id" => !isset($q->divisi_id) ? "" : $q->divisi_id,
 			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
-			"image_id" => !isset($q->image_id) ? "" : $q->image_id,
+			"image_id" => $image_id,
 	 		"title" => $title, 
 			"keyword" => $tag,
 			"tag" => $this->global_common->get_list_tag($tag),
@@ -102,7 +105,8 @@ class About extends CI_Controller {
 	 		"status" => !isset($q->status) ? "" : $q->status,
 	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
-	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
+	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name,
+			"image" => "<p><img src='" . base_url($image->path) . "'</p>"
 	     ); 
 		 
 		 return $data;
@@ -118,6 +122,10 @@ class About extends CI_Controller {
 				$divisi_id = !isset($q->divisi_id) ? "" : $q->divisi_id;
 				$title = !isset($q->title) ? "" : $q->title;
 				$tag = !isset($q->tag) ? "" : $q->tag;					
+				$image_id =  !isset($q->image_id) ? "" : $q->image_id;
+		
+				$image = $this->image_model->get_by_id($image_id) ? $this->image_model->get_by_id($image_id) : "";
+				
 				$read_more = base_url("about/page/organization/" . $divisi_id . "/" . $this->slug($title));
 				
 				$data[$i] = array(
@@ -127,6 +135,7 @@ class About extends CI_Controller {
 					"sub_summary" => !isset($q->summary) ? "" : $q->summary,
 					"sub_body" => !isset($q->body) ? "" : $q->body,
 					"sub_read_more" => "<a class='btn btn-primary' href='" . $read_more . "'>Read More</a>",
+					"sub_image" => "<p><img width=150px src='" . base_url($image->path) . "'</p>"
 				 ); 
 				 
 				 $i++;
@@ -138,7 +147,8 @@ class About extends CI_Controller {
 					"sub_tag" => "",
 					"sub_summary" => "",
 					"sub_body" => "",
-					"sub_read_more" => ""
+					"sub_read_more" => "",
+					"sub_image" => ""
 				 ); 
 		}
 
@@ -181,7 +191,8 @@ class About extends CI_Controller {
 	 		"status" => !isset($q->status) ? "" : $q->status,
 	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
-	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name
+	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name,
+			"image" => ""
 	     ); 
 		 
 		 return $data;
@@ -212,7 +223,8 @@ class About extends CI_Controller {
 				"status" => !isset($q->status) ? "" : $q->status,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 				"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
-				"full_name" => !isset($q->full_name) ? "" : $q->full_name
+				"full_name" => !isset($q->full_name) ? "" : $q->full_name,
+				"image" => ""
 			 ); 
 			 
 			 $i++;
