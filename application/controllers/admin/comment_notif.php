@@ -33,6 +33,7 @@ class Comment_notif extends CI_Controller {
 			   	$this->load->view("admin/comment/comment_list", $data);
 		     
 		     } else {
+		     	$this->output->set_status_header('401');
 		     	print_r("<h1>Authorization required.</h1>");
 		     }
 	   	} else {

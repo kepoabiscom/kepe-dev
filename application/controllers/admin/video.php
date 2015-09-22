@@ -43,6 +43,7 @@ class Video extends CI_Controller {
 			     		);
 			     $this->parser->parse('admin/video/video_management', $data);
 			} else {
+				$this->output->set_status_header('401');
 				print_r("<h1>Authorization required.</h1>");
 			}
 	   	} else {

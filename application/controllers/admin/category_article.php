@@ -33,6 +33,7 @@ class Category_article extends CI_Controller {
 				 
 				 $this->parser->parse('admin/category/article/category_article_management', $data);
 			 } else {
+			 	$this->output->set_status_header('401');
 		     	print_r("<h1>Authorization required.</h1>");
 		     }
 	   	} else {

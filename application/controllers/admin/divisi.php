@@ -34,6 +34,7 @@ class Divisi extends CI_Controller {
 	
 			     $this->parser->parse('admin/content/divisi/divisi_management', $data);
 		     } else {
+		     	$this->output->set_status_header('401');
 		     	print_r("<h1>Authorization required.</h1>");
 		     }
 	   	} else {
@@ -88,8 +89,33 @@ class Divisi extends CI_Controller {
 	}
 	
 	function get_status($t=1, $s='') {
+		$session_data = $this->session->userdata('logged_in');
 		$status = $this->divisi_model->get_enum_status();
-		print_r($status);		
+		$enum = ""; $f = ""; 
+		foreach($status as $r) {
+			 $enum = $r->COLUMN_TYPE;
+		}
+		preg_match_all("/enum\(\'(.*)\'\)$/", $enum, $matches);
+        $results = explode("','", $matches[1][0]);
+        if($session_data['role'] == 'superadmin' or $session_data['role'] == 'admin') {
+			if($t == 1) {
+		 		foreach($results as $result) {
+		 			$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 		}	
+		 	} else {
+		 		foreach($results as $result) {
+		 			if($s == $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";	
+		 			}
+		 		}
+		 		foreach($results as $result) {
+		 			if($s != $result) {
+		 				$f .= "<option value='". $result ."'>" . $result . "</option>";
+		 			}
+		 		}	
+		 	}
+	 	} 
+	 	return $f;	
 	}
 	
 	function notification() {
@@ -209,7 +235,7 @@ class Divisi extends CI_Controller {
 						"image" => $this->get_divisi_image($r->divisi_id), 
 		 				"summary" => $r->summary,
 		 				"body" => $r->body,
-		 				"status" => $r->status,
+		 				"status" => $this->get_status(2, $r->status),
 		 				"created_date" => $r->created_date,
 		 				"modified_date" => $r->modified_date,
 						"flag" => "update",

@@ -34,6 +34,7 @@ class Category_news extends CI_Controller {
 		     
 				$this->parser->parse('admin/category/news/category_news_management', $data);
 			 } else {
+			 	$this->output->set_status_header('401');
 		     	print_r("<h1>Authorization required.</h1>");
 		     }
 	   	} else {

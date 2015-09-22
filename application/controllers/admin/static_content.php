@@ -33,6 +33,7 @@ class Static_content extends CI_Controller {
 	
 			     $this->parser->parse('admin/content/static_content/static_content_management', $data);
 		     } else {
+		     	$this->output->set_status_header('401');
 		     	print_r("<h1>Authorization required.</h1>");
 		     }
 	   	} else {
