@@ -31,11 +31,6 @@
                 <li class="<?php echo $active[4]; ?>">
                     <a href="<?php echo base_url(); ?>admin/article">Article</a>
                 </li>
-				<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
-				<li class="<?php echo $active[15]; ?>">
-                    <a href="<?php echo base_url(); ?>admin/divisi">Divisi</a>
-                </li>
-				<?php } ?>
                 <li class="<?php echo $active[5]; ?>">
                     <a href="<?php echo base_url(); ?>admin/news">News</a>
                 </li>
@@ -70,6 +65,11 @@
             </ul>
         </li>
 		<?php } ?>
+        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+        <li class="<?php echo $active[15]; ?>">
+            <a href="<?php echo base_url(); ?>admin/divisi"><i class="fa fa-fw fa-table"></i>&nbsp;Division Management</a>
+        </li>
+        <?php } ?>
         <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[13]; ?>">
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
