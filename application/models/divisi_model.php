@@ -47,12 +47,20 @@ class divisi_model extends CI_Model {
 
         return false;
     }
-	
+
 	function get_enum_status() {
-        $enum = $this->db->query("SHOW COLUMNS FROM divisi WHERE Field = 'status' ");
-        preg_match("//^enum\(\'(.*)\'\)$/", $enum, $matches);
-        $result = explode("','", $matches[1]);
-        return $result;
+        $query = $this->db->query("
+        		SELECT COLUMN_TYPE
+				FROM information_schema.COLUMNS
+				WHERE TABLE_NAME = 'divisi'
+				      AND COLUMN_NAME = 'status';
+        		");
+        if($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                $data[] = $row;
+            }
+            return $data;
+        }
     }
 	
 	function update_divisi($id, $data){
@@ -60,5 +68,36 @@ class divisi_model extends CI_Model {
 		
         $this->db->where('divisi_id', $id);
         $this->db->update('divisi', $data); 
+    }
+	
+	function get_image($id='') {
+        $this->db->select("i.path")
+                ->from("divisi d")
+                ->join("image i", "d.image_id = i.image_id")
+                ->where("divisi_id", $id);
+        $query = $this->db->get();
+
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return false;
+
+    }
+	
+	function create_divisi($data) {
+        $data = array("user_id" => $data['user_id'],
+                    "title" => $data['title'],
+                    "tag" => $data['tag'],
+                    "status" => $data['status'],
+                    "summary" => $data['summary'],
+                    "body" => $data['body'],
+                    "created_date" => date("Y-m-d H:i:s"),
+                    "modified_date" => date("Y-m-d H:i:s"),
+                    "image_id" => $data['image_id']
+                );
+        $this->db->insert('divisi', $data);
+    }
+	
+	function delete_divisi($id) {
+    	return $this->db->delete("divisi", array("divisi_id" => $id));
     }
  }
