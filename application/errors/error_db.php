@@ -1,62 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Database Error</title>
-<style type="text/css">
+	<meta charset="utf-8">
+	<?php if(ENVIRONMENT == 'production') { ?>
+	<title>Maintenance</title>
+	<?php } else { ?>
+	<title>Database Error</title>
+	<?php } ?>
+	<meta name="description" content="">
+	<meta name="author" content="">
 
-::selection{ background-color: #E13300; color: white; }
-::moz-selection{ background-color: #E13300; color: white; }
-::webkit-selection{ background-color: #E13300; color: white; }
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="<?php echo base_url(). 'assets/css/flipclock.css'; ?>">
 
-body {
-	background-color: #fff;
-	margin: 40px;
-	font: 13px/20px normal Helvetica, Arial, sans-serif;
-	color: #4F5155;
-}
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
-a {
-	color: #003399;
-	background-color: transparent;
-	font-weight: normal;
-}
-
-h1 {
-	color: #444;
-	background-color: transparent;
-	border-bottom: 1px solid #D0D0D0;
-	font-size: 19px;
-	font-weight: normal;
-	margin: 0 0 14px 0;
-	padding: 14px 15px 10px 15px;
-}
-
-code {
-	font-family: Consolas, Monaco, Courier New, Courier, monospace;
-	font-size: 12px;
-	background-color: #f9f9f9;
-	border: 1px solid #D0D0D0;
-	color: #002166;
-	display: block;
-	margin: 14px 0 14px 0;
-	padding: 12px 10px 12px 10px;
-}
-
-#container {
-	margin: 10px;
-	border: 1px solid #D0D0D0;
-	-webkit-box-shadow: 0 0 8px #D0D0D0;
-}
-
-p {
-	margin: 12px 15px 12px 15px;
-}
-</style>
+	<script src="<?php echo base_url(). 'assets/js/flipclock.js'; ?>"></script>
+	<link rel="shortcut icon" href="<?php echo base_url(). 'assets/img/favicon.png'; ?>">
+	<link href="<?php echo base_url() . 'assets/css/default.css'; ?>" rel="stylesheet" media="screen">
 </head>
 <body>
-	<div id="container">
-		<h1><?php echo $heading; ?></h1>
-		<?php echo $message; ?>
+	<div class="page-wrap">
+		<div style="padding: 50px;">
+			<div class="header">
+				<h1>Server is busy, we'll be back shortly!</h1><br>
+				<div class="clock" style="margin-left:30%;"></div>
+				<script type="text/javascript">
+					var clock;
+					var sec = "<?php echo '120'; ?>";
+					$(document).ready(function() {
+						var clock;
+						clock = $('.clock').FlipClock(sec, {
+					        clockFace: 'MinuteCounter',
+					        autoStart: false,
+					        callbacks: {
+					        	stop: function() {
+					        		$(location).attr('href', location.href);
+					        	}
+					        }
+					    });
+					    clock.setCountdown(true);
+					    clock.start();
+					});
+				</script>
+			</div>
+			<div class="content">
+				<div class="left-content">
+					<div class="image-box-wrapper" id="image-box-wrapper">
+						<div style="clear:both;"></div>
+					</div>
+				</div>
+				<div class="right-content">
+					<p class="quote">
+						"Always make you curious!"
+					<p>
+					<p>
+						<!--<a title="Blog" href="#"><img class="icon_find_us1" width="96px" src="<?php echo base_url() . 'assets/img/wordpress-icon.png'; ?>"></a>-->
+						<a title="Twitter" target='_blank' href="https://twitter.com/kepoabiscom"><img class="icon_find_us1" width="96px" src="<?php echo base_url() . 'assets/img/twitter-icon.png' ;?>"></a>
+						<a title="Facebook" target='_blank' href="https://www.facebook.com/kepoabiscom"><img class="icon_find_us1" width="96px" src="<?php echo base_url() . 'assets/img/facebook-icon.png'; ?>"></a>
+					</p>
+					<br>
+					<p>
+                        <br>Email: hi@kepoabis.com 
+					<p>	
+				</div>
+			</div>
+		</div>
+		<div class="footer">
+			<p>
+				Copyright &copy; 2015 Haamill Productions. All Rights Reserved. 
+			</p>
+		</div>
 	</div>
 </body>
 </html>
