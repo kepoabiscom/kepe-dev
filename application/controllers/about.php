@@ -70,11 +70,10 @@ class About extends CI_Controller {
 					$this->global_header(),
 					$this->read_divisi($this->uri->segment(3), $this->uri->segment(4))
 				);
-				
+
 				$data['author'] = $data['full_name'];
 				$data['url'] = base_url('about/page/organization/' .  $this->uri->segment(4));
 				$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, " . $data['keyword'];
-				$data['og_image'] = base_url('assets/img/'.$data['logo_name']);
 				$data['get_divisi'] = $this->get_divisi($this->uri->segment(3), $this->uri->segment(4));
 			}
 			
@@ -106,7 +105,8 @@ class About extends CI_Controller {
 	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
 	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
 	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name,
-			"image" => "<p><img src='" . base_url($image->path) . "'</p>"
+			"image" => "<p><img src='" . base_url($image->path) . "'</p>",
+			"og_image" => base_url($image->path)
 	     ); 
 		 
 		 return $data;
