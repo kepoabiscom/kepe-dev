@@ -84,32 +84,34 @@ class About extends CI_Controller {
 	public function read_divisi($parameter, $divisi_id){
 		$q = $this->divisi_model->get_by_id($divisi_id);
 		
-		$title = !isset($q->title) ? "" : $q->title;
-		$tag = !isset($q->tag) ? "" : $q->tag;
-		$image_id =  !isset($q->image_id) ? "" : $q->image_id;
-		
-		$image = $this->image_model->get_by_id($image_id) ? $this->image_model->get_by_id($image_id) : "";
-		
- 		$data = array(
-			"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
-			"static_content_id" => !isset($q->divisi_id) ? "" : $q->divisi_id,
-			"user_id" => !isset($q->user_id) ? "" : $q->user_id,
-			"image_id" => $image_id,
-	 		"title" => $title, 
-			"keyword" => $tag,
-			"tag" => $this->global_common->get_list_tag($tag),
-	 		"parameter" => "",
-	 		"summary" => !isset($q->summary) ? "" : $q->summary,
-	 		"body" => !isset($q->body) ? "" : $q->body,
-	 		"status" => !isset($q->status) ? "" : $q->status,
-	 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
-	 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
-	 		"full_name" => !isset($q->full_name) ? "" : $q->full_name,
-			"image" => "<p><img src='" . base_url($image->path) . "'</p>",
-			"og_image" => base_url($image->path)
-	     ); 
-		 
-		 return $data;
+		if($q == null) show_404();
+		else {
+			$title = !isset($q->title) ? "" : $q->title;
+			$tag = !isset($q->tag) ? "" : $q->tag;
+			$image_id =  !isset($q->image_id) ? "" : $q->image_id;
+			
+			$image = $this->image_model->get_by_id($image_id) ? $this->image_model->get_by_id($image_id) : "";
+			
+	 		$data = array(
+				"membership_list" => ($parameter != NULL) ? $this->get_list($parameter, 0, 100) : "",
+				"static_content_id" => !isset($q->divisi_id) ? "" : $q->divisi_id,
+				"user_id" => !isset($q->user_id) ? "" : $q->user_id,
+				"image_id" => $image_id,
+		 		"title" => $title, 
+				"keyword" => $tag,
+				"tag" => $this->global_common->get_list_tag($tag),
+		 		"parameter" => "",
+		 		"summary" => !isset($q->summary) ? "" : $q->summary,
+		 		"body" => !isset($q->body) ? "" : $q->body,
+		 		"status" => !isset($q->status) ? "" : $q->status,
+		 		"created_date" => !isset($q->created_date) ? "" : $q->created_date,
+		 		"modified_date" => !isset($q->modified_date) ? "" : $q->modified_date,
+		 		"full_name" => !isset($q->full_name) ? "" : $q->full_name,
+				"image" => "<p><img src='" . base_url($image->path) . "'</p>",
+				"og_image" => base_url($image->path)
+		     ); 	 
+			 return $data;
+		}
 	}
 	
 	public function get_divisi($parameter, $video_id){
