@@ -52,14 +52,14 @@
     <label class="col-sm-2">Body</label>
     <div class="col-sm-6">
         <?php $body = ($flag == "update") ? $body : ""; ?>
-        <textarea class="form-control" rows="3" name="body"><?php echo $body; ?></textarea>
+        <textarea class="form-control" rows="10" name="body"><?php echo $body; ?></textarea>
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2">Summary</label>
     <div class="col-sm-6">
         <?php $summary = ($flag == "update") ? $summary : ""; ?>
-        <textarea class="form-control" rows="3" name="summary"><?php echo $summary; ?></textarea>
+        <textarea class="form-control" rows="10" name="summary"><?php echo $summary; ?></textarea>
     </div>
 </div>
 
