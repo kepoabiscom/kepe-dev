@@ -17,9 +17,6 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-    
-    <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
-    <script>tinymce.init({selector:'textarea'});</script>
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -40,7 +37,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "divisi"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "service"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -59,26 +56,47 @@
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Division
+                                <i class="fa fa-file"></i>Static Content
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-                <?php if($success) { ?>
-                <div class="alert alert-success fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New divisi has been created successfully.
-                </div>
-                <?php } ?>
-                <h2>Create new Divisi</h2><br>
-                <div class="col-lg-18">
-                    <?php echo $error_message; echo validation_errors(); ?><br>
-                    <form action="<?php echo base_url(); ?>admin/divisi/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
-                        <?php $this->load->view("admin/content/divisi/_form"); ?>
-                        <button type="submit" name="submit" class="btn btn-primary">Create</button>
-                        <a href='<?php echo base_url(); ?>admin/divisi'>Back</a>
-                    </form>
+                <h2>Detail Static Content</h2><br>
+                <div class="col-lg-8">
+                    <div class="row clearfix">
+                        <div class="col-md-18 column"><br>
+                            <table class="table">
+                                <tbody>
+                                    <tr>
+                                        <td align="left"><strong>Title</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{title}</td>                                      
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Tag</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{tag}</td>                                      
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Summary</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{summary}</td>                                      
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Body</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{body}</td>                                      
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Created Date</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{created_date}</td>                                      
+                                    </tr>
+									<tr>
+                                        <td align="left"><strong>Modified Date</strong></td>
+										<td align="left">:&nbsp;&nbsp;&nbsp;{modified_date}</td>                                      
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <a href='<?php echo base_url(); ?>admin/service'>Back</a>
+                        </div>
+                    </div>
                 </div>  
             </div>
             <!-- /.container-fluid -->

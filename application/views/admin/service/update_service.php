@@ -17,7 +17,7 @@
 
     <!-- Custom Fonts -->
     <link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
-    
+
     <script src="//tinymce.cachefly.net/4.1/tinymce.min.js"></script>
     <script>tinymce.init({selector:'textarea'});</script>
 
@@ -40,7 +40,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "divisi"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "service"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -59,25 +59,19 @@
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i> Division
+                                <i class="fa fa-file"></i> Service
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-                <?php if($success) { ?>
-                <div class="alert alert-success fade in">
-                    <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New divisi has been created successfully.
-                </div>
-                <?php } ?>
-                <h2>Create new Divisi</h2><br>
-                <div class="col-lg-18">
+                <h2>Edit Service</h2><br>
+                <div class="col-lg-20">
                     <?php echo $error_message; echo validation_errors(); ?><br>
-                    <form action="<?php echo base_url(); ?>admin/divisi/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
-                        <?php $this->load->view("admin/content/divisi/_form"); ?>
-                        <button type="submit" name="submit" class="btn btn-primary">Create</button>
-                        <a href='<?php echo base_url(); ?>admin/divisi'>Back</a>
+                    <form action="<?php echo base_url() . 'admin/service/update/' . $service_id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+                        <?php $this->load->view("admin/service/_form"); ?>
+                        <button type="submit" name="submit" class="btn btn-primary">Edit</button>
+                        <a href='<?php echo base_url(); ?>admin/service'>Back</a>
                     </form>
                 </div>  
             </div>
