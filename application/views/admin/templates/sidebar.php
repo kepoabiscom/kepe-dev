@@ -78,7 +78,7 @@
         <?php } ?>
         <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[16]; ?>">
-            <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Acivity History</a>
+            <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Activity History</a>
         </li>
         <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
