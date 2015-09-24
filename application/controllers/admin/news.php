@@ -1,9 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-require_once APPPATH . 'controllers/admin/comment_notif.php'; 
-require_once APPPATH . 'controllers/home.php'; 
+ 
+require_once APPPATH . 'libraries/utils.php';
 
 class News extends CI_Controller {
+
+	private $utils;
 
 	/**
 	 * Constructor for this controller.
@@ -17,15 +18,12 @@ class News extends CI_Controller {
 		$this->load->model('image_model','', true);
 		$this->load->library("pagination");
 		$this->load->library('form_validation');
+
+		$this->utils = new Utils();
 	}
 
 	function index() {
-		/* Set counter notif new comment */
-		$comment_notif = new Comment_notif();
-	    $t = $comment_notif->counter_comment_notif();
-	    $this->session->set_userdata("counter_comment_notif",
- 			array("counter" => $t)
- 		);
+		$this->utils->set_counter_comment_notif();
  		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
@@ -49,7 +47,6 @@ class News extends CI_Controller {
 		$number = 0;
 		
 	 	if($result) {
-	 		$home = new Home();
 			$session_data = $this->session->userdata('logged_in');
 			 
 	 		foreach($result as $row) {
@@ -93,7 +90,7 @@ class News extends CI_Controller {
 				}
 				$d1 = explode(" ", $row->created_date);
 		        $d2 = explode("-", $d1[0]);
-		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("news/read/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_news))."'>View</a>" : "";
+		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("news/read/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $this->utils->slug($row->title_news))."'>View</a>" : "";
 				$btn = implode("&nbsp;", $button);
 
 	        	$data_array .= "<tr><td>" . $number . "</td>";

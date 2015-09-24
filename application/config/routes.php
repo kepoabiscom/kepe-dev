@@ -55,6 +55,7 @@ $route['category-article'] = "admin/category_article";
 $route['category-news'] = "admin/category_news";
 $route['category-video'] = "admin/category_video";
 $route['comment-notif'] = "admin/comment_notif";
+$route['activity-history'] = "admin/activity_history";
 $route['static-content'] = "admin/static_content";
 $route['video-competition'] = "competition/video_competition";
 $route['404_override'] = 'Page_404';

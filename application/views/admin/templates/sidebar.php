@@ -3,7 +3,7 @@
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
                         'video', 'category', 'about', 'gallery', 'category_article', 
-                        'category_video', 'category_news', 'comment_notif','static_content', 'divisi', 'service');
+                        'category_video', 'category_news', 'comment_notif','static_content', 'divisi', 'activity', 'service');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -71,7 +71,7 @@
         </li>
         <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
-        <li class="<?php echo $active[16]; ?>">
+        <li class="<?php echo $active[17]; ?>">
             <a href="<?php echo base_url(); ?>admin/service"><i class="fa fa-fw fa-table"></i>&nbsp;What We Do Management</a>
         </li>
         <?php } ?>
@@ -80,10 +80,19 @@
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
         </li>
         <?php } ?>
+        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+        <li class="<?php echo $active[16]; ?>">
+            <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Activity History</a>
+        </li>
+        <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[8]; ?>">
             <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
         </li>
 		<?php } ?>
+        <li>
+            <?php $x = $this->session->userdata('last_login'); ?>
+            <a><?php echo "Last Login From: <br>". $x['username']." " . $x['ip_address']; ?></a>
+        </li>
     </ul>
 </div>

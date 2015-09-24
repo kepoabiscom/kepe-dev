@@ -1,9 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'controllers/admin/comment_notif.php';
-require_once APPPATH . 'controllers/home.php'; 
+require_once APPPATH . 'libraries/utils.php'; 
 
 class Video extends CI_Controller {
+
+	private $utils;
 
 	/**
 	 * Constructor for this controller.
@@ -23,12 +24,8 @@ class Video extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
-		/* Set counter notif new comment */
-		$comment_notif = new Comment_notif();
-	    $t = $comment_notif->counter_comment_notif();
-	    $this->session->set_userdata("counter_comment_notif",
- 			array("counter" => $t)
- 		);
+		$this->utils = new Utils();
+		$this->utils->set_counter_comment_notif();
  		
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
@@ -109,7 +106,6 @@ class Video extends CI_Controller {
 		$number = 0;
 		
 	 	if($result) {
-	 		$home = new Home();
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 		 		$id = $row->video_id;
@@ -138,7 +134,7 @@ class Video extends CI_Controller {
 		        ));
 		        $d1 = explode(" ", $row->created_date);
 		        $d2 = explode("-", $d1[0]);
-		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $home->slug($row->title_video))."'>View</a>" : "";
+		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $this->utils->slug($row->title_video))."'>View</a>" : "";
 		        
 		        $data_array .= "<tr>";
 	        	$data_array .= "<td>" . $number . "</td>";
