@@ -9,6 +9,7 @@ class Static_content extends CI_Controller {
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		$this->load->model('static_content_model','', true);
+		$this->load->model('image_model','', true);
 		$this->load->library('form_validation');
 
 		$this->utils = new Utils();
