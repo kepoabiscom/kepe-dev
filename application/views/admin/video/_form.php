@@ -66,7 +66,7 @@
     <label class="col-sm-2">Artist</label>
     <div class="col-sm-6">
         <?php $artist = ($flag == "update") ? $artist : ""; ?>
-        <textarea class="form-control" rows="4" name="artist"><?php echo $artist; ?></textarea>
+        <textarea class="form-control" rows="5" name="artist"><?php echo $artist; ?></textarea>
     </div>
 </div>
 <div class="form-group">
@@ -135,7 +135,7 @@
     <label class="col-sm-2">Description</label>
     <div class="col-sm-6">
         <?php $description = ($flag == "update") ? $description : ""; ?>
-        <textarea class="form-control" rows="3" name="description"><?php echo $description; ?></textarea>
+        <textarea class="form-control" rows="15" name="description"><?php echo $description; ?></textarea>
     </div>
 </div>
 <!--

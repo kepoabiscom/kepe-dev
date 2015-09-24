@@ -52,7 +52,7 @@
     <label class="col-sm-2">Summary</label>
     <div class="col-sm-6">
         <?php $summary = ($flag == "update") ? $summary : ""; ?>
-        <textarea class="form-control" rows="3" name="summary"><?php echo $summary; ?></textarea>
+        <textarea class="form-control" rows="15" name="summary"><?php echo $summary; ?></textarea>
     </div>
 </div>
 
