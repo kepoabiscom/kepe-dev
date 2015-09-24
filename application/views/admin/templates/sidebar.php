@@ -3,7 +3,8 @@
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
                         'video', 'category', 'about', 'gallery', 'category_article', 
-                        'category_video', 'category_news', 'comment_notif','static_content', 'divisi');
+                        'category_video', 'category_news', 'comment_notif','static_content', 
+                        'divisi', 'activity');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -75,10 +76,18 @@
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
         </li>
         <?php } ?>
+        <?php if($q['role'] == "superadmin") { ?>
+        <li class="<?php echo $active[16]; ?>">
+            <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Acivity History</a>
+        </li>
+        <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[8]; ?>">
             <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
         </li>
 		<?php } ?>
+        <li>
+            <a><?php echo "Last login from: <br> {username} {ip_address}"; ?></a>
+        </li>
     </ul>
 </div>

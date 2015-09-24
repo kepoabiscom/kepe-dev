@@ -1,15 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once APPPATH . 'libraries/utils.php'; 
+
 class Login extends CI_Controller {
 	
-	function __construct()	{
-   		parent::__construct();
+  function __construct()	{
+      parent::__construct();
    		$this->load->helper(array('form'));
    		$this->load->model('user_model','', true);
       $this->load->library('form_validation');
+
+      $this->utils = new Utils();
  	}
 
  	function index() {
+      $this->utils->set_counter_comment_notif();
+
    		if(!$this->session->userdata('logged_in')) {
   	   		  $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
   	        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_db');

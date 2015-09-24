@@ -1,9 +1,11 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+require_once APPPATH . 'libraries/utils.php'; 
 
 class Dashboard extends CI_Controller {
 
+	private $utils;
+	
 	/**
 	 * Constructor for this controller.
 	 */
@@ -12,18 +14,15 @@ class Dashboard extends CI_Controller {
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		//$this->load->library("pagination");
+
+		$this->utils = new Utils();
 	}
 
 	/**
 	 * Index Page for this controller.
 	 */
 	function index() {
-		/* Set counter notif new comment */
-		$comment_notif = new Comment_notif();
-	    $t = $comment_notif->counter_comment_notif();
-	    $this->session->set_userdata("counter_comment_notif",
- 			array("counter" => $t)
- 		);
+		$this->utils->set_counter_comment_notif();
 
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
