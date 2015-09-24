@@ -23,14 +23,13 @@ class User extends CI_Controller {
 		$this->load->model('user_role_basic_model','', true);
 		$this->load->library('form_validation');
 		$this->load->library("pagination");
-
-		$this->utils = new Utils();
 	}
 
 	/**
 	 * Index Page for this controller.
 	 */
 	function index() {
+		$this->utils = new Utils();
 		$this->utils->set_counter_comment_notif();
  		
 		if($this->session->userdata('logged_in')) {

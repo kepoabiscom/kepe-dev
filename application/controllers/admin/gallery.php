@@ -14,11 +14,10 @@ class Gallery extends CI_Controller {
 		$this->load->model('image_model','', true);
 		//$this->load->library('form_validation');
 		//$this->load->library("pagination");
-
-		$this->utils = new Utils();
 	}
 
 	function index() {
+		$this->utils = new Utils();
 		$this->utils->set_counter_comment_notif();
  		
 		if($this->session->userdata('logged_in')) {

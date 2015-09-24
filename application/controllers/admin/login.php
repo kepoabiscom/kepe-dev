@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'libraries/utils.php'; 
+require_once APPPATH . 'libraries/utils.php';
+require_once APPPATH . 'controllers/admin/activity_history.php'; 
 
 class Login extends CI_Controller {
 	
@@ -9,23 +10,18 @@ class Login extends CI_Controller {
    		$this->load->helper(array('form'));
    		$this->load->model('user_model','', true);
       $this->load->library('form_validation');
-
-      $this->utils = new Utils();
  	}
 
  	function index() {
-      $this->utils->set_counter_comment_notif();
-
    		if(!$this->session->userdata('logged_in')) {
-  	   		  $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-  	        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_db');
-
-  	        if($this->form_validation->run() == false) {
-  	            $this->load->view('admin/login');
-  	        }
-  	        else {
-  	            redirect('admin/dashboard', 'refresh');
-  	        }
+	   		  $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+	        $this->form_validation->set_rules('password', 'Password', 'trim|required|xss_clean|callback_check_db');
+      
+	        if($this->form_validation->run() == false) {
+              $this->load->view('admin/login');
+	        } else {
+	            redirect('admin/dashboard', 'refresh');
+	        }
   	    } else {
   	    	redirect('admin/dashboard', 'refresh');
   	    }
@@ -39,14 +35,17 @@ class Login extends CI_Controller {
        if($result) {
            $sess_array = array();
            foreach($result as $row) {
-             $sess_array = array(
-               'id' => $row->user_id,
-               'role' => $row->user_role,
-               'username' => $row->user_name
-             );
-             $this->session->set_userdata('logged_in', $sess_array);
-           }
-           return true;
+              $sess_array = array(
+                'id' => $row->user_id,
+                'role' => $row->user_role,
+                'username' => $row->user_name
+            );
+
+            $this->activity = new Activity_history();
+            $this->activity->set_activity($sess_array['id'], 'login');
+            $this->session->set_userdata('logged_in', $sess_array);
+          }
+          return true;
        }
        else {
            $this->form_validation->set_message('check_db', "<span style='color:red'>Invalid username or password</span>");

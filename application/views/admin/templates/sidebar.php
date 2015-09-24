@@ -76,7 +76,7 @@
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
         </li>
         <?php } ?>
-        <?php if($q['role'] == "superadmin") { ?>
+        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[16]; ?>">
             <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Acivity History</a>
         </li>
@@ -87,7 +87,8 @@
         </li>
 		<?php } ?>
         <li>
-            <a><?php echo "Last login from: <br> {username} {ip_address}"; ?></a>
+            <?php $x = $this->session->userdata('last_login'); ?>
+            <a><?php echo "Last Login From: <br>". $x['username']." " . $x['ip_address']; ?></a>
         </li>
     </ul>
 </div>

@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'libraries/utils.php'; 
+require_once APPPATH . 'libraries/utils.php';
 
 class Dashboard extends CI_Controller {
 
@@ -14,14 +14,13 @@ class Dashboard extends CI_Controller {
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
 		//$this->load->library("pagination");
-
-		$this->utils = new Utils();
 	}
 
 	/**
 	 * Index Page for this controller.
 	 */
 	function index() {
+		$this->utils = new Utils();
 		$this->utils->set_counter_comment_notif();
 
 		if($this->session->userdata('logged_in')) {
