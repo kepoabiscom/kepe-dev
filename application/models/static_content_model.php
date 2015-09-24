@@ -48,6 +48,20 @@ class Static_content_model extends CI_Model {
         $this->db->where('static_content_id', $id);
         $this->db->update('static_content', $data); 
     }
+	
+	function get_image($id) {
+    	$query = $this->db->select("i.path")
+    		->from("static_content sc")
+			->join("image i", "sc.image_id = i.image_id")
+			->where("sc.status", "published")
+			->where("sc.static_content_id", $id)
+			->limit(1)
+			->get();
+		
+        if($query->num_rows() == 1) {
+            return $query->row();
+        } return;
+    }
 }
 
 ?>

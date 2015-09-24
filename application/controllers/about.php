@@ -74,6 +74,7 @@ class About extends CI_Controller {
 				$data['author'] = $data['full_name'];
 				$data['url'] = base_url('about/page/organization/' .  $this->uri->segment(4));
 				$data['meta_tag'] = "Kepo ".$data['title'].", kepoabis, Kepo Abis, Kepo, Abis, " . $data['keyword'];
+				$data['meta_description'] = strip_tags($data['body']);
 				$data['get_divisi'] = $this->get_divisi($this->uri->segment(3), $this->uri->segment(4));
 			}
 			

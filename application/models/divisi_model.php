@@ -80,7 +80,6 @@ class divisi_model extends CI_Model {
         if($query->num_rows() == 1) {
             return $query->row();
         } return false;
-
     }
 	
 	function create_divisi($data) {
