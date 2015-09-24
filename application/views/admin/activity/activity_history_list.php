@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Comment Notification - KepoAbis.com</title>
+    <title>Activity History List - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,7 @@
                                 <i class="fa fa-dashboard"></i>  <a href="<?php echo base_url(); ?>admin/dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>&nbsp;Activity History Listn
+                                <i class="fa fa-file"></i>&nbsp;Activity History List
                             </li>
                         </ol>
                         <div class="panel panel-default">
