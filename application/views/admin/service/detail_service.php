@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     
-    <title>Content Management - KepoAbis.com</title>
+    <title>What We Do! - KepoAbis.com</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
@@ -37,7 +37,7 @@
             <!-- Brand and toggle get grouped for better mobile display -->
             <?php $this->load->view("admin/templates/header"); ?>
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-            <?php $active['menu'] = "service"; $this->load->view("admin/templates/sidebar", $active); ?>
+            <?php $active['menu'] = "about"; $this->load->view("admin/templates/sidebar", $active); ?>
             <!-- /.navbar-collapse -->
         </nav>
 
@@ -49,20 +49,20 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Content Management
+                            What We Do!
                         </h1>
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="dashboard">Dashboard</a>
                             </li>
                             <li class="active">
-                                <i class="fa fa-file"></i>Static Content
+                                <i class="fa fa-file"></i>Service
                             </li>
                         </ol>
                     </div>
                 </div>
                 <!-- /.row -->
-                <h2>Detail Static Content</h2><br>
+                <h2>Service Detail</h2><br>
                 <div class="col-lg-8">
                     <div class="row clearfix">
                         <div class="col-md-18 column"><br>

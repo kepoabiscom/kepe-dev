@@ -66,16 +66,6 @@
         </li>
 		<?php } ?>
         <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
-        <li class="<?php echo $active[15]; ?>">
-            <a href="<?php echo base_url(); ?>admin/divisi"><i class="fa fa-fw fa-table"></i>&nbsp;Division Management</a>
-        </li>
-        <?php } ?>
-		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
-        <li class="<?php echo $active[17]; ?>">
-            <a href="<?php echo base_url(); ?>admin/service"><i class="fa fa-fw fa-table"></i>&nbsp;What We Do Management</a>
-        </li>
-        <?php } ?>
-        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[13]; ?>">
             <a href="<?php echo base_url(); ?>admin/comment-notif"> <i class="fa fa-bell"></i>&nbsp;Comment Notif <?php $data = $this->session->userdata('counter_comment_notif'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
         </li>
@@ -87,7 +77,19 @@
         <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[8]; ?>">
-            <a href="<?php echo base_url(); ?>admin/about"> <i class="fa fa-fw fa-file"></i>&nbsp;About</a>
+            <a href="javascript:;" data-toggle="collapse" data-target="#about"><i class="fa fa-fw fa-file"></i>&nbsp;About Us<i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="about" class="collapse">
+                <li class="<?php echo $active[8]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/about">&nbsp;About</a>
+                </li>
+                <li class="<?php echo $active[8]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/divisi">&nbsp;Division</a>
+                </li>
+                <li class="<?php echo $active[8]; ?>">
+                    <a href="<?php echo base_url(); ?>admin/service">&nbsp;What We Do!</a>
+                </li>
+            </ul>
+            
         </li>
 		<?php } ?>
         <li>
