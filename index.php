@@ -1,4 +1,7 @@
-<html>
-	
-	<h1>Hi Adil, Fatah, Hady</h1>
-</html>
+ <form>
+First name:<br>
+<input type="text" name="firstname">
+<br>
+Last name:<br>
+<input type="text" name="lastname">
+</form> 
