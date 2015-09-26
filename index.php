@@ -1,1 +1,4 @@
-<?php echo "<h1>KepoAbis.com</h1>"; ?> 
+<html>
+	
+	<h1>Hi Adil, Fatah, Hady</h1>
+</html>
