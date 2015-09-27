@@ -20,8 +20,8 @@ This SDK is deprecated.  Please use the new SDK found here: https://github.com/f
 require 'facebook.php';
 // Create our Application instance (replace this with your appId and secret).
 $facebook = new Facebook(array(
-  'appId'  => '344617158898614',
-  'secret' => '6dc8ac871858b34798bc2488200e503d',
+  'appId'  => '876274572459160',
+  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
 ));
 Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
 Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
