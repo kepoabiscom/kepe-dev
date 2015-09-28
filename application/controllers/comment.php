@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once APPPATH . "../facebook-sdk/config.php";
+
 date_default_timezone_set("Asia/Jakarta");
 
 class Comment extends CI_Controller {
@@ -17,46 +19,57 @@ class Comment extends CI_Controller {
 	}
 
 	function ajax_() {
+		$data_fb = $this->get_user_data_facebook();
+
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
 			$n1 = $this->random_set_captcha(0);
 			$op = $this->random_set_captcha();
 			$n2 = $this->random_set_captcha(0);
-			if(!empty($d['nick_name']) && !empty($d['body'])) { 
-				if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
-					unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
-					$type = $d['type']; unset($d['type']);
-					$this->comment_model->post_comment($type, $d);
-					if($type == "news")
-						$id = $d['news_id'];
-					if($type == "article")
-						$id = $d['article_id'];
-					if($type == "video")
-						$id = $d['video_id'];
+			if($data_fb['is_active']) {
+				if(!empty($d['nick_name']) && !empty($d['body'])) { 
+					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
+						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
+						$type = $d['type']; unset($d['type']);
+						$this->comment_model->post_comment($type, $d);
+						if($type == "news")
+							$id = $d['news_id'];
+						if($type == "article")
+							$id = $d['article_id'];
+						if($type == "video")
+							$id = $d['video_id'];
 
-					$status = array('status' => true, 
-			  					'msg' => 'Success',
-			  					'get_comment' => $this->get_comment($type, $id, 1),
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-		  			);	
+						$status = array('status' => true, 
+				  					'msg' => 'Success',
+				  					'get_comment' => $this->get_comment($type, $id, 1),
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+			  			);	
+					} else {
+						$status = array('status' => false, 
+				  					'msg' => 'Your answer is incorrect!',
+				  					'result' => $d['answer'],
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+				  			);	
+					}			
 				} else {
 					$status = array('status' => false, 
-			  					'msg' => 'Your answer is incorrect!',
-			  					'result' => $d['answer'],
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-			  			);	
-				}			
+				  					'msg' => 'Nick name and your comment is required!',
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+				  			);
+				}
 			} else {
 				$status = array('status' => false, 
-			  					'msg' => 'Nick name and your comment is required!',
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-			  			);
+	  					'msg' => 'You must be connected with Facebook Account!',
+	  					'n1' => $n1,
+	  					'op' => $op,
+	  					'n2' => $n2
+	  			);
 			}
 		} else {
 			$status = array('status' => false, 
@@ -135,6 +148,33 @@ class Comment extends CI_Controller {
 
 	    if (!$full) $string = array_slice($string, 0, 1);
 	    return $string ? "<em>" . implode(', ', $string) . " ago</em>" : "<em>Just now</em>";
+	}
+
+	function get_user_data_facebook() {
+		$config = new Config();
+		$is_active = $config->getUser();
+		$user_profile = ""; $loginUrl = "";
+
+		if($is_active) {
+			try {
+				$user_profile = $config->api('/me');
+			} catch (FacebookApiException $e) {
+				error_log($e);
+				$is_active = null;
+			}
+		}
+
+		if($is_active) {
+			$logoutUrl = $config->getLogoutUrl();
+		} else {
+			$loginUrl = $config->getLoginUrl();
+		}
+
+		return array(
+				"session_data_fb" => $user_profile,
+				"is_active" => $is_active,
+				"login_fb_url" => $loginUrl
+			);
 	}
 
 }

@@ -177,7 +177,7 @@ class Article extends CI_Controller {
 			
 			$title_category = $q->title_category;
 			$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
-			
+			$data_fb = $comment->get_user_data_facebook();
 			$tag = !isset($q->tag) ? "" : $q->tag;
 			
 			$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
@@ -208,6 +208,7 @@ class Article extends CI_Controller {
 			 				"n1" => $comment->random_set_captcha(0),
 			 				"op" => $comment->random_set_captcha(),
 			 				"n2" => $comment->random_set_captcha(0),
+			 				"login_url_fb" => $data_fb['login_fb_url'],
 			 				"prev_next" => $prev_next,
 			 				"article_id" => $id,
 							"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
