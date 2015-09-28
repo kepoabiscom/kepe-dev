@@ -20,6 +20,7 @@ class Comment extends CI_Controller {
 
 	function ajax_() {
 		$data_fb = $this->get_user_data_facebook();
+		echo $data_fb['is_active']; exit("");
 
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
@@ -151,18 +152,18 @@ class Comment extends CI_Controller {
 	}
 
 	function get_user_data_facebook() {
-		$this->facebook = new Facebook(array(
+		$facebook = new Facebook(array(
 	        'appId'  => '876274572459160',
 	        'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
       	));
       	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
       	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
-      	$is_active = $this->facebook->getUser();
+      	$is_active = $facebook->getUser();
 		$user_profile = ""; $loginUrl = "";
 
 		if($is_active) {
 			try {
-				$user_profile = $config->api('/me');
+				$user_profile = $facebook->api('/me');
 			} catch (FacebookApiException $e) {
 				error_log($e);
 				$is_active = null;
@@ -170,9 +171,9 @@ class Comment extends CI_Controller {
 		}
 
 		if($is_active) {
-			$logoutUrl = $this->facebook->getLogoutUrl();
+			$logoutUrl = $facebook->getLogoutUrl();
 		} else {
-			$loginUrl = $this->facebook->getLoginUrl();
+			$loginUrl = $facebook->getLoginUrl();
 		}
 
 		return array(
