@@ -170,9 +170,9 @@ class Comment extends CI_Controller {
 		}
 
 		if($is_active) {
-			$logoutUrl = $config->getLogoutUrl();
+			$logoutUrl = $this->facebook->getLogoutUrl();
 		} else {
-			$loginUrl = $config->getLoginUrl();
+			$loginUrl = $this->facebook->getLoginUrl();
 		}
 
 		return array(
