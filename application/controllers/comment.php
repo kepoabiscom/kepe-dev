@@ -20,7 +20,6 @@ class Comment extends CI_Controller {
 
 	function ajax_() {
 		$data_fb = $this->get_user_data_facebook();
-		echo $data_fb['is_active']; exit("");
 
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
@@ -66,7 +65,7 @@ class Comment extends CI_Controller {
 				}
 			} else {
 				$status = array('status' => false, 
-	  					'msg' => 'You must be connected with Facebook Account!',
+	  					'msg' => $data_fb['is_active'],
 	  					'n1' => $n1,
 	  					'op' => $op,
 	  					'n2' => $n2
