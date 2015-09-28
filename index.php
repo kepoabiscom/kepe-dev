@@ -23,8 +23,10 @@ $host .=  "://".$_SERVER['HTTP_HOST'];
 $host .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 
 $ENV = strpos($host, 'localhost') || strpos($host, '127.0.0.1') ? 'development' : 'production';
+$STAGE = strpos($host, 'staging') ? 'staging' : 'master';
 
 define('ENVIRONMENT', $ENV);
+define('STAGE', $STAGE);
 
 /*
  *---------------------------------------------------------------
