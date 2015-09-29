@@ -18,8 +18,9 @@ class Comment extends CI_Controller {
 	}
 
 	public function get_user_data_fb() {
-		require '././facebook-sdk/facebook.php';
-		
+		//require '././facebook-sdk/facebook.php';
+		include('././facebook-sdk/config.php'); 
+
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
@@ -43,7 +44,7 @@ class Comment extends CI_Controller {
 			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
 			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {
-			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
+			$url = "<a href=" . $loginUrl() .">Login First with Facebook.</a>";
 		}
 
 		return array(
