@@ -72,7 +72,7 @@
         <input type="hidden" class="form-control" value="article" name="type">
         <div class="form-group">
             <label for="name">Name* :</label>
-            <input type="text" class="form-control" name="nick_name" placeholder="Your Name">
+            {form_name}
         </div>
         <div class="form-group">
             <label for="comment">Comment* :</label>

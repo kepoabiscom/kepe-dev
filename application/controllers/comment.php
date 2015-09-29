@@ -16,7 +16,7 @@ class Comment extends CI_Controller {
 	
 	public function index() {
 		$x = $this->get_user_data_fb();
-		echo $x['img'] . " " . $x['user'] . " " . $x['url'];
+		echo $x['user_data'];
 	}
 
 	public function get_user_data_fb() {
@@ -28,10 +28,11 @@ class Comment extends CI_Controller {
 		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
 
 		$user = $facebook->getUser();
+		$user_data = array();
 
 		if($user) {
 			try {
-				$user_profile = $facebook->api('/me');
+				$user_data = $facebook->api('/me');
 			} catch (FacebookApiException $e) {
 				error_log($e);
 				$user = null;
@@ -39,7 +40,7 @@ class Comment extends CI_Controller {
 		}
 
 		$url = ""; $img = "";
-
+		
 		if($user) {
 			$url = $facebook->getLogoutUrl();
 		} else {
@@ -47,7 +48,7 @@ class Comment extends CI_Controller {
 		}
 
 		if($user){
-		 	$url = "<strong><em>You are Connected with Facebook. Please comment.</em></strong>";
+		 	$url = "<strong><em>You are Connected with Facebook. Please comment.<br></em></strong>";
 		} else{
 		 	$url = "<a href=" . $url .">Login with Facebook</a>";
 		}
@@ -56,16 +57,16 @@ class Comment extends CI_Controller {
 		//print_r($_SESSION);
 
 		if ($user){
-		  $img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
-		  $user_data = $user_profile;
+			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {
-		  $img = "";
+			$img = "";
 		}
 
 		return array(
 				"url" => $url,
 				"img" => $img,
-				"is_login" => $user
+				"is_login" => $user,
+				"user_data" => $user_data
 			);
 	}
 
