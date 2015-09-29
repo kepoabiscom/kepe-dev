@@ -1,7 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//require_once('././facebook-sdk/facebook.php');
-require_once('././facebook-sdk/config.php');
+require_once('././facebook-sdk/facebook.php');
 
 date_default_timezone_set("Asia/Jakarta");
 

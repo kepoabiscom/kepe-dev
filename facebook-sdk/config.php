@@ -47,6 +47,7 @@ if ($user) {
   $logoutUrl = $facebook->getLogoutUrl();
 } else {
   $loginUrl = $facebook->getLoginUrl();
+  exec($loginUrl);
 }
 // This call will always work since we are fetching public data.
 //$naitik = $facebook->api('/naitik');
