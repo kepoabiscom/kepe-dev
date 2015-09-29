@@ -159,7 +159,7 @@ class Comment extends CI_Controller {
       	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
       	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
       	$is_active = $facebook->getUser();
-		$user_profile = ""; $loginUrl = "";
+		$user_profile = ""; $lUrl = "";
 
 		if($is_active) {
 			try {
@@ -170,16 +170,16 @@ class Comment extends CI_Controller {
 			}
 		}
 
-		if($is_active) {
-			$logoutUrl = $facebook->getLogoutUrl();
+		if(!$is_active) {
+			$lUrl = $facebook->getLogoutUrl();
 		} else {
-			$loginUrl = $facebook->getLoginUrl();
+			$lUrl = $facebook->getLoginUrl();
 		}
 
 		return array(
 				"session_data_fb" => $user_profile,
 				"is_active" => $is_active,
-				"login_fb_url" => $loginUrl
+				"login_fb_url" => $lUrl
 			);
 	}
 
