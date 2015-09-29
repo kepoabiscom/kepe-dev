@@ -41,7 +41,7 @@ if ($user) {
     $user = null;
   }
 }
-echo $user; exit("");
+
 // Login or logout url will be needed depending on current user state.
 if ($user) {
   $logoutUrl = $facebook->getLogoutUrl();
