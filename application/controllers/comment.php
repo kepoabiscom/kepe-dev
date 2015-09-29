@@ -15,7 +15,7 @@ class Comment extends CI_Controller {
 	}
 	
 	public function index() {
-		return 0;
+		include("./././facebook-sdk/config.php");
 	}
 
 	function ajax_() {

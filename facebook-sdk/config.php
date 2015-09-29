@@ -11,9 +11,8 @@ Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
 
 $user = $facebook->getUser();
 
-if ($user) {
+if($user) {
   try {
-    
     $user_profile = $facebook->api('/me');
   } catch (FacebookApiException $e) {
     error_log($e);
@@ -21,17 +20,18 @@ if ($user) {
   }
 }
 
+$url = "";
 
-if ($user) {
-  $logoutUrl = $facebook->getLogoutUrl();
+if($user) {
+  $url = $facebook->getLogoutUrl();
 } else {
-  $loginUrl = $facebook->getLoginUrl();
+  $url = $facebook->getLoginUrl();
 }
 
-if ($user){
-  echo "<a href=" . $logoutUr . ">Logout</a>";
+if($user){
+  echo "<a href=" . $url . ">Logout</a>";
 } else{
-  echo "<a href=" . $loginUrl .">Login with Facebook</a>";
+  echo "<a href=" . $url .">Login with Facebook</a>";
 }
 
 
