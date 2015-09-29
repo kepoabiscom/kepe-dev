@@ -38,25 +38,12 @@ class Comment extends CI_Controller {
 				$user = null;
 			}
 		}
-
 		$url = ""; $img = "";
-		
 		if($user) {
-			$url = $facebook->getLogoutUrl();
-		} else {
-			$url = $facebook->getLoginUrl();
-		}
-
-		if($user){
-		 	$url = "<strong><em>You are Connected with Facebook. Please comment.<br></em></strong>";
-		} else{
-		 	$url = "<a href=" . $url .">Login with Facebook</a>";
-		}
-
-		if ($user){
+			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
 			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {
-			$img = "";
+			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
 		}
 
 		return array(
@@ -76,7 +63,9 @@ class Comment extends CI_Controller {
 			$op = $this->random_set_captcha();
 			$n2 = $this->random_set_captcha(0);
 			if($data_fb['is_login']) {
-				if(!empty($d['nick_name']) && !empty($d['body'])) { 
+				if(!empty($d['nick_name']) && !empty($d['body'])) {
+					//$fb_name = $data_fb['user_data']['first_name'] . " " . $data_fb['user_data']['last_name'];
+					//if($fb_name != $d['nick_name'])
 					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
 						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
 						$type = $d['type']; unset($d['type']);
