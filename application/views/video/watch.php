@@ -77,7 +77,7 @@
 	<div class="comment-block">
 		{get_comment}
 	</div>
-	<p><h2>Do you want to comment?</h2></p><p>{login_url_fb}</p><br>
+	<p><h2>Do you want to comment?</h2></p><p>{login_url_fb}</p>
 	<div class ="msg"></div><br>
     <form id='form-comment' action="<?php echo base_url(). 'comment/ajax_'; ?>" method="post">
         <input type="hidden" class="form-control" value="<?php echo $video_id; ?>" name="video_id">
