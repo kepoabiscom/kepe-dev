@@ -53,9 +53,6 @@ class Comment extends CI_Controller {
 		 	$url = "<a href=" . $url .">Login with Facebook</a>";
 		}
 
-
-		//print_r($_SESSION);
-
 		if ($user){
 			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {

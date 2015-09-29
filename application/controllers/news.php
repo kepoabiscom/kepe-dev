@@ -181,7 +181,11 @@ class News extends CI_Controller {
 			
 			$title_category = $q->title_category;
 			$category = "<a href='".base_url('news/page/0/0/'.$title_category)."'>".$title_category."</a>";
-			
+			$data_fb = $comment->get_user_data_fb();
+			$form_name = "<input type='text' class='form-control' name='nick_name' placeholder='Your Name'>";
+			if($data_fb['is_login']) {
+				$form_name = "<input type='text' class='form-control' name='nick_name' value='".$data_fb['user_data']['first_name'] . " ". $data_fb['user_data']['last_name'] ."' readonly>";
+			}
 			$tag = !isset($q->tag) ? "" : $q->tag;
 			
 			$url_share = base_url("news/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
@@ -213,6 +217,8 @@ class News extends CI_Controller {
 			 				"n1" => $comment->random_set_captcha(0),
 			 				"op" => $comment->random_set_captcha(),
 			 				"n2" => $comment->random_set_captcha(0),
+			 				"login_url_fb" => $data_fb['url'],
+			 				"form_name" => $form_name,
 			 				"prev_next" => $prev_next,
 			 				"news_id" => $id,
 							"count_news_comment" => $this->news_model->count_news_comment($id)->count_news_comment,
