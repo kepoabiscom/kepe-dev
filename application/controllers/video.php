@@ -183,6 +183,11 @@ class Video extends CI_Controller {
 	 			$arr = explode("v=", $link);
 	 			$youtube_id = $arr[1];
 	 		}
+	 		$data_fb = $comment->get_user_data_fb();
+			$form_name = "<input type='text' class='form-control' name='nick_name' placeholder='Your Name'>";
+			if($data_fb['is_login']) {
+				$form_name = "<input type='text' class='form-control' name='nick_name' value='".$data_fb['user_data']['first_name'] . " ". $data_fb['user_data']['last_name'] ."' readonly>";
+			}
 			
 			$title_category = $q->title_category;
 			$category = "<a href='".base_url('video/page/0/0/'.$title_category)."'>".$title_category."</a>";
@@ -224,6 +229,8 @@ class Video extends CI_Controller {
 	 				"n1" => $comment->random_set_captcha(0),
 	 				"op" => $comment->random_set_captcha(),
 	 				"n2" => $comment->random_set_captcha(0),
+	 				"login_url_fb" => $data_fb['url'],
+			 		"form_name" => $form_name,
 	 				"prev_next" => $prev_next,
 	 				"video_id" => $id,
 					"count_video_comment" => $this->video_model->count_video_comment($id)->count_video_comment,

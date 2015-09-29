@@ -64,7 +64,7 @@
 	<div class="comment-block">
 		{get_comment}
 	</div>
-	<p><h2>You will comment?</h2></p>
+	<p><h2>Do you want to comment?</h2>{login_url_fb}<br>
 	<div class ="msg"></div><br>
     <form id='form-comment' action="<?php echo base_url(). 'comment/ajax_'; ?>" method="post">
         <input type="hidden" class="form-control" value="<?php echo $article_id; ?>" name="article_id">
@@ -72,7 +72,7 @@
         <input type="hidden" class="form-control" value="article" name="type">
         <div class="form-group">
             <label for="name">Name* :</label>
-            <input type="text" class="form-control" name="nick_name" placeholder="Your Name">
+            {form_name}
         </div>
         <div class="form-group">
             <label for="comment">Comment* :</label>

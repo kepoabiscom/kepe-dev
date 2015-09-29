@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require './././facebook-sdk/facebook.php';
+
 date_default_timezone_set("Asia/Jakarta");
 
 class Comment extends CI_Controller {
@@ -13,50 +15,99 @@ class Comment extends CI_Controller {
 	}
 	
 	public function index() {
-		return 0;
+		$x = $this->get_user_data_fb();
+		echo $x['user_data'];
+	}
+
+	public function get_user_data_fb() {
+		$facebook = new Facebook(array(
+		  'appId'  => '876274572459160',
+		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
+		));
+		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
+		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
+
+		$user = $facebook->getUser();
+		$user_data = array();
+
+		if($user) {
+			try {
+				$user_data = $facebook->api('/me');
+			} catch (FacebookApiException $e) {
+				error_log($e);
+				$user = null;
+			}
+		}
+		$url = ""; $img = "";
+		if($user) {
+			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
+			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
+		} else {
+			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
+		}
+
+		return array(
+				"url" => $url,
+				"img" => $img,
+				"is_login" => $user,
+				"user_data" => $user_data
+			);
 	}
 
 	function ajax_() {
+		$data_fb = $this->get_user_data_fb();
+
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
 			$n1 = $this->random_set_captcha(0);
 			$op = $this->random_set_captcha();
 			$n2 = $this->random_set_captcha(0);
-			if(!empty($d['nick_name']) && !empty($d['body'])) { 
-				if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
-					unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
-					$type = $d['type']; unset($d['type']);
-					$this->comment_model->post_comment($type, $d);
-					if($type == "news")
-						$id = $d['news_id'];
-					if($type == "article")
-						$id = $d['article_id'];
-					if($type == "video")
-						$id = $d['video_id'];
+			if($data_fb['is_login']) {
+				if(!empty($d['nick_name']) && !empty($d['body'])) {
+					//$fb_name = $data_fb['user_data']['first_name'] . " " . $data_fb['user_data']['last_name'];
+					//if($fb_name != $d['nick_name'])
+					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
+						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
+						$type = $d['type']; unset($d['type']);
+						$this->comment_model->post_comment($type, $d);
+						if($type == "news")
+							$id = $d['news_id'];
+						if($type == "article")
+							$id = $d['article_id'];
+						if($type == "video")
+							$id = $d['video_id'];
 
-					$status = array('status' => true, 
-			  					'msg' => 'Success',
-			  					'get_comment' => $this->get_comment($type, $id, 1),
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-		  			);	
+						$status = array('status' => true, 
+				  					'msg' => 'Success',
+				  					'get_comment' => $this->get_comment($type, $id, 1),
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+			  			);	
+					} else {
+						$status = array('status' => false, 
+				  					'msg' => 'Your answer is incorrect!',
+				  					'result' => $d['answer'],
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+				  			);	
+					}			
 				} else {
 					$status = array('status' => false, 
-			  					'msg' => 'Your answer is incorrect!',
-			  					'result' => $d['answer'],
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-			  			);	
-				}			
+				  					'msg' => 'Your comment is required!',
+				  					'n1' => $n1,
+				  					'op' => $op,
+				  					'n2' => $n2
+				  			);
+				}
 			} else {
 				$status = array('status' => false, 
-			  					'msg' => 'Nick name and your comment is required!',
-			  					'n1' => $n1,
-			  					'op' => $op,
-			  					'n2' => $n2
-			  			);
+	  					'msg' => "You must login first with Facebook.",
+	  					'n1' => $n1,
+	  					'op' => $op,
+	  					'n2' => $n2
+	  			);
 			}
 		} else {
 			$status = array('status' => false, 
