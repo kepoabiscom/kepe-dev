@@ -156,8 +156,8 @@ class Comment extends CI_Controller {
 	        'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
 	        'cookie' => true
       	));
-      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
-      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
+      	//Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
+      	//Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
       	$is_active = $facebook->getUser();
 		$user_profile = ""; $lUrl = "";
 
@@ -170,7 +170,7 @@ class Comment extends CI_Controller {
 			}
 		}
 
-		if(!$is_active) {
+		if($is_active) {
 			$lUrl = $facebook->getLogoutUrl();
 		} else {
 			$lUrl = $facebook->getLoginUrl();
