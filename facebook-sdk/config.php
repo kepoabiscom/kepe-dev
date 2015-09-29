@@ -48,3 +48,5 @@ if ($user) {
 } else {
   $loginUrl = $facebook->getLoginUrl();
 }
+
+?>
