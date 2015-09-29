@@ -95,7 +95,7 @@ class Comment extends CI_Controller {
 					}			
 				} else {
 					$status = array('status' => false, 
-				  					'msg' => 'Nick name and your comment is required!',
+				  					'msg' => 'Your comment is required!',
 				  					'n1' => $n1,
 				  					'op' => $op,
 				  					'n2' => $n2
