@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-//require_once APPPATH . "../facebook-sdk/facebook.php";
+require './././facebook-sdk/facebook.php';
 
 date_default_timezone_set("Asia/Jakarta");
 
@@ -15,8 +15,11 @@ class Comment extends CI_Controller {
 	}
 	
 	public function index() {
-		require './././facebook-sdk/facebook.php';
+		$x = $this->get_user_data_fb();
+		echo $x['img'] . " " . $x['user'] . " " . $x['url'];
+	}
 
+	public function get_user_data_fb() {
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
@@ -35,7 +38,7 @@ class Comment extends CI_Controller {
 		  }
 		}
 
-		$url = "";
+		$url = ""; $img = "";
 
 		if($user) {
 		  $url = $facebook->getLogoutUrl();
@@ -44,20 +47,26 @@ class Comment extends CI_Controller {
 		}
 
 		if($user){
-		  echo "<a href=" . $url . ">Logout</a>";
+		 	$url = "<a href=" . $url . ">Logout</a>";
 		} else{
-		  echo "<a href=" . $url .">Login with Facebook</a>";
+		 	$url = "<a href=" . $url .">Login with Facebook</a>";
 		}
 
 
-		print_r($_SESSION);
+		//print_r($_SESSION);
 
 		if ($user){
-		  echo "<img src='https://graph.facebook.com/'". $user. "/picture'>";
-		  print_r($user_profile);
+		  $img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
+		  //print_r($user_profile);
 		} else {
-		  echo "<strong><em>You are not Connected.</em></strong>";
+		  $img = "<strong><em>You are not Connected.</em></strong>";
 		}
+
+		return array(
+				"url" => $url,
+				"img" => $img,
+				"user" => $user
+			);
 	}
 
 	function ajax_() {
