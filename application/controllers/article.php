@@ -167,32 +167,6 @@ class Article extends CI_Controller {
 		
 		if($q == null) show_404();
 		else {
-			$facebook = new Facebook(array(
-	        'appId'  => '876274572459160',
-	        'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
-	        'cookie' => true,
-	        'domain' => base_url()
-	      	));
-	      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
-	      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
-	      	$is_active = $facebook->getUser();
-			$user_profile = ""; $lUrl = "";
-
-			if($is_active) {
-				try {
-					$user_profile = $facebook->api('/me');
-				} catch (FacebookApiException $e) {
-					error_log($e);
-					$is_active = null;
-				}
-			}
-
-			if($is_active) {
-				$lUrl = $facebook->getLogoutUrl();
-			} else {
-				$lUrl = $facebook->getLoginUrl();
-			}
-
 			$comment = new Comment();
 
 			$prev_next = $this->prev_next($id);
@@ -203,7 +177,7 @@ class Article extends CI_Controller {
 			
 			$title_category = $q->title_category;
 			$category = "<a href='".base_url('article/page/0/0/'.$title_category)."'>".$title_category."</a>";
-			$data_fb = $comment->get_user_data_facebook();
+			$data_fb = $comment->get_user_data_fb();
 			$tag = !isset($q->tag) ? "" : $q->tag;
 			
 			$url_share = base_url("article/read/" .  $year.'/'.$month.'/'.$day.'/'.$id . "/" . $this->slug($title) . "");
@@ -234,7 +208,7 @@ class Article extends CI_Controller {
 			 				"n1" => $comment->random_set_captcha(0),
 			 				"op" => $comment->random_set_captcha(),
 			 				"n2" => $comment->random_set_captcha(0),
-			 				"login_url_fb" => $is_active,
+			 				"login_url_fb" => $data_fb['user'],
 			 				"prev_next" => $prev_next,
 			 				"article_id" => $id,
 							"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,
