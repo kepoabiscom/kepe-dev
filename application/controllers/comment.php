@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require '././facebook-sdk/facebook.php';
+
 date_default_timezone_set("Asia/Jakarta");
 
 class Comment extends CI_Controller {
@@ -18,12 +20,6 @@ class Comment extends CI_Controller {
 	}
 
 	public function get_user_data_fb() {
-		//require '././facebook-sdk/facebook.php';
-		$user_profile = "";
-		
-		include('././facebook-sdk/config.php'); 
-
-		/*
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
@@ -41,20 +37,20 @@ class Comment extends CI_Controller {
 				error_log($e);
 				$user = null;
 			}
-		}*/
+		}
 		$url = ""; $img = "";
 		if($user) {
 			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
 			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {
-			$url = "<a href=" . $loginUrl .">Login First with Facebook.</a>";
+			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
 		}
 
 		return array(
 				"url" => $url,
 				"img" => $img,
 				"is_login" => $user,
-				"user_data" => $user_profile
+				"user_data" => $user_data
 			);
 	}
 
