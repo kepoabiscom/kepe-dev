@@ -103,7 +103,7 @@ class Comment extends CI_Controller {
 				}
 			} else {
 				$status = array('status' => false, 
-	  					'msg' => $data_fb['is_active'],
+	  					'msg' => "You must login first with Facebook.",
 	  					'n1' => $n1,
 	  					'op' => $op,
 	  					'n2' => $n2
