@@ -70,14 +70,14 @@ class Comment extends CI_Controller {
 	}
 
 	function ajax_() {
-		$data_fb = $this->get_user_data_facebook();
+		$data_fb = $this->get_user_data_fb();
 
 		if (isset($_SERVER['HTTP_X_REQUESTED_WITH'])) {
 			$d = $this->input->post(null, true);
 			$n1 = $this->random_set_captcha(0);
 			$op = $this->random_set_captcha();
 			$n2 = $this->random_set_captcha(0);
-			if($data_fb['is_active']) {
+			if($data_fb['user']) {
 				if(!empty($d['nick_name']) && !empty($d['body'])) { 
 					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
 						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
@@ -199,40 +199,6 @@ class Comment extends CI_Controller {
 
 	    if (!$full) $string = array_slice($string, 0, 1);
 	    return $string ? "<em>" . implode(', ', $string) . " ago</em>" : "<em>Just now</em>";
-	}
-
-	function get_user_data_facebook() {
-		$facebook = new Facebook(array(
-	        'appId'  => '876274572459160',
-	        'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
-	        'cookie' => true,
-	        'domain' => base_url()
-      	));
-      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
-      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
-      	$is_active = $facebook->getUser();
-		$user_profile = ""; $lUrl = "";
-
-		if($is_active) {
-			try {
-				$user_profile = $facebook->api('/me');
-			} catch (FacebookApiException $e) {
-				error_log($e);
-				$is_active = null;
-			}
-		}
-
-		if($is_active) {
-			$lUrl = $facebook->getLogoutUrl();
-		} else {
-			$lUrl = $facebook->getLoginUrl();
-		}
-
-		return array(
-				"session_data_fb" => $user_profile,
-				"is_active" => $is_active,
-				"login_fb_url" => $lUrl
-			);
 	}
 
 }
