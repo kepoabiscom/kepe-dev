@@ -28,19 +28,20 @@ if ($user) {
   $loginUrl = $facebook->getLoginUrl();
 }
 
-if ($user):
+if ($user){
   echo "<a href=" . $logoutUr . ">Logout</a>";
-else:
+} else{
   echo "<a href=" . $loginUrl .">Login with Facebook</a>";
-endif
+}
+
 
 print_r($_SESSION);
 
-if ($user):
+if ($user){
   echo "<img src='https://graph.facebook.com/'". $user. "/picture'>";
   print_r($user_profile);
-else:
+} else {
   echo "<strong><em>You are not Connected.</em></strong>";
-endif
+}
 
 ?>
