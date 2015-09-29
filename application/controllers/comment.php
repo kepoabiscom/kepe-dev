@@ -1,6 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require '././facebook-sdk/facebook.php';
+//require_once('././facebook-sdk/facebook.php');
+require_once('././facebook-sdk/config.php');
 
 date_default_timezone_set("Asia/Jakarta");
 
@@ -43,7 +44,7 @@ class Comment extends CI_Controller {
 			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
 			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
 		} else {
-			$url = "<a href=" . $facebook->getLoginUrl() ." target='_blank'>Login First with Facebook.</a>";
+			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
 		}
 
 		return array(
