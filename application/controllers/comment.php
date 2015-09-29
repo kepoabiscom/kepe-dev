@@ -154,10 +154,11 @@ class Comment extends CI_Controller {
 		$facebook = new Facebook(array(
 	        'appId'  => '876274572459160',
 	        'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
-	        'cookie' => true
+	        'cookie' => true,
+	        'domain' => base_url()
       	));
-      	//Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
-      	//Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
+      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
+      	Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
       	$is_active = $facebook->getUser();
 		$user_profile = ""; $lUrl = "";
 
