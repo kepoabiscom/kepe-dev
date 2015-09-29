@@ -208,7 +208,7 @@ class Article extends CI_Controller {
 			 				"n1" => $comment->random_set_captcha(0),
 			 				"op" => $comment->random_set_captcha(),
 			 				"n2" => $comment->random_set_captcha(0),
-			 				"login_url_fb" => $data_fb['user'],
+			 				"login_url_fb" => $data_fb['url'],
 			 				"prev_next" => $prev_next,
 			 				"article_id" => $id,
 							"count_article_comment" => $this->article_model->count_article_comment($id)->count_article_comment,

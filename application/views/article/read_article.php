@@ -64,7 +64,7 @@
 	<div class="comment-block">
 		{get_comment}
 	</div>
-	<p><h2>You will comment?</h2><a href="{login_url_fb}">Login First with Facebook</a></p>
+	<p><h2>You will comment?</h2>{login_url_fb}
 	<div class ="msg"></div><br>
     <form id='form-comment' action="<?php echo base_url(). 'comment/ajax_'; ?>" method="post">
         <input type="hidden" class="form-control" value="<?php echo $article_id; ?>" name="article_id">

@@ -30,24 +30,24 @@ class Comment extends CI_Controller {
 		$user = $facebook->getUser();
 
 		if($user) {
-		  try {
-		    $user_profile = $facebook->api('/me');
-		  } catch (FacebookApiException $e) {
-		    error_log($e);
-		    $user = null;
-		  }
+			try {
+				$user_profile = $facebook->api('/me');
+			} catch (FacebookApiException $e) {
+				error_log($e);
+				$user = null;
+			}
 		}
 
 		$url = ""; $img = "";
 
 		if($user) {
-		  $url = $facebook->getLogoutUrl();
+			$url = $facebook->getLogoutUrl();
 		} else {
-		  $url = $facebook->getLoginUrl();
+			$url = $facebook->getLoginUrl();
 		}
 
 		if($user){
-		 	$url = "<a href=" . $url . ">Logout</a>";
+		 	$url = "<strong><em>You are Connected with Facebook. Please comment.</em></strong>";
 		} else{
 		 	$url = "<a href=" . $url .">Login with Facebook</a>";
 		}
@@ -57,15 +57,15 @@ class Comment extends CI_Controller {
 
 		if ($user){
 		  $img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
-		  //print_r($user_profile);
+		  $user_data = $user_profile;
 		} else {
-		  $img = "<strong><em>You are not Connected.</em></strong>";
+		  $img = "";
 		}
 
 		return array(
 				"url" => $url,
 				"img" => $img,
-				"user" => $user
+				"is_login" => $user
 			);
 	}
 
@@ -77,7 +77,7 @@ class Comment extends CI_Controller {
 			$n1 = $this->random_set_captcha(0);
 			$op = $this->random_set_captcha();
 			$n2 = $this->random_set_captcha(0);
-			if($data_fb['user']) {
+			if($data_fb['is_login']) {
 				if(!empty($d['nick_name']) && !empty($d['body'])) { 
 					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
 						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
