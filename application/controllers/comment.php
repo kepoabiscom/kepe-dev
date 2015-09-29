@@ -1,7 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once('././facebook-sdk/facebook.php');
-
 date_default_timezone_set("Asia/Jakarta");
 
 class Comment extends CI_Controller {
@@ -20,6 +18,8 @@ class Comment extends CI_Controller {
 	}
 
 	public function get_user_data_fb() {
+		require '././facebook-sdk/facebook.php';
+		
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
