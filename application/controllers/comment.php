@@ -20,6 +20,7 @@ class Comment extends CI_Controller {
 	}
 
 	public function get_user_data_fb() {
+		parse_str($_SERVER['QUERY_STRING'], $_REQUEST);
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
