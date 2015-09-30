@@ -44,7 +44,7 @@ class Comment extends CI_Controller {
 		$url = ""; $img = "";
 		if($user) {
 			$url = "<strong><em>You are connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
-			$img = "https://graph.facebook.com/'". $user. "/picture";
+			$img = "https://graph.facebook.com/". $user. "/picture";
 		} else {
 			$url = "<a href=" . $facebook->getLoginUrl() .">Login first with Facebook.</a>";
 		}
