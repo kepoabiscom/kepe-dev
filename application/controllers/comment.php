@@ -43,10 +43,10 @@ class Comment extends CI_Controller {
 		}
 		$url = ""; $img = "";
 		if($user) {
-			$url = "<strong><em>You are Connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
-			$img = "<img src='https://graph.facebook.com/'". $user. "/picture'>";
+			$url = "<strong><em>You are connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
+			$img = "https://graph.facebook.com/'". $user. "/picture";
 		} else {
-			$url = "<a href=" . $facebook->getLoginUrl() .">Login First with Facebook.</a>";
+			$url = "<a href=" . $facebook->getLoginUrl() .">Login first with Facebook.</a>";
 		}
 
 		return array(
@@ -72,6 +72,8 @@ class Comment extends CI_Controller {
 					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
 						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
 						$type = $d['type']; unset($d['type']);
+						$d['img'] = $data_fb['img'];
+						$d['ip_address'] = $_SERVER['REMOTE_ADDR'];
 						$this->comment_model->post_comment($type, $d);
 						if($type == "news")
 							$id = $d['news_id'];
@@ -130,8 +132,11 @@ class Comment extends CI_Controller {
 			$data = "";
 			foreach($result as $row) {
 				$date = explode(" ", $row->created_date);
-
-				$data .= "<div class='new-comment'><img style='margin-bottom: 10px;' class=''img-responsive' src='http://www.gravatar.com/avatar/' width='68' height='68' />";
+				$img = "http://www.gravatar.com/avatar/";
+				if($row->img != null){
+					$img = $row->img;
+				}
+				$data .= "<div class='new-comment'><img style='margin-bottom: 10px;' class=''img-responsive' src='" .$img. "' width='68' height='68' />";
 				$data .= "<p>" . $this->get_time_elapsed_string($row->created_date) . " - " .date("d F Y", strtotime($date[0])) . "";
 				$data .= ",&nbsp;";
 				$data .= "Posted By " . $row->nick_name . "</p>";

@@ -91,6 +91,7 @@
                                                 <th>Type</th>
                                                 <th>Nick Name</th>
                                                 <th>Comment</th>
+                                                <th>IP Address</th>
                                                 <th>Created Date</th>
                                                 <th>More</th>
                                             </tr>
@@ -127,6 +128,7 @@
                                 { "data": "type" },
                                 { "data": "nick_name" },
                                 { "data": "body" },
+                                { "data": "ip_address" },
                                 { "data": "created_date" },
                                 { "data": "action" },
                             ]
