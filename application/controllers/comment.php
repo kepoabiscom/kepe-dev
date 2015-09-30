@@ -67,13 +67,14 @@ class Comment extends CI_Controller {
 			$n2 = $this->random_set_captcha(0);
 			if($data_fb['is_login']) {
 				if(!empty($d['nick_name']) && !empty($d['body'])) {
-					//$fb_name = $data_fb['user_data']['first_name'] . " " . $data_fb['user_data']['last_name'];
+					$fb_name = $data_fb['user_data']['first_name'] . " " . $data_fb['user_data']['last_name'];
 					//if($fb_name != $d['nick_name'])
 					if($this->get_result_captcha($d['n1'], $d['op'], $d['n2']) == $d['answer']) {
 						unset($d['n1']); unset($d['n2']); unset($d['op']); unset($d['answer']);
 						$type = $d['type']; unset($d['type']);
 						$d['img'] = $data_fb['img'];
 						$d['ip_address'] = $_SERVER['REMOTE_ADDR'];
+						$d['nick_name'] = $fb_name;
 						$this->comment_model->post_comment($type, $d);
 						if($type == "news")
 							$id = $d['news_id'];
