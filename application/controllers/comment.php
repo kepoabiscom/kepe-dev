@@ -25,7 +25,7 @@ class Comment extends CI_Controller {
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
 		  'cookie' => true
-		  //'redirect_uri' => 'kepoabis.com'
+		  'redirect_uri' => 'staging.kepoabis.com'
 		));
 		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
 		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYHOST] = 2;
