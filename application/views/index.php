@@ -101,6 +101,13 @@
 				text-decoration: none;
 			}
 		}
+
+		.btn-facebook {
+    		background-color: #4286c1;
+		    background-image: -moz-linear-gradient(center top , #4286c1 0%, #3d7db4 100%);
+		    border: 1px solid #2e6697;
+		    color: #fff;
+		}
 	</style>
 	<script src="<?php echo base_url('assets/js/jquery-1.11.1.min.js'); ?>"></script>
     <script src="<?php echo base_url('assets/js/bootstrap.min.js'); ?>"></script>
