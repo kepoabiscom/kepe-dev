@@ -270,6 +270,7 @@ class News extends CI_Controller {
 		    $keyword = $this->input->get('title', true);
 			$config = $this->page_config(array('filter', $keyword));
 
+			$this->utils = new Utils();
 		    $data = array(
 		   			'list_news' => $this->get_list_news($config['uri'], $config['per_page'], $keyword),
 		   			'link' => $this->pagination->create_links(),

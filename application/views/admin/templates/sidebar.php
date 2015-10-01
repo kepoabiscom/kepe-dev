@@ -94,7 +94,7 @@
 		<?php } ?>
         <li>
             <?php $x = $this->session->userdata('last_login'); ?>
-            <a><?php echo "Last Login From: <br>". $x['username']." " . $x['ip_address']; ?></a>
+            <a></a>
         </li>
     </ul>
 </div>

@@ -272,7 +272,8 @@ class Article extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		    $keyword = $this->input->get('title', true);
 			$config = $this->page_config(array('filter', $keyword));
-
+			
+			$this->utils = new Utils();
 		    $data = array(
 		   			'list_article' => $this->get_list_article($config['uri'], $config['per_page'], $keyword),
 		   			'link' => $this->pagination->create_links(),

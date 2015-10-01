@@ -148,7 +148,7 @@ class Comment extends CI_Controller {
 	}
 
 	function random_set_captcha($op=1) {
-		$n = rand(100, 999);
+		$n = rand(1, 9);
 		if($op == 0) return $n;
 		else {
 			$op = rand(1, 3);
