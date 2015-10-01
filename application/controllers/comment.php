@@ -24,7 +24,7 @@ class Comment extends CI_Controller {
 		$facebook = new Facebook(array(
 		  'appId'  => '876274572459160',
 		  'secret' => 'c44768470ff9f9d7a52784f6f5fbfd9a',
-		  'cookie' => true
+		  'cookie' => true,
 		  'redirect_uri' => 'staging.kepoabis.com'
 		));
 		Facebook::$CURL_OPTS[CURLOPT_SSL_VERIFYPEER] = false;
