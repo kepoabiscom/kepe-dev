@@ -37,7 +37,7 @@ $(document).ready(function() {
                     }
                     formObj.trigger('reset');
                     submit.val('Submit').removeAttr('disabled');
-                }, 500);
+                }, 10);
             }
         });
         return false;
