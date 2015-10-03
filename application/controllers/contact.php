@@ -16,7 +16,6 @@ class Contact extends CI_Controller {
 		$this->load->library("parser");
 		$this->load->library("menu");
 		$this->load->library('email');
-		$this->load->library('form_validation');
 	}
 	
 	/**
@@ -54,11 +53,19 @@ class Contact extends CI_Controller {
 			} else {
 				if($this->validate_email($data['email'])) {
 					$data['ip_address'] = $_SERVER['REMOTE_ADDR'];
-					$this->contact_model->insert_message($data);
-					$status = array(
-							"status" => true,
-							"msg" => "Your message have been sent successfully."
-						);	
+					$is_sent = $this->send_to_email($data['email'], $data['from_name']);
+					if($is_sent) {
+						$this->contact_model->insert_message($data);
+						$status = array(
+								"status" => true,
+								"msg" => "Your message has been sent successfully."
+							);
+					} else {
+						$status = array(
+								"status" => false,
+								"msg" => "There's an error with our mail server."
+							);
+					}	
 				} else {
 					$status = array(
 							"status" => false,
@@ -100,5 +107,53 @@ class Contact extends CI_Controller {
 			return false;
 		}
 		return true;
+	}
+
+	function send_to_email($to, $from_name) {
+		$subject = '[KepoAbis.com] Your message has been sent to KepoAbis';
+		$from = 'contact@kepoabis.com';
+		$message = 'Dear '.$from_name.',
+					<br>
+					<br>Anda (atau seseorang) baru saja mengirimkan pesan menggunakan alamat email '.$to.' ke kontak kami,
+					terima kasih telah menghubungi kami.
+					<p><br>
+					Best Regards,
+					Haamill Productions
+					<br>
+					<br>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati, Jakarta Timur 13540, Indonesia
+					<br><a href="http://kepoabis.com">KepoAbis.com</a> by Haamill Productions
+					<br>Phone: 085697309204
+					<br>Email: hi@kepoabis.com or contact@kepoabis.com
+				</p>';
+        $body =
+        	'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+			<html xmlns="http://www.w3.org/1999/xhtml">
+			<head>
+			    <meta http-equiv="Content-Type" content="text/html; charset='.strtolower(config_item('charset')).'" />
+			    <title>'.html_escape($subject).'</title>
+			    <style type="text/css">
+			        body {
+			            font-family: Arial, Verdana, Helvetica, sans-serif;
+			            font-size: 16px;
+			        }
+			    </style>
+			</head>
+			<body>
+				<p>'.$message.'</p>
+			</body>
+			</html>';
+        //$body = $this->email->full_html($subject, $message);
+
+        $result = $this->email
+            ->from($from)
+            //->reply_to('herman.wahyudi@tokopedia.com')
+            ->to($to)
+            ->subject($subject)
+            ->message($body)
+            ->send();
+		
+        return $result;
+        
+        //echo $this->email->print_debugger(); exit("");
 	}
 }
