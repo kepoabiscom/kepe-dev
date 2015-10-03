@@ -117,8 +117,8 @@ class Contact extends CI_Controller {
 					<br>Anda (atau seseorang) baru saja mengirimkan pesan menggunakan alamat email '.$to.' ke kontak kami,
 					terima kasih telah menghubungi kami.
 					<p><br>
-					Best Regards,
-					Haamill Productions
+					<strong>Best Regards,<br>
+					Haamill Productions</strong>
 					<br>
 					<br>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati, Jakarta Timur 13540, Indonesia
 					<br><a href="http://kepoabis.com">KepoAbis.com</a> by Haamill Productions

@@ -22,7 +22,7 @@ $(document).ready(function() {
                     }
                     $('.msg').html(alert);
                     obj.trigger('reset');
-                    act.val('Submit').removeAttr('disabled');
+                    act.val('SEND').removeAttr('disabled');
                 }, 10);
             }
         });
