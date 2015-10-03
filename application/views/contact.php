@@ -15,12 +15,12 @@
 	</div>
 </div>
 <div class="col-md-6">
-	{alert}
-	<form action="{sending_message}" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
+	<div class ="msg"></div><br>
+	<form id="form-contact" action="<?php echo base_url(). 'contact/send_message'; ?>" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
 		<div class="form-group">
 			<div class="input-group">
 			<span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-			<input type="text" class="form-control" placeholder="Name" value="" name="name">
+			<input type="text" class="form-control" placeholder="Name" value="" name="from_name">
 			</div>
 		</div>
 		<div class="form-group">
@@ -43,10 +43,12 @@
 		</div>
 		<div class="form-group">
 			<input type="reset" value="CLEAR" class="btn btn-primary">
-			<input type="submit" value="SEND" class="btn btn-primary">
+			<input type="submit" value="SEND" id='submit' name ='submit' class="btn btn-primary">
 		</div>
 	</form>
 </div>
 <div class="col-md-6">
 	{contact_footer}                     
 </div>
+
+<script type="text/javascript" src="<?php echo base_url() . 'ajax/send_message_contact.js'; ?>"></script>
