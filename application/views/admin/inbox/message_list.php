@@ -133,7 +133,7 @@
                         var t = $('#message-list').DataTable( {
                             "processing": true,
                             "ajax": "<?php echo base_url(); ?>admin/inbox-message/get_list_message",
-                            "order": [[ 3, 'desc' ]],
+                            "order": [[ 6, 'desc' ]],
                             "pagingType": "simple_numbers",
                             "columns": [
                                 { "data": "no" },

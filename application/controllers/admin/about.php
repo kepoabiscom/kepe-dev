@@ -17,7 +17,7 @@ class About extends CI_Controller {
 	function index() {
 		$this->utils = new Utils();
 		$this->utils->set_counter_comment_notif();
-
+		$this->utils->set_counter_new_message();
 		if($this->session->userdata('logged_in')) {
 			 $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {

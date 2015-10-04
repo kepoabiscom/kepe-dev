@@ -20,12 +20,13 @@ class Dashboard extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
+		$this->utils = new Utils();
+		$this->utils->set_counter_comment_notif();
+		$this->utils->set_counter_new_message();
+		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		    
-		    $this->utils = new Utils();
-			$this->utils->set_counter_comment_notif();
-			$this->utils->set_counter_new_message();
 		    $data = $this->get_api_weather(); 
 		    $this->parser->parse('admin/dashboard', $data);
 	   	} else {
@@ -42,11 +43,19 @@ class Dashboard extends CI_Controller {
 		$kelvin = $parsed_json->main->temp;
 		$celcius = $kelvin - 273.15;
 		$weather = $parsed_json->weather[0]->main;
+		$celcius = ceil($celcius);
+		$color = "primary";
+		if($celcius > 34) {
+			$color = "red";
+		}else if($celcius >= 30 && $celcius <= 34) {
+			$color = "green";
+		} 
 		
 		return array("city" => $city,
 					"weather" => $weather,
-					"celcius" => ceil($celcius),
-					"now" => $this->get_now()
+					"celcius" => $celcius,
+					"now" => $this->get_now(),
+					"color" => $color
 			);
 	}
 

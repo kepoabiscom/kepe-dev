@@ -23,8 +23,8 @@ class Inbox_message extends CI_Controller {
 		     	$data = array(
 		     				"success" => $this->notification()
 		     			);
-		     	$this->contact_model->update_has_read();
 		     	$this->session->unset_userdata("counter_new_message");
+		     	$this->contact_model->update_has_read();
 		     	$count = $this->contact_model->count_notif()->counter_new_message;
 		     	$this->session->set_userdata("counter_new_message",
 		     				array("counter" => $count)
