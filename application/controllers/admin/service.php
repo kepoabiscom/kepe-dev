@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-require_once APPPATH . 'controllers/admin/comment_notif.php'; 
+require_once APPPATH . 'libraries/utils.php'; 
 
 class Service extends CI_Controller {
 
@@ -14,17 +14,12 @@ class Service extends CI_Controller {
 	}
 
 	function index() {
-		/* Set counter notif new comment */
-		$comment_notif = new Comment_notif();
-	    $t = $comment_notif->counter_comment_notif();
-	    $this->session->set_userdata("counter_comment_notif",
- 			array("counter" => $t)
- 		);
- 		
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 			 $success = $this->notification();
-			 
+			 $this->utils = new Utils();
+			 $this->utils->set_counter_comment_notif();
+			 $this->utils->set_counter_new_message();
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
 			     $data = array(
 					'data_service' => $this->get_list_service(),

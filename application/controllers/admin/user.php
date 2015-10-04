@@ -29,15 +29,14 @@ class User extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		 	if($session_data['role'] == 'superadmin') {
 				$success = $this->notification();
 				$config = $this->page_config();
-
+				$this->utils = new Utils();
+			 	$this->utils->set_counter_comment_notif();
+			 	$this->utils->set_counter_new_message();
 				$data = array(
 							'username' => $session_data['username'],
 							'data_user' => $this->get_user_list($config['uri'], $config['per_page']),

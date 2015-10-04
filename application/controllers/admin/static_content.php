@@ -14,13 +14,12 @@ class Static_content extends CI_Controller {
 	}
 
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 			 $success = $this->notification();
-			 
+			 $this->utils = new Utils();
+			 $this->utils->set_counter_comment_notif();
+			 $this->utils->set_counter_new_message();
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
 			     $data = array(
 					'data_static_content' => $this->get_list_static_content(),

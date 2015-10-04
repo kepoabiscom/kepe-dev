@@ -61,6 +61,7 @@ class Contact extends CI_Controller {
 								"msg" => "Your message has been sent successfully."
 							);
 					} else {
+						$this->output->set_status_header('500');
 						$status = array(
 								"status" => false,
 								"msg" => "There's an error with our mail server."
@@ -73,8 +74,8 @@ class Contact extends CI_Controller {
 						);
 				}
 			}
-			
 		} else {
+			$this->output->set_status_header('401');
 			$status = array(
 						"status" => false,
 						"msg" => "Ajax request isn't authorized."

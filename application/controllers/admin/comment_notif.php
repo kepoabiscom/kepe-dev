@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
+require_once APPPATH . 'libraries/utils.php'; 
+
 class Comment_notif extends CI_Controller {
 
 	function __construct() {
@@ -16,7 +18,8 @@ class Comment_notif extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
-
+		     	$this->utils = new Utils();
+				$this->utils->set_counter_new_message();
 		     	$data = array(
 		     				"success" => $this->notification()
 		     			);

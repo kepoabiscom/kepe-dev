@@ -44,6 +44,10 @@ function deleted(t) {
     $('.close').trigger('click');
 }
 
+function detailMessage(from_name, subject, created_time) {
+    $('a[href="#modal_read"]').trigger('click');
+}
+
 function read_image(input) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();

@@ -30,9 +30,10 @@ class Video extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
-		     
+		     	 $this->utils = new Utils();
+			 	 $this->utils->set_counter_comment_notif();
+			 	 $this->utils->set_counter_new_message();
 			     $config = $this->page_config();
-
 			     $data = array(
 			     			'list_video' => $this->get_list_video($config['uri'], $config['per_page']),
 			     			'link' => $this->pagination->create_links(),

@@ -20,14 +20,14 @@ class Dashboard extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
-
 		if($this->session->userdata('logged_in')) {
-		     $session_data = $this->session->userdata('logged_in');
-		     $data = $this->get_api_weather(); 
-
-		     $this->parser->parse('admin/dashboard', $data);
+		    $session_data = $this->session->userdata('logged_in');
+		    
+		    $this->utils = new Utils();
+			$this->utils->set_counter_comment_notif();
+			$this->utils->set_counter_new_message();
+		    $data = $this->get_api_weather(); 
+		    $this->parser->parse('admin/dashboard', $data);
 	   	} else {
 		     redirect('admin/login', 'refresh');
 	   	}

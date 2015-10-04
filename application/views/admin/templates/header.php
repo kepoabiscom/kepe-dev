@@ -16,6 +16,9 @@
             <li>
                 <a href="<?php echo base_url() . "admin/comment-notif"; ?>"><span class="label label-default"><?php $data = $this->session->userdata('counter_comment_notif'); echo $data['counter']; ?> New Comments</span></a>
             </li>
+            <li>
+                <a href="<?php echo base_url() . "admin/inbox-message"; ?>"><span class="label label-primary"><?php $data = $this->session->userdata('counter_new_message'); echo $data['counter']; ?> New Messages</span></a>
+            </li>
             <li class="divider"></li>
             <li>
                 <a href="<?php echo base_url() . "admin/comment-notif"; ?>">View All</a>

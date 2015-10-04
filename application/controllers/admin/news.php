@@ -21,12 +21,12 @@ class News extends CI_Controller {
 	}
 
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 
+		    $this->utils = new Utils();
+			$this->utils->set_counter_comment_notif();
+			$this->utils->set_counter_new_message();
 		    $config = $this->page_config();
 
 		    $data = array(
