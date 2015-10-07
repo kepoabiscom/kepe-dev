@@ -14,16 +14,20 @@ $(document).ready(function() {
             },
             success: function(data) {
                 var alert = "";
-                setTimeout(function() { 
-                    if(data.status){
-                        alert = "<div class='alert alert-success fade in'>"+ data.msg +"</div>";
-                    } else {
-                        alert = "<div class='alert alert-danger'>"+data.msg+"</div>";
-                    }
-                    $('.msg').html(alert);
-                    obj.trigger('reset');
-                    act.val('SEND').removeAttr('disabled');
-                }, 10);
+                if(data.status){
+                    alert = "<div class='alert alert-success fade in'>"+ data.msg +"</div>";
+                } else {
+                    alert = "<div class='alert alert-danger'>"+data.msg+"</div>";
+                }
+                $('.msg').html(alert);
+            },
+            error: function(data) {
+                alert = "<div class='alert alert-danger'>"+data.msg+"</div>";
+                $('.msg').html(alert);
+            },
+            complete: function() {
+                obj.trigger('reset');
+                act.val('SEND').removeAttr('disabled');
             }
         });
         return false;
