@@ -189,13 +189,13 @@ class Article extends CI_Controller {
 			 			$img_data['size'] = $t['data']['file_size'];
 			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
 			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 			$this->load->view("admin/content/article/create_article", $data);
+			 			return;
 			 		}
-			 		if($data['success']) {
-			 			$data['success'] = true;
-			 			$d['image_id'] = $this->post_image($d, $img_data);
-			 			$this->article_model->create_article($d);
-			 		}
-			 		$this->load->view("admin/content/article/create_article", $data);
+		 			$data['success'] = true;
+		 			$d['image_id'] = $this->post_image($d, $img_data);
+		 			$this->article_model->create_article($d);
+		 			$this->load->view("admin/content/article/create_article", $data);
 			 	} else {
 			 		if(!$data['success']) {
 				 		$data = array("title" => $d['title'],
