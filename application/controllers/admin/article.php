@@ -166,35 +166,51 @@ class Article extends CI_Controller {
 	function create() {
 		if($this->session->userdata('logged_in')) {
 			$sess_data = $this->session->userdata('logged_in');
-	 		$data = array("success" => false, 
-	 					"error_message" => "", 
+	 		$data = array("success" => false,
+	 					"error_message" => "",
 	 					"flag" => "create",
 	 					"user_id" => $sess_data['id'],
+	 					"title" => "",
+	 					"tag" => "",
 	 					"category" => $this->get_category_article(),
-	 					"status" => $this->get_status()
+	 					"status" => $this->get_status(),
+	 					"image" => "assets/img/article/default-image.png",
+	 					"summary" => ""
 	 				);
-
-	        $this->validation();
-
-	        if($this->form_validation->run() == true) {
-	        	$t = $this->upload_config();
-				$img_data = array("name" => "assets/img/article/default-image.png", 
-								"size" => 0);
-				if($t['is_uploaded']) {
-		 			$img_data['name'] = "assets/img/article/" . $t['data']['file_name'];
-		 			$img_data['size'] = $t['data']['file_size'];
-		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-		 			$this->load->view("admin/content/article/create_article", $data);	
-		 			return;
-		 		}
-
-			 	if(isset($_POST['submit'])) {
-			 		$d = $this->input->post(null, true);
-			 		$d['image_id'] = $this->post_image($d, $img_data);
-			 		$this->article_model->create_article($d);
-			 		$data['success'] = true;
+	 		$this->validation();
+	        if(isset($_POST['submit'])) {
+	        	$d = $this->input->post(null, true);
+	        	if($this->form_validation->run() == true) {
+		        	$t = $this->upload_config();
+					$img_data = array("name" => $data["image"], 
+									"size" => 0);
+					if($t['is_uploaded']) {
+			 			$img_data['name'] = "assets/img/article/" . $t['data']['file_name'];
+			 			$img_data['size'] = $t['data']['file_size'];
+			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 		}
+			 		if($data['success']) {
+			 			$data['success'] = true;
+			 			$d['image_id'] = $this->post_image($d, $img_data);
+			 			$this->article_model->create_article($d);
+			 		}
 			 		$this->load->view("admin/content/article/create_article", $data);
+			 	} else {
+			 		if(!$data['success']) {
+				 		$data = array("title" => $d['title'],
+			 				"tag" => $d['tag'],
+			 				"category" => $this->get_category_article(2, $d['article_category_id']),
+			 				"status" => $this->get_status(2, $d['status']),
+			 				"summary" => $d['summary'],
+			 				"image" => $data['image'],
+			 				"user_id" => $data['user_id'],
+			 				"error_message" => "",
+			 				"success" => $data['success'],
+			 				"flag" => $data['flag']
+			     		);
+			     		$this->load->view("admin/content/article/create_article", $data);
+			     	}
 			 	}
 		 	} else {
 		 		$this->load->view("admin/content/article/create_article", $data);	
@@ -221,8 +237,8 @@ class Article extends CI_Controller {
 		$config['upload_path'] = './assets/img/article/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
 		$config['max_size']	= '2000';
-		$config['max_width']  = '2024';
-		$config['max_height']  = '1768';
+		$config['max_width']  = '1200';
+		$config['max_height']  = '1200';
 		$config['encrypt_name'] = true;
 
 		$this->load->library('upload', $config);
