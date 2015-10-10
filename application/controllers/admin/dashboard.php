@@ -2,6 +2,8 @@
 
 require_once APPPATH . 'libraries/utils.php';
 
+define("API_KEY_WEATHER", "63af5a8f9383ad2bf890c6a938273148");
+
 class Dashboard extends CI_Controller {
 
 	private $utils;
@@ -36,8 +38,8 @@ class Dashboard extends CI_Controller {
  	
 	function get_api_weather() {
 		$city = $this->get_region();
-		$jsonurl = "http://api.openweathermap.org/data/2.5/weather?q=" . $city;
-		$json = file_get_contents($jsonurl);
+		$api = "http://api.openweathermap.org/data/2.5/weather?q=" . $city ."&APPID=". API_KEY_WEATHER;
+		$json = file_get_contents($api);
 
 		$parsed_json = json_decode($json);
 		$kelvin = $parsed_json->main->temp;

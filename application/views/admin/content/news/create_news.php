@@ -68,11 +68,12 @@
                 <?php if($success) { ?>
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New news has been created successfully.
+                    <strong>Success!</strong> <a href="<?php echo base_url(); ?>admin/news">New news</a> has been created successfully.
                 </div>
                 <?php } ?>
                 <h2>Create new News</h2><br>
                 <div class="col-lg-18">
+                    <div id="msg-error"></div>
                     <?php echo $error_message; echo validation_errors(); ?><br>
                     <form action="<?php echo base_url(); ?>admin/news/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/content/news/_form"); ?>

@@ -166,30 +166,49 @@ class News extends CI_Controller {
 	 					"flag" => "create",
 	 					"user_id" => $sess_data['id'],
 	 					"category" => $this->get_category_news(),
-	 					"status" => $this->get_status()
+	 					"status" => $this->get_status(),
+	 					"title" => "",
+	 					"tag" => "",
+	 					"body" => "",
+	 					"summary" => "",
+	 					"image" => "assets/img/news/default-image.png"
 	 				);
 
 	        $this->validation();
-
-	        if($this->form_validation->run() == true) {
-	        	$t = $this->upload_config();
-				$img_data = array("name" => "assets/img/news/default-image.png", 
-								"size" => 0);
-				if($t['is_uploaded']) {
-		 			$img_data['name'] = "assets/img/news/" . $t['data']['file_name'];
-		 			$img_data['size'] = $t['data']['file_size'];
-		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-		 			$this->load->view("admin/content/news/create_news", $data);	
-		 			return;
-		 		}
-
-			 	if(isset($_POST['submit'])) {
-			 		$d = $this->input->post(null, true);
+	        if(isset($_POST['submit'])) {
+	        	$d = $this->input->post(null, true);
+		        if($this->form_validation->run() == true) {
+		        	$t = $this->upload_config();
+					$img_data = array("name" => $data['image'], 
+									"size" => 0);
+					if($t['is_uploaded']) {
+			 			$img_data['name'] = "assets/img/news/" . $t['data']['file_name'];
+			 			$img_data['size'] = $t['data']['file_size'];
+			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 			$this->load->view("admin/content/news/create_news", $data);	
+			 			return;
+			 		}
 			 		$d['image_id'] = $this->post_image($d, $img_data);
 			 		$this->news_model->create_news($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/content/news/create_news", $data);
+			 	} else {
+			 		if(!$data['success']) {
+				 		$data = array("success" => $data['success'],
+				 			"error_message" => "", 
+		 					"flag" => "create",
+		 					"user_id" => $sess_data['id'],
+		 					"category" => $this->get_category_news(2, $d['news_category_id']),
+		 					"status" => $this->get_status(2, $d['status']),
+		 					"image" => "assets/img/news/default-image.png",
+		 					"title" => $d['title'],
+		 					"tag" => $d['tag'],
+		 					"body" => $d['body'],
+		 					"summary" => $d["summary"]
+ 		 				);
+		 				$this->load->view("admin/content/news/create_news", $data);
+			 		}
 			 	}
 		 	} else {
 		 		$this->load->view("admin/content/news/create_news", $data);	

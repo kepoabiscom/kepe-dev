@@ -56,26 +56,39 @@ class Video extends CI_Controller {
 	 					"error_message" => "", 
 	 					"flag" => "create",
 	 					"user_id" => $sess_data['id'],
-	 					"title_category" => $this->get_category_video()
+	 					"title_category" => $this->get_category_video(),
+	 					"image" => "assets/img/default-image.png",
+	 					"title" => "",
+	                    "tag" => "",
+	                    "status" => "",
+	                    "description" => "",
+	                    "producer" => "",
+	                    "story_ide" => "",
+	                    "screenwriter" => "",
+	                    "film_director" => "",
+	                    "cameramen" => "",
+	                    "artist" => "",
+	                    "url" => "",
+	                    "host" => "",
+	                    "editor" => "",
+	                    "duration" => ""
 	 				);
 
 	        $this->validation();
-
-	        if($this->form_validation->run() == true) {
-	        	$t = $this->upload_config();
-				$img_data = array("name" => "assets/img/video/default-image.png", 
-								"size" => 0);
-				if($t['is_uploaded']) {
-		 			$img_data['name'] = "assets/img/video/" . $t['data']['file_name'];
-		 			$img_data['size'] = $t['data']['file_size'];
-		 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-		 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-		 			$this->load->view("admin/video/create_video", $data);	
-		 			return;
-		 		}
-
-			 	if(isset($_POST['submit'])) {
-			 		$d = $this->input->post(null, true);
+	        if(isset($_POST['submit'])) {
+	        	$d = $this->input->post(null, true);
+	        	if($this->form_validation->run() == true) {
+		        	$t = $this->upload_config();
+					$img_data = array("name" => "assets/img/video/default-image.png", 
+									"size" => 0);
+					if($t['is_uploaded']) {
+			 			$img_data['name'] = "assets/img/video/" . $t['data']['file_name'];
+			 			$img_data['size'] = $t['data']['file_size'];
+			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 			$this->load->view("admin/video/create_video", $data);	
+			 			return;
+			 		}
 			 		$d['image_id'] = $this->post_image(array("title" => $d['title'],
 							"type" => "video",
 							"tag" => $d['tag'],
@@ -86,6 +99,31 @@ class Video extends CI_Controller {
 			 		$this->video_model->create_video($d);
 			 		$data['success'] = true;
 			 		$this->load->view("admin/video/create_video", $data);
+			 	} else {
+			 		if(!$data['success']) {
+				 		$data = array("success" => $data['success'],
+			 				"title_category" => $this->get_category_video(2, $d['video_category_id']),
+		                    "title" => $d['title'],
+		                    "tag" => $d['tag'],
+		                    "status" => $d['status'],
+		                    "description" => $d['description'],
+		                    "producer" => $d['producer'],
+		                    "story_ide" => $d['story_ide'],
+		                    "screenwriter" => $d['screenwriter'],
+		                    "film_director" => $d['film_director'],
+		                    "cameramen" => $d['cameramen'],
+		                    "artist" => $d['artist'],
+		                    "url" => $d['url'],
+		                    "host" => $d['host'],
+		                    "editor" => $d['editor'],
+		                    "duration" => $d['duration'],
+		                    "image" => $data['image'], 
+			 				"flag" => "create",
+			 				"error_message" => "",
+			 				"user_id" => $sess_data['id']
+			 			);
+			 			$this->load->view("admin/video/create_video", $data);
+			 		}
 			 	}
 		 	} else {
 		 		$this->load->view("admin/video/create_video", $data);	
@@ -382,8 +420,8 @@ class Video extends CI_Controller {
 		$config['upload_path'] = './assets/img/video/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
 		$config['max_size']	= '2000';
-		$config['max_width']  = '2024';
-		$config['max_height']  = '1768';
+		$config['max_width']  = '1200';
+		$config['max_height']  = '1200';
 		$config['encrypt_name'] = true;
 
 		$this->load->library('upload', $config);

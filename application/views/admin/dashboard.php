@@ -79,7 +79,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
-                        <div class="panel panel-<?php echo $color; ?>">
+                        <div class="panel panel-{color}">
                             <div class="panel-heading">
                                 <div class="row">
                                     <div class="col-xs-3">

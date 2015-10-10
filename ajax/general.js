@@ -83,7 +83,7 @@ function read_image(input) {
 
 function validateExt(nameFile) {
     var name = nameFile.toLowerCase(); 
-    var rgex = /(\.jpg|\.jpeg|\.bmp|\.gif|\.png)$/i;
+    var rgex = /(\.jpg|\.jpeg|\.gif|\.png)$/i;
     if(!rgex.exec(name)) {
         return false;
     }
