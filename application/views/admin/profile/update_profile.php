@@ -11,6 +11,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/datepicker/css/datepicker.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
@@ -63,8 +64,9 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <h2>Update Profile</h2><br>
+                <h2>Update Account (<?php $data = $this->session->userdata('logged_in'); echo $data['username']; ?>)</h2><br>
                 <div class="col-lg-8">
+                    <div id="msg-error"></div>
                     <?php echo $success; ?>
                     <?php echo $error_message; echo validation_errors(); ?><br>
                     <form action="<?php echo base_url(); ?>admin/profile/update" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
@@ -84,9 +86,11 @@
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-datepicker.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+</script>
 
 </body>
 

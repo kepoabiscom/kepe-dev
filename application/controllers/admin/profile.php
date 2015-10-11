@@ -137,7 +137,7 @@ class Profile extends CI_Controller {
 						"place_of_birth" => $r->place_of_birth,
 		 				"address" => $r->address,
 		 				"phone_number" => $r->phone_number,
-		 				"description" => $r->body,
+		 				"desc" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e,

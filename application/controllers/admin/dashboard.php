@@ -47,9 +47,9 @@ class Dashboard extends CI_Controller {
 		$weather = $parsed_json->weather[0]->main;
 		$celcius = ceil($celcius);
 		$color = "primary";
-		if($celcius > 34) {
+		if($celcius >= 34) {
 			$color = "red";
-		}else if($celcius >= 30 && $celcius <= 34) {
+		}else if($celcius >= 30 && $celcius < 34) {
 			$color = "green";
 		} 
 		
