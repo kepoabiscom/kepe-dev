@@ -25,7 +25,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2">News Image</label>
+    <label class="col-sm-2">News Image (1200x1200)</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);" accept="image/*">
     </div>

@@ -176,19 +176,20 @@ class News extends CI_Controller {
 
 	        $this->validation();
 	        if(isset($_POST['submit'])) {
+	        	$is_uploaded = true;
 	        	$d = $this->input->post(null, true);
-		        if($this->form_validation->run() == true) {
-		        	$t = $this->upload_config();
-					$img_data = array("name" => $data['image'], 
-									"size" => 0);
+		        $t = $this->upload_config();
+				$img_data = array("name" => $data['image'], 
+								"size" => 0);
+				if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 		$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 		$is_uploaded = false;
+			 	}
+		        if($this->form_validation->run() == true and $is_uploaded) {	
 					if($t['is_uploaded']) {
 			 			$img_data['name'] = "assets/img/news/" . $t['data']['file_name'];
 			 			$img_data['size'] = $t['data']['file_size'];
-			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-			 			$this->load->view("admin/content/news/create_news", $data);	
-			 			return;
-			 		}
+			 		} 
 			 		$d['image_id'] = $this->post_image($d, $img_data);
 			 		$this->news_model->create_news($d);
 			 		$data['success'] = true;
@@ -196,7 +197,7 @@ class News extends CI_Controller {
 			 	} else {
 			 		if(!$data['success']) {
 				 		$data = array("success" => $data['success'],
-				 			"error_message" => "", 
+				 			"error_message" => $data['error_message'], 
 		 					"flag" => "create",
 		 					"user_id" => $sess_data['id'],
 		 					"category" => $this->get_category_news(2, $d['news_category_id']),
@@ -235,8 +236,8 @@ class News extends CI_Controller {
 		$config['upload_path'] = './assets/img/news/';
 		$config['allowed_types'] = 'jpg|gif|jpeg|png';
 		$config['max_size']	= '2000';
-		$config['max_width']  = '2024';
-		$config['max_height']  = '1768';
+		$config['max_width']  = '1200';
+		$config['max_height']  = '1200';
 		$config['encrypt_name'] = true;
 
 		$this->load->library('upload', $config);

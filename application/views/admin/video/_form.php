@@ -107,7 +107,7 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2">Thumbnail</label>
+    <label class="col-sm-2">Thumbnail (1200x1200)</label>
     <div class="col-sm-6">
         <input type="file" name="userfile" onchange="read_image(this);" accept="image/*">
     </div>

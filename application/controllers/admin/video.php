@@ -76,19 +76,20 @@ class Video extends CI_Controller {
 
 	        $this->validation();
 	        if(isset($_POST['submit'])) {
+	        	$is_uploaded = true;
 	        	$d = $this->input->post(null, true);
-	        	if($this->form_validation->run() == true) {
-		        	$t = $this->upload_config();
-					$img_data = array("name" => "assets/img/video/default-image.png", 
-									"size" => 0);
+	        	$t = $this->upload_config();
+				$img_data = array("name" => "assets/img/video/default-image.png", 
+								"size" => 0);
+				if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 		$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 		$is_uploaded = false;
+			 	}
+	        	if($this->form_validation->run() == true and $is_uploaded) {	
 					if($t['is_uploaded']) {
 			 			$img_data['name'] = "assets/img/video/" . $t['data']['file_name'];
 			 			$img_data['size'] = $t['data']['file_size'];
-			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-			 			$this->load->view("admin/video/create_video", $data);	
-			 			return;
-			 		}
+			 		} 
 			 		$d['image_id'] = $this->post_image(array("title" => $d['title'],
 							"type" => "video",
 							"tag" => $d['tag'],
@@ -119,7 +120,7 @@ class Video extends CI_Controller {
 		                    "duration" => $d['duration'],
 		                    "image" => $data['image'], 
 			 				"flag" => "create",
-			 				"error_message" => "",
+			 				"error_message" => $data['error_message'],
 			 				"user_id" => $sess_data['id']
 			 			);
 			 			$this->load->view("admin/video/create_video", $data);

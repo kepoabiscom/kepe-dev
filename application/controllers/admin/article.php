@@ -179,19 +179,20 @@ class Article extends CI_Controller {
 	 				);
 	 		$this->validation();
 	        if(isset($_POST['submit'])) {
+	        	$is_uploaded = true;
 	        	$d = $this->input->post(null, true);
-	        	if($this->form_validation->run() == true) {
-		        	$t = $this->upload_config();
-					$img_data = array("name" => $data["image"], 
-									"size" => 0);
+	        	$t = $this->upload_config();
+				$img_data = array("name" => $data["image"], 
+								"size" => 0);
+				if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
+			 		$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
+			 		$is_uploaded = false;	
+			 	}
+	        	if($this->form_validation->run() == true and $is_uploaded) {
 					if($t['is_uploaded']) {
 			 			$img_data['name'] = "assets/img/article/" . $t['data']['file_name'];
 			 			$img_data['size'] = $t['data']['file_size'];
-			 		} else if(!$t['is_uploaded'] && !empty($t['data']['file_name'])) {
-			 			$data['error_message'] = "<span style='color:red'>" . $t['error_message'] . "</span>";
-			 			$this->load->view("admin/content/article/create_article", $data);
-			 			return;
-			 		}
+			 		} 
 		 			$data['success'] = true;
 		 			$d['image_id'] = $this->post_image($d, $img_data);
 		 			$this->article_model->create_article($d);
@@ -205,7 +206,7 @@ class Article extends CI_Controller {
 			 				"summary" => $d['summary'],
 			 				"image" => $data['image'],
 			 				"user_id" => $data['user_id'],
-			 				"error_message" => "",
+			 				"error_message" => $data['error_message'],
 			 				"success" => $data['success'],
 			 				"flag" => $data['flag']
 			     		);
