@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller {
 		parent:: __construct();
 		$this->load->helper(array("url", "form"));
 		$this->load->library("parser");
+		$this->load->model('stat_model','', true);
 		//$this->load->library("pagination");
 	}
 
@@ -79,29 +80,42 @@ class Dashboard extends CI_Controller {
 		}
 	}
 
-	function get_stat($year='') {		
-		$stat = array("Home" => $this->get_data($year),
-					"Article" => $this->get_data($year),
-					"News" => $this->get_data($year),
-					"Videografi" => $this->get_data($year)
+	function get_stat($year) {		
+		$stat = array("Home" => $this->get_data("home", $year),
+					"Article" => $this->get_data("article", $year),
+					"News" => $this->get_data("news", $year),
+					"Videografi" => $this->get_data("video", $year)
 			);
 		echo json_encode($stat);
 	}
 
-	function get_data($year='') {
+	function get_data($type='', $year) {
+		$month = array(
+					array()
+				);
+		$length_month = 12;
+		for($i = 1; $i <= $length_month; $i++) {
+			if($type == "home") {
+				$month[$type][$i] = 0;
+			} else {
+				$row = $this->stat_model->get_stat_dashboard($type, $i, $year);
+				$month[$type][$i] = (int) $row->stat;
+			}
+		}
+
 		return array(
-			array("label" => "January", "y" => rand(10, 40)),
-			array("label" => "February", "y" => rand(10, 40)),
-			array("label" => "March", "y" => rand(10, 40)),
-			array("label" => "April", "y" => rand(10, 40)),
-			array("label" => "May", "y" => rand(10, 40)),
-			array("label" => "June", "y" => rand(10, 40)),
-			array("label" => "July", "y" => rand(10, 40)),
-			array("label" => "August", "y" => rand(10, 40)),
-			array("label" => "September", "y" => rand(10, 40)),
-			array("label" => "October", "y" => rand(10, 40)),
-			array("label" => "November", "y" => rand(10, 40)),
-			array("label" => "December", "y" => rand(10, 40))
+			array("label" => "January", "y" => $month[$type][1]),
+			array("label" => "February", "y" => $month[$type][2]),
+			array("label" => "March", "y" => $month[$type][3]),
+			array("label" => "April", "y" => $month[$type][4]),
+			array("label" => "May", "y" => $month[$type][5]),
+			array("label" => "June", "y" => $month[$type][6]),
+			array("label" => "July", "y" => $month[$type][7]),
+			array("label" => "August", "y" => $month[$type][8]),
+			array("label" => "September", "y" => $month[$type][9]),
+			array("label" => "October", "y" => $month[$type][10]),
+			array("label" => "November", "y" => $month[$type][11]),
+			array("label" => "December", "y" => $month[$type][12])
 		);
 	}
 

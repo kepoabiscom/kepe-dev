@@ -89,20 +89,7 @@
     <label class="col-sm-2">Status</label>
     <div class="col-sm-6">
         <select class="form-control" id="status" name="status">
-            <?php if($status == "unpublished") { ?>
-            <option value="unpublished">Unpublished</option>
-            <option value="pending">Pending</option>
-            <option value="published">Published</option>
-            <?php } else { ?>
-            <?php if ($status == "published") { ?>
-            <option value="published">Published</option>
-            <option value="unpublished">Unpublished</option>
-            <option value="pending">Pending</option>
-            <?php } else { ?>
-            <option value="pending">Pending</option>
-            <option value="published">Published</option>
-            <option value="unpublished">Unpublished</option>
-            <?php } } ?>
+           <?php echo $status; ?>
         </select>
     </div>
 </div>

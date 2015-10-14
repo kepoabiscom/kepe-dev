@@ -4,6 +4,7 @@ require_once APPPATH . 'libraries/utils.php';
 
 class Video extends CI_Controller {
 
+	private $status = array("unpublished", "pending", "published");
 	private $utils;
 
 	/**
@@ -60,7 +61,7 @@ class Video extends CI_Controller {
 	 					"image" => "assets/img/default-image.png",
 	 					"title" => "",
 	                    "tag" => "",
-	                    "status" => "",
+	                    "status" => $this->get_status(),
 	                    "description" => "",
 	                    "producer" => "",
 	                    "story_ide" => "",
@@ -106,7 +107,7 @@ class Video extends CI_Controller {
 			 				"title_category" => $this->get_category_video(2, $d['video_category_id']),
 		                    "title" => $d['title'],
 		                    "tag" => $d['tag'],
-		                    "status" => $d['status'],
+		                    "status" => $this->get_status(2, $d['status']),
 		                    "description" => $d['description'],
 		                    "producer" => $d['producer'],
 		                    "story_ide" => $d['story_ide'],
@@ -143,9 +144,10 @@ class Video extends CI_Controller {
 	function get_list_video($start, $limit, $keyword='') {
 	 	$result = $this->video_model->get_video_list(0, $start, $limit, $keyword);
 	 	$data_array = ""; $i = 1;
-		$number = 0;
+		$number = 0; $edit = ""; $delete = ""; $approve = "";
 		
 	 	if($result) {
+	 		$session_data = $this->session->userdata('logged_in');
 	 		foreach($result as $row) {
 				$number =  $start + $i;
 		 		$id = $row->video_id;
@@ -157,21 +159,34 @@ class Video extends CI_Controller {
 		            'color' => Tb::BUTTON_COLOR_PRIMARY
 		        ));
 
-				$edit = Tb::button('Edit', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'url' => base_url() . "admin/video/update/".$id,
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_SUCCESS
-		        ));
+	        	if($session_data['role'] == 'superadmin' ||  $session_data['id']== $row->user_id) {
+					$edit = Tb::button('Edit', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'url' => base_url() . "admin/video/update/".$id,
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_SUCCESS
+			        ));
 
-		        $delete = Tb::button('Delete', array(
-		            'type' => Tb::BUTTON_TYPE_LINK,
-		            'onclick' => "setId(".$id.")",
-		            'size' => Tb::BUTTON_SIZE_SMALL,
-		            'color' => Tb::BUTTON_COLOR_DANGER,
-		            'url' => '#modal_confirm',
-                    'data-toggle' => 'modal'
-		        ));
+			        $delete = Tb::button('Delete', array(
+			            'type' => Tb::BUTTON_TYPE_LINK,
+			            'onclick' => "setId(".$id.")",
+			            'size' => Tb::BUTTON_SIZE_SMALL,
+			            'color' => Tb::BUTTON_COLOR_DANGER,
+			            'url' => '#modal_confirm',
+	                    'data-toggle' => 'modal'
+			        ));
+			    }
+			    if($session_data['role'] == 'superadmin') {
+			    	$approve = Tb::button('Approve', array(
+						'type' => Tb::BUTTON_TYPE_LINK,
+						'onclick' => "setId(".$id.")",
+						'size' => Tb::BUTTON_SIZE_SMALL,
+						'color' => Tb::BUTTON_COLOR_WARNING,
+						'url' => '#modal_approve',
+						'data-toggle' => 'modal'
+					));
+			    }
+
 		        $d1 = explode(" ", $row->created_date);
 		        $d2 = explode("-", $d1[0]);
 		        $url = $row->status == 'published' ? "<a target='_blank' href='".base_url("video/watch/".$d2[0]."/".$d2[1]."/".$d2[2]."/". $id . "/" . $this->utils->slug($row->title_video))."'>View</a>" : "";
@@ -182,8 +197,9 @@ class Video extends CI_Controller {
 	        	$data_array .= "<td>" . $row->title_video . "</td>";
 	        	$data_array .= "<td>" . $row->status . "</td>";
 	        	$data_array .= "<td>".$url."</td>";
-	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."</td>";
+	        	$data_array .= "<td>".$detail."&nbsp;".$edit."&nbsp;".$delete."&nbsp;".$approve."</td>";
 	        	$data_array .= "</tr>";
+	        	$edit = ""; $delete = ""; $approve = "";
 	        	$i++;
 	        }
 	        return $data_array;	
@@ -282,7 +298,7 @@ class Video extends CI_Controller {
 		 				"title_category" => $this->get_category_video(2, $q->video_category_id),
 	                    "title" => $q->title_video,
 	                    "tag" => $q->tag,
-	                    "status" => $q->status,
+	                    "status" => $this->get_status(2, $q->status),
 	                    "description" => $q->description,
 	                    "producer" => $q->producer,
 	                    "story_ide" => $q->story_ide,
@@ -305,6 +321,21 @@ class Video extends CI_Controller {
 		} else {
 			redirect('admin/login', 'refresh');
 		}
+	}
+
+	function approve() {
+		if($this->session->userdata('logged_in')) {
+			$id = isset($_POST['id']) ? $_POST['id'] : 0;
+	 		$r = $this->video_model->get_by_id(0, $id);
+	 		$this->video_model->update_status($id);
+	 		$t = array("success" => true,
+	 				"video_title" => $r->title_video,
+	 				"f" => "approve"
+	 			);
+	 		$this->session->set_userdata("t", $t);
+	 	} else {
+	 		redirect('admin/login', 'refresh');
+	 	}
 	}
 
 	function get_video_image($id) {
@@ -354,9 +385,9 @@ class Video extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		    $keyword = $this->input->get('title', true);
 			$config = $this->page_config(array('filter', $keyword));
-
+			$this->utils = new Utils();
 		    $data = array(
-		   			'list_news' => $this->get_list_video($config['uri'], $config['per_page'], $keyword),
+		   			'list_video' => $this->get_list_video($config['uri'], $config['per_page'], $keyword),
 		   			'link' => $this->pagination->create_links(),
 		   			'success' => $this->notification()
 		   		);
@@ -364,6 +395,38 @@ class Video extends CI_Controller {
 		} else {
 			redirect('admin/login', 'refresh');
 		}
+	}
+
+	function get_status($flag=1, $st=''){
+		$sess_data = $this->session->userdata('logged_in');
+		$option = "";
+		if($sess_data['role'] == 'superadmin') {
+			if($flag == 1) {
+				foreach($this->status as $s) {
+					$option .= "<option value='".$s."'>".$s."</option>";
+				}
+			} else {
+				foreach($this->status as $s) {
+					if($s == $st) {
+						$option .= "<option value='".$s."'>".$s."</option>";
+						break;
+					} 
+				}
+				foreach($this->status as $s) {
+					if($s != $st) {
+						$option .= "<option value='".$s."'>".$s."</option>";
+					} 
+				}
+			}
+		} else {
+			if($st == "published") {
+	 			$option = "<option value='". $st ."'>published</option>";
+	 		} else {
+	 			$option = "<option value='pending'>waiting</option>";
+	 		}
+		}
+
+		return $option;
 	}
 
 	function page_config() {
@@ -398,6 +461,8 @@ class Video extends CI_Controller {
 				$notif = $t['video_title'] . " has been deleted successfully.";
 			} else if($t['success'] && $t['f'] == 'update') {
 				$notif = $t['video_title'] . " has been updated successfully.";
+			} else if($t['success'] && $t['f'] == 'approve') {
+				$notif = $t['video_title'] . " has been approved successfully.";
 			} 
 			$s = "<div class='alert alert-success fade in'>
                     <a href='#'' class='close' data-dismiss='alert'>&times;</a>

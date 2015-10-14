@@ -34,6 +34,16 @@
         )
     ));
     ?>
+    <?php echo Tb::modal(array(
+        'id' => 'modal_approve',
+        'header' => 'Approve',
+        'body' => '<strong>Apakah Anda yakin ingin meng-approve video ini?</strong>',
+        'footer' => array(
+            Tb::button('Ya', array('onclick' => "approve('video')", 'color' => Tb::BUTTON_COLOR_WARNING)),
+            TB::button('Tidak', array('data-dismiss' => 'modal'))
+        )
+    ));
+    ?>
     <script type="text/javascript" src="<?php echo base_url() . 'ajax/general.js'; ?>"></script>
 
 </head>
@@ -76,14 +86,13 @@
                  <div class="col-lg-12">
                         <h2>Video List - <strong>KepoAbis.com</strong></h2>
                         {success}
-                        <!--
                         <div class="row">
                             <form action="<?php echo base_url(); ?>admin/video/filter" method="get">
                             <div class="col-sm-3">
-                                <input type="text" class="form-control" value="" name="title" placeholder="Title">
+                                <input type="text" class="form-control" value="" name="title" placeholder="Video Title">
                             </div><button type="submit" name="submit" value="s" id="filter" class="btn btn-primary">Filter</button>
                             </form>
-                        </div><br>-->
+                        </div><br>
                         <div class="table-responsive">
                             <table class="table table-bordered table-hover table-striped">
                                 <thead>
