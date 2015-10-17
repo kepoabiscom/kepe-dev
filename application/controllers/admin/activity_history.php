@@ -15,7 +15,10 @@ class Activity_history extends CI_Controller {
 		if($this->session->userdata('logged_in')) {
 		     $session_data = $this->session->userdata('logged_in');
 		     if($session_data['role'] == 'superadmin' || $session_data['role'] == 'admin') {
-
+		     	$this->utils = new Utils();
+				$this->utils->set_counter_comment_notif();
+				$this->utils->set_counter_new_message();
+				
 			   	$this->load->view("admin/activity/activity_history_list");
 		     } else {
 		     	$this->output->set_status_header('401');

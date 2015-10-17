@@ -29,15 +29,14 @@ class User extends CI_Controller {
 	 * Index Page for this controller.
 	 */
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		 	if($session_data['role'] == 'superadmin') {
 				$success = $this->notification();
 				$config = $this->page_config();
-
+				$this->utils = new Utils();
+			 	$this->utils->set_counter_comment_notif();
+			 	$this->utils->set_counter_new_message();
 				$data = array(
 							'username' => $session_data['username'],
 							'data_user' => $this->get_user_list($config['uri'], $config['per_page']),
@@ -167,15 +166,28 @@ class User extends CI_Controller {
 				"success" => false, 
 				"error_message" => "", 
 				"flag" => "create",
-				"role_name" => $this->get_user_role_basic()
+				"role_name" => $this->get_user_role_basic(),
+				"image" => "http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg",
+				"username" => "",
+ 				"nama_lengkap" => "",
+ 				"email" => "",
+ 				"position" => "",
+ 				"role_name" => $this->get_user_role_basic(),
+				"date_of_birth" => "",
+				"place_of_birth" => "",
+ 				"address" => "",
+ 				"phone_number" => "",
+ 				"desc" => ""
 			);
 	 		$regex_username = '^[A-Za-z0-9]+(?:[._][A-Za-z0-9]+)*$';
 	        $this->validation();
 	        $this->form_validation->set_rules('user_name', 'Username', 'required|xss_clean|min_length[3]|regex_match[/'.$regex_username.'/]|callback_db_check_username');
 	        $this->form_validation->set_rules('password', 'Password', 'required|xss_clean');
 
-	        if($this->form_validation->run() == true) {
-	        	$img_path = "http://res.cloudinary.com/kepoabis-com/image/upload/v1437144062/default.jpg";
+	        if(isset($_POST['submit'])) {
+	        	$d = $this->input->post(null, true);
+			 	unset($d['submit']);
+	        	$img_path = $data['image'];
 	 			$t = $this->upload_to_cdn($_FILES['userfile']['tmp_name']);
 		 		if($t['status'] == 1 && $t['f'] == "generate") {
 		 			$img_path = $t['secure_url'];
@@ -185,9 +197,7 @@ class User extends CI_Controller {
 		 			return;
 		 		}
 
-			 	if(isset($_POST['submit'])) {
-			 		$d = $this->input->post(null, true);
-			 		unset($d['submit']);
+			 	if($this->form_validation->run() == true) {
 			 		if($d['password'] == $d['re_password']) {
 			 			unset($d['re_password']);
 				 		$d['image'] = $img_path;
@@ -197,6 +207,25 @@ class User extends CI_Controller {
 				 		$data['error_message'] = "<span style='color:red'>Password isn't same.</span><br><br>";
 				 	}
 				 	$this->load->view("admin/user/create_user", $data);
+			 	} else {
+			 		if(!$data['success']) {
+				 		$data = array("username" => $d['user_name'],
+			 				"nama_lengkap" => $d['nama_lengkap'],
+			 				"email" => $d['email'],
+			 				"position" => $d['position'],
+			 				"role_name" => $this->get_user_role_basic(2, $d['user_role_basic_id']),
+							"date_of_birth" => $d['date_of_birth'],
+							"place_of_birth" => $d['place_of_birth'],
+			 				"address" => $d['address'],
+			 				"phone_number" => $d['phone_number'],
+			 				"desc" => $d['body'],
+			 				"image" => $data['image'],
+			 				"flag" => "create",
+			 				"error_message" => "",
+			 				"success" => false
+			 			);
+				 		$this->load->view("admin/user/create_user", $data);	
+			 		}
 			 	}
 		 	} else {
 		 		$this->load->view("admin/user/create_user", $data);	
@@ -313,7 +342,7 @@ class User extends CI_Controller {
 						"place_of_birth" => $r->place_of_birth,
 		 				"address" => $r->address,
 		 				"phone_number" => $r->phone_number,
-		 				"description" => $r->body,
+		 				"desc" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e

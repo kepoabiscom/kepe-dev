@@ -46,13 +46,8 @@ class Comment extends CI_Controller {
 			$url = "<strong><em>You are connected with Facebook.<br></em></strong>"; //$facebook->getLogoutUrl();
 			$img = "https://graph.facebook.com/". $user. "/picture";
 		} else {
-			$url = "<a href=" . $facebook->getLoginUrl() .">
-					<button class='btn btn-block btn-facebook mb-20'type='button'>
-   						Login first with Facebook
-					</button>
-			</a>";
+			$url = "<a class='btn btn-default btn-social btn-facebook' href=" . $facebook->getLoginUrl() ."><i class='fa fa-facebook'></i>Sign in with Facebook</a>";
 		}
-
 		return array(
 				"url" => $url,
 				"img" => $img,
@@ -152,7 +147,7 @@ class Comment extends CI_Controller {
 	}
 
 	function random_set_captcha($op=1) {
-		$n = rand(100, 999);
+		$n = rand(1, 9);
 		if($op == 0) return $n;
 		else {
 			$op = rand(1, 3);

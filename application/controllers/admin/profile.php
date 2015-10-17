@@ -24,13 +24,13 @@ class Profile extends CI_Controller {
 	}
 
 	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 		    $q = $this->user_model->get_by_id($session_data['id']);
 
+		    $this->utils = new Utils();
+			$this->utils->set_counter_comment_notif();
+			$this->utils->set_counter_new_message();
 		    $path_image = !strpos($q->image, "cloudinary") ? base_url() . "assets/img/team/" . $q->image : $q->image;
 
 		    $img = "<div class='col-lg-4 col-md-6 col-xs-6 thumb'>";
@@ -137,7 +137,7 @@ class Profile extends CI_Controller {
 						"place_of_birth" => $r->place_of_birth,
 		 				"address" => $r->address,
 		 				"phone_number" => $r->phone_number,
-		 				"description" => $r->body,
+		 				"desc" => $r->body,
 		 				"image" => $r->image,
 		 				"flag" => "update",
 		 				"error_message" => $e,

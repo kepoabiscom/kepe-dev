@@ -337,7 +337,7 @@ class About extends CI_Controller {
 					$date_of_birth = !isset($row->date_of_birth) ? "" : $row->date_of_birth;
 					$box = (substr($date_of_birth, 5, 5) == date("m-d")) ? 'background-color: #009688; border-radius: 4px; color: #fff; padding: 5px;' : 'margin-bottom: 20px;';
 
-					$brithday =  (substr($date_of_birth, 5, 5)  == date("m-d")) ? "Friends' Birthdays" : "";
+					$brithday =  (substr($date_of_birth, 5, 5)  == date("m-d")) ? "Friend's Birthday" : "";
 					
 					$data[] = array(
 						"number" => $number,

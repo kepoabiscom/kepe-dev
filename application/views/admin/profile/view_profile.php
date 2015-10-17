@@ -62,7 +62,7 @@
                     </div>
                 </div>
                 <!-- /.row -->
-                <h2>My Profile</h2><br>
+                <h2>My Account (<?php $data = $this->session->userdata('logged_in'); echo $data['username']; ?>)</h2><br>
                 <div class="col-lg-12">
                     <div class="row clearfix">
                         <div> 

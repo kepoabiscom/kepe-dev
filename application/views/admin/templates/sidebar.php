@@ -3,7 +3,8 @@
         <?php 
             $data = array('home', 'profile', 'user', 'content', 'article', 'news', 
                         'video', 'category', 'about', 'gallery', 'category_article', 
-                        'category_video', 'category_news', 'comment_notif','static_content', 'divisi', 'activity', 'service');
+                        'category_video', 'category_news', 'comment_notif','static_content', 
+                        'divisi', 'activity', 'service', 'inbox_message');
             $active = array_fill(0, count($data), '');
             $j = 0;
             foreach($data as $i) {
@@ -75,6 +76,11 @@
             <a href="<?php echo base_url(); ?>admin/activity-history"> <i class="fa fa-fw fa-table"></i>&nbsp;Activity History</a>
         </li>
         <?php } ?>
+        <?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
+        <li class="<?php echo $active[18]; ?>">
+            <a href="<?php echo base_url(); ?>admin/inbox-message"> <i class="fa fa-bell"></i>&nbsp;Inbox Message <?php $data = $this->session->userdata('counter_new_message'); echo "(<strong>" . $data['counter'] . " New</strong>)"; ?></a>
+        </li>
+        <?php } ?>
 		<?php if($q['role'] == "superadmin" || $q['role'] == "admin") { ?>
         <li class="<?php echo $active[8]; ?>">
             <a href="javascript:;" data-toggle="collapse" data-target="#about"><i class="fa fa-fw fa-file"></i>&nbsp;About Us<i class="fa fa-fw fa-caret-down"></i></a>
@@ -94,7 +100,7 @@
 		<?php } ?>
         <li>
             <?php $x = $this->session->userdata('last_login'); ?>
-            <a><?php echo "Last Login From: <br>". $x['username']." " . $x['ip_address']; ?></a>
+            <a></a>
         </li>
     </ul>
 </div>

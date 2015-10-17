@@ -116,7 +116,7 @@
                         var t = $('#comment-list').DataTable( {
                             "processing": true,
                             "ajax": "<?php echo base_url(); ?>admin/comment-notif/ajax_",
-                            "order": [[ 4, 'desc' ]],
+                            "order": [[ 5, 'desc' ]],
                             "pagingType": "simple_numbers",
                             "columns": [
                                 /*{ 

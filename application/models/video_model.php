@@ -59,7 +59,7 @@ class Video_model extends CI_Model {
     function get_video_list($flag=0, $start, $limit, $keyword=array()) {
         if($flag == 0) {
             $this->db->select("v.video_id, v.title as title_video, vc.title as title_category, 
-                            v.status, v.created_date, v.modified_date", false);
+                            v.status, v.user_id, v.created_date, v.modified_date", false);
             $this->db->from("video as v");
             if($keyword != "") 
             	$this->db->like("v.title", $keyword);
@@ -228,6 +228,13 @@ class Video_model extends CI_Model {
         $data["created_date"] = date("Y-m-d H:i:s");
         $data["modified_date"] = date("Y-m-d H:i:s");
         $this->db->insert('video', $data);
+    }
+
+    function update_status($id) {
+    	$data["modified_date"] = date("Y-m-d H:i:s");
+        $data['status'] = 'published';
+        $this->db->where('video_id', $id);
+        $this->db->update('video', $data);
     }
 
     function get_by_id($flag=0, $id) {

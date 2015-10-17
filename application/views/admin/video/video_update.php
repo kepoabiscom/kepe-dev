@@ -67,6 +67,7 @@
                 <!-- /.row -->
                 <h2>Update Video</h2><br>
                 <div class="col-lg-20">
+                    <div id="msg-error"></div>
                     <?php echo $error_message; echo validation_errors(); ?><br>
                     <form action="<?php echo base_url() . 'admin/video/update/' . $video_id; ?>" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/video/_form"); ?>

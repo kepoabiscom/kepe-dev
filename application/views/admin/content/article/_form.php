@@ -7,7 +7,6 @@
 <div class="form-group">
     <label class="col-sm-2">Title</label>
     <div class="col-sm-6">
-        <?php $title = ($flag == "update") ? $title : ""; ?>
         <input type="text" class="form-control" value="<?php echo $title; ?>" name="title">
     </div>
 </div>
@@ -22,20 +21,18 @@
 <div class="form-group">
     <label class="col-sm-2">Tag</label>
     <div class="col-sm-6">
-        <?php $tag = ($flag == "update") ? $tag : ""; ?>
         <input type="text" class="form-control" value="<?php echo $tag; ?>" name="tag">
     </div>
 </div>
 <div class="form-group">
-    <label class="col-sm-2">Article Image</label>
+    <label class="col-sm-2">Article Image (1200x1200)</label>
     <div class="col-sm-6">
-        <input type="file" name="userfile" onchange="read_image(this);">
+        <input type="file" name="userfile" onchange="read_image(this);" accept="image/*">
     </div>
 </div>
 <div class="form-group">
     <label class="col-sm-2">Preview</label>
     <div class="col-sm-6">
-        <?php $image = ($flag == "update") ? $image : "assets/img/article/default-image.png"; ?>
         <img id="img_prev" style="border-radius:25px; box-shadow: 10px 10px 5px #888888; max-width:95%;border:6px groove #545565;" src="<?php echo base_url() . $image;?>"  width="150" height="200"/>
     </div>
 </div>
@@ -51,7 +48,6 @@
 <div class="form-group">
     <label class="col-sm-2">Summary</label>
     <div class="col-sm-6">
-        <?php $summary = ($flag == "update") ? $summary : ""; ?>
         <textarea class="form-control" rows="15" name="summary"><?php echo $summary; ?></textarea>
     </div>
 </div>

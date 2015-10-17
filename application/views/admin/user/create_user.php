@@ -11,6 +11,7 @@
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="<?php echo base_url(); ?>assets/datepicker/css/datepicker.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="<?php echo base_url(); ?>assets/css/sb-admin.css" rel="stylesheet">
@@ -69,11 +70,12 @@
                 <?php if($success) { ?>
                 <div class="alert alert-success fade in">
                     <a href="#" class="close" data-dismiss="alert">&times;</a>
-                    <strong>Success!</strong> New user has been created successfully.
+                    <strong>Success!</strong> <a href="<?php echo base_url(); ?>admin/user">New user</a> has been created successfully.
                 </div>
                 <?php } ?>
                 <h2>Create new User</h2><br>
                 <div class="col-lg-8">
+                    <div id="msg-error"></div>
                     <?php echo $error_message; echo validation_errors(); ?><br>
                     <form action="<?php echo base_url(); ?>admin/user/create" method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
                         <?php $this->load->view("admin/user/_form"); ?>
@@ -92,6 +94,7 @@
 
     <!-- jQuery -->
     <script src="<?php echo base_url(); ?>assets/js/jquery.js"></script>
+     <script src="<?php echo base_url(); ?>assets/datepicker/js/bootstrap-datepicker.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>

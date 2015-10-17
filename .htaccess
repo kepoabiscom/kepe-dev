@@ -1,5 +1,6 @@
 RewriteEngine On
 RewriteCond %{REQUEST_URI} ^/system.*
+RewriteCond %{REQUEST_URI} ^/assets.*
 RewriteRule ^(.*)$ index.php?/$1 [L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d

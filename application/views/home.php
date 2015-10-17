@@ -94,6 +94,7 @@
 				  </a>
 				</div>
 			</div>
+			<!--
 			<div class="sidebar-module kp-news">
 				<h2 class="line-title"><strong class="bold-text" style="color: black;">Upcoming Events</strong></h2>
 				<ol class="list-unstyled">
@@ -105,7 +106,7 @@
 					</li>
 					{/get_upcoming_events}
 				</ol>
-			</div>
+			</div>-->
 			<div class="sidebar-module kp-news">
 				<h2 class="line-title"><strong class="bold-text" style="color: black;">Recent News</strong></h2>
 				<ol class="list-unstyled">

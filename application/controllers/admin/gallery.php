@@ -16,13 +16,13 @@ class Gallery extends CI_Controller {
 		//$this->load->library("pagination");
 	}
 
-	function index() {
-		$this->utils = new Utils();
-		$this->utils->set_counter_comment_notif();
- 		
+	function index() { 		
 		if($this->session->userdata('logged_in')) {
 		    $session_data = $this->session->userdata('logged_in');
 
+		    $this->utils = new Utils();
+			$this->utils->set_counter_comment_notif();
+			$this->utils->set_counter_new_message();
 		    $data = array("images_list" => $this->get_list_image("behindscene", 0),
 		    			"notif" => $this->notification()
 		    		);
