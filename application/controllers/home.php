@@ -56,7 +56,7 @@ class Home extends CI_Controller {
 		$data = array_merge($content, $data);
 		
 		if(ENVIRONMENT == 'production') 
-			$this->output->cache(15);
+			$this->output->cache(5);
 		
 		$this->parser->parse('/index', $data);
 	}
@@ -210,7 +210,7 @@ class Home extends CI_Controller {
 			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 15px;'>";
 			$img .= "</a>";
 			$view_more = "<a href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
-			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(18, $title)."</a>";
+			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(14, $title)."</a>";
 			
 			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
 			$closing_parenthesis = ($parenthesis % 4 == 0) ? "</div></div>" : "";
