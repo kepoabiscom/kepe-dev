@@ -23,6 +23,10 @@ $(document).ready(function() {
                 
                 if(data.status){
                     $(data.get_comment).hide().fadeIn(800);
+                    var comments = $('.comment-block').text();
+                    if(comments.contains("No comments yet.")) {
+                        $('.comment-block').html("");
+                    }
                     $('.comment-block').append(data.get_comment);
                     $('.msg').html('');
                     $('.questions').html('');

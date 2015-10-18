@@ -42,6 +42,11 @@
 			<textarea class="form-control" placeholder="Message" id="message" name="message"></textarea>
 		</div>
 		</div>
+		<div id="captcha">
+			<div class="g-recaptcha" data-sitekey="<?php echo API_KEY_RECAPTCHA; ?>"></div>
+        </div>
+        
+        <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?hl=en"></script><br>
 		<div class="form-group">
 			<input type="submit" value="SEND" id='submit' name ='submit' class="btn btn-primary">
 			<input type="reset" value="CLEAR" class="btn btn-primary">

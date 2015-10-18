@@ -1,7 +1,10 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 require_once "about.php";
+require_once "././api-recaptcha/autoload.php";
 
+define("API_KEY_RECAPTCHA", "6LdCCA8TAAAAAFGhzpgknm7n5LiADikSoHjxfHIK");
+define("SECRET_KEY_RECAPTCHA", "6LdCCA8TAAAAAK4qtpc65Y2Nae_4wAFegimkwIhq");
 define("AJAX_REQUEST", isset($_SERVER['HTTP_X_REQUESTED_WITH']));
 
 class Contact extends CI_Controller {
@@ -44,35 +47,58 @@ class Contact extends CI_Controller {
 
 	function send_message() {
 		if(AJAX_REQUEST) {
-			$data = $this->input->post(null, true);
-			if(empty($data['from_name']) || empty($data['email']) || empty($data['subject']) || empty($data['message'])) {
-				$status = array(
-						"status" => false,
-						"msg" => "All fields is required."
-					);
-			} else {
-				if($this->validate_email($data['email'])) {
-					$data['ip_address'] = $_SERVER['REMOTE_ADDR'];
-					$is_sent = $this->send_to_email($data['email'], $data['from_name']);
-					if($is_sent) {
-						$this->contact_model->insert_message($data);
-						$status = array(
-								"status" => true,
-								"msg" => "Your message has been sent successfully."
-							);
-					} else {
-						$this->output->set_status_header('500');
-						$status = array(
-								"status" => false,
-								"msg" => "There's an error with our mail server."
-							);
-					}	
+			$recaptcha_data = array(
+					"is_passed" => false,
+					"error_message" => ""	
+			);
+			if(isset($_POST['g-recaptcha-response'])){
+				$recaptcha = new \ReCaptcha\ReCaptcha(SECRET_KEY_RECAPTCHA);
+
+				$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
+				if($resp->isSuccess()){
+					$recaptcha_data['is_passed'] = true;
 				} else {
+					foreach($resp->getErrorCodes() as $code) {
+						$recaptcha_data['error_message'] =  $code;
+					}
+				}
+			}
+			$data = $this->input->post(null, true);
+			if($recaptcha_data['is_passed']) {
+				if(empty($data['from_name']) || empty($data['email']) || empty($data['subject']) || empty($data['message'])) {
 					$status = array(
 							"status" => false,
-							"msg" => "Invalid email format."
+							"msg" => "All fields is required."
 						);
+				} else {
+					if($this->validate_email($data['email'])) {
+						$data['ip_address'] = $_SERVER['REMOTE_ADDR'];
+						$is_sent = $this->send_to_email($data['email'], $data['from_name']);
+						if($is_sent) {
+							$this->contact_model->insert_message($data);
+							$status = array(
+									"status" => true,
+									"msg" => "Your message has been sent successfully."
+								);
+						} else {
+							$this->output->set_status_header('500');
+							$status = array(
+									"status" => false,
+									"msg" => "There's an error with our mail server."
+								);
+						}	
+					} else {
+						$status = array(
+								"status" => false,
+								"msg" => "Invalid email format."
+							);
+					}
 				}
+			} else {
+				$status = array(
+							"status" => false,
+							"msg" => "Re-Captcha is required." //. $recaptcha_data['error_message']
+					);
 			}
 		} else {
 			$this->output->set_status_header('401');
@@ -81,7 +107,9 @@ class Contact extends CI_Controller {
 						"msg" => "Ajax request isn't authorized."
 					);
 		}
-
+		$status = array_merge(
+					array("api_key_recaptcha" => API_KEY_RECAPTCHA), $status
+				);
 		echo json_encode($status);
 	}
 	

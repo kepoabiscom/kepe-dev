@@ -19,6 +19,8 @@ $(document).ready(function() {
                 } else {
                     alert = "<div class='alert alert-danger'>"+data.msg+"</div>";
                 }
+                $.getScript("https://www.google.com/recaptcha/api.js");
+                $("#captcha").html("<div class='g-recaptcha' data-sitekey='"+data.api_key_recaptcha+"'></div>");
                 $('.msg').html(alert);
             },
             error: function(data) {

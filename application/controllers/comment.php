@@ -128,7 +128,7 @@ class Comment extends CI_Controller {
 		$result = $this->comment_model->get_comment($type, $id, $f);
 
 		if($result == false) {
-			return "";
+			return "<em>No comments yet.</em>";
 		} else {
 			$data = "";
 			foreach($result as $row) {
