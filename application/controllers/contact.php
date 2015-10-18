@@ -52,7 +52,7 @@ class Contact extends CI_Controller {
 					"error_message" => ""	
 			);
 			if(isset($_POST['g-recaptcha-response'])){
-				$recaptcha = new \ReCaptcha\ReCaptcha(SECRET_KEY_RECAPTCHA);
+				$recaptcha = new \ReCaptcha\ReCaptcha(SECRET_KEY_RECAPTCHA, new \ReCaptcha\RequestMethod\CurlPost());
 
 				$resp = $recaptcha->verify($_POST['g-recaptcha-response'], $_SERVER['REMOTE_ADDR']);
 				if($resp->isSuccess()){
@@ -97,7 +97,7 @@ class Contact extends CI_Controller {
 			} else {
 				$status = array(
 							"status" => false,
-							"msg" => "Re-Captcha is required." //. $recaptcha_data['error_message']
+							"msg" => $recaptcha_data['error_message']
 					);
 			}
 		} else {
