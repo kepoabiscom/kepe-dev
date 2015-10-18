@@ -35,7 +35,7 @@
 	<link href="<?php echo base_url(); ?>assets/css/font-awesome.css" rel="stylesheet" type="text/css">
 	<style>
 		body{
-			background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 230%; background-attachment: fixed;
+			background: url('<?php echo base_url('assets/img/background.jpg'); ?>') no-repeat center top; background-size: 200%; background-attachment: fixed;
 		}
 		
 		#header{

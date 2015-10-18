@@ -15,8 +15,8 @@
 	</div>
 </div>
 <div class="col-md-6">
-	<h4>Send Message to KepoAbis.com</h4>
-	<div class ="msg"></div><br>
+	<h4>Send Message to <strong>KepoAbis.com</strong></h4>
+	<div class ="msg"></div>
 	<form id="form-contact" action="<?php echo base_url(). 'contact/send_message'; ?>" class="bs-example bs-example-form" role="form" method="post" class="form-horizontal">
 		<div class="form-group">
 			<div class="input-group">

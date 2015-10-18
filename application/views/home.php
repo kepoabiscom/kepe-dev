@@ -1,10 +1,12 @@
 		<style>
 			.kp-news a, .kp-article a{
-				color: black;
+				color: #505050 ;
+				font-family: "Arial", Times, serif;
+				font-size: 110%;
 			}
 			
 			.kp-news a:hover, .kp-article a:hover{
-				color: blue;
+				color: green;
 				text-decoration: none;
 			}
 			
@@ -43,6 +45,7 @@
 			<div class="sidebar-module" style="margin-bottom: 20px;">
 				<div id="myCarousel" class="carousel slide" data-ride="carousel">
 				  <!-- Indicators -->
+				  <!--
 				  <ol class="carousel-indicators">
 					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 					<li data-target="#myCarousel" data-slide-to="1"></li>
@@ -50,6 +53,7 @@
 					<li data-target="#myCarousel" data-slide-to="3"></li>
 					<li data-target="#myCarousel" data-slide-to="4"></li>
 				  </ol>
+				  -->
 
 				 <div class="sidebar-module">
 					<form role="search" method="get" action="<?php echo base_url('search'); ?>">
@@ -68,7 +72,8 @@
 					</form>
 				</div>
 				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" role="listbox">
+				  <div class="sidebar-module">
+				  	<!--
 					{get_all}
 					<div class="{status}">
 						<div style="background-color: #fff; padding-bottom: 10px; color: black;">
@@ -81,17 +86,18 @@
 						</div>
 					</div>
 					{/get_all}
+					-->
 				  </div>
 
 				  <!-- Left and right controls -->
-				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				  <!--<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
 					<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
 					<span class="sr-only">Previous</span>
 				  </a>
 				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
 					<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
-				  </a>
+				  </a>-->
 				</div>
 			</div>
 			<!--
@@ -132,6 +138,12 @@
 						</li>
 					{/get_article}
 				</ol>				
+			</div>
+			<div class="sidebar-module">
+				<div>
+					<a class="twitter-timeline" href="https://twitter.com/KepoAbisCom"  data-widget-id="459590213916848128">Tweets by @KepoAbisCom</a>
+					<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+				</div>
 			</div>
 			<!--
 			<div class="sidebar-module">
