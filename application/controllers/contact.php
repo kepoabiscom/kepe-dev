@@ -75,6 +75,7 @@ class Contact extends CI_Controller {
 						$data['ip_address'] = $_SERVER['REMOTE_ADDR'];
 						$is_sent = $this->send_to_email($data['email'], $data['from_name']);
 						if($is_sent) {
+							unset($data['g-recaptcha-response']);
 							$this->contact_model->insert_message($data);
 							$status = array(
 									"status" => true,
@@ -97,7 +98,7 @@ class Contact extends CI_Controller {
 			} else {
 				$status = array(
 							"status" => false,
-							"msg" => $recaptcha_data['error_message']
+							"msg" => "reCaptcha is required." //$recaptcha_data['error_message']
 					);
 			}
 		} else {
