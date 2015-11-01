@@ -19,7 +19,7 @@
  *
  */
 
-$host = ""; //"/localhost/";
+$host = ""; //"/localhost/"; -> set to localhost if you will test it on your local site
 
 if(PHP_SAPI == "cli") {
 	$_SERVER['HTTP_HOST'] = "";

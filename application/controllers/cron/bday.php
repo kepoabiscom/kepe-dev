@@ -16,6 +16,8 @@ class Bday extends CI_Controller {
 	public function index() {
 		if($this->input->is_cli_request()) {
 			$this->run();
+		} else {
+			show_404();
 		}
 	}
 
@@ -52,9 +54,17 @@ class Bday extends CI_Controller {
 		try {
 			$subject = "[KepoAbis.com] Happy Birthday " . $name;
 			$from = "contact@kepoabis.com";
-			$to = "herman.wahyudi02@gmail.com";
+			$to = $email;
 
 			$message = "<p><strong>HAPPY BIRTHDAY ".$name." yang ke-". $age . "</strong></p>";
+			$message .= "<br><p>Semoga tercapai segala cita-citanya :D</p><br><br>";
+			$message .= "<strong>Best Regards,<br>
+						Haamill Productions</strong>
+						<br>
+						<br>Jalan Pelita RT 02/09 No. 69 Kel. Tengah, Kec. Kramat Jati, Jakarta Timur 13540, Indonesia
+						<br><a href='http://kepoabis.com'>KepoAbis.com</a> by Haamill Productions
+						<br>Phone: 085697309204
+						<br>Email: hi@kepoabis.com or contact@kepoabis.com";
 	        $body =
 	        	'<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 				<html xmlns="http://www.w3.org/1999/xhtml">

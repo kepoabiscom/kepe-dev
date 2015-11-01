@@ -60,6 +60,7 @@ $route['inbox-message'] = "admin/inbox_message";
 $route['static-content'] = "admin/static_content";
 $route['video-competition'] = "competition/video_competition";
 $route['404_override'] = 'Page_404';
+$route['cron'] = 'Page_404';
 $route['sitemap\.xml'] = "feeds/sitemap";
 $route['api/users/u/(:num)'] = 'api/users/u/id/$1';
 
