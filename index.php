@@ -18,13 +18,23 @@
  * NOTE: If you change these, also change the error_reporting() code below
  *
  */
-$host = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "http");
-$host .=  "://".$_SERVER['HTTP_HOST'];
-$host .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+
+$host = ""; //"/localhost/";
+
+if(PHP_SAPI == "cli") {
+	$_SERVER['HTTP_HOST'] = "";
+}
+
+if(PHP_SAPI != "cli") {
+	$host = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ?  "https" : "http");
+	$host .=  "://".$_SERVER['HTTP_HOST'];
+	$host .=  str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+}
 
 $ENV = strpos($host, 'localhost') || strpos($host, '127.0.0.1') ? 'development' : 'production';
 $STAGE = strpos($host, 'staging') ? 'staging' : 'master';
 
+define('HOST', $host); 
 define('ENVIRONMENT', $ENV);
 define('STAGE', $STAGE);
 

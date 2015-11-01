@@ -15,8 +15,8 @@ class Comment extends CI_Controller {
 	}
 	
 	public function index() {
-		$x = $this->get_user_data_fb();
-		echo $x['user_data'];
+		$this->output->set_status_header("403");
+		exit('<h1>Forbidden.</h1>');
 	}
 
 	public function get_user_data_fb() {

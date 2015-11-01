@@ -3,10 +3,12 @@
 require_once APPPATH . 'controllers/admin/comment_notif.php';
 require_once APPPATH . 'controllers/admin/inbox_message.php'; 
 
-class Utils extends CI_Controller {
+class Utils {
 
-	function __construct() {
-		parent:: __construct();
+	private static $ins;
+
+	public function __construct() {
+		$this->ins =& get_instance();
 	}
 
 	function slug($str='') {
@@ -17,7 +19,7 @@ class Utils extends CI_Controller {
 		/* Set counter notif new comment */
 		$comment_notif = new Comment_notif();
 	    $t = $comment_notif->counter_comment_notif();
-	    $this->session->set_userdata("counter_comment_notif",
+	    $this->ins->session->set_userdata("counter_comment_notif",
  			array("counter" => $t)
  		);
 	}
@@ -25,7 +27,7 @@ class Utils extends CI_Controller {
 	function set_counter_new_message() {
 		$obj = new Inbox_message();
 		$count_new_message = $obj->count_new_message();
-	    $this->session->set_userdata("counter_new_message",
+	    $this->ins->session->set_userdata("counter_new_message",
  			array("counter" => $count_new_message)
  		);
 	}

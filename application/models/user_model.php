@@ -145,4 +145,12 @@ class User_model extends CI_Model {
     function delete_user($id) {
         $this->db->delete("user", array("user_id" => $id));
     }
+
+    function get_bday_user() {
+        $query = $this->db->select("nama_lengkap as full_name, date_of_birth as bday, email")
+                ->from("user")
+                ->get()->result();
+
+        return $query;
+    }
 }
