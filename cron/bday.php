@@ -54,6 +54,6 @@ class Bday {
 }
  
 $t = new Bday();
-$t->main();
+$t->run();
 
 ?>
