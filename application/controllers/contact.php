@@ -140,7 +140,7 @@ class Contact extends CI_Controller {
 	}
 
 	function send_to_email($to, $from_name) {
-		$subject = '[KepoAbis.com] Your message has been sent to KepoAbis';
+		$subject = '[KepoAbis.com] Your message has been sent to KepoAbis.com';
 		$from = 'contact@kepoabis.com';
 		$message = 'Dear '.$from_name.',
 					<br>
@@ -175,7 +175,7 @@ class Contact extends CI_Controller {
         //$body = $this->email->full_html($subject, $message);
 
         $result = $this->email
-            ->from($from)
+            ->from($from, "KepoAbis.com")
             //->reply_to('herman.wahyudi@tokopedia.com')
             ->to($to)
             ->subject($subject)
