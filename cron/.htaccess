@@ -1,4 +1,4 @@
 Options -Indexes
 RewriteEngine on
-RewriteCond $1 !^(assets|robots\.txt)
+RewriteCond $1 !^(cron|robots\.txt)
 ErrorDocument 403 /403.php

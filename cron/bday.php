@@ -40,7 +40,7 @@ class Bday {
 				$result = $this->db->execute($sql);
 				while($row = mysqli_fetch_assoc($result)) {
 					$this->email->send_to_email($row['email'], $name, $age);
-					sleep(1);
+					sleep(2);
 				}
 			} else {
 				echo "There's no Birthday Today!";
