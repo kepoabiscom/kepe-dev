@@ -31,6 +31,7 @@ class Bday {
 			$result = $this->db->execute($sql);
 			$today = (string) date("m-d");
 			$is_bday = false; $name = ""; $age = 0;
+			$emails = array(); $i = 0;
 			if($result->num_rows > 0) {
 				while($row = mysqli_fetch_assoc($result)) {
 					$bday = trim((string) $row['bday']);
@@ -39,14 +40,16 @@ class Bday {
 						$name = $row['full_name'];
 						$is_bday = true;
 					}
+					$emails[$i++] = $row['email'];
 					//echo $row['full_name'] . " " . $row['bday'] . " " . $row['email'] . PHP_EOL;
 				}
 			}
+
 			if($is_bday) {
-				$result = $this->db->execute($sql);
-				while($row = mysqli_fetch_assoc($result)) {
-					$this->email->send_to_email($row['email'], $name, $age);
-					sleep(5);
+				foreach($emails as $t) {
+					$sent = $this->email->send_to_email($t, $name, $age);
+					echo $sent . PHP_EOL;
+					sleep(1);
 				}
 			} else {
 				echo "There's no Birthday Today!";

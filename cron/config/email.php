@@ -34,11 +34,11 @@ class Email {
 		$this->mail->AddAddress($msg['to']);
 		if(!$this->mail->Send()) {
 			$error = 'Mail error: '. $this->mail->ErrorInfo;
-			return false;
 		} else {
-			$error = 'Message sent!';
-			return true;
+			$error = 'Message sent to';
 		}
+		$this->mail->ClearAddresses();
+		return $error . " " . $to;
 	}
 
 	function message($email, $name, $age) {
