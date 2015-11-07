@@ -13,9 +13,15 @@ class Bday {
 		$this->email = new Email();
 	}
 
-	function main() {
-		if(PHP_SAPI == "cli") {
-			$this->run();
+	function start() {
+		if(PHP_SAPI == "cli" || PHP_SAPI == 'cgi-fcgi') {
+			if(empty($_SERVER['REQUEST_URI'])) {
+				$this->run();
+			} else {
+				echo "You can't access this cron.";
+			}
+		} else {
+			echo "You can't access this cron.";
 		}
 	}
 
@@ -40,7 +46,7 @@ class Bday {
 				$result = $this->db->execute($sql);
 				while($row = mysqli_fetch_assoc($result)) {
 					$this->email->send_to_email($row['email'], $name, $age);
-					sleep(2);
+					sleep(5);
 				}
 			} else {
 				echo "There's no Birthday Today!";
@@ -54,6 +60,6 @@ class Bday {
 }
  
 $t = new Bday();
-$t->run();
+$t->start();
 
 ?>

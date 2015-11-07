@@ -14,7 +14,7 @@ class Db {
 		$password = "123456";
 		$_dbsname = "kepe3788_db";
 		
-		if(getHostByName(getHostName()) != '127.0.0.1') {
+		if(getHostByName(getHostName()) != '127.0.1.1') {
 			$hostname = "103.247.8.138";
 			$username = "kepe3788_user";
 			$password = "1234_asdf";

@@ -46,7 +46,7 @@ class Email {
 		$to = $email; //"herman.wahyudi02@gmail.com";
 
 		$message = "<p><strong>HAPPY BIRTHDAY ".$name." yang ke-". $age . "</strong></p>";
-		$message .= "<br><p>Semoga tercapai segala cita-citanya :D</p><br><br>";
+		$message .= "<p>Semoga tercapai segala cita-citanya :D</p><br>";
 		$message .= "<strong>Best Regards,<br>
 					Haamill Productions</strong>
 					<br>
