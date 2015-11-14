@@ -131,7 +131,7 @@ class home_model extends CI_Model {
 			  ,DATE_FORMAT(vid.created_date, '%Y') as year
 		      ,DATE_FORMAT(vid.created_date, '%m') as month
 			  ,DATE_FORMAT(vid.created_date, '%d') as day
-			  ,DATE_FORMAT(vid.created_date, '%M %d, %Y %h:%i %p') as created_date
+			  ,DATE_FORMAT(vid.created_date, '%M %d, %Y') as created_date
 			FROM
 				video vid
 				LEFT JOIN

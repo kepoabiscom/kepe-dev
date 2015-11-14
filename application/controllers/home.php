@@ -209,22 +209,22 @@ class Home extends CI_Controller {
 			//$img .= "<img class='img-responsive' src='". base_url($path) ."' alt='".$title."' style='margin-top: 20px;'/>";
 			$img .= "<img class='img-responsive lazy' src='".$default."' data-original='". base_url($path) ."'  alt='".$title."' style='margin-top: 15px;'>";
 			$img .= "</a>";
-			$view_more = "<a href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."' class='button medium yellow'>View</a>";
-			$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(14, $title)."</a>";
+			$view_more = base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title));
+			//$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(14, $title)."</a>";
 			
-			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<div class='col-md-12'><div class='row'>" : "";
-			$closing_parenthesis = ($parenthesis % 4 == 0) ? "</div></div>" : "";
+			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<ul class='list-unstyled video-list-thumbs row'>" : "";
+			$closing_parenthesis = ($parenthesis % 4 == 0) ? "</ul>" : "";
 				
 			$data[$i] = array(
 				"video_id" => $video_id,
 				"video_category_id" => !isset($q->video_category_id) ? "" : $q->video_category_id,
 				"image_id" => !isset($q->image_id) ? "" : $q->image_id,
-				"title" => $title,
+				"title" => $this->global_common->get_title(100, $title),
 				"description" => !isset($q->description) ? "" : $this->get_preview_summary($q->description, $view_more),
 				"path_video" => !isset($q->path_video) ? "" : $q->path_video,
 				"duration" => !isset($q->duration) ? "" : $q->duration,
 				"created_date" => !isset($q->created_date) ? "" : $q->created_date,
-				"image" => $img,
+				"image" => base_url($path),
 				"url" => $view_more,
 				"full_name" => !isset($q->full_name) ? "" : $q->full_name,
 				"category" => !isset($q->category) ? "" : $q->category,

@@ -40,6 +40,75 @@
 				position: relative;
 				z-index: 10;
 			}
+
+			.video-list-thumbs{}
+			.video-list-thumbs > li{
+			    margin-bottom:12px;
+			}
+			.video-list-thumbs > li:last-child{}
+			.video-list-thumbs > li > a{
+				display:block;
+				position:relative;
+				background-color: white;
+				color: black;
+				padding: 8px;
+				border-radius:3px
+			    transition:all 500ms ease-in-out;
+			    border-radius:4px
+			}
+			.video-list-thumbs > li > a:hover{
+				box-shadow:0 2px 5px rgba(0,0,0,.3);
+				text-decoration:none
+			}
+			.video-list-thumbs h2{
+				bottom: 0;
+				font-size: 14px;
+				height: 33px;
+				margin: 8px 0 0;
+			}
+			.video-list-thumbs .glyphicon-play-circle{
+			    font-size: 60px;
+			    opacity: 0.6;
+			    position: absolute;
+			    right: 39%;
+			    top: 15%;
+			    text-shadow: 0 1px 3px rgba(0,0,0,.5);
+			    transition:all 500ms ease-in-out;
+			}
+			.video-list-thumbs > li > a:hover .glyphicon-play-circle{
+				color:#fff;
+				opacity:1;
+				text-shadow:0 1px 3px rgba(0,0,0,.8);
+			}
+			.video-list-thumbs .duration{
+				background-color: rgba(0, 0, 0, 0.4);
+				border-radius: 2px;
+				color: #fff;
+				font-size: 11px;
+				font-weight: bold;
+				left: 12px;
+				line-height: 13px;
+				padding: 2px 3px 1px;
+				position: absolute;
+				top: 12px;
+			    transition:all 500ms ease;
+			}
+			.video-list-thumbs > li > a:hover .duration{
+				background-color:#000;
+			}
+			@media (min-width:320px) and (max-width: 480px) { 
+				.video-list-thumbs .glyphicon-play-circle{
+			    font-size: 35px;
+			    right: 36%;
+			    top: 27%;
+				}
+				.video-list-thumbs h2{
+					bottom: 0;
+					font-size: 12px;
+					height: 22px;
+					margin: 8px 0 0;
+				}
+			}
 		</style>
 		<div class="col-md-3"  style="background: none repeat scroll 0 0; padding-top: 15px; padding-bottom: 15px;">
 			<div class="sidebar-module" style="margin-bottom: 20px;">
@@ -160,19 +229,18 @@
 				<h2 class="line-title"><strong class="bold-text" style="color: black; margin-left: 15px;">Recent Video</strong></h2>
 				{get_video}
 					{open_parenthesis}
-					<div class="col-md-3">
-						<p>{image}</p>
-						<div  style="font-size: 20px;">{title}</div>
-						<div class="post-body">
-							<!--
-							<i class="glyphicon glyphicon-comment"></i>&nbsp;{count_video_comment} comment | 
-							<i class="glyphicon glyphicon-stats"></i>&nbsp;{count_video_stat} views | 
-							<i class="glyphicon glyphicon-time"></i>&nbsp;{duration}
-							-->
-							On {created_date} 
-							<br/>By {full_name}
-						</div>
-					</div>
+						<li class="col-lg-3 col-sm-4 col-xs-6">
+							<a href="{url}" title="{title}" target="_blank">
+								<img src="{image}" alt="{title}" class="img-responsive" height="130px" />
+								<h2 style="color:#009999">{title}</h2>
+								<span class="glyphicon glyphicon-play-circle"></span>
+								<span class="duration">{duration}</span><br>
+								<div class="post-body">
+									<p>By {full_name}</p>
+									On {created_date}
+								</div>
+							</a>
+						</li>
 					{closing_parenthesis}
 				{/get_video}
 			</div>
