@@ -191,11 +191,12 @@ class Home extends CI_Controller {
 	}
 	
 	public function get_video(){
-		$query = $this->home_model->get_recent_video();
-		
+		$page = isset($_GET['page']) ? (int) $_GET['page'] : 0;
+		$query = $this->home_model->get_recent_video($page);
 		$i = 0; $parenthesis = 1;
+		$data = array();
 
-		foreach ($query->result() as $q)
+		foreach ($query as $q)
 		{
 			$video_id= !isset($q->video_id) ? "" : $q->video_id;
 			$path = !isset($q->path_image) ? "" : $q->path_image;
@@ -212,7 +213,7 @@ class Home extends CI_Controller {
 			$view_more = base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title));
 			//$title = "<a data-toggle='tooltip' data-placement='top' title='".$title."' href='".base_url('video/watch/'.$year.'/'.$month.'/'.$day.'/'.$video_id.'/'. $this->slug($title))."'>".$this->global_common->get_title(14, $title)."</a>";
 			
-			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<ul class='list-unstyled video-list-thumbs row'>" : "";
+			$open_parenthesis =  ($parenthesis % 4 == 1) ? "<ul class='list-unstyled video-list-thumbs row col-md-12'>" : "";
 			$closing_parenthesis = ($parenthesis % 4 == 0) ? "</ul>" : "";
 				
 			$data[$i] = array(
@@ -237,7 +238,26 @@ class Home extends CI_Controller {
 			 $i++; $parenthesis++;
 		}
 
- 		return $data;
+		if($page == 0)
+ 			return $data;
+		else {
+			foreach($data as $t) {
+				echo $t['open_parenthesis'] .
+					"<li class='col-lg-3 col-sm-4 col-xs-6'>
+						<a href=".$t['url']." title=".$t['title']." target='_blank'>
+							<img src=". $t['image']. " alt=". $t['title']. "class='img-responsive' height='130px' />
+							<h2 style='color:#009999'>".$t['title']."</h2>
+							<span class='glyphicon glyphicon-play-circle'></span>
+							<span class='duration'>".$t['duration']."</span><br>
+							<div class='post-body'>
+								<p>By " .$t['full_name']. "</p>
+								On ".$t['created_date']."
+							</div>
+						</a>
+					</li>".
+					$t['closing_parenthesis'];
+			}
+		}
 	}
 
 	function get_upcoming_events() {

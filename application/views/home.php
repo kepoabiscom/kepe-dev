@@ -71,7 +71,7 @@
 			    opacity: 0.6;
 			    position: absolute;
 			    right: 39%;
-			    top: 15%;
+			    top: 13%;
 			    text-shadow: 0 1px 3px rgba(0,0,0,.5);
 			    transition:all 500ms ease-in-out;
 			}
@@ -243,11 +243,17 @@
 						</li>
 					{closing_parenthesis}
 				{/get_video}
+				<div class="list_video_more"></div>
+			</div>
+			<div class="container" style="text-align: justify">
+				<button class="btn btn-default" id="load_more" data-val="0">Load more
+					<img style="display:none" id="loader" src="<?php echo base_url(); ?>assets/img/loader.gif"> 
+				</button>
 			</div>
 		</div>
-			
 <script>
 	$(document).ready(function(){
-		$('[data-toggle="tooltip"]').tooltip();   
+		$('[data-toggle="tooltip"]').tooltip();
 	});
 </script>
+<script type="text/javascript" src="<?php echo base_url(). 'ajax/load_more_video.js'; ?>"></script>

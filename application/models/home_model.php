@@ -114,7 +114,9 @@ class home_model extends CI_Model {
 		}
 	}
 	
-	function get_recent_video() {
+	function get_recent_video($page) {
+		$offset = 16 * $page;
+		$limit = $page == 0 ? 16 : 4;
 		$q = "
 			SELECT 
 			  vid.video_id
@@ -150,17 +152,10 @@ class home_model extends CI_Model {
 				vid.status = 'published'
 				AND vid.image_id > 0
 			ORDER BY vid.created_date DESC
-			LIMIT 0, 16
+			LIMIT $offset, $limit
 		";
 
-        $query = $this->db->query($q);
-		
-        if($query->num_rows() > 0) {
-            return $query;
-        } 
-		else{
-			return false;
-		}
+        return $this->db->query($q)->result();
 	}
 	
 	function get_recent_news() {
