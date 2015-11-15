@@ -246,7 +246,7 @@
 				<div class="list_video_more"></div>
 			</div>
 			<div class="container" style="text-align: justify">
-				<button class="btn btn-default" id="load_more" data-val="0">Load more
+				<button class="btn btn-default" id="load_more" data-val="0">Load more videos
 					<img style="display:none" id="loader" src="<?php echo base_url(); ?>assets/img/loader.gif"> 
 				</button>
 			</div>

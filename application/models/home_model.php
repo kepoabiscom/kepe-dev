@@ -117,6 +117,10 @@ class home_model extends CI_Model {
 	function get_recent_video($page) {
 		$offset = 16 * $page;
 		$limit = $page == 0 ? 16 : 4;
+		if($page > 1) {
+			$offset = 16 + ($page-1)*4;
+		}
+
 		$q = "
 			SELECT 
 			  vid.video_id

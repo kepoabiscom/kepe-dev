@@ -245,7 +245,7 @@ class Home extends CI_Controller {
 				echo $t['open_parenthesis'] .
 					"<li class='col-lg-3 col-sm-4 col-xs-6'>
 						<a href=".$t['url']." title=".$t['title']." target='_blank'>
-							<img src=". $t['image']. " alt=". $t['title']. "class='img-responsive' height='130px' />
+							<img src='". $t['image']. "' alt=". $t['title']. "class='img-responsive' height='130px' />
 							<h2 style='color:#009999'>".$t['title']."</h2>
 							<span class='glyphicon glyphicon-play-circle'></span>
 							<span class='duration'>".$t['duration']."</span><br>
