@@ -4,8 +4,11 @@ $(document).ready(function(){
     $("#load_more").click(function(e){
         e.preventDefault();
         var page = $(this).data('val');
-        getVideoMore(page);
-		scroll();
+        $(this).button('loading');
+        setTimeout(function(){
+            getVideoMore(page);
+            scroll();
+        }, 1000);
     });
 });
 
@@ -32,6 +35,7 @@ var getVideoMore  = function(page){
     }).done(function(response){
         $(".list_video_more").append(response);
         $("#loader").hide();
+        $('#load_more').button('reset');
         $('#load_more').data('val', ($('#load_more').data('val')+1));
     });
 };

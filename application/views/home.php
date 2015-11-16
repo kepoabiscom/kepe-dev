@@ -245,9 +245,9 @@
 				{/get_video}
 				<div class="list_video_more"></div>
 			</div>
-			<div class="container" style="text-align: justify">
-				<button class="btn btn-default" id="load_more" data-val="0">Load more videos
-					<img style="display:none" id="loader" src="<?php echo base_url(); ?>assets/img/loader.gif"> 
+			<div class="container" style="margin-left:38%">
+				<button class="btn btn-default" id="load_more" data-val="0" data-loading-text="<i class='fa fa-spinner fa-spin '></i> Loading...">Load More Videos
+					<img style="display:none" id="loader" src="<?php echo base_url(); ?>assets/img/loader.gif">
 				</button>
 			</div>
 		</div>
