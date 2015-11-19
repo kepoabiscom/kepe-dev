@@ -241,21 +241,25 @@ class Home extends CI_Controller {
 		if($page == 0)
  			return $data;
 		else {
-			foreach($data as $t) {
-				echo $t['open_parenthesis'] .
-					"<li class='col-lg-3 col-sm-4 col-xs-6'>
-						<a href=".$t['url']." title=".$t['title']." target='_blank'>
-							<img src='". $t['image']. "' alt=". $t['title']. "class='img-responsive' height='130px' />
-							<h2 style='color:#009999'>".$t['title']."</h2>
-							<span class='glyphicon glyphicon-play-circle'></span>
-							<span class='duration'>".$t['duration']."</span><br>
-							<div class='post-body'>
-								<p>By " .$t['full_name']. "</p>
-								On ".$t['created_date']."
-							</div>
-						</a>
-					</li>".
-					$t['closing_parenthesis'];
+			if($query == null) {
+				return;
+			} else {
+				foreach($data as $t) {
+					echo $t['open_parenthesis'] .
+						"<li class='col-lg-3 col-sm-4 col-xs-6'>
+							<a href=".$t['url']." title=".$t['title']." target='_blank'>
+								<img src='". $t['image']. "' alt=". $t['title']. "class='img-responsive' height='130px' />
+								<h2 style='color:#009999'>".$t['title']."</h2>
+								<span class='glyphicon glyphicon-play-circle'></span>
+								<span class='duration'>".$t['duration']."</span><br>
+								<div class='post-body'>
+									<p>By " .$t['full_name']. "</p>
+									On ".$t['created_date']."
+								</div>
+							</a>
+						</li>".
+						$t['closing_parenthesis'];
+				}
 			}
 		}
 	}
